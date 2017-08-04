@@ -1,0 +1,126 @@
+<section class="content-header">
+    <h1>
+        Pencarian Data Penerbangan
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-plane"></i> Tiket.com</a></li>
+        <li class="active">Pencarian Data Penerbangan</li>
+    </ol>
+</section>
+<!-- notification template -->
+{include file="base/templates/notification.html"}
+<!-- end of notification template-->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
+                </div>
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('tiket/flight/search_process')}" method="post">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">Departure</label>
+                                <div class="col-sm-4">
+                                    <select name="departure" class="form-control">
+                                        {foreach $rs_airport as $airport}
+                                        <option value="{$airport.airport_iata_cd}" {if $search.d eq $airport.airport_iata_cd}selected{/if}>{$airport.airport_nm}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">Arrival</label>
+                                <div class="col-sm-4">
+                                    <select name="arrival" class="form-control">
+                                        {foreach $rs_airport as $airport}
+                                        <option value="{$airport.airport_iata_cd}" {if $search.a eq $airport.airport_iata_cd}selected{/if}>{$airport.airport_nm}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">Depart Date</label>
+                                <div class="col-sm-2">
+                                    <input name="depart_date" type="date" value="{$search.date|default:''}" class="form-control text-right" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">Return Date</label>
+                                <div class="col-sm-2">
+                                    <input name="ret_date" type="date" value="{$search.ret_date|default:''}" class="form-control text-right" placeholder="Optional" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">Adult</label>
+                                <div class="col-sm-1">
+                                    <input name="adult" type="number" value="{$search.adult|default:0}" class="form-control text-right" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">Child</label>
+                                <div class="col-sm-1">
+                                    <input name="child" type="number" value="{$search.child|default:0}" class="form-control text-right" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">Infant</label>
+                                <div class="col-sm-1">
+                                    <input name="infant" type="number" value="{$search.infant|default:0}" class="form-control text-right" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <div class="pull-right">
+                                        <button type="submit" value="Reset" name="save" class="btn btn-default">Reset</button>
+                                        <button type="submit" value="Cari" name="save" class="btn btn-primary">Cari</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-search"></i> Hasil</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th rowspan="2">No.</th>
+                            <th rowspan="2">Flight Number</th>
+                            <th rowspan="2"></th>
+                            <th rowspan="2">Airline</th>
+                            <th colspan="3">Price</th>
+                            <th rowspan="2">Schedule</th>
+                            <th rowspan="2">Duration</th>
+                        </tr>
+                        <tr>
+                            <th>Adult</th>
+                            <th>Child</th>
+                            <th>Infant</th>
+                        </tr>
+                        {foreach $rs_flight->departures->result as $key => $flight}
+                        <tr>
+                            <td>{$key+1}</td>
+                            <td>{$flight->flight_number}</td>
+                            <td><img src="{$flight->image}" /></td>
+                            <td>{$flight->airlines_name}</td>
+                            <td class="text-right">{$flight->price_adult|number_format:0:",":"."}</td>
+                            <td>{$flight->price_child}</td>
+                            <td>{$flight->price_infant}</td>
+                            <td>{$flight->full_via}</td>
+                            <td>{$flight->duration}</td>
+                        </tr>
+                        {/foreach}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+    </div>
+</section>

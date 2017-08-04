@@ -1,0 +1,13 @@
+tambahkan line berikut pada file httpd-vhosts.conf yg tersimpan pada folder 
+C:\xampp\apache\conf\extra
+
+keterangan :
+mhas adalah nama alias
+F:\TEDEV dst adalah path folder hasil clone / checkout
+
+Alias /mhas "F:\TEDEV\mandiri-project\csa-fatmawati\development\csa-rsf.1.4.1"
+<Directory "F:\TEDEV\mandiri-project\csa-fatmawati\development\csa-rsf.1.4.1">
+    Options All
+	AllowOverride All
+	Require all granted
+</Directory>

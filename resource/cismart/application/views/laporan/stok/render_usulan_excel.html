@@ -1,0 +1,53 @@
+<?php 
+header("Content-type: application/vnd-ms-excel");
+$namafile ="RekapUsulan_".date('dmy')."";
+header("Content-Disposition: inline; filename=".$namafile.".xls");
+header("Cache-Control: max-age=0");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("Cache-Control: private",false);
+
+?>
+
+<header><h1>Usulan Diklat</h1></header>
+SKPD : <?php echo $this->session->userdata('login')['nama'] ?>
+<table width="100%" border="1" style="border-collapse: collapse;display: block;">
+	
+	<thead>
+		<tr>
+			<th rowspan=2>NO</th>
+			<th rowspan=2>PENGUSUL</th>
+			<th rowspan=2>JABATAN</th>
+			<th rowspan=2>JENIS DIKLAT</th>
+			<th rowspan=2>USULAN DIKLAT</th>
+			<th  style="text-align: center;" colspan=3>KOMPETENSI</th>
+			<th rowspan=2>JUMLAH PESERTA</th>
+		</tr>
+		<tr>
+			<th style="text-align: center;">STANDARD</th>
+			<th style="text-align: center;">DIKUASAI</th>
+			<th style="text-align: center;">TIDAK DIKUASAI</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	<?php $no=1;
+	foreach($data as $datas){?>
+		<tr>
+			<td style="text-align: center;"><?php echo $no;?></td>
+			<td style="text-align: left;"><?php echo $datas['nama'];?></td>
+			<td>&nbsp;<?php echo $datas['jabatan'];?></td>
+			<td>&nbsp;<?php echo $datas['nama_diklat'];?></td>
+			<td>&nbsp;<?php echo $datas['usulan_diklat'];?></td>
+			<td><?php echo $datas['standar'];?></td>
+			<td><?php echo $datas['dikuasai'];?></td>
+			<td><?php echo $datas['tdikuasai'];?></td>
+			<td style="text-align: center;"><?php echo $datas['jml_calon'];?></td>
+		</tr>
+	<?php $no++; } ?>
+	</tbody>
+</table>
+
+<script>
+
+</script>

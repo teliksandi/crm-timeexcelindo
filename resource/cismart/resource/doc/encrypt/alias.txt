@@ -1,0 +1,57 @@
+Alias /edapem "G:\TEDEV\PROJECT\e-dapem.3.1"
+<Directory "G:\TEDEV\PROJECT\e-dapem.3.1">
+    Options Indexes FollowSymLinks MultiViews IncludesNoExec
+    AddOutputFilter Includes html
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+Alias /edapem312 "G:\TEDEV\PROJECT\dapem.3.1.2"
+<Directory "G:\TEDEV\PROJECT\dapem.3.1.2">
+    Options Indexes FollowSymLinks MultiViews IncludesNoExec
+    AddOutputFilter Includes html
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+Alias /mandiri "G:\TEDEV\PROJECT\mandiri-project"
+<Directory "G:\TEDEV\PROJECT\mandiri-project">
+    Order allow,deny
+	Allow from all
+	Require all granted
+	Satisfy Any
+</Directory>
+
+Alias /training "G:\TRAINING"
+<Directory "G:\TRAINING">
+    Options Indexes FollowSymLinks MultiViews IncludesNoExec
+    AddOutputFilter Includes html
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+Alias /spjkampen "G:\TEDEV\spj-ditkampen\development\spj-kampen"
+<Directory "G:\TEDEV\spj-ditkampen\development\spj-kampen">
+    Options Indexes FollowSymLinks MultiViews IncludesNoExec
+    AddOutputFilter Includes html
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+Alias /exsum "G:\TEDEV\PROJECT\exec-summary\development\exec-summary.1.0.0"
+<Directory "G:\TEDEV\PROJECT\exec-summary\development\exec-summary.1.0.0">
+    Options Indexes FollowSymLinks MultiViews IncludesNoExec
+    AddOutputFilter Includes html
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+Alias /apmsonline "G:\TEDEV\PROJECT\apms-online.1.0"
+<Directory "G:\TEDEV\PROJECT\apms-online.1.0">
+    Options Indexes FollowSymLinks MultiViews IncludesNoExec
+    AddOutputFilter Includes html

@@ -1,0 +1,102 @@
+<section class="content-header">
+    <h1>
+        Stok Obat
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Laporan</a></li>
+        <li class="active">Stok Obat</li>
+    </ol>
+</section>
+<!-- notification template -->
+{include file="base/templates/notification.html"}
+<!-- end of notification template-->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Data Stok Obat</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-danger" href="{$config->site_url('laporan/stok/pdf')}" ><i class="fa-flie-pdf-o"></i> Export to PDF</a>
+                        <a class="btn btn-sm btn-primary" href="{$config->site_url('laporan/stok/excel')}" ><i class="fa-file-excel-o"></i> Export to Excel</a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th width="5%">No.</th>
+                                <th width="10%">ID Stok</th>
+                                <th>Nama Obat</th>
+                                <th>Jumlah</th>
+                                <th>Tanggal Entry</th>
+                                <th>Gambar</th>
+                            </tr>
+                            {$total=0}
+                            {foreach $stok as $result}
+                                {if $result.jml < 10} 
+                                <tr style="color:red">
+                                    <td align="middle">{$no++}</td>
+                                    <td align="middle">{$result.stok_id}</td>
+                                    <td>{$result.nama_obat|ucfirst}</td>
+                                    <td align="middle">{$result.jml}</td>
+                                    <td>{date('m-d-y',strtotime($result.tgl_entry))}</td>
+                                    <td align="middle"><img style="max-height:180px; max-width:180px" src="{$BASEURL}resource/doc/{$result.gambar}"/></td>
+                                    
+                                  </tr>
+                                {else}
+                                <tr>
+                                    <td align="middle">{$no++}</td>
+                                    <td align="middle">{$result.stok_id}</td>
+                                    <td>{$result.nama_obat|ucfirst}</td>
+                                    <td align="middle">{$result.jml}</td>
+                                    <td>{date('m-d-y',strtotime($result.tgl_entry))}</td>
+                                    <td align="middle"><img style="max-height:180px; max-width:180px" src="{$BASEURL}resource/doc/{$result.gambar}"/></td>
+                                   
+                                {/if}
+                            </tr>
+                            {$total=$total+$result.jml}
+                            {foreachelse}
+                            <tr>
+                                <td colspan="4">
+                                    Data tidak ditemukan!
+                                </td>
+                            </tr>
+                            {/foreach}
+                            <tr>
+                                <td colspan="3">TOTAL</td>
+                                <td align="middle">{$total}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer clearfix">
+                    {$pagination.data|default:''}
+                </div>
+            </div>
+            
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Chart Stok Obat</h3>
+                    
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <!-- / chart -->
+                    <div id="chartdiv">FusionCharts. </div>
+                </div>
+                <!-- /.box-body -->
+                
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+
+<script type="text/javascript">
+    var chart = new FusionCharts("{$BASEURL}resource/doc/charts/FCF_Area2D.swf", "ChartId", "900", "350");
+    chart.setDataURL("{$config->site_url('laporan/stok/data_xml')}");
+    chart.render("chartdiv");
+</script>

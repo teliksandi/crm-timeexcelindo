@@ -1,0 +1,39 @@
+<section class="content-header">
+    <h1>
+        Enkripsi File
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-lock"></i> Security</a></li>
+        <li class="active">Enkripsi File</li>
+    </ol>
+</section>
+<section class="content">
+    <!-- notification template -->
+    {include file="base/templates/notification.html"}
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-cloud-upload"></i> Upload File</h3>
+                </div>
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('security/encryption/encrypt_process')}" method="post" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="category_nm" class="col-sm-2 control-label">File yg akan di-enkripsi</label>
+                                <div class="col-sm-4">
+                                    <input type="file" name="file_nm" value="" class="form-control" id="file_nm" placeholder="">
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="submit" name="upload" class="btn btn-primary">Enkripsi File !</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</section>

@@ -1,0 +1,88 @@
+<section class="content-header">
+    <h1>
+        Pengolahan Data Stok Obat
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li><a href="#"> Stok Obat</a></li>
+        <li class="active">Tambah Data</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!-- notification template -->
+    {include file="base/templates/notification.html"}
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Form Tambah Data Stok Obat</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-default" href="{$config->site_url('master/stok')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('master/stok/add_process')}" method="post" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="nama_obat" class="col-sm-2 control-label">Nama Obat</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="nama_obat" value="{$result.nama_obat|default:''}" class="form-control" id="nama_obat" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="jml" class="col-sm-2 control-label">Jumlah Stok</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="jml" value="{$result.jml|default:''}" class="form-control" id="jml" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="jml" class="col-sm-2 control-label">Harga Satuan</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="harga_satuan" value="{$result.harga_satuan|default:''}" class="form-control" id="harga_satuan" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="jml" class="col-sm-2 control-label">Tanggal Entry</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="datepicker" class="form-control" name="tgl_entry">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gambar" class="col-sm-2 control-label">Gambar Obat</label>
+                                <div class="col-sm-4">
+                                    <input type="file" name="gambar">
+                                </div>
+                            </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <button type="submit" class="btn btn-info">Simpan</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    {$pagination.data|default:''}
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+<script>
+//Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    });
+</script>
+

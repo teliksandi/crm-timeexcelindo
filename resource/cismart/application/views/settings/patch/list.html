@@ -1,0 +1,23 @@
+<div class="head-content">
+    <h3>Install Patch</h3>
+    <div class="clear"></div>
+</div>
+<!-- notification template -->
+{include file="base/templates/notification.html"}
+<!-- end of notification template-->
+<form action="{$config->site_url('settings/patch/process_patch')}" method="post" enctype="multipart/form-data">
+    <table class="table-input" width="100%">
+        <tr class="headrow">
+            <th colspan="2">Choose Patch File</th>
+        </tr>
+        <tr>
+            <td>Patch File</td>
+            <td colspan="3">
+                <input type="file" name="patch_file" size="50" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" name="save" value="Install Patch" class="edit-button" /> </td>
+        </tr>
+    </table>
+</form>

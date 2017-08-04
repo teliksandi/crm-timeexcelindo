@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head -->
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name='description' content="{$site.meta_desc|default:''}" />
+        <meta name='keywords' content="{$site.meta_key|default:''}" />
+        <meta name='robots' content='index,follow' />
+        <title>Login - {$site.site_title|default:''}</title>
+        <link href="{$BASEURL}/resource/doc/images/icon/favicon-operator.png" rel="SHORTCUT ICON" />
+        <!-- themes style -->
+        <!-- other style -->
+        {$LOAD_STYLE}
+        <link rel="stylesheet" type="text/css" href="{$THEMESPATH}" media="screen" />
+    </head>
+    <!-- body -->
+    <body class="hold-transition login-page full">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="#"><b>CISMART</b> v3.1</a>
+            </div><!-- /.login-logo -->
+            <div class="login-box-body">
+                {include file="$template_content"}
+            </div><!-- /.login-box-body -->
+        </div>
+        <!-- load javascript -->
+        {$LOAD_JAVASCRIPT}
+        <!-- end of javascript	-->
+    </body>
+    <!-- end body -->
+</html>

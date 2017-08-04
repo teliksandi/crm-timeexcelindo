@@ -1,0 +1,83 @@
+<section class="content-header">
+      <h1>
+            Google Map API
+      </h1>
+      <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-cog"></i> Library</a></li>
+            <li class="active">Google Map API</li>
+      </ol>
+</section>
+<section class="content">
+      <div class="row">
+            <div class="col-md-12">
+                  <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body" id="map" style="height:450px">
+
+                        </div>
+                        <script type="text/javascript">
+                        function initMap() {
+                              var map = new google.maps.Map(document.getElementById('map'), {
+                                    zoom: 15,
+                                    center: {
+                                          lat: -8.74657,
+                                          lng: 115.17024000000004},  // Denali.
+                                          mapTypeId: 'terrain'
+                                    });
+                                    var elevator = new google.maps.ElevationService;
+                                    var infowindow = new google.maps.InfoWindow({
+                                          map: map
+                                    });
+
+                                    // Add a listener for the click event. Display the elevation for the LatLng of
+                                    // the click inside the infowindow.
+                                    map.addListener('click', function(event) {
+                                          displayLocationElevation(event.latLng, elevator, infowindow);
+                                    });
+                              }
+
+                              function displayLocationElevation(location, elevator, infowindow) {
+                                    // Initiate the location request
+                                    elevator.getElevationForLocations({
+                                          'locations': [location]
+                                    }, function(results, status) {
+                                          infowindow.setPosition(location);
+                                          if (status === google.maps.ElevationStatus.OK) {
+                                                var JSONObj = JSON.stringify(results[0]);
+                                                var obj = jQuery.parseJSON(JSONObj);
+                                                // Retrieve the first result
+                                                if (results[0]) {
+                                                      // Open the infowindow indicating the elevation at the clicked position.
+                                                      //ajax convert coordinate to UTM
+                                                      $.ajax({
+                                                            url : "{$config->site_url('lib/gmap/convertutm')}",
+                                                            type : "POST",
+                                                            data : obj.location,
+                                                            dataType :"json",
+                                                            success : function(res){
+                                                                  var resJSONObj = JSON.stringify(res);
+                                                                  var conversionRes = jQuery.parseJSON(resJSONObj);
+                                                                  infowindow.setContent('<b>Hasil Konversi Koordinat ke UTM</b> <br> ' +
+                                                                  '---------------------------------------------------------<br/>'+
+                                                                  'LAT ORIG : '+obj.location.lat+'<br/>'+
+                                                                  'LON ORIG : '+obj.location.lng+'<br/>'+
+                                                                  'LAT UTM : '+conversionRes.easting+'<br/>'+
+                                                                  'LON UTM : '+conversionRes.northing+'<br/>'+
+                                                                  'ELEVASI : '+obj.elevation
+                                                                   + ' meters.');
+                                                            }
+                                                      });
+                                                } else {
+                                                      infowindow.setContent('No results found');
+                                                }
+                                          } else {
+                                                infowindow.setContent('Elevation service failed due to: ' + status);
+                                          }
+                                    });
+                              }
+                              </script>
+                              <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFhljXCkDhnbrdnjuaZ9yna4Adxmvs2ak&callback=initMap "></script>
+                        </div>
+                  </div>
+            </div>
+      </section>

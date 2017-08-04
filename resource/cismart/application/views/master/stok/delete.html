@@ -1,0 +1,50 @@
+<section class="content-header">
+    <h1>
+        Pengolahan Data Stok Obat
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li><a href="#"> Stok Obat</a></li>
+        <li class="active">Hapus Data</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!-- notification template -->
+    {include file="base/templates/notification.html"}
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Apakah anda yakin ingin menghapus data ini ?</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-default" href="{$config->site_url('master/stok')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('master/stok/delete_process')}" method="post">
+                        <input type="hidden" name="stok_id" value="{$result.stok_id|default:''}">
+                       
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    {$pagination.data|default:''}
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>

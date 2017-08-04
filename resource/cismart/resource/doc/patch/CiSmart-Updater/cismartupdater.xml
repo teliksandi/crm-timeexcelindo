@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cismart>
+	<modulelist>
+		<moduledetail>
+			<modulename>Modul Backup Database</modulename>
+			<moduledesc>Modul untuk pengelolaan backup database</moduledesc>
+			<controllerpath>adminmenu/backupdb</controllerpath>
+			<portalid>1</portalid>
+			<parentmenuid>3</parentmenuid>
+			<menuorder>202</menuorder>
+		</moduledetail>
+	</modulelist>
+</cismart>
