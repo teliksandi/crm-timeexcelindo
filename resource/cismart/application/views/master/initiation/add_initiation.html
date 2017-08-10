@@ -16,7 +16,7 @@
 			<select name="Karyawan">
 				<option value="">Pilih Karyawan</option>
             	{foreach $data_kar as $cth}
-            		<option value={$cth.id_karyawan}>{$cth.karyawan_name}</option>
+            		<option value={$cth.id_identitas}>{$cth.karyawan_name}</option>
            		{foreachelse}
            			Data tidak ditemukan !
            		{/foreach}
