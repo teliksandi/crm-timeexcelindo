@@ -1,44 +1,57 @@
 <section class="content-header">
 {include file="base/templates/notification.html"}
-    <h1>
-        Dashboard Operator
-    </h1>
-</section>
-<section class="content">
-<form method=post action="{$config->site_url('master/client/add_client')}" method="post">
-<table weight = "2">
-<tr>
-	<td>Alias Name</td>
-	<td width="700px"><input type="text" name="alias_name" placeholder="Nama Alias" class="form-control" required></td>
-</tr>
-<tr>
-	<td>Name</td>
-	<td><input type="text" name="client_name" placeholder="Nama Client" class="form-control" required></td>
-</tr>
-<tr>
-	<td width="100px">Client Address</td>
-	<td><textarea name="client_address" placeholder="Alamat Client" class="form-control" required></textarea>  </td>
-</tr>
-<tr>
-	<td>Person Name</td>
-	<td><input type="text" name="person_name" placeholder="Nama Person" class="form-control" required></td>
-</tr>
-<tr>
-	<td>Job Position</td>
-	<td><input type="text" name="department" placeholder="Jabatan" class="form-control" required></td>
-</tr>
-<tr>
-	<td>No. Telp</td>
-	<td><input type="number" min ="0"  name="telp" placeholder="Nomor Telepon" class="form-control" required></td>
-</tr>
-<tr>
-	<td>Email</td> 
-	<td><input type="email" name="email" placeholder="Email" class="form-control"></td>
-</tr>
-</table>
-<button type="submit" class="btn btn-default">Kirim</button>
-<button type="reset" value="reset" name="reset" class="btn btn-default">Reset</button>
-
-
+<div class="box box-success">
+	<div class="box-header with-border">
+    	<label><h3><b>
+        	Dashboard Operator
+    	</b></h3></label>
+    </div>
+<div class="box box-success">
+<form role="form" method=post action="{$config->site_url('master/client/add_client')}" method="post">
+	<div class="box-header with-border">
+	 <div class="col-md-6">
+		<tr>
+			<label>Alias Name</label>
+			<input type="text" name="alias_name" placeholder="Nama Alias" class="form-control" required>
+		</tr>
+		<tr>
+			<label>Name</label>
+			<input type="text" name="client_name" placeholder="Nama Client" class="form-control" required>
+		</tr>
+		<tr>
+			<label>Client Address</label>
+			<textarea name="client_address" placeholder="Alamat Client" class="form-control" required></textarea>
+		</tr>
+	 </div>
+	 <div class="col-md-6">
+		<tr>
+			<label>Person Name</label>
+			<input type="text" name="person_name" placeholder="Nama Person" class="form-control" required>
+		</tr>	
+		<tr>
+			<label>Job Position</label>
+			<input type="text" name="department" placeholder="Jabatan" class="form-control" required>
+		</tr>
+		<tr>
+			<label>No. Telp</label>
+			<input type="number" min ="0"  name="telp" placeholder="Nomor Telepon" class="form-control" required>
+		</tr>
+		<tr>
+			<label>Email</label> 
+			<input type="email" name="email" placeholder="Email" class="form-control">
+		</tr>
+	 </div>
+	</div>
+<div class="box box-danger">
+<form role="form">
+	<div class="box-header with-border">
+	<center>
+		<button type="submit" class="btn btn-success">Kirim</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
+	</center>
+	</div>
+</form>
+</div>
 </form>
 </section>

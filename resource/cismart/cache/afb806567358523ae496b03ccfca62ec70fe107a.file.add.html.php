@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-06 09:22:31
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-10 17:27:13
          compiled from "application/views\settings/menu/add.html" */ ?>
 <?php /*%%SmartyHeaderCode:182365986c3b746fae2-47648801%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     'afb806567358523ae496b03ccfca62ec70fe107a' => 
     array (
       0 => 'application/views\\settings/menu/add.html',
-      1 => 1501832426,
+      1 => 1501832721,
       2 => 'file',
     ),
   ),

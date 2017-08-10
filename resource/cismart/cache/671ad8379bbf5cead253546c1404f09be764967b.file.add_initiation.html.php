@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-10 15:15:43
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-10 17:41:08
          compiled from "application/views\master/initiation/add_initiation.html" */ ?>
-<?php /*%%SmartyHeaderCode:21805598c5c7f665748-83884014%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:22950598c7e94d89238-95712390%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '671ad8379bbf5cead253546c1404f09be764967b' => 
     array (
       0 => 'application/views\\master/initiation/add_initiation.html',
-      1 => 1502370939,
+      1 => 1502378349,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21805598c5c7f665748-83884014',
+  'nocache_hash' => '22950598c7e94d89238-95712390',
   'function' => 
   array (
   ),
@@ -40,7 +40,7 @@ $_smarty_tpl->decodeProperties(array (
 if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['cth']->key => $_smarty_tpl->tpl_vars['cth']->value){
 ?>
-            		<option value=<?php echo $_smarty_tpl->tpl_vars['cth']->value['id_karyawan'];?>
+            		<option value=<?php echo $_smarty_tpl->tpl_vars['cth']->value['id_identitas'];?>
 ><?php echo $_smarty_tpl->tpl_vars['cth']->value['karyawan_name'];?>
 </option>
            		<?php }} else { ?>

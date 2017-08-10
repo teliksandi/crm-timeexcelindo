@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-06 09:01:43
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-10 17:27:51
          compiled from "application/views\settings/role/access_update.html" */ ?>
 <?php /*%%SmartyHeaderCode:4735986bed739cfa1-84571868%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '6ff52b57b3c7683f13584749d1b128304963ad52' => 
     array (
       0 => 'application/views\\settings/role/access_update.html',
-      1 => 1501832426,
+      1 => 1501832721,
       2 => 'file',
     ),
   ),
