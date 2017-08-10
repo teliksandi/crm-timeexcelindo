@@ -24,7 +24,28 @@ class operatorlogin extends ApplicationBase {
         // bisnis proses
         if (!empty($this->com_user)) {
             // still login
-            redirect('operator/welcome');
+/*
+        $role = $this->login_process('$role');
+
+            $sql = "SELECT * FROM
+                (
+                        SELECT b.*, user_mail, d.role_nm, login_date, ip_address, user_name, d.role_id
+                        FROM com_user a
+                        INNER JOIN users b ON a.user_id = b.user_id
+                        INNER JOIN com_role_user c ON b.user_id = c.user_id
+                        INNER JOIN com_role d ON c.role_id = d.role_id
+                        LEFT JOIN com_user_login e ON b.user_id = e.user_id
+                        WHERE b.user_id = ? AND c.role_id = ?
+                        ORDER BY login_date DESC
+                ) result
+                GROUP BY user_id";
+            $bio = $this->db->query($sql, $role);
+                foreach ($get_id->result() as $cth) {
+                    $id =  $cth->user_id.'<br>';
+                }
+*/
+
+            redirect('operator/welcome', 'refresh');
         } else {
             $this->smarty->assign("login_st", $status);
         }
@@ -43,7 +64,19 @@ class operatorlogin extends ApplicationBase {
             $username = trim($this->input->post('username'));
             $password = trim($this->input->post('pass'));
             // get user detail
-            $result = $this->m_account->get_user_login($username, $password, 2, $this->portal_id);
+
+                $get_id = $this->db->query("select user_id from com_user where user_name = '".$username."'");
+                foreach ($get_id->result() as $cth) {
+                    $id =  $cth->user_id.'<br>';
+                }
+
+            $role = $this->db->query("select role_id from com_role_user where user_id = '".$id."'");
+                foreach ($role->result() as $rl) {
+                    $role_user =  $rl->role_id.'<br>';
+                }
+
+
+            $result = $this->m_account->get_user_login($username, $password,  /*Ini yang jadi identitas admin atau sebagai user biasa*/ $role_user , $this->portal_id);
             // check
             if (!empty($result)) {
                 // cek lock status

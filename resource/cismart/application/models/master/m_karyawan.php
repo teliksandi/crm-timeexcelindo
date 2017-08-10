@@ -15,6 +15,18 @@ class m_karyawan extends CI_Model{
         }
     }
 
+    function get_all_karyawan(){
+        $sql = "SELECT * FROM karyawan";
+        $query = $this->db->query($sql);
+          if ($query->num_rows() > 0) {
+              $result = $query->result_array();
+              $query->free_result();
+              return $result;
+          } else {
+              return array();
+        }
+    }
+
     function get_list_department(){
         $sql = "SELECT * FROM department";
         $query = $this->db->query($sql);

@@ -1,0 +1,204 @@
+<section class="content-header">
+{include file="base/templates/notification.html"}
+<div class="box box-success">
+	<div class="box-header with-border">
+    	<label><h2><b>
+        	Inisiasi
+    	</b></h2></label>
+    </div>
+<div class="box box-success">
+<form role="form">
+	<div class="box-header with-border">
+		<tr>
+			<td>Karyawan</td>
+			<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<select name="Karyawan">
+				<option value="">Pilih Karyawan</option>
+            	{foreach $data_kar as $cth}
+            		<option value={$cth.id_karyawan}>{$cth.karyawan_name}</option>
+           		{foreachelse}
+           			Data tidak ditemukan !
+           		{/foreach}
+           </select>
+			</td>
+		</tr>
+		<br>
+		<br>
+		<tr>
+			<td>Client</td>
+			<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<select name="Client">
+<option value="">Pilih Client</option>
+            {foreach $data as $cth}
+            <option value={$cth.id_client}>{$cth.client_name}</option>
+           {foreachelse}
+           Data tidak ditemukan !
+           {/foreach}
+           </select>
+			</td>
+		</tr>
+	</div>
+</form>
+</div>
+<div class="box box-success">
+<form role="form">
+	<div class="box-header with-border">
+		<label><h4><b>
+			Detail Project
+		</b></h4></label>
+	<br>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Project Title</label>
+			<input type="text" name="judul_project" placeholder="Judul Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+		</div>
+		<div class="form-group">
+			<label>Project Description</label>
+			<textarea name="deskripsi" rows="3" cols="35" class="form-control" placeholder="Deskripsi Tentang Project" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
+		</div>
+		<div class="form-group">
+			<label>Project Manager Department</label>
+			<input type="text" name="manager_department" placeholder="Departement Management Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+		</div>
+		<div class="form-group">
+			<label> Budget, Schdule, Staffing, dll</label>
+			<input type="text" name="BSSD" placeholder="Uang, Susunan, Staf, dll" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+		</div>
+		<div class="form-group">
+			<label>Job / Bussiness Needs</label> 
+			<input type="text" name="kebutuhan_kerja" placeholder="Kebutuhan Pekerjaan/Bisnis" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Project Justification</label> 
+			<input type="text" name="justifikasi" placeholder="Justifikasi Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+		</div>
+		<div class="form-group">
+			<label>Human Resource Needs</label> 
+			<input type="text" name="kebutuhan_sdm" placeholder="Kebutuhan SDM" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+		</div>
+		<div class="form-group">
+			<label>Product Description</label> 
+			<textarea name="product_deskripsi" rows="3" cols="35" class="form-control" placeholder="Deskripsi tentang Produk" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
+	
+		</div>
+		<div class="form-group">
+			<label>Not in this Project</label> 
+			<textarea name="not_in" rows="3" cols="35" class="form-control" placeholder="Data yang tidak ada pada Project" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
+		</div>
+	</div>
+</form>
+</div>
+<div class="box box-success">
+<form role="form">
+	<div class="box-header with-border">
+		<tr>
+			<label><h4><b>Stakeholder</b></h4></label>
+			<td>
+				<table>
+					<tr>
+						<td width="500px" align="center"><b>Role</b></td>
+						<td width="500px" align="center"><b>Dampak</b></td>
+						<td width="500px" align="center"><b>Pengaruh</b></td>
+						<td width="500px" align="center"><b>Risk Tolerance</b></td>
+					</tr>
+			<tr>
+				<td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="role1">Kepala Kantor
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="role2">Staff
+				</td>
+				<td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi1" value="High">High
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi2" value="Medium">Medium
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi3" value="Low Medium">Low Medium
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi4" value="Low">Low
+				</td>
+
+				
+				<td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi5" value="High">High
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi6" value="Medium">Medium
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi7" value="Low Medium">Low Medium
+					<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="devisi8" value="Low">Low
+				</td>
+				<td>
+				<center>
+					<input type="number" name="data1" value="0" min="0" max="99">
+					<br>
+					<input type="number" name="data2" value="0" min="0" max="99">
+					<br>
+					<input type="number" name="data3" value="0" min="0" max="99">
+					<br>
+					<input type="number" name="data4" value="0" min="0" max="99">
+					<br>
+				</center>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+	</div>
+</form>
+</div>
+<div class="box box-success">
+<form role="form">
+	<div class="box-header with-border">
+		<tr>
+			<label><h4><b>
+				Date And Upload
+			</b></h4></label>
+			<td>
+				<table>
+					<tr>
+						<td width="500px" align="center"><b>Start date</b></td>
+						<td width="500px" align="center"><b>Due date</b></td>
+						<td width="500px" align="center"><b>Pilih File</b></td>
+					</tr>
+					<tr>
+						<td align="center">
+							<input type="date" name="tanggal_start">
+						</td>
+						<td align="center">
+							<input type="date" name="tanggal_due">
+						</td>
+						<td align="center">
+							<input type="file" name="foto_narsis">
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</div>
+</form>
+<div class="box box-danger">
+<form role="form">
+	<div class="box-header with-border">
+	<center>
+		<button type="submit" class="btn btn-success">Kirim</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
+	</center>
+	</div>
+</form>
+</div>
+</section>

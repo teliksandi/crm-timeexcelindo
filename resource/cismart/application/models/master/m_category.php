@@ -15,6 +15,19 @@ class m_category extends CI_Model{
         }
     }
 
+    function get_all_cat(){
+        $sql = "SELECT * FROM category";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+
     function get_total_category($params){
         $sql = "SELECT COUNT(*) as 'total' FROM category WHERE category_nm LIKE ? ";
         $query = $this->db->query($sql, $params);
@@ -38,6 +51,15 @@ class m_category extends CI_Model{
             return NULL;
         }
     }
+
+    function insert_client($params){
+        return $this->db->insert('client', $params);
+    }
+
+        function insert_inisiasi($params){
+        return $this->db->insert('inisiasi', $params);
+    }
+
 
     function insert_category($params){
         return $this->db->insert('category', $params);

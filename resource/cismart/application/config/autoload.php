@@ -67,7 +67,7 @@ $autoload['libraries'] = array('database', 'tsession', 'smarty');
   |	$autoload['helper'] = array('url', 'file');
  */
 
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url','form');
 
 
 /*

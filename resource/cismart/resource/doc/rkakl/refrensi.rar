@@ -1,0 +1,77 @@
+tabel : 1.Departemen
+isi : 	id_depart*
+	nama
+
+
+
+tbl  : 2 karyawan
+isi  :	id_karyawan*
+	id_depart**
+	nama
+	jabatan
+	divisi
+
+
+View :
+ {foreach $rs_id as $result}
+                            <tr>
+                                <td align="middle">{$no++}</td>
+                                <td align="middle">{$result.category_id}</td>
+                                <td>{$result.category_nm}</td>
+                                <td>
+                                    <a href="{$config->site_url('master/category/edit')}/{$result.category_id}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="{$config->site_url('master/category/delete')}/{$result.category_id}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                </td>
+                            </tr>
+                            {foreachelse}
+                            <tr>
+                                <td colspan="4">
+                                    Data tidak ditemukan!
+                                </td>
+                            </tr>
+                            {/foreach}
+
+
+
+controller:
+ // get list data
+        $params = array($category_nm, ($start - 1), $config['per_page']);
+        $this->smarty->assign("rs_id", $this->m_category->get_list_category($params));
+
+
+model :
+function get_list_category($params){
+        $sql = "SELECT * FROM category WHERE category_nm LIKE ? LIMIT ?,?";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <select name="client" id="client" class="form-control">
+           <option></option>
+           {foreach $data_client as $data}
+           <option value="<?=$data->client_name?>"><?=$data->client_name?></option>
+           {foreachelse}
+           Data tidak ditemukan !
+           {/foreach}
+          </select>

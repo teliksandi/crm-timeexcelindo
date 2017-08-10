@@ -51,6 +51,8 @@ class karyawan extends ApplicationBase{
         // get list data
         $params = array($nama_karyawan, ($start - 1), $config['per_page']);
         $this->smarty->assign("rs_id", $this->m_karyawan->get_list_karyawan($params));
+
+         $this->smarty->assign("data",$this->m_karyawan->get_all_karyawan());
         // output
         parent::display();
     }

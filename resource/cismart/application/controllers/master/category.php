@@ -14,6 +14,9 @@ class category extends ApplicationBase{
         $this->load->library('pagination');
         $this->load->library('datetimemanipulation');
     }
+function tombol_client(){
+$this->load->view('master/category/add_client.html');
+}
 
     function index(){
         // set page rules
@@ -87,6 +90,7 @@ class category extends ApplicationBase{
         parent::display();
     }
 
+
     function add_process(){
         // set page rules
         $this->_set_page_rule("C");
@@ -114,6 +118,49 @@ class category extends ApplicationBase{
         // default redirect
         redirect("master/category/add/");
     }
+
+    function add_inisiasi(){
+        // set page rules
+        $this->_set_page_rule("C");
+
+        // cek input
+        $this->tnotification->set_rules('karyawan', 'Data Inisiasi', 'trim|required');
+
+        if($this->tnotification->run() !== FALSE){
+            $params = array(
+                'karyawan' => $this->input->post('karyawan'),
+                'client' => $this->input->post('client'),
+                'judul_project' => $this->input->post('judul_project'),
+                'desc_project' => $this->input->post('deskripsi_project'),
+                'project_manage_depart' => $this->input->post('manager_department'),
+                'BSSD' => $this->input->post('BSSD'),
+                'kebutuhan_kerja' => $this->input->post('kebutuhan_kerja'),
+                'justifi_project' => $this->input->post('justifikasi'),
+                'SDM' => $this->input->post('kebutuhan_sdm'),
+                'product_desc' => $this->input->post('product_deskripsi'),
+                'not_in_project' => $this->input->post('not_in'),
+                'role' => $this->input->post('role1 & role2 & role3 & role4'),
+                'dampak' => $this->input->post('dampak1 & dampak2 & dampak3 & dampak4'),
+                'risk_tolerance' => $this->input->post('risk1'),
+                'start_date' => $this->input->post('tanggal_start'),
+                'due_date' => $this->input->post('tanggal_due'),
+                'file' => $this->input->post('file'),
+            );
+            if ($this->m_category->insert_inisiasi($params)) {
+                //$this->tnotification->delete_last_field();
+                $this->tnotification->sent_notification("success", "Data berhasil disimpan");
+            }else{
+                // default error
+                $this->tnotification->sent_notification("error", "Data gagal disimpan");
+            }
+        }else{
+            // default error
+            $this->tnotification->sent_notification("error", "Data gagal disimpan");
+        }
+        // default redirect
+        redirect("master/category/add/");
+    }
+
 
     function edit($params){
         // set page rules
