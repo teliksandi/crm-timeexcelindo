@@ -1,0 +1,162 @@
+<section class="content-header">
+    <h1>
+        Penambahan Data Karyawan
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li><a href="#"> Karyawan</a></li>
+        <li class="active">Tambah Data</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!-- notification template -->
+    {include file="base/templates/notification.html"}
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Data Karyawan</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-default" href="{$config->site_url('master/karyawan')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('master/karyawan/add_process')}" method="post">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="no_identitas" class="col-sm-2 control-label">Nomor Identitas</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="no_identitas" value="{$result.no_identitas|default:''}" class="form-control" id="no_identitas" placeholder="Nomor Identitas KTP/SIM/Passport">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nik" class="col-sm-2 control-label">NIK</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="nik" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="No. Induk Karyawan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_karyawan" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="Nama">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_alias" class="col-sm-2 control-label">Alias Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="nama_alias" value="{$result.nama_alias|default:''}" class="form-control" id="nama_alias" placeholder="Nama Panggilan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="jabatan" class="col-sm-2 control-label">Position</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="jabatan" value="{$result.jabatan|default:''}" class="form-control" id="jabatan" placeholder="Jabatan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_department" class="col-sm-2 control-label">Department</label>
+                                <div class="col-sm-4">
+                                    <select name="department">
+                                        <option value="" disabled="disabled" selected="selected">--Choose Department--</option>
+                                                {foreach $data_department as $d_dp}
+                                                    <option value={$d_dp.id_department}>{$d_dp.nama_department}</option>
+                                                    {foreachelse}
+                                                   Data tidak ditemukan !
+                                                {/foreach}
+                                    </select>
+                                </div>
+                            </div>                      
+                        </div>
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Detail Personal</h3>
+                    </div>
+                        <div class="form-group">
+                                <label for="tempat_lahir" class="col-sm-2 control-label">Place of Birth</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="tgl_lahir" class="col-sm-2 control-label">Date of Birth</label>                                
+                                    <input type="date" name="tgl_lahir">                           
+                        </div>
+                        <div class="form-group">
+                                <label for="alamat_asal" class="col-sm-2 control-label">Origin Address</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="alamat_asal" value="{$result.alamat_asal|default:''}" class="form-control" id="alamat_asal" placeholder="Alamat Asal">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="alamat_sekarang" class="col-sm-2 control-label">Current Address</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="alamat_sekarang" value="{$result.alamat_sekarang|default:''}" class="form-control" id="alamat_sekarang" placeholder="Alamat sekarang">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="email" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="Email">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="telp" class="col-sm-2 control-label">No. Handphone</label>
+                                <div class="col-sm-4">
+                                    <input type="tel" name="telp" value="{$result.telp|default:''}" class="form-control" id="telp" placeholder="Nomor Handphone">
+                                </div>
+                        </div>
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Data Pendidikan</h3>
+                    </div>
+                        <div class="form-group">
+                                <label for="nama_instansi" class="col-sm-2 control-label">Instance Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="nama_instansi" value="{$result.nama_instansi|default:''}" class="form-control" id="nama_instansi" placeholder="Nama Instansi Pendidikan">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="jurusan" class="col-sm-2 control-label">Areas of Expertise</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="jurusan" value="{$result.jurusan|default:''}" class="form-control" id="jurusan" placeholder="Jurusan">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="jenjang_pendidikan" class="col-sm-2 control-label">Level Educational</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="jenjang_pendidikan" value="{$result.jenjang_pendidikan|default:''}" class="form-control" id="jenjang_pendidikan" placeholder="Jenjang Pendidikan">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="tahun_lulus" class="col-sm-2 control-label">Years of Gradueted</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="tahun_lulus" value="{$result.tahun_lulus|default:''}" class="form-control" id="tahun_lulus" placeholder="Tahun Lulus" maxlength="4">
+                                </div>
+                        </div>
+                        
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <button type="submit" class="btn btn-info">Simpan</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                 
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    {$pagination.data|default:''}
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
