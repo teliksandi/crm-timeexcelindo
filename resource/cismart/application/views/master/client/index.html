@@ -1,0 +1,94 @@
+<section class="content-header">
+    <h1>
+        Pengolahan Data Client
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li class="active">Client</li>
+    </ol>
+</section>
+<!-- notification template -->
+{include file="base/templates/notification.html"}
+<!-- end of notification template-->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
+                </div>
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('master/client/search_process')}" method="post">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="client_name" class="col-sm-2 control-label">Nama Client</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="client_name" value="{$search.client_name|default:''}" class="form-control" id="client_name" placeholder="">
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="submit" value="Reset" name="save" class="btn btn-default">Reset</button>
+                                    <button type="submit" value="Cari" name="save" class="btn btn-primary">Cari</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tabel Data Client</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-success" href="{$config->site_url('master/client/add_client')}" ><i class="fa fa-plus"></i> Tambah Data</a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th width="5%">No.</th>
+                                <th width="10%">Alias Name</th>
+                                <th width="20%">Client Nama</th>
+                                <th width="20">Client Address</th>
+                                <th width="15%">Person Name</th>
+                                <th width="15%">Job Position</th>
+                                <th width="10%">Telp</th>
+                                <th width="13%">Email</th>
+                            </tr>
+                            {foreach $rs_id as $result}
+                            <tr>
+                                <td align="middle">{$no++}</td>
+                                <td align="middle">{$result.alias_name}</td>
+                                <td align="middle">{$result.client_name}</td>
+                                <td align="middle">{$result.client_address}</td>
+                                <td align="middle">{$result.person_name}</td>
+                                <td align="middle">{$result.job_position}</td>
+                                <td align="middle">{$result.telp}</td>
+                                <td align="middle">{$result.email}</td>
+                                <td>
+                                    <a href="{$config->site_url('master/client/edit')}/{$result.id_client}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="{$config->site_url('master/client/delete')}/{$result.id_client}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                </td>
+                            </tr>
+                            {foreachelse}
+                            <tr>
+                                <td colspan="4">
+                                    Data tidak ditemukan!
+                                </td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    {$pagination.data|default:''}
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+
+

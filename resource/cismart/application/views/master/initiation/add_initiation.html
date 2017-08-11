@@ -10,15 +10,17 @@
 <form role="form">
 	<div class="box-header with-border">
 		<tr>
-			<td>Employees</td>
+			<td>Karyawan</td>
 			<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select name="Nama">
-					<option value="">Pilih Karyawan..</option>
-					<option value="Lathiif">Lathiif</option>
-					<option value="Nur Alim">Nur Alim</option>
-					<option value="Tio">Tio</option>
-				</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<select name="Karyawan">
+				<option value="">Pilih Karyawan</option>
+            	{foreach $data_kar as $cth}
+            		<option value={$cth.id_identitas}>{$cth.karyawan_name}</option>
+           		{foreachelse}
+           			Data tidak ditemukan !
+           		{/foreach}
+           </select>
 			</td>
 		</tr>
 		<br>
@@ -26,24 +28,15 @@
 		<tr>
 			<td>Client</td>
 			<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<select name="Client">
-					<option value="">Pilih Client..</option>
-					<option value="Lathiif">Lathiif</option>
-					<option value="Nur Alim">Nur Alim</option>
-					<option value="Tio">Tio</option>
-				</select>
-			</td>
-		</tr>
-		<br>
-		<br>
-		<tr>
-			<td>Project Manager Department</td>
-			<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select name="PMD">
-					<option value="">Pilih..</option>
-				</select>
+<option value="">Pilih Client</option>
+            {foreach $data as $cth}
+            <option value={$cth.id_client}>{$cth.client_name}</option>
+           {foreachelse}
+           Data tidak ditemukan !
+           {/foreach}
+           </select>
 			</td>
 		</tr>
 	</div>
@@ -66,27 +59,16 @@
 			<textarea name="deskripsi" rows="3" cols="35" class="form-control" placeholder="Deskripsi Tentang Project" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
 		</div>
 		<div class="form-group">
+			<label>Project Manager Department</label>
+			<input type="text" name="manager_department" placeholder="Departement Management Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+		</div>
+		<div class="form-group">
 			<label> Budget, Schdule, Staffing, dll</label>
 			<input type="text" name="BSSD" placeholder="Uang, Susunan, Staf, dll" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
 		</div>
 		<div class="form-group">
-			<label>Job / Bussiness Needs</label>
-			<br> 
-			<table>
-				<tr>
-					<td class="col-md-4">
-					&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="checkbox" name="BN1">&nbsp;&nbsp;Website
-					</td>
-					<td>
-					&nbsp;&nbsp;
-						<input type="checkbox" name="BN2">&nbsp;&nbsp;Mobile Apps
-					</td>
-					<td>
-						<input type="checkbox" name="BN3">&nbsp;&nbsp;IoS Apps
-					</td>
-				</tr>
-			</table>
+			<label>Job / Bussiness Needs</label> 
+			<input type="text" name="kebutuhan_kerja" placeholder="Kebutuhan Pekerjaan/Bisnis" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
 		</div>
 	</div>
 	<div class="col-md-6">
@@ -208,13 +190,12 @@
 		</tr>
 	</div>
 </form>
-<br>
 <div class="box box-danger">
 <form role="form">
 	<div class="box-header with-border">
 	<center>
 		<button type="submit" class="btn btn-success">Kirim</button>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
 	</center>
 	</div>

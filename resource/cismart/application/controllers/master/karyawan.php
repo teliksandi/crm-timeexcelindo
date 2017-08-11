@@ -83,8 +83,7 @@ class karyawan extends ApplicationBase{
         $this->smarty->assign("template_content", "master/karyawan/add.html");    
         $this->smarty->assign("data_department",$this->m_karyawan->get_list_department());
         // notification
-        $this->tnotification->display_notification();
-        $this->tnotification->display_last_field();
+
         // output
         parent::display();
     }

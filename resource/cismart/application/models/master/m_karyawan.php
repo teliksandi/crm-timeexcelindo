@@ -71,7 +71,7 @@ class m_karyawan extends CI_Model{
     }
 
     function delete_karyawan($params){
-        $sql = "DELETE FROM karyawan WHERE id_karyawan = ?";
+        $sql = "DELETE FROM karyawan WHERE no_identitas = ?";
         return $this->db->query($sql, $params);
     }
 

@@ -1,0 +1,59 @@
+<section class="content-header">
+    <h1>
+        Pengolahan Data Client
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li><a href="#"> Client</a></li>
+        <li class="active">Ubah Data</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!-- notification template -->
+    {include file="base/templates/notification.html"}
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Form Ubah Data Client</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-default" href="{$config->site_url('master/client')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('master/client/edit_process')}" method="post">
+                        <input type="hidden" name="no_identitas" value="{$result.id_client|default:''}">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="client_name" class="col-sm-2 control-label">Nama Client</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="client_name" value="{$result.client_name|default:''}" class="form-control" id="client_name" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <button type="submit" class="btn btn-info">Simpan</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    {$pagination.data|default:''}
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
