@@ -30,31 +30,31 @@
                             <div class="form-group">
                                 <label for="no_identitas" class="col-sm-2 control-label">Nomor Identitas</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="no_identitas" value="{$result.no_identitas|default:''}" class="form-control" id="no_identitas" placeholder="Nomor Identitas KTP/SIM/Passport">
+                                    <input type="number" min="0" name="no_identitas" value="{$result.no_identitas|default:''}" class="form-control" id="no_identitas" placeholder="Nomor Identitas KTP/SIM/Passport">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nik" class="col-sm-2 control-label">NIK</label>
                                 <div class="col-sm-2">
-                                    <input type="text" name="nik" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="No. Induk Karyawan">
+                                    <input type="number" min="0" name="nik" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="No. Induk Karyawan" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_karyawan" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="Nama">
+                                    <input type="text" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="Nama" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_alias" class="col-sm-2 control-label">Alias Name</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="nama_alias" value="{$result.nama_alias|default:''}" class="form-control" id="nama_alias" placeholder="Nama Panggilan">
+                                    <input type="text" name="nama_alias" value="{$result.nama_alias|default:''}" class="form-control" id="nama_alias" placeholder="Nama Panggilan" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="jabatan" class="col-sm-2 control-label">Position</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="jabatan" value="{$result.jabatan|default:''}" class="form-control" id="jabatan" placeholder="Jabatan">
+                                    <input type="text" name="jabatan" value="{$result.jabatan|default:''}" class="form-control" id="jabatan" placeholder="Jabatan" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -77,23 +77,23 @@
                         <div class="form-group">
                                 <label for="tempat_lahir" class="col-sm-2 control-label">Place of Birth</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir">
+                                    <input type="text" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" required>
                                 </div>
                         </div>
                         <div class="form-group">
                                 <label for="tgl_lahir" class="col-sm-2 control-label">Date of Birth</label>                                
-                                    <input type="date" name="tgl_lahir">                           
+                                    <input type="date" name="tgl_lahir" required>                           
                         </div>
                         <div class="form-group">
                                 <label for="alamat_asal" class="col-sm-2 control-label">Origin Address</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="alamat_asal" value="{$result.alamat_asal|default:''}" class="form-control" id="alamat_asal" placeholder="Alamat Asal">
+                                    <input type="text" name="alamat_asal" value="{$result.alamat_asal|default:''}" class="form-control" id="alamat_asal" placeholder="Alamat Asal" required>
                                 </div>
                         </div>
                         <div class="form-group">
                                 <label for="alamat_sekarang" class="col-sm-2 control-label">Current Address</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="alamat_sekarang" value="{$result.alamat_sekarang|default:''}" class="form-control" id="alamat_sekarang" placeholder="Alamat sekarang">
+                                    <input type="text" name="alamat_sekarang" value="{$result.alamat_sekarang|default:''}" class="form-control" id="alamat_sekarang" placeholder="Alamat sekarang" required>
                                 </div>
                         </div>
                         <div class="form-group">
@@ -105,7 +105,7 @@
                         <div class="form-group">
                                 <label for="telp" class="col-sm-2 control-label">No. Handphone</label>
                                 <div class="col-sm-4">
-                                    <input type="tel" name="telp" value="{$result.telp|default:''}" class="form-control" id="telp" placeholder="Nomor Handphone">
+                                    <input type="tel" name="telp" value="{$result.telp|default:''}" class="form-control" id="telp" placeholder="Nomor Handphone" required>
                                 </div>
                         </div>
                     <div class="box-header with-border">
