@@ -8,6 +8,7 @@ class karyawan extends ApplicationBase{
     public function __construct(){
         parent::__construct();
         // load Model
+        $this->load->model('master/m_department');
         $this->load->model('master/m_karyawan');
         $this->load->library('tnotification');
         $this->load->library('pagination');
@@ -19,7 +20,7 @@ class karyawan extends ApplicationBase{
         $this->_set_page_rule("R");
         // set template content
         $this->smarty->assign("template_content", "master/karyawan/index.html");
-
+                
         // session
         $search = $this->tsession->userdata('search_karyawan');
         $this->smarty->assign('search', $search);
@@ -51,9 +52,14 @@ class karyawan extends ApplicationBase{
         // get list data
         $params = array($nama_karyawan, ($start - 1), $config['per_page']);
         $this->smarty->assign("rs_id", $this->m_karyawan->get_list_karyawan($params));
-
-         $this->smarty->assign("data",$this->m_karyawan->get_all_karyawan());
+        
         // output
+        $data['query'] =$this->m_department->get_data_department();
+        print_r($data['query']);
+        die();
+        $this->load->view('master/karyawan/index.html', $data);
+
+        $this->smarty->assign("dpt_id", $this->m_department->get_data_department());
         parent::display();
     }
 
@@ -81,9 +87,11 @@ class karyawan extends ApplicationBase{
         
         // set template content
         $this->smarty->assign("template_content", "master/karyawan/add.html");    
-        $this->smarty->assign("data_department",$this->m_karyawan->get_list_department());
+        $this->smarty->assign("data_department",$this->m_department->get_list_department());
+        
         // notification
-
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
         // output
         parent::display();
     }
@@ -100,24 +108,19 @@ class karyawan extends ApplicationBase{
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
                 //'mdb' => $this->com_user['user_id'],
                // 'mdd' => date('Y-m-d')
+                'username'          => $this->input->post('username'),
+                'password'          => $this->input->post('password'),
                 'nik'               => $this->input->post('nik'),
                 'nama_alias'        => $this->input->post('nama_alias'),
                 'jabatan'           => $this->input->post('jabatan'),
-
+                'jenis_kelamin'     => $this->input->post('jenis_kelamin'),
                 'tempat_lahir'      => $this->input->post('tempat_lahir'),
                 'tgl_lahir'         => $this->input->post('tgl_lahir'),
-                'alamat_asal'       => $this->input->post('alamat_asal'),
-                'alamat_sekarang'   => $this->input->post('alamat_sekarang'),
                 'email'             => $this->input->post('email'),
                 'telp'              => $this->input->post('telp'),
-                'no_identitas'      => $this->input->post('no_identitas'),
-
-                'nama_instansi'     => $this->input->post('nama_instansi'),
-                'tahun_lulus'       => $this->input->post('tahun_lulus'),
-                'jenjang_pendidikan'=> $this->input->post('jenjang_pendidikan'),
-                'jurusan'           => $this->input->post('jurusan'),
-                'id_department'     => $this->input->post('id_department')
+                'id_department'     => $this->input->post('department')
             );
+
             if ($this->m_karyawan->insert_karyawan($params)) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
@@ -151,7 +154,7 @@ class karyawan extends ApplicationBase{
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('no_identitas', 'Nomor Identitas', 'trim|required');
+        $this->tnotification->set_rules('id_karyawan', 'Nomor Identitas', 'trim|required');
         $this->tnotification->set_rules('nama_karyawan', 'Nama Karyawan', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
@@ -168,7 +171,7 @@ class karyawan extends ApplicationBase{
                 'alamat_asal'       => $this->input->post('alamat_asal'),
                 'alamat_sekarang'   => $this->input->post('alamat_sekarang'),
                 'telp'              => $this->input->post('telp'),
-                'no_identitas'      => $this->input->post('no_identitas'),
+                'id_karyawan'      => $this->input->post('id_karyawan'),
 
                 'nama_instansi'     => $this->input->post('nama_instansi'),
                 'tahun_lulus'       => $this->input->post('tahun_lulus'),
@@ -177,7 +180,7 @@ class karyawan extends ApplicationBase{
                 'id_department'    => $this->input->post('id_department')
             );
             $where = array(
-                'no_identitas' => $this->input->post('no_identitas', TRUE),
+                'id_karyawan' => $this->input->post('id_karyawan', TRUE),
             );
 
             if ($this->m_karyawan->update_karyawan($params)) {
@@ -192,7 +195,7 @@ class karyawan extends ApplicationBase{
             $this->tnotification->sent_notification("error", "Data gagal disimpan");
         }
         // default redirect
-        redirect("master/karyawan/edit/".$this->input->post('no_identitas', TRUE));
+        redirect("master/karyawan/edit/".$this->input->post('id_karyawan', TRUE));
     }
 
     function delete($params){
@@ -213,11 +216,11 @@ class karyawan extends ApplicationBase{
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('no_identitas', 'ID Kategori', 'trim|required');
+        $this->tnotification->set_rules('id_karyawan', 'ID Kategori', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
-                'no_identitas' => $this->input->post('no_identitas', TRUE),
+                'id_karyawan' => $this->input->post('id_karyawan', TRUE),
             );
 
             if ($this->m_karyawan->delete_karyawan($params)) {

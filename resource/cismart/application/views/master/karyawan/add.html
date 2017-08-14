@@ -28,33 +28,67 @@
                     <form class="form-horizontal" action="{$config->site_url('master/karyawan/add_process')}" method="post">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="no_identitas" class="col-sm-2 control-label">Nomor Identitas</label>
+                                <label for="username" class="col-sm-2 control-label">Username</label>
                                 <div class="col-sm-4">
-                                    <input type="number" min="0" name="no_identitas" value="{$result.no_identitas|default:''}" class="form-control" id="no_identitas" placeholder="Nomor Identitas KTP/SIM/Passport">
+                                    <input type="text" name="username" value="{$result.username|default:''}" class="form-control" id="username" placeholder="Username digunakan untuk login">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-2">
+                                    <input type="password" name="password" value="{$result.password|default:''}" class="form-control" id="password" placeholder="Kata sandi">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nik" class="col-sm-2 control-label">NIK</label>
                                 <div class="col-sm-2">
-                                    <input type="number" min="0" name="nik" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="No. Induk Karyawan" required>
+                                    <input type="text" name="nik" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="No. Induk Karyawan">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_karyawan" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="Nama" required>
+                                    <input type="text" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="Nama">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_alias" class="col-sm-2 control-label">Alias Name</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="nama_alias" value="{$result.nama_alias|default:''}" class="form-control" id="nama_alias" placeholder="Nama Panggilan" required>
+                                    <input type="text" name="nama_alias" value="{$result.nama_alias|default:''}" class="form-control" id="nama_alias" placeholder="Nama Panggilan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="jenis_kelamin" class="col-sm-2 control-label">Sex</label>
+                                <div class="col-sm-4">                                    
+                                    <input type="radio" name="jenis_kelamin" value="Pria"/>Male
+                                    <input type="radio" name="jenis_kelamin" value="Wanita"/>Female
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tempat_lahir" class="col-sm-2 control-label">Place, Date of Birth</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="date" name="tgl_lahir">
+                                </div>                                
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="email" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telp" class="col-sm-2 control-label">Contact Number</label>
+                                <div class="col-sm-2">
+                                    <input type="tel" name="telp" value="{$result.telp|default:''}" class="form-control" id="telp" placeholder="Nomor Handphone">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="jabatan" class="col-sm-2 control-label">Position</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="jabatan" value="{$result.jabatan|default:''}" class="form-control" id="jabatan" placeholder="Jabatan" required>
+                                    <input type="text" name="jabatan" value="{$result.jabatan|default:''}" class="form-control" id="jabatan" placeholder="Jabatan">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -71,70 +105,7 @@
                                 </div>
                             </div>                      
                         </div>
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Detail Personal</h3>
-                    </div>
-                        <div class="form-group">
-                                <label for="tempat_lahir" class="col-sm-2 control-label">Place of Birth</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" required>
-                                </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="tgl_lahir" class="col-sm-2 control-label">Date of Birth</label>                                
-                                    <input type="date" name="tgl_lahir" required>                           
-                        </div>
-                        <div class="form-group">
-                                <label for="alamat_asal" class="col-sm-2 control-label">Origin Address</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="alamat_asal" value="{$result.alamat_asal|default:''}" class="form-control" id="alamat_asal" placeholder="Alamat Asal" required>
-                                </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="alamat_sekarang" class="col-sm-2 control-label">Current Address</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="alamat_sekarang" value="{$result.alamat_sekarang|default:''}" class="form-control" id="alamat_sekarang" placeholder="Alamat sekarang" required>
-                                </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-4">
-                                    <input type="email" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="Email">
-                                </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="telp" class="col-sm-2 control-label">No. Handphone</label>
-                                <div class="col-sm-4">
-                                    <input type="tel" name="telp" value="{$result.telp|default:''}" class="form-control" id="telp" placeholder="Nomor Handphone" required>
-                                </div>
-                        </div>
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Data Pendidikan</h3>
-                    </div>
-                        <div class="form-group">
-                                <label for="nama_instansi" class="col-sm-2 control-label">Instance Name</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="nama_instansi" value="{$result.nama_instansi|default:''}" class="form-control" id="nama_instansi" placeholder="Nama Instansi Pendidikan">
-                                </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="jurusan" class="col-sm-2 control-label">Areas of Expertise</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="jurusan" value="{$result.jurusan|default:''}" class="form-control" id="jurusan" placeholder="Jurusan">
-                                </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="jenjang_pendidikan" class="col-sm-2 control-label">Level Educational</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="jenjang_pendidikan" value="{$result.jenjang_pendidikan|default:''}" class="form-control" id="jenjang_pendidikan" placeholder="Jenjang Pendidikan">
-                                </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="tahun_lulus" class="col-sm-2 control-label">Years of Gradueted</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="tahun_lulus" value="{$result.tahun_lulus|default:''}" class="form-control" id="tahun_lulus" placeholder="Tahun Lulus" maxlength="4">
-                                </div>
-                        </div>
+                   
                         
                         <!-- /.box-body -->
                         <div class="box-footer">

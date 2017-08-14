@@ -45,6 +45,7 @@
                 <div class="box-body">
                     <table class="table table-bordered">
                         <tbody>
+                            
                             <tr>
                                 <th width="5%">No.</th>
                                 <th width="10%">NIK</th>
@@ -55,18 +56,18 @@
                                 <th width="10%">Status</th>
                                 <th width="13%">Action</th>
                             </tr>
-                            {foreach $rs_id as $result}
+                            {foreach $dpt_id as $result}
                             <tr>
                                 <td align="middle">{$no++}</td>
                                 <td align="middle">{$result.nik}</td>
-                                <td align="middle">{$result.nama_karyawan}</td>
-                                <td align="middle">{$result.id_department}</td>
+                                <td align="middle">{$result.nama_karyawan}</td>                           
+                                <td align="middle" >{$result.nama_department}</td>
                                 <td align="middle">{$result.email}</td>
                                 <td align="middle">{$result.telp}</td>
                                 <td align="middle">{$result.status}</td>
                                 <td>
-                                    <a href="{$config->site_url('master/karyawan/edit')}/{$result.no_identitas}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="{$config->site_url('master/karyawan/delete')}/{$result.no_identitas}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                    <a href="{$config->site_url('master/karyawan/edit')}/{$result.id_karyawan}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="{$config->site_url('master/karyawan/delete')}/{$result.id_karyawan}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
                                 </td>
                             </tr>
                             {foreachelse}
