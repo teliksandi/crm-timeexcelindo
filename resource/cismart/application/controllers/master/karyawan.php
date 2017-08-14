@@ -53,12 +53,6 @@ class karyawan extends ApplicationBase{
         $params = array($nama_karyawan, ($start - 1), $config['per_page']);
         $this->smarty->assign("rs_id", $this->m_karyawan->get_list_karyawan($params));
         
-        // output
-        $data['query'] =$this->m_department->get_data_department();
-        print_r($data['query']);
-        die();
-        $this->load->view('master/karyawan/index.html', $data);
-
         $this->smarty->assign("dpt_id", $this->m_department->get_data_department());
         parent::display();
     }

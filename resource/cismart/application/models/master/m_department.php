@@ -20,7 +20,7 @@ class m_department extends CI_Model{
         $this->db->from('karyawan');
         $this->db->join('department', 'karyawan.id_department = department.id_department', 'inner'); 
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
         
     }
 }
