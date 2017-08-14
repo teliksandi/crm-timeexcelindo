@@ -1,13 +1,31 @@
 <section class="content-header">
-{include file="base/templates/notification.html"}
+    <h1>
+        Add Data Initiation
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li><a href="#"> Initiation</a></li>
+        <li class="active">Add Data</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!-- notification template -->
+    {include file="base/templates/notification.html"}
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Data Initation</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-default" href="{$config->site_url('master/initiation')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
 <div class="box box-success">
-	<div class="box-header with-border">
-    	<label><h2><b>
-        	Inisiasi
-    	</b></h2></label>
-    </div>
-<div class="box box-success">
-<form role="form">
+
+<form role="form" action="{$config->site_url('master/initiation/add_initiation')}" method="post">
 	<div class="box-header with-border">
 		<tr>
 			<td>Karyawan</td>
@@ -31,7 +49,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<select name="Client">
 <option value="">Pilih Client</option>
-            {foreach $data as $cth}
+            {foreach $dataclient as $cth}
             <option value={$cth.id_client}>{$cth.client_name}</option>
            {foreachelse}
            Data tidak ditemukan !
@@ -40,10 +58,8 @@
 			</td>
 		</tr>
 	</div>
-</form>
 </div>
 <div class="box box-success">
-<form role="form">
 	<div class="box-header with-border">
 		<label><h4><b>
 			Detail Project
@@ -90,10 +106,8 @@
 			<textarea name="not_in" rows="3" cols="35" class="form-control" placeholder="Data yang tidak ada pada Project" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
 		</div>
 	</div>
-</form>
 </div>
 <div class="box box-success">
-<form role="form">
 	<div class="box-header with-border">
 		<tr>
 			<label><h4><b>Stakeholder</b></h4></label>
@@ -158,10 +172,8 @@
 	</td>
 </tr>
 	</div>
-</form>
 </div>
 <div class="box box-success">
-<form role="form">
 	<div class="box-header with-border">
 		<tr>
 			<label><h4><b>
@@ -189,9 +201,7 @@
 			</td>
 		</tr>
 	</div>
-</form>
 <div class="box box-danger">
-<form role="form">
 	<div class="box-header with-border">
 	<center>
 		<button type="submit" class="btn btn-success">Kirim</button>

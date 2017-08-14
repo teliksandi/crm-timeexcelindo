@@ -1,33 +1,53 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-10 17:41:08
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-14 05:03:08
          compiled from "application/views\master/initiation/add_initiation.html" */ ?>
-<?php /*%%SmartyHeaderCode:22950598c7e94d89238-95712390%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15248599112ec5c0df2-83672773%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '671ad8379bbf5cead253546c1404f09be764967b' => 
     array (
       0 => 'application/views\\master/initiation/add_initiation.html',
-      1 => 1502378349,
+      1 => 1502679727,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '22950598c7e94d89238-95712390',
+  'nocache_hash' => '15248599112ec5c0df2-83672773',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
 <section class="content-header">
-<?php $_template = new Smarty_Internal_Template("base/templates/notification.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+    <h1>
+        Add Data Initiation
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li><a href="#"> Initiation</a></li>
+        <li class="active">Add Data</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!-- notification template -->
+    <?php $_template = new Smarty_Internal_Template("base/templates/notification.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
  echo $_template->getRenderedTemplate();?><?php unset($_template);?>
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Data Initation</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-default" href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/initiation');?>
+" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
 <div class="box box-success">
-	<div class="box-header with-border">
-    	<label><h2><b>
-        	Inisiasi
-    	</b></h2></label>
-    </div>
-<div class="box box-success">
-<form role="form">
+
+<form role="form" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/initiation/add_initiation');?>
+" method="post">
 	<div class="box-header with-border">
 		<tr>
 			<td>Karyawan</td>
@@ -58,7 +78,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 				<select name="Client">
 <option value="">Pilih Client</option>
             <?php  $_smarty_tpl->tpl_vars['cth'] = new Smarty_Variable;
- $_from = $_smarty_tpl->getVariable('data')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_from = $_smarty_tpl->getVariable('dataclient')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['cth']->key => $_smarty_tpl->tpl_vars['cth']->value){
 ?>
@@ -72,10 +92,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 			</td>
 		</tr>
 	</div>
-</form>
 </div>
 <div class="box box-success">
-<form role="form">
 	<div class="box-header with-border">
 		<label><h4><b>
 			Detail Project
@@ -122,10 +140,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 			<textarea name="not_in" rows="3" cols="35" class="form-control" placeholder="Data yang tidak ada pada Project" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')"></textarea>
 		</div>
 	</div>
-</form>
 </div>
 <div class="box box-success">
-<form role="form">
 	<div class="box-header with-border">
 		<tr>
 			<label><h4><b>Stakeholder</b></h4></label>
@@ -190,10 +206,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 	</td>
 </tr>
 	</div>
-</form>
 </div>
 <div class="box box-success">
-<form role="form">
 	<div class="box-header with-border">
 		<tr>
 			<label><h4><b>
@@ -221,9 +235,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 			</td>
 		</tr>
 	</div>
-</form>
 <div class="box box-danger">
-<form role="form">
 	<div class="box-header with-border">
 	<center>
 		<button type="submit" class="btn btn-success">Kirim</button>

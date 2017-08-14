@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-11 09:33:48
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-11 10:12:16
          compiled from "application/views\master/karyawan/add.html" */ ?>
-<?php /*%%SmartyHeaderCode:3750598d5ddc549a01-98076388%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:21619598d66e0c457b9-80657940%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'a3ba94c94deec91f2da2c797a7aaca2cb3c08a06' => 
     array (
       0 => 'application/views\\master/karyawan/add.html',
-      1 => 1502436454,
+      1 => 1502439126,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3750598d5ddc549a01-98076388',
+  'nocache_hash' => '21619598d66e0c457b9-80657940',
   'function' => 
   array (
   ),
@@ -52,36 +52,36 @@ $_smarty_tpl->decodeProperties(array (
                             <div class="form-group">
                                 <label for="no_identitas" class="col-sm-2 control-label">Nomor Identitas</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="no_identitas" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['no_identitas'])===null||$tmp==='' ? '' : $tmp);?>
+                                    <input type="number" min="0" name="no_identitas" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['no_identitas'])===null||$tmp==='' ? '' : $tmp);?>
 " class="form-control" id="no_identitas" placeholder="Nomor Identitas KTP/SIM/Passport">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nik" class="col-sm-2 control-label">NIK</label>
                                 <div class="col-sm-2">
-                                    <input type="text" name="nik" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['nik'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="nik" placeholder="No. Induk Karyawan">
+                                    <input type="number" min="0" name="nik" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['nik'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="nik" placeholder="No. Induk Karyawan" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_karyawan" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="nama_karyawan" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['nama_karyawan'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="nama_karyawan" placeholder="Nama">
+" class="form-control" id="nama_karyawan" placeholder="Nama" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_alias" class="col-sm-2 control-label">Alias Name</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="nama_alias" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['nama_alias'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="nama_alias" placeholder="Nama Panggilan">
+" class="form-control" id="nama_alias" placeholder="Nama Panggilan" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="jabatan" class="col-sm-2 control-label">Position</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="jabatan" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['jabatan'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="jabatan" placeholder="Jabatan">
+" class="form-control" id="jabatan" placeholder="Jabatan" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -111,25 +111,25 @@ if ($_smarty_tpl->_count($_from) > 0){
                                 <label for="tempat_lahir" class="col-sm-2 control-label">Place of Birth</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="tempat_lahir" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['tempat_lahir'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir">
+" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" required>
                                 </div>
                         </div>
                         <div class="form-group">
                                 <label for="tgl_lahir" class="col-sm-2 control-label">Date of Birth</label>                                
-                                    <input type="date" name="tgl_lahir">                           
+                                    <input type="date" name="tgl_lahir" required>                           
                         </div>
                         <div class="form-group">
                                 <label for="alamat_asal" class="col-sm-2 control-label">Origin Address</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="alamat_asal" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['alamat_asal'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="alamat_asal" placeholder="Alamat Asal">
+" class="form-control" id="alamat_asal" placeholder="Alamat Asal" required>
                                 </div>
                         </div>
                         <div class="form-group">
                                 <label for="alamat_sekarang" class="col-sm-2 control-label">Current Address</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="alamat_sekarang" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['alamat_sekarang'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="alamat_sekarang" placeholder="Alamat sekarang">
+" class="form-control" id="alamat_sekarang" placeholder="Alamat sekarang" required>
                                 </div>
                         </div>
                         <div class="form-group">
@@ -143,7 +143,7 @@ if ($_smarty_tpl->_count($_from) > 0){
                                 <label for="telp" class="col-sm-2 control-label">No. Handphone</label>
                                 <div class="col-sm-4">
                                     <input type="tel" name="telp" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['telp'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="telp" placeholder="Nomor Handphone">
+" class="form-control" id="telp" placeholder="Nomor Handphone" required>
                                 </div>
                         </div>
                     <div class="box-header with-border">

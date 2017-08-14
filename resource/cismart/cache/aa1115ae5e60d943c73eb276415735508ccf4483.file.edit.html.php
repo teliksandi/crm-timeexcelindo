@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-11 08:33:50
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-14 07:13:19
          compiled from "application/views\master/client/edit.html" */ ?>
-<?php /*%%SmartyHeaderCode:31107598d4fce7e3b68-45209681%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:273065991316fe59659-89197068%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'aa1115ae5e60d943c73eb276415735508ccf4483' => 
     array (
       0 => 'application/views\\master/client/edit.html',
-      1 => 1502432805,
+      1 => 1502687434,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '31107598d4fce7e3b68-45209681',
+  'nocache_hash' => '273065991316fe59659-89197068',
   'function' => 
   array (
   ),
@@ -48,14 +48,56 @@ $_smarty_tpl->decodeProperties(array (
                 <div class="box-body">
                     <form class="form-horizontal" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/client/edit_process');?>
 " method="post">
-                        <input type="hidden" name="no_identitas" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['id_client'])===null||$tmp==='' ? '' : $tmp);?>
+                        <input type="hidden" name="id_client" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['id_client'])===null||$tmp==='' ? '' : $tmp);?>
 ">
                         <div class="box-body">
+                            <div class="form-group">
+                                <label for="alias_name" class="col-sm-2 control-label">Alias Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="alias_name" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['alias_name'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="Alias_name" placeholder="Nama Alias">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="client_name" class="col-sm-2 control-label">Nama Client</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="client_name" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['client_name'])===null||$tmp==='' ? '' : $tmp);?>
 " class="form-control" id="client_name" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="client_address" class="col-sm-2 control-label">Nama Address</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="client_address" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['client_address'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="client_address" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="person_name" class="col-sm-2 control-label">Person Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="person_name" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['person_name'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="person_name" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="job_position" class="col-sm-2 control-label">Job Position</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="job_position" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['job_position'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="job_position" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telp" class="col-sm-2 control-label">Telp</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="telp" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['telp'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="telp" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="email" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['email'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="email" placeholder="">
                                 </div>
                             </div>
                         </div>

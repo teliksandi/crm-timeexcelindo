@@ -1,10 +1,10 @@
 <section class="content-header">
     <h1>
-        Pengolahan Data Client
+        Pengolahan Data Inisisi
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
-        <li class="active">Client</li>
+        <li><a href="#"><i class="fa fa-database"></i> Initiation</a></li>
+        <li class="active">Data Initiation</li>
     </ol>
 </section>
 <!-- notification template -->
@@ -18,12 +18,12 @@
                     <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
                 </div>
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('master/client/search_process')}" method="post">
+                    <form class="form-horizontal" action="{$config->site_url('master/initiation/search_process')}" method="post">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="client_name" class="col-sm-2 control-label">Nama Client</label>
+                                <label for="project_name" class="col-sm-2 control-label">Nama Project</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="client_name" value="{$search.client_name|default:''}" class="form-control" id="client_name" placeholder="">
+                                    <input type="text" name="project_name" value="{$search.project_name|default:''}" class="form-control" id="project_name" placeholder="">
                                 </div>
                                 <div class="col-sm-4">
                                     <button type="submit" value="Reset" name="save" class="btn btn-default">Reset</button>
@@ -36,9 +36,9 @@
             </div>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Tabel Data Client</h3>
+                    <h3 class="box-title">Tabel Data Inisiasi</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-success" href="{$config->site_url('master/client/add_client')}" ><i class="fa fa-plus"></i> Tambah Data</a>
+                        <a class="btn btn-sm btn-success" href="{$config->site_url('master/initiation/add_initiation')}" ><i class="fa fa-plus"></i> Tambah Data</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -54,7 +54,6 @@
                                 <th width="15%">Job Position</th>
                                 <th width="10%">Telp</th>
                                 <th width="13%">Email</th>
-                                <th width="13%">Actions</th>
                             </tr>
                             {foreach $rs_id as $result}
                             <tr>
@@ -67,8 +66,8 @@
                                 <td align="middle">{$result.telp}</td>
                                 <td align="middle">{$result.email}</td>
                                 <td>
-                                    <a href="{$config->site_url('master/client/edit')}/{$result.id_client}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="{$config->site_url('master/client/delete')}/{$result.id_client}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                    <a href="{$config->site_url('master/initiation/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="{$config->site_url('master/initiation/delete')}/{$result.id_initiation}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
                                 </td>
                             </tr>
                             {foreachelse}

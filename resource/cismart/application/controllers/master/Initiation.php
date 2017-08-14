@@ -5,10 +5,14 @@ exit('No direct script access allowed');
 // load base class if needed
 require_once( APPPATH . 'controllers/base/OperatorBase.php' );
 
-class client extends ApplicationBase {
-  public function __construct() {
+class Initiation extends ApplicationBase {
+
+ public function __construct() {
         parent::__construct();
         // load model
+        $this->load->model("master/m_initiation");
+
+        $this->load->model("master/m_karyawan");
         $this->load->model("master/m_client");
         // load library
         $this->load->library('tnotification');
@@ -16,25 +20,26 @@ class client extends ApplicationBase {
         $this->load->library('pagination');
     }
 
-  	public function index() {
+
+public function index() {
         // set page rules
         
         $this->_set_page_rule("R");
         // set template content
-        $this->smarty->assign("template_content", "master/client/index.html");
+        $this->smarty->assign("template_content", "master/Initiation/index.html");
         //$this->smarty->assign('user', $this->com_user['user_id']);
         //$this->smarty->assign("data",$this->m_client->get_list_client());
     
 // session
-        $search = $this->tsession->userdata('search_client');
+        $search = $this->tsession->userdata('search_initiation');
         $this->smarty->assign('search', $search);
 
         // params
-        $client_name = !empty($search['client_name']) ? '%'. $search['client_name'] . '%' : "%";
-        $params = array($client_name);
+        $project_name = !empty($search['project_name']) ? '%'. $search['project_name'] . '%' : "%";
+        $params = array($project_name);
 
-        $config['base_url'] = site_url("master/client/index/");
-        $config['total_rows'] = $this->m_client->get_total_client($params);
+        $config['base_url'] = site_url("master/Initiation/index/");
+        $config['total_rows'] = $this->m_initiation->get_total_initiation($params);
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
@@ -54,22 +59,21 @@ class client extends ApplicationBase {
 
         // /* end of pagination ---------------------- */
         // get list data
-        $params = array($client_name, ($start - 1), $config['per_page']);
-        $this->smarty->assign("rs_id", $this->m_client->get_list_client($params));
-
-         $this->smarty->assign("data",$this->m_client->get_all_client());
+        $params = array($project_name, ($start - 1), $config['per_page']);
+        $this->smarty->assign("rs_id", $this->m_initiation->get_all_initiation($params));
 
         // output
     
         parent::display();       
     }
 
+
      function delete($params){
         // set page rules
         $this->_set_page_rule("U");
         // set template content
-        $this->smarty->assign("template_content", "master/client/delete.html");
-        $this->smarty->assign("result", $this->m_client->get_client_by_id($params));
+        $this->smarty->assign("template_content", "master/initiation/delete.html");
+        $this->smarty->assign("result", $this->m_client->get_initiation_by_id($params));
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
@@ -77,19 +81,19 @@ class client extends ApplicationBase {
         parent::display();
     }
 
-    function delete_process(){
+     function delete_process(){
         // set page rules
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('id_client', 'ID Client', 'trim|required');
+        $this->tnotification->set_rules('id_initiation', 'ID Initiation', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
-                'id_client' => $this->input->post('id_client', TRUE),
+                'id_initiation' => $this->input->post('id_initiation', TRUE),
             );
 
-            if ($this->m_client->delete_client($params)) {
+            if ($this->m_initiation->delete_client($params)) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil dihapus");
             }else{
@@ -101,35 +105,39 @@ class client extends ApplicationBase {
             $this->tnotification->sent_notification("error", "Data gagal dihapus");
         }
         // default redirect
-        redirect("master/client/");
+        redirect("master/inititiation/");
     }
 
-    function search_process(){
+
+
+  function search_process(){
         // set page rules
         $this->_set_page_rule("R");
         //--
         if ($this->input->post('save') == 'Cari') {
             $params = array(
-                "client_name" => $this->input->post('client_name'),
+                "project_name" => $this->input->post('project_name'),
             );
             // set
-            $this->tsession->set_userdata('search_client', $params);
+            $this->tsession->set_userdata('search_initiation', $params);
         } else {
             // unset
-            $this->tsession->unset_userdata('search_client');
+            $this->tsession->unset_userdata('search_initiation');
         }
         //--
-        redirect('master/client');
+        redirect('master/initiation');
     }
 
-    function add_client(){
+    function add_initiation(){
         // set page rules
         $this->_set_page_rule("C");
 
-         $this->smarty->assign("template_content", "master/client/add_client.html");
+         $this->smarty->assign("template_content", "master/initiation/add_initiation.html");
 
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
+
+        $this->smarty->assign("dataclient",$this->m_initiation->get_list_client());
 
         // cek input
         parent::display();
@@ -140,7 +148,7 @@ class client extends ApplicationBase {
 
         $this->_set_page_rule("C");
 
-        $this->tnotification->set_rules('client_name', 'Data Client', 'trim|required');
+        $this->tnotification->set_rules('project_name', 'Data Initiation', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
@@ -152,7 +160,7 @@ class client extends ApplicationBase {
                 'telp' => $this->input->post('telp'),
                 'email' => $this->input->post('email')
             );
-            if ($this->m_client->insert_client($params)) {
+            if ($this->m_initiation->insert_initiation($params)) {
                 //$this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
@@ -164,35 +172,37 @@ class client extends ApplicationBase {
             $this->tnotification->sent_notification("error", "Data gagal disimpan");
         }
         // default redirect
-        redirect("master/client/add_client/");
+        redirect("master/initiation/add_initiation/");
 
     }
 
-    function edit($params){
+     function edit($params){
         // set page rules
         $this->_set_page_rule("U");
         // set template content
-        $this->smarty->assign("template_content", "master/client/edit.html");
-        $this->smarty->assign("result", $this->m_client->get_client_by_id($params));
+        $this->smarty->assign("template_content", "master/initiation/edit.html");
+        $this->smarty->assign("result", $this->m_initiation->get_initiation_by_id($params));
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
         // output
         parent::display();
     }
+
     function edit_process(){
         // set page rules
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('id_client', 'Nomor Identitas Client', 'trim|required');
-        $this->tnotification->set_rules('client_name', 'Nama Client', 'trim|required');
+        $this->tnotification->set_rules('id_initiation', 'Nomor Identitas Initiation', 'trim|required');
+        $this->tnotification->set_rules('project_name', 'Nama Project', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
+                'project_name' => $this->input->post('project_name', TRUE),
                 //'mdb' => $this->com_user['user_id'],
                 //'mdd' => date('Y-m-d')
-                'alias_name'               => $this->input->post('alias_name', TRUE),
+                'alias_name'               => $this->input->post('alias_name'),
                 'client_name'        => $this->input->post('client_name'),
                 'client_address'           => $this->input->post('client_address'),
 
@@ -202,10 +212,10 @@ class client extends ApplicationBase {
                 'email'   => $this->input->post('email')
             );
             $where = array(
-                'id_client' => $this->input->post('id_client', TRUE),
+                'id_initiation' => $this->input->post('id_initiation', TRUE),
             );
 
-            if ($this->m_client->update_client($params, $where)) {
+            if ($this->m_initiation->update_initiation($params)) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
@@ -217,8 +227,7 @@ class client extends ApplicationBase {
             $this->tnotification->sent_notification("error", "Data gagal disimpan");
         }
         // default redirect
-        redirect("master/client/edit/".$this->input->post('id_client', TRUE));
+        redirect("master/initiation/edit/".$this->input->post('id_initiation', TRUE));
     }
-
 
 }
