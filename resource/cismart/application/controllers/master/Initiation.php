@@ -26,7 +26,7 @@ public function index() {
         
         $this->_set_page_rule("R");
         // set template content
-        $this->smarty->assign("template_content", "master/Initiation/index.html");
+        $this->smarty->assign("template_content", "master/initiation/index.html");
         //$this->smarty->assign('user', $this->com_user['user_id']);
         //$this->smarty->assign("data",$this->m_client->get_list_client());
     
@@ -138,6 +138,8 @@ public function index() {
         $this->tnotification->display_last_field();
 
         $this->smarty->assign("dataclient",$this->m_initiation->get_list_client());
+        $this->smarty->assign("datakaryawan",$this->m_initiation->get_list_karyawan());
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
 
         // cek input
         parent::display();

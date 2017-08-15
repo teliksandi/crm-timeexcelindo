@@ -14,7 +14,7 @@
 				<label>Client</label>
 				</div>
 				<select name="Client">
-		 			<option value="" disabled="disabled" selected="selected">--Choose Department--</option>
+		 			<option value="" disabled="disabled" selected="selected">--Pilih client--</option>
             			{foreach $dataclient as $cth}
             		<option value={$cth.id_client}>{$cth.client_name}</option>
            				{foreachelse}
@@ -54,9 +54,14 @@
 		</div>
 		<div class="form-group">
 			<label>Project Manager Department</label>
-				<select class="form-control">
-					<option>Pilih..</option>
-				</select>
+				<select name="Department">
+		 			<option value="" disabled="disabled" selected="selected">--Pilih Department--</option>
+            			{foreach $datadepartment as $cth}
+            		<option value={$cth.id_department}>{$cth.nama_department}</option>
+           				{foreachelse}
+           				Data tidak ditemukan !
+           				{/foreach}
+           		</select>
 		</div>
 		<div class="form-group">
 			<label>Project Description</label>
