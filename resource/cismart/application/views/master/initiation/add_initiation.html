@@ -9,28 +9,37 @@
 </div>
 <div class="box box-success">
 	<div class="box-header with-border">
-	<div class="col-sm-2">
+		<div class="form-group">
+			<div class="col-sm-2">
+				<label>Client</label>
+				</div>
+				<select name="Client">
+		 			<option value="" disabled="disabled" selected="selected">--Choose Department--</option>
+            			{foreach $dataclient as $cth}
+            		<option value={$cth.id_client}>{$cth.client_name}</option>
+           				{foreachelse}
+           				Data tidak ditemukan !
+           				{/foreach}
+           		</select>
+		</div>
+		<div class="col-sm-2">
 		<label>Employees</label>
 	</div>
 			<div class="form-group">
+			<div id="" style="overflow-y:scroll; height:100px;">
 				<div class="checkbox-inline">
-					<label>
-						<input type="checkbox">
+				{foreach $datakaryawan as $cth}
+            		<label>
+						<input type="checkbox">{$cth.nama_karyawan}
 					</label>
+					<br>
+           {foreachelse}
+           Data tidak ditemukan !
+           {/foreach}
 				</div>
 			</div>
-	<div class="form-group">
-	<div class="col-sm-2">
-			<label>Client</label>
 			</div>
-				<select class="col-sm-4" class="form-control">
-					<option>Pilih Client..</option>
-					<option>Lathiif</option>
-					<option>Nur Alim</option>
-					<option>Tio</option>
-				</select>
-	</div>
-	</div>
+		</div>
 </div>
 <div class="box box-success">
 	<div class="box-header with-border">
