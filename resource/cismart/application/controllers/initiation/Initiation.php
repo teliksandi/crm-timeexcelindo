@@ -10,7 +10,7 @@ class Initiation extends ApplicationBase {
  public function __construct() {
         parent::__construct();
         // load model
-        $this->load->model("master/m_initiation");
+        $this->load->model("initiation/m_initiation");
 
         $this->load->model("master/m_karyawan");
         $this->load->model("master/m_client");
@@ -26,7 +26,7 @@ public function index() {
         
         $this->_set_page_rule("R");
         // set template content
-        $this->smarty->assign("template_content", "master/initiation/index.html");
+        $this->smarty->assign("template_content", "initiation/index.html");
         //$this->smarty->assign('user', $this->com_user['user_id']);
         //$this->smarty->assign("data",$this->m_client->get_list_client());
     
@@ -35,10 +35,10 @@ public function index() {
         $this->smarty->assign('search', $search);
 
         // params
-        $project_name = !empty($search['project_name']) ? '%'. $search['project_name'] . '%' : "%";
-        $params = array($project_name);
+        $project_title = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
+        $params = array($project_title);
 
-        $config['base_url'] = site_url("master/Initiation/index/");
+        $config['base_url'] = site_url("Initiation/index/");
         $config['total_rows'] = $this->m_initiation->get_total_initiation($params);
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
@@ -59,7 +59,7 @@ public function index() {
 
         // /* end of pagination ---------------------- */
         // get list data
-        $params = array($project_name, ($start - 1), $config['per_page']);
+        $params = array($project_title, ($start - 1), $config['per_page']);
         $this->smarty->assign("rs_id", $this->m_initiation->get_all_initiation($params));
 
         // output
@@ -72,7 +72,7 @@ public function index() {
         // set page rules
         $this->_set_page_rule("U");
         // set template content
-        $this->smarty->assign("template_content", "master/initiation/delete.html");
+        $this->smarty->assign("template_content", "initiation/delete.html");
         $this->smarty->assign("result", $this->m_client->get_initiation_by_id($params));
         // notification
         $this->tnotification->display_notification();
@@ -105,7 +105,7 @@ public function index() {
             $this->tnotification->sent_notification("error", "Data gagal dihapus");
         }
         // default redirect
-        redirect("master/inititiation/");
+        redirect("inititiation/initiation");
     }
 
 
@@ -116,7 +116,7 @@ public function index() {
         //--
         if ($this->input->post('save') == 'Cari') {
             $params = array(
-                "project_name" => $this->input->post('project_name'),
+                "project_title" => $this->input->post('project_title'),
             );
             // set
             $this->tsession->set_userdata('search_initiation', $params);
@@ -125,14 +125,14 @@ public function index() {
             $this->tsession->unset_userdata('search_initiation');
         }
         //--
-        redirect('master/initiation');
+        redirect('initiation/initiation');
     }
 
     function add_initiation(){
         // set page rules
         $this->_set_page_rule("C");
 
-         $this->smarty->assign("template_content", "master/initiation/add_initiation.html");
+         $this->smarty->assign("template_content", "initiation/add_initiation.html");
 
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
@@ -150,17 +150,25 @@ public function index() {
 
         $this->_set_page_rule("C");
 
-        $this->tnotification->set_rules('project_name', 'Data Initiation', 'trim|required');
+        $this->tnotification->set_rules('project_title', 'Data Initiation', 'trim|required');
+
+     //   $split = explode('|', $this->input->post('Client'));
+     //   $getid_client = $split[0];
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
-                'alias_name' => $this->input->post('alias_name'),
-                'client_name' => $this->input->post('client_name'),
-                'client_address' => $this->input->post('client_address'),
-                'person_name' => $this->input->post('person_name'),
-                'job_position' => $this->input->post('job_position'),
-                'telp' => $this->input->post('telp'),
-                'email' => $this->input->post('email')
+                'id_client' => $this->input->post('Client'),
+                'id_karyawan' => $this->input->post('client_name'),
+                'Project_title' => $this->input->post('client_address'),
+                'id_department' => $this->input->post('person_name'),
+                'Project_desc' => $this->input->post('job_position'),
+                'Project_just' => $this->input->post('telp'),
+                'Budget' => $this->input->post('email'),
+                'Schedule' => $this->input->post('telp'),
+                'Not_in_Project' => $this->input->post('email'),
+                'Start_date' => $this->input->post('telp'),
+                'Due_date' => $this->input->post('email'),
+                'file' => $this->input->post('telp')
             );
             if ($this->m_initiation->insert_initiation($params)) {
                 //$this->tnotification->delete_last_field();
@@ -174,7 +182,7 @@ public function index() {
             $this->tnotification->sent_notification("error", "Data gagal disimpan");
         }
         // default redirect
-        redirect("master/initiation/add_initiation/");
+        redirect("initiation/add_initiation/");
 
     }
 
@@ -182,7 +190,7 @@ public function index() {
         // set page rules
         $this->_set_page_rule("U");
         // set template content
-        $this->smarty->assign("template_content", "master/initiation/edit.html");
+        $this->smarty->assign("template_content", "/initiation/edit.html");
         $this->smarty->assign("result", $this->m_initiation->get_initiation_by_id($params));
         // notification
         $this->tnotification->display_notification();
@@ -197,11 +205,11 @@ public function index() {
 
         // cek input
         $this->tnotification->set_rules('id_initiation', 'Nomor Identitas Initiation', 'trim|required');
-        $this->tnotification->set_rules('project_name', 'Nama Project', 'trim|required');
+        $this->tnotification->set_rules('project_title', 'Nama Project', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
-                'project_name' => $this->input->post('project_name', TRUE),
+                'project_title' => $this->input->post('project_title', TRUE),
                 //'mdb' => $this->com_user['user_id'],
                 //'mdd' => date('Y-m-d')
                 'alias_name'               => $this->input->post('alias_name'),
@@ -229,7 +237,7 @@ public function index() {
             $this->tnotification->sent_notification("error", "Data gagal disimpan");
         }
         // default redirect
-        redirect("master/initiation/edit/".$this->input->post('id_initiation', TRUE));
+        redirect("initiation/edit/".$this->input->post('id_initiation', TRUE));
     }
 
 }

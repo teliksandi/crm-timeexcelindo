@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 18:44:44
-         compiled from "application/views\master/client/index.html" */ ?>
-<?php /*%%SmartyHeaderCode:24046599324fcee6ac4-42127133%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 18:40:38
+         compiled from "application/views\initiation/index.html" */ ?>
+<?php /*%%SmartyHeaderCode:5115993240668ea37-39654519%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '47a87770c0468983a20951053257d536eaafaf2c' => 
+    '241f8940f556055502fc413429a77d6ad7a650a7' => 
     array (
-      0 => 'application/views\\master/client/index.html',
-      1 => 1502815388,
+      0 => 'application/views\\initiation/index.html',
+      1 => 1502815233,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '24046599324fcee6ac4-42127133',
+  'nocache_hash' => '5115993240668ea37-39654519',
   'function' => 
   array (
   ),
@@ -19,11 +19,11 @@ $_smarty_tpl->decodeProperties(array (
 )); /*/%%SmartyHeaderCode%%*/?>
 <section class="content-header">
     <h1>
-        Pengolahan Data Client
+        Pengolahan Data Inisisi
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
-        <li class="active">Client</li>
+        <li><a href="#"><i class="fa fa-database"></i> Initiation</a></li>
+        <li class="active">Data Initiation</li>
     </ol>
 </section>
 <!-- notification template -->
@@ -38,14 +38,14 @@ $_smarty_tpl->decodeProperties(array (
                     <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
                 </div>
                 <div class="box-body">
-                    <form class="form-horizontal" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/client/search_process');?>
+                    <form class="form-horizontal" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('initiation/initiation/search_process');?>
 " method="post">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="client_name" class="col-sm-2 control-label">Nama Client</label>
+                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="client_name" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('search')->value['client_name'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="client_name" placeholder="">
+                                    <input type="text" name="project_title" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('search')->value['project_title'])===null||$tmp==='' ? '' : $tmp);?>
+" class="form-control" id="project_title" placeholder="">
                                 </div>
                                 <div class="col-sm-4">
                                     <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
@@ -56,11 +56,11 @@ $_smarty_tpl->decodeProperties(array (
                     </form>
                 </div>
             </div>
-            <div class="box box-success">
+            <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Tabel Data Client</h3>
+                    <h3 class="box-title">Tabel Data Inisiasi</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-success" href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/client/add_client');?>
+                        <a class="btn btn-sm btn-success" href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('initiation/initiation/add_initiation');?>
 " ><i class="fa fa-plus"></i> Tambah Data</a>
                     </div>
                 </div>
@@ -77,7 +77,6 @@ $_smarty_tpl->decodeProperties(array (
                                 <th width="15%">Job Position</th>
                                 <th width="10%">Telp</th>
                                 <th width="13%">Email</th>
-                                <th width="13%">Actions</th>
                             </tr>
                             <?php  $_smarty_tpl->tpl_vars['result'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('rs_id')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -102,11 +101,11 @@ if ($_smarty_tpl->_count($_from) > 0){
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['email'];?>
 </td>
                                 <td>
-                                    <a href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/client/edit');?>
-/<?php echo $_smarty_tpl->tpl_vars['result']->value['id_client'];?>
+                                    <a href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('initiation/initiation/edit');?>
+/<?php echo $_smarty_tpl->tpl_vars['result']->value['id_initiation'];?>
 " class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/client/delete');?>
-/<?php echo $_smarty_tpl->tpl_vars['result']->value['id_client'];?>
+                                    <a href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('initiation/initiation/delete');?>
+/<?php echo $_smarty_tpl->tpl_vars['result']->value['id_initiation'];?>
 " class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
                                 </td>
                             </tr>

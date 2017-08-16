@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 09:40:11
-         compiled from "application/views\master/initiation/add_initiation.html" */ ?>
-<?php /*%%SmartyHeaderCode:89885992a55bf1abd7-34478465%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 18:44:10
+         compiled from "application/views\initiation/add_initiation.html" */ ?>
+<?php /*%%SmartyHeaderCode:18850599324dae3fff9-28944076%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '671ad8379bbf5cead253546c1404f09be764967b' => 
+    '2028055b515988d73e43cab623d6cd73c73bf661' => 
     array (
-      0 => 'application/views\\master/initiation/add_initiation.html',
-      1 => 1502781806,
+      0 => 'application/views\\initiation/add_initiation.html',
+      1 => 1502815329,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '89885992a55bf1abd7-34478465',
+  'nocache_hash' => '18850599324dae3fff9-28944076',
   'function' => 
   array (
   ),
@@ -28,17 +28,23 @@ $_smarty_tpl->decodeProperties(array (
     </ol>
 </section>
 
-<section class="content-header">
-<?php $_template = new Smarty_Internal_Template("base/templates/notification.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+<section class="content">
+    <!-- notification template -->
+    <?php $_template = new Smarty_Internal_Template("base/templates/notification.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
  echo $_template->getRenderedTemplate();?><?php unset($_template);?>
-<div class="box box-success">
-	<div class="box-header with-border">
-    	<label><h2><b>
-        	Inisiasi
-    	</b></h2></label>
-    </div>
-</div>
-<form class="form-horizontal" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/initiation/add_process');?>
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Data Initiation</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-default" href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('initiation/initiation');?>
+" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+<form  action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('initiation/add_process');?>
 " method="post">
 <div class="box box-success">
 	<div class="box-header with-border">
@@ -63,7 +69,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 		</div>
 		<div class="col-sm-2">
 		<label>Employees</label>
-	</div>
+		</div>
 			<div class="form-group">
 			<div id="" style="overflow-y:scroll; height:100px;">
 				<div class="checkbox-inline">
@@ -98,6 +104,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 		</div>
 		<div class="form-group">
 			<label>Project Manager Department</label>
+				<br>
 				<select name="Department">
 		 			<option value="" disabled="disabled" selected="selected">--Pilih Department--</option>
             			<?php  $_smarty_tpl->tpl_vars['cth'] = new Smarty_Variable;
@@ -167,11 +174,11 @@ if ($_smarty_tpl->_count($_from) > 0){
 		</tr>
 	</div>
 </div>
-<div class="box box-danger">
+<div class="box">
 	<div class="box-header with-border">
 	<center>
 		<button type="submit" class="btn btn-success">Kirim</button>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
 	</center>
 	</div>

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-11 03:37:22
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 18:44:31
          compiled from "application/views\master/karyawan/index.html" */ ?>
-<?php /*%%SmartyHeaderCode:12532598d0a5242dba4-21671016%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:16155599324ef6256e3-33346833%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '949a7d901d53a7772f7b7d90ed2838535bac32ec' => 
     array (
       0 => 'application/views\\master/karyawan/index.html',
-      1 => 1502373409,
+      1 => 1502815438,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12532598d0a5242dba4-21671016',
+  'nocache_hash' => '16155599324ef6256e3-33346833',
   'function' => 
   array (
   ),
@@ -33,7 +33,7 @@ $_smarty_tpl->decodeProperties(array (
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-primary">
+            <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
                 </div>
@@ -48,15 +48,15 @@ $_smarty_tpl->decodeProperties(array (
 " class="form-control" id="nama_karyawan" placeholder="">
                                 </div>
                                 <div class="col-sm-4">
-                                    <button type="submit" value="Reset" name="save" class="btn btn-default">Reset</button>
-                                    <button type="submit" value="Cari" name="save" class="btn btn-primary">Cari</button>
+                                    <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
+                                    <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="box">
+            <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tabel Data Karyawan</h3>
                     <div class="box-tools">
@@ -68,6 +68,7 @@ $_smarty_tpl->decodeProperties(array (
                 <div class="box-body">
                     <table class="table table-bordered">
                         <tbody>
+                            
                             <tr>
                                 <th width="5%">No.</th>
                                 <th width="10%">NIK</th>
@@ -79,7 +80,7 @@ $_smarty_tpl->decodeProperties(array (
                                 <th width="13%">Action</th>
                             </tr>
                             <?php  $_smarty_tpl->tpl_vars['result'] = new Smarty_Variable;
- $_from = $_smarty_tpl->getVariable('rs_id')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_from = $_smarty_tpl->getVariable('dpt_id')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['result']->key => $_smarty_tpl->tpl_vars['result']->value){
 ?>
@@ -89,8 +90,8 @@ if ($_smarty_tpl->_count($_from) > 0){
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['nik'];?>
 </td>
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['nama_karyawan'];?>
-</td>
-                                <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['id_department'];?>
+</td>                           
+                                <td align="middle" ><?php echo $_smarty_tpl->tpl_vars['result']->value['nama_department'];?>
 </td>
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['email'];?>
 </td>
@@ -100,10 +101,10 @@ if ($_smarty_tpl->_count($_from) > 0){
 </td>
                                 <td>
                                     <a href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/karyawan/edit');?>
-/<?php echo $_smarty_tpl->tpl_vars['result']->value['no_identitas'];?>
+/<?php echo $_smarty_tpl->tpl_vars['result']->value['id_karyawan'];?>
 " class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
                                     <a href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/karyawan/delete');?>
-/<?php echo $_smarty_tpl->tpl_vars['result']->value['no_identitas'];?>
+/<?php echo $_smarty_tpl->tpl_vars['result']->value['id_karyawan'];?>
 " class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
                                 </td>
                             </tr>

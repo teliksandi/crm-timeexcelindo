@@ -66,7 +66,7 @@ function get_initiation_by_id($params){
     }
 
     function get_total_initiation($params){
-        $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_name LIKE ? ";
+        $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();

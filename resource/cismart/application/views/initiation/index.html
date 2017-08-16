@@ -13,21 +13,21 @@
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-primary">
+            <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
                 </div>
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('master/initiation/search_process')}" method="post">
+                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/search_process')}" method="post">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="project_name" class="col-sm-2 control-label">Nama Project</label>
+                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="project_name" value="{$search.project_name|default:''}" class="form-control" id="project_name" placeholder="">
+                                    <input type="text" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
                                 </div>
                                 <div class="col-sm-4">
-                                    <button type="submit" value="Reset" name="save" class="btn btn-default">Reset</button>
-                                    <button type="submit" value="Cari" name="save" class="btn btn-primary">Cari</button>
+                                    <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
+                                    <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Tabel Data Inisiasi</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-success" href="{$config->site_url('master/initiation/add_initiation')}" ><i class="fa fa-plus"></i> Tambah Data</a>
+                        <a class="btn btn-sm btn-success" href="{$config->site_url('initiation/initiation/add_initiation')}" ><i class="fa fa-plus"></i> Tambah Data</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -66,8 +66,8 @@
                                 <td align="middle">{$result.telp}</td>
                                 <td align="middle">{$result.email}</td>
                                 <td>
-                                    <a href="{$config->site_url('master/initiation/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="{$config->site_url('master/initiation/delete')}/{$result.id_initiation}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                    <a href="{$config->site_url('initiation/initiation/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="{$config->site_url('initiation/initiation/delete')}/{$result.id_initiation}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
                                 </td>
                             </tr>
                             {foreachelse}

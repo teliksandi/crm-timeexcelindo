@@ -20,18 +20,18 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Form Ubah Data Initiation</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-default" href="{$config->site_url('master/initiation')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                        <a class="btn btn-sm btn-default" href="{$config->site_url('initiation')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('master/initiation/edit_process')}" method="post">
+                    <form class="form-horizontal" action="{$config->site_url('initiation/edit_process')}" method="post">
                         <input type="hidden" name="id_initiation" value="{$result.id_initiation|default:''}">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="project_name" class="col-sm-2 control-label">Nama Project</label>
+                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="project_name" value="{$result.project_name|default:''}" class="form-control" id="project_name" placeholder="">
+                                    <input type="text" name="project_title" value="{$result.project_title|default:''}" class="form-control" id="project_title" placeholder="">
                                 </div>
                             </div>
                         </div>

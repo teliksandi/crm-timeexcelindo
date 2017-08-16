@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-14 06:42:10
+<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 18:44:53
          compiled from "application/views\master/client/add_client.html" */ ?>
-<?php /*%%SmartyHeaderCode:759759912a22062a29-63495188%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1396959932505503398-36222444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '05a0e974bbdb221e285aba0fc4d8f24bf011089c' => 
     array (
       0 => 'application/views\\master/client/add_client.html',
-      1 => 1502674497,
+      1 => 1502815365,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '759759912a22062a29-63495188',
+  'nocache_hash' => '1396959932505503398-36222444',
   'function' => 
   array (
   ),
@@ -36,7 +36,7 @@ $_smarty_tpl->decodeProperties(array (
     <div class="row">
         <div class="col-md-12">
 
-            <div class="box box-primary">
+            <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">Data Client</h3>
                     <div class="box-tools">
@@ -70,7 +70,7 @@ $_smarty_tpl->decodeProperties(array (
 		</tr>	
 		<tr>
 			<label>Job Position</label>
-			<input type="text" name="department" placeholder="Jabatan" class="form-control" required>
+			<input type="text" name="job_position" placeholder="Jabatan" class="form-control" required>
 		</tr>
 		<tr>
 			<label>No. Telp</label>
@@ -87,7 +87,7 @@ $_smarty_tpl->decodeProperties(array (
 <div class="box-header with-border">
 	<center>
 		<button type="submit" class="btn btn-success">Kirim</button>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
 	</center>
 	</div>
