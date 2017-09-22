@@ -14,7 +14,19 @@ class m_client extends CI_Model{
         }
     }
 
-        function get_all_client(){
+     function get_id_client_name($name){
+        $sql = "SELECT * FROM client where client_name = ?";
+        $query = $this->db->query($sql, $name);
+          if ($query->num_rows() > 0) {
+              $result = $query->result();
+              $query->free_result();
+              return $result;
+          } else {
+              return array();
+        }
+    }
+
+    function get_all_client(){
         $sql = "SELECT * FROM client";
         $query = $this->db->query($sql);
           if ($query->num_rows() > 0) {

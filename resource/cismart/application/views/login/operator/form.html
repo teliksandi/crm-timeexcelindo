@@ -2,19 +2,19 @@
 {if $login_st|default:'' eq 'error'}
 <div class="alert alert-danger alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-    <p><strong>Your account is not found</strong>, Please Try Again or contact your administrator </p>
+    <p><strong>Akun Anda Tidak Ditemukan</strong>, Coba Ulangi atau Hubungi Administrator </p>
     <div class="clear"></div>
 </div>
 {elseif $login_st|default:'' eq 'locked'}
 <div class="alert alert-danger alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-    <p><strong>Your account has been locked</strong>, Please Try Again or contact your administrator </p>
+    <p><strong>Akun Anda Telah Terkunci</strong>, Coba Ulangi atau Hubungi Administrator </p>
     <div class="clear"></div>
 </div>
 {else}
 <div class="alert alert-warning alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-    <p><strong>Please Login First</strong>, to acces this application! </p>
+    <p><strong>Mohon Login Dahulu</strong>, Untuk Mengakses Aplikasi Ini! </p>
     <div class="clear"></div>
 </div>
 {/if}

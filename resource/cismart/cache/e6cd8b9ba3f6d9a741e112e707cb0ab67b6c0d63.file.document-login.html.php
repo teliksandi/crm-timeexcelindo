@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-06 07:54:40
+<?php /* Smarty version Smarty-3.0.7, created on 2017-09-12 09:38:04
          compiled from "application/views\base/operator/document-login.html" */ ?>
-<?php /*%%SmartyHeaderCode:122785986af202138d3-50013156%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:257359b78edcd2ea47-19472459%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e6cd8b9ba3f6d9a741e112e707cb0ab67b6c0d63' => 
     array (
       0 => 'application/views\\base/operator/document-login.html',
-      1 => 1501832425,
+      1 => 1503646879,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '122785986af202138d3-50013156',
+  'nocache_hash' => '257359b78edcd2ea47-19472459',
   'function' => 
   array (
   ),
@@ -42,7 +42,7 @@ $_smarty_tpl->decodeProperties(array (
     <body class="hold-transition login-page full">
         <div class="login-box">
             <div class="login-logo">
-                <a href="#"><b>CISMART</b> v3.1</a>
+                <a href="#"><b>PT. Time Excelindo</b></a>
             </div><!-- /.login-logo -->
             <div class="login-box-body">
                 <?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('template_content')->value), $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);

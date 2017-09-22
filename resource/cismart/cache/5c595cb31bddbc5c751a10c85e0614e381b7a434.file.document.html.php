@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-10 17:26:03
+<?php /* Smarty version Smarty-3.0.7, created on 2017-09-18 03:42:02
          compiled from "application/views\base/operator/document.html" */ ?>
-<?php /*%%SmartyHeaderCode:310875986b4959716d7-44956504%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3175259bf246ade85e5-34708458%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '5c595cb31bddbc5c751a10c85e0614e381b7a434' => 
     array (
       0 => 'application/views\\base/operator/document.html',
-      1 => 1501832721,
+      1 => 1505698857,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '310875986b4959716d7-44956504',
+  'nocache_hash' => '3175259bf246ade85e5-34708458',
   'function' => 
   array (
   ),
@@ -44,6 +44,19 @@ $_smarty_tpl->decodeProperties(array (
     <!-- load javascript -->
     <?php echo $_smarty_tpl->getVariable('LOAD_JAVASCRIPT')->value;?>
 
+    <script type="text/javascript">
+    $(document).ready(function () {
+        // date picker
+        $(".tanggal").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            buttonImageOnly: true,
+            yearRange: '1970:2020',
+            format: 'dd-mm-yyyy'
+        });
+        
+    });
+</script>
     <!-- end of javascript	-->
     <!-- layout -->
     <div class="wrapper">
@@ -96,11 +109,11 @@ $_smarty_tpl->decodeProperties(array (
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="#" class="btn btn-success">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('login/operatorlogin/logout_process');?>
-" class="btn btn-default btn-flat">Sign out</a>
+" class="btn btn-danger ">Sign out</a>
                                     </div>
                                 </li>
                             </ul>

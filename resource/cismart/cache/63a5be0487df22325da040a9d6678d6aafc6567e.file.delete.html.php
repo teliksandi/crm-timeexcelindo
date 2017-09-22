@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-11 04:45:53
+<?php /* Smarty version Smarty-3.0.7, created on 2017-09-14 08:08:56
          compiled from "application/views\master/karyawan/delete.html" */ ?>
-<?php /*%%SmartyHeaderCode:26428598d1a61e8bdc6-76121291%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:687559ba1cf8f2e239-62840588%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '63a5be0487df22325da040a9d6678d6aafc6567e' => 
     array (
       0 => 'application/views\\master/karyawan/delete.html',
-      1 => 1502384267,
+      1 => 1505181711,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '26428598d1a61e8bdc6-76121291',
+  'nocache_hash' => '687559ba1cf8f2e239-62840588',
   'function' => 
   array (
   ),
@@ -40,7 +40,7 @@ $_smarty_tpl->decodeProperties(array (
                 <div class="box-header with-border">
                     <h3 class="box-title">Apakah anda yakin ingin menghapus data ini ?</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-default" href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/karyawan');?>
+                        <a class="btn btn-sm btn-primary" href="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/karyawan');?>
 " ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
@@ -48,14 +48,14 @@ $_smarty_tpl->decodeProperties(array (
                 <div class="box-body">
                     <form class="form-horizontal" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('master/karyawan/delete_process');?>
 " method="post">
-                        <input type="hidden" name="no_identitas" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['no_identitas'])===null||$tmp==='' ? '' : $tmp);?>
+                        <input type="hidden" name="id_karyawan" value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['id_karyawan'])===null||$tmp==='' ? '' : $tmp);?>
 ">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="nama_karyawan" class="col-sm-2 control-label">Nama Karyawan</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="nama_karyawan" disabled value="<?php echo (($tmp = @$_smarty_tpl->getVariable('result')->value['nama_karyawan'])===null||$tmp==='' ? '' : $tmp);?>
-" class="form-control" id="nama_karyawan" placeholder="">
+" class="form-control" id="nama_karyawan" placeholder="" title="Masukkan Nama Karyawan">
                                 </div>
                             </div>
                         </div>

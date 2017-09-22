@@ -43,23 +43,21 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered">
+                    <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th width="5%">No.</th>
-                                <th width="10%">Alias Name</th>
-                                <th width="20%">Client Nama</th>
-                                <th width="20">Client Address</th>
-                                <th width="15%">Person Name</th>
-                                <th width="15%">Job Position</th>
-                                <th width="10%">Telp</th>
-                                <th width="13%">Email</th>
-                                <th width="13%">Actions</th>
+                                <td width="5%" align="middle"><b>No</b></td>
+                                <td width="20%" align="middle"><b>Client Nama</b></td>
+                                <td width="20%" align="middle"><b>Client Address</b></td>
+                                <td width="15%" align="middle"><b>Person Name</b></td>
+                                <td width="15%" align="middle"><b>Job Position</b></td>
+                                <td width="10%" align="middle"><b>Phone Number</b></td>
+                                <td width="15%" align="middle"><b>Email</b></td>
+                                <td width="20%" align="middle"><b>Actions</b></td>
                             </tr>
                             {foreach $rs_id as $result}
                             <tr>
                                 <td align="middle">{$no++}</td>
-                                <td align="middle">{$result.alias_name}</td>
                                 <td align="middle">{$result.client_name}</td>
                                 <td align="middle">{$result.client_address}</td>
                                 <td align="middle">{$result.person_name}</td>
@@ -91,5 +89,3 @@
         <!-- /.col -->
     </div>
 </section>
-
-

@@ -1,0 +1,179 @@
+
+<section class="content-header">
+    <h1>
+        Pengolahan Data Initiation
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-database"></i> Initiation</a></li>
+        <li class="active">Detail</li>
+    </ol>
+</section>
+
+<section class="content">
+    <!-- notification template -->
+    {include file="base/templates/notification.html"}
+    <!-- end of notification template-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Form detail initiation</h3>
+                    <div class="box-tools">
+                        <a class="btn btn-sm btn-primary" href="{$config->site_url('initiation/initiation')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
+                    {foreach $join as $jn}
+                        <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}" id="id_initiation">
+                        <div class="box-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="client_name">Client Name</label>
+                                    <input type="text" name="client" value="{$jn.client_name|default:''}" class="form-control"  title="Nama Client" readonly>
+                                    </option>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_karyawan">Team Members Name</label>
+                                    <input type="text" name="nama_karyawan" value="{$jn.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="" title="Nama Karyawan" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="project_title">Project title</label>
+                                    <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_department">Project Manager Department</label>
+         
+                               <!--  {foreach $list as $ls}
+                                     {$ls}
+                                {/foreach}-->
+                                <!--{foreach $dp as $d}
+                                {$d}
+                                {$d.id_department}
+                                {$s = explode(",",{$d.id_department})}
+                                {print_r($s)}
+                                {/foreach} -->
+                                    <!-- {$s = explode(",",{$d})} -->
+                                    <input type="text" name="nama_department" value="{$jn.nama_department}" class="form-control" id="nama_department" placeholder="" title="Daftar nama department" readonly>
+
+                               
+                                        <!-- {foreach $join as $i}
+                                        {$temp = explode(",",$i["nama_department"])}
+                                        
+                                        {/foreach}
+                                        {print_r($temp)} -->
+                       <!--              
+                                    {foreach $s as $k}
+                                        {var_dump($k)}
+
+                                    {/foreach}
+
+                                    {$jn.nama_department|default:''}
+                        -->
+                            </div>
+                            <div class="form-group">
+                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                <label for="project_desc">Project Description</label>
+                                    <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$jn.project_desc|default:''}</textarea>
+                            </div>
+                            <div class="form-group">
+                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                <label for="project_just">Project Justification</label>
+                                    <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$jn.project_just|default:''}</textarea>
+                            </div>
+                            <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="budget">Budget</label>
+                                    <input type="text" name="budget" value="Rp. {number_format($jn.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                <label for="not_in_project">Not in project</label>
+                                    <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$jn.not_in_project|default:''}</textarea>
+                            </div>
+                            <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="start_date">Start date</label>    
+                                    <input type="text" name="start_date" value="{date('d F Y', strtotime($jn.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="due_date">Due date</label>
+                                    <input type="text" name="due_date" value="{date('d F Y', strtotime($jn.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
+                            </div>
+                            </div>
+
+                        </div>
+                        <center>
+                        <div class="col-md-6">
+                        <div class="form-group">
+                                <label for="files[]">Files</label>
+                                <a href="{$config->site_url('initiation/initiation/pdf_view')}" target="_blank">
+                                    <table>
+                                        <tr>
+                                            <td><img alt="file" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>apabae</td>
+                                        </tr>
+                                    </table>
+                                </a> 
+                        </div>
+
+                    <div class="form-group">
+                        <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
+                                    <button type="submit" name="accept" class="btn btn-success">Accept</button>&nbsp;&nbsp;
+               </form>
+                <form class="form-horizontal" action="{$config->site_url('closing/closing/closing_process')}" method="post">
+                    <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
+                    <button type="submit" class="btn btn-danger">Reject</button>
+                </from>
+                        </div>
+                        </div>
+                        </center>
+
+                <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                    Komentar :
+                                    {foreach $komen as $km}
+                                        <br>
+                                        <b><textarea disabled class="form-control">
+                                            {$km.komentar}</textarea></b>
+                                <div align="right">
+                                    Dikomentari pada : 
+                                        <br>
+                                            {$km.tgl_komentar}
+                                        <br>
+                                    {/foreach}
+                                </div>
+                                    <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}">
+                                    <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
+                                        <br>
+                                        <textarea name="komentar" class="form-control" id="komentar" title="Komentar"></textarea>
+                                            <br>
+                                <div align="right">
+                                    <button type="submit" name="submit" class="btn btn-info">Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+
+                </form>
+
+                        <!-- /.box-footer -->
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer clearfix">
+                    {$pagination.data|default:''}
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>

@@ -34,7 +34,7 @@
                     </form>
                 </div>
             </div>
-            <div class="box box-success">
+            <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tabel Data Karyawan</h3>
                     <div class="box-tools">
@@ -43,25 +43,24 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered">
-                        <tbody>
-                            
+                    <table class="table table-striped">
+                        <tbody> 
                             <tr>
-                                <th width="5%">No.</th>
-                                <th width="10%">NIK</th>
-                                <th width="20%">Nama</th>
-                                <th width="20">Department</th>
-                                <th width="15%">Email</th>
-                                <th width="15%">HP</th>
-                                <th width="10%">Status</th>
-                                <th width="13%">Action</th>
+                                <td width="5%" align="middle"><b>No</b></td>
+                                <td width="10%" align="middle"><b>NIK</b></td>
+                                <td width="20%" align="middle"><b>Nama</b></td>
+                                <td width="20" align="middle"><b>Department</b></td>
+                                <td width="15%" align="middle"><b>Email</b></td>
+                                <td width="15%" align="middle"><b>HP</b></td>
+                                <td width="10%" align="middle"><b>Status</b></td>
+                                <td width="13%" align="middle"><b>Action</b></td>
                             </tr>
                             {foreach $dpt_id as $result}
                             <tr>
                                 <td align="middle">{$no++}</td>
                                 <td align="middle">{$result.nik}</td>
-                                <td align="middle">{$result.nama_karyawan}</td>                           
-                                <td align="middle" >{$result.nama_department}</td>
+                                <td align="middle">{$result.nama_karyawan}</td> 
+                                <td align="middle">{$result.nama_department}</td>
                                 <td align="middle">{$result.email}</td>
                                 <td align="middle">{$result.telp}</td>
                                 <td align="middle">{$result.status}</td>

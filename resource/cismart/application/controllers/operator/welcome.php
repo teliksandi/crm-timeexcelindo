@@ -21,7 +21,7 @@ class welcome extends ApplicationBase {
         // set page rules
         $this->_set_page_rule("R");
         // set template content
-        $this->smarty->assign("template_content", "operator/welcome/index.html");
+        $this->smarty->assign("template_content", "operator/welcome/indes.php");
         $this->smarty->assign('user', $this->com_user['user_id']);
         // output
         parent::display();

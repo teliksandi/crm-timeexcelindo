@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-06 07:54:41
+<?php /* Smarty version Smarty-3.0.7, created on 2017-09-12 09:38:04
          compiled from "application/views\login/operator/form.html" */ ?>
-<?php /*%%SmartyHeaderCode:40875986af2124b798-93911212%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2809859b78edcf16241-31378676%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '354a7c05912a2c14ecbbf6e6de53872e18de2fef' => 
     array (
       0 => 'application/views\\login/operator/form.html',
-      1 => 1501832425,
+      1 => 1503646880,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '40875986af2124b798-93911212',
+  'nocache_hash' => '2809859b78edcf16241-31378676',
   'function' => 
   array (
   ),
@@ -21,19 +21,19 @@ $_smarty_tpl->decodeProperties(array (
 <?php if ((($tmp = @$_smarty_tpl->getVariable('login_st')->value)===null||$tmp==='' ? '' : $tmp)=='error'){?>
 <div class="alert alert-danger alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-    <p><strong>Your account is not found</strong>, Please Try Again or contact your administrator </p>
+    <p><strong>Akun Anda Tidak Ditemukan</strong>, Coba Ulangi atau Hubungi Administrator </p>
     <div class="clear"></div>
 </div>
 <?php }elseif((($tmp = @$_smarty_tpl->getVariable('login_st')->value)===null||$tmp==='' ? '' : $tmp)=='locked'){?>
 <div class="alert alert-danger alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-    <p><strong>Your account has been locked</strong>, Please Try Again or contact your administrator </p>
+    <p><strong>Akun Anda Telah Terkunci</strong>, Coba Ulangi atau Hubungi Administrator </p>
     <div class="clear"></div>
 </div>
 <?php }else{ ?>
 <div class="alert alert-warning alert-dismissable">
     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-    <p><strong>Please Login First</strong>, to acces this application! </p>
+    <p><strong>Mohon Login Dahulu</strong>, Untuk Mengakses Aplikasi Ini! </p>
     <div class="clear"></div>
 </div>
 <?php }?>

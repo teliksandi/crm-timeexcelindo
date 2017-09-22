@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-10 17:26:37
+<?php /* Smarty version Smarty-3.0.7, created on 2017-09-05 04:46:28
          compiled from "application/views\base/admin/document-login.html" */ ?>
-<?php /*%%SmartyHeaderCode:325315986af60de8ea7-06384986%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2181759ae1004057548-26578254%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '6fc9d9be6b0f946a05fda2815dedd1c7fe1fc016' => 
     array (
       0 => 'application/views\\base/admin/document-login.html',
-      1 => 1501832721,
+      1 => 1503646879,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '325315986af60de8ea7-06384986',
+  'nocache_hash' => '2181759ae1004057548-26578254',
   'function' => 
   array (
   ),

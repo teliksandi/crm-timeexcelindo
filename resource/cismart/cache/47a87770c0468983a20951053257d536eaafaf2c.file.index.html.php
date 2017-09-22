@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 18:44:44
+<?php /* Smarty version Smarty-3.0.7, created on 2017-09-14 08:10:02
          compiled from "application/views\master/client/index.html" */ ?>
-<?php /*%%SmartyHeaderCode:24046599324fcee6ac4-42127133%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3090259ba1d3a39a866-44698650%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '47a87770c0468983a20951053257d536eaafaf2c' => 
     array (
       0 => 'application/views\\master/client/index.html',
-      1 => 1502815388,
+      1 => 1505181705,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '24046599324fcee6ac4-42127133',
+  'nocache_hash' => '3090259ba1d3a39a866-44698650',
   'function' => 
   array (
   ),
@@ -66,18 +66,17 @@ $_smarty_tpl->decodeProperties(array (
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered">
+                    <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th width="5%">No.</th>
-                                <th width="10%">Alias Name</th>
-                                <th width="20%">Client Nama</th>
-                                <th width="20">Client Address</th>
-                                <th width="15%">Person Name</th>
-                                <th width="15%">Job Position</th>
-                                <th width="10%">Telp</th>
-                                <th width="13%">Email</th>
-                                <th width="13%">Actions</th>
+                                <td width="5%" align="middle"><b>No</b></td>
+                                <td width="20%" align="middle"><b>Client Nama</b></td>
+                                <td width="20%" align="middle"><b>Client Address</b></td>
+                                <td width="15%" align="middle"><b>Person Name</b></td>
+                                <td width="15%" align="middle"><b>Job Position</b></td>
+                                <td width="10%" align="middle"><b>Phone Number</b></td>
+                                <td width="15%" align="middle"><b>Email</b></td>
+                                <td width="20%" align="middle"><b>Actions</b></td>
                             </tr>
                             <?php  $_smarty_tpl->tpl_vars['result'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('rs_id')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -86,8 +85,6 @@ if ($_smarty_tpl->_count($_from) > 0){
 ?>
                             <tr>
                                 <td align="middle"><?php echo $_smarty_tpl->getVariable('no')->value++;?>
-</td>
-                                <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['alias_name'];?>
 </td>
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['client_name'];?>
 </td>
@@ -131,5 +128,3 @@ if ($_smarty_tpl->_count($_from) > 0){
         <!-- /.col -->
     </div>
 </section>
-
-

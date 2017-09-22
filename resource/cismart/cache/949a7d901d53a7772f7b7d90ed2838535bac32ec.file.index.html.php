@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-08-15 18:44:31
+<?php /* Smarty version Smarty-3.0.7, created on 2017-09-12 04:05:14
          compiled from "application/views\master/karyawan/index.html" */ ?>
-<?php /*%%SmartyHeaderCode:16155599324ef6256e3-33346833%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:385159b740dacc0a33-32299629%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '949a7d901d53a7772f7b7d90ed2838535bac32ec' => 
     array (
       0 => 'application/views\\master/karyawan/index.html',
-      1 => 1502815438,
+      1 => 1505181711,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '16155599324ef6256e3-33346833',
+  'nocache_hash' => '385159b740dacc0a33-32299629',
   'function' => 
   array (
   ),
@@ -56,7 +56,7 @@ $_smarty_tpl->decodeProperties(array (
                     </form>
                 </div>
             </div>
-            <div class="box box-success">
+            <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tabel Data Karyawan</h3>
                     <div class="box-tools">
@@ -66,18 +66,17 @@ $_smarty_tpl->decodeProperties(array (
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered">
-                        <tbody>
-                            
+                    <table class="table table-striped">
+                        <tbody> 
                             <tr>
-                                <th width="5%">No.</th>
-                                <th width="10%">NIK</th>
-                                <th width="20%">Nama</th>
-                                <th width="20">Department</th>
-                                <th width="15%">Email</th>
-                                <th width="15%">HP</th>
-                                <th width="10%">Status</th>
-                                <th width="13%">Action</th>
+                                <td width="5%" align="middle"><b>No</b></td>
+                                <td width="10%" align="middle"><b>NIK</b></td>
+                                <td width="20%" align="middle"><b>Nama</b></td>
+                                <td width="20" align="middle"><b>Department</b></td>
+                                <td width="15%" align="middle"><b>Email</b></td>
+                                <td width="15%" align="middle"><b>HP</b></td>
+                                <td width="10%" align="middle"><b>Status</b></td>
+                                <td width="13%" align="middle"><b>Action</b></td>
                             </tr>
                             <?php  $_smarty_tpl->tpl_vars['result'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('dpt_id')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -90,8 +89,8 @@ if ($_smarty_tpl->_count($_from) > 0){
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['nik'];?>
 </td>
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['nama_karyawan'];?>
-</td>                           
-                                <td align="middle" ><?php echo $_smarty_tpl->tpl_vars['result']->value['nama_department'];?>
+</td> 
+                                <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['nama_department'];?>
 </td>
                                 <td align="middle"><?php echo $_smarty_tpl->tpl_vars['result']->value['email'];?>
 </td>

@@ -1,3 +1,34 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        // date picker
+        $(".tanggal").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            buttonImageOnly: true,
+            yearRange: '1970:2000',
+            dateFormat: 'yy-mm-dd'
+        });
+        // change person
+        $('#status-person').change(function () {
+            var x = $('#status-person').val();
+            if (x === 'karyawan') {
+                $('.karyawan').show(500);
+            } else {
+                $('.karyawan').hide(500);
+            }
+
+        });
+        // hak akses
+        $('#log_in').change(function () {
+            var y = $("input[name=akses]:checked").val();
+            if (y === 'y') {
+                $('.log_in').show(500);
+            } else {
+                $('.log_in').hide(500);
+            }
+        });
+    });
+</script>
 <section class="content-header">
     <h1>
         Pengolahan Data Karyawan
@@ -16,31 +47,128 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="box box-primary">
+            <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">Form Ubah Data Karyawan</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-default" href="{$config->site_url('master/karyawan')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                        <a class="btn btn-sm btn-primary" href="{$config->site_url('master/karyawan')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form class="form-horizontal" action="{$config->site_url('master/karyawan/edit_process')}" method="post">
-                        <input type="hidden" name="no_identitas" value="{$result.no_identitas|default:''}">
+                        <input type="hidden" name="id_karyawan" value="{$result.id_karyawan|default:''}">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="nama_karyawan" class="col-sm-2 control-label">Nama Karyawan</label>
+                                <label for="username" class="col-sm-2 control-label">Username</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="">
+                                    <input type="text" name="username" value="{$result.username|default:''}" class="form-control" id="username" placeholder="" title="Masukkan Username">
                                 </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-2">
+                                    <input type="password" name="password" value="{$result.password|default:''}" class="form-control" id="password" placeholder="" title="Masukkan Kata Sandi/Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nik" class="col-sm-2 control-label">NIK</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="nik" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="" title="Masukkan Nomer Induk Karyawan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_karyawan" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="" title="Masukkan Nama">
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="jenis_kelamin" class="col-sm-2 control-label">Sex</label>
+                                <div class="col-sm-4"> 
+                                    {if $result.jenis_kelamin|default:'' eq 'Pria'}
+                                        <input type="radio" name="jenis_kelamin" value="Pria" checked/>Male
+                                        <input type="radio" name="jenis_kelamin" value="Wanita"/>Female
+                                    {elseif $result.jenis_kelamin|default:'' eq 'Wanita'}
+                                        <input type="radio" name="jenis_kelamin" value="Pria"/>Male
+                                        <input type="radio" name="jenis_kelamin" value="Wanita" checked/>Female 
+                                        {/if}
+                                </div>                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="tempat_lahir" class="col-sm-2 control-label">Place, Date of Birth</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input name="tgl_lahir" value="{$result.tgl_lahir|default:''}" type="text" maxlength="10" size="10" class="tanggal" >&nbsp;&nbsp;
+                                    <!-- 
+                                    <img src="{$BASEURL}/resource/doc/images/icon/tanggal.png" class="tanggal" title="..." alt="..." >
+                                     -->
+                                </div>                                
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="email" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="" title="Masukkan Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telp" class="col-sm-2 control-label">Contact Number</label>
+                                <div class="col-sm-2">
+                                    <input type="tel" name="telp" value="{$result.telp|default:''}" class="form-control" id="telp" placeholder="" title="Masukkan Nomer Telepon">
+                                </div>
+                            </div>
+                                                       
+                            <div class="form-group">
+                                <label for="id_department" class="col-sm-2 control-label">Department</label>
+                                <div class="col-sm-4">
+                                    <select name="department" >
+                                        {foreach $data_department as $d_dp}
+                                            <option value="{$d_dp.id_department}" {if $result.id_department == $d_dp.id_department} selected {/if}>{$d_dp.nama_department}</option>
+                                            {foreachelse}
+                                            Data tidak ditemukan !
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_position" class="col-sm-2 control-label">Position</label>
+                                <div class="col-sm-4">
+                                    <select name="id_position" >
+                                        {foreach $data_position as $d_pst}
+                                            <option value="{$d_pst.id_position}" {if $result.id_position == $d_pst.id_position} selected {/if}>{$d_pst.name}</option>
+                                            {foreachelse}
+                                            Data tidak ditemukan !
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="status" class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-4" >
+                                    <select name="status">
+                                        {if $result.status|default:'' eq 'Aktif'}
+                                        <option selected="selected" value="Aktif">Aktif</option>
+                                        <option  value="Off">Off</option>
+                                        {elseif $result.status|default:'' eq 'Off'}
+                                        <option value="Aktif">Aktif</option>
+                                        <option selected="selected" value="Off">Off</option>
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <div class="row">
                                 <div class="col-md-3 col-md-offset-2">
-                                    <button type="reset" class="btn btn-default">Reset</button>
-                                    <button type="submit" class="btn btn-info">Simpan</button>
+                                    <button type="submit" class="btn btn-success">Simpan</button>&nbsp;&nbsp;
+                                    <button type="reset" class="btn btn-danger">Reset</button>                                    
                                 </div>
                             </div>
                         </div>

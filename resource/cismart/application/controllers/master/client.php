@@ -144,12 +144,11 @@ class client extends ApplicationBase {
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
-                'alias_name' => $this->input->post('alias_name'),
                 'client_name' => $this->input->post('client_name'),
                 'client_address' => $this->input->post('client_address'),
                 'person_name' => $this->input->post('person_name'),
                 'job_position' => $this->input->post('job_position'),
-                'telp' => $this->input->post('telp'),
+                'telp' => $this->input->post('hsl_telp'),
                 'email' => $this->input->post('email')
             );
             if ($this->m_client->insert_client($params)) {
@@ -192,7 +191,6 @@ class client extends ApplicationBase {
             $params = array(
                 //'mdb' => $this->com_user['user_id'],
                 //'mdd' => date('Y-m-d')
-                'alias_name'               => $this->input->post('alias_name', TRUE),
                 'client_name'        => $this->input->post('client_name'),
                 'client_address'           => $this->input->post('client_address'),
 

@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        Pengolahan Data Inisisi
+        Pengolahan Data Inisiasi
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-database"></i> Initiation</a></li>
@@ -10,6 +10,7 @@
 <!-- notification template -->
 {include file="base/templates/notification.html"}
 <!-- end of notification template-->
+
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -23,7 +24,7 @@
                             <div class="form-group">
                                 <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
+                                    <input type="text" title="Masukkan Nama Project" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
                                 </div>
                                 <div class="col-sm-4">
                                     <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
@@ -43,31 +44,50 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered">
+                    <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th width="5%">No.</th>
-                                <th width="10%">Alias Name</th>
-                                <th width="20%">Client Nama</th>
-                                <th width="20">Client Address</th>
-                                <th width="15%">Person Name</th>
-                                <th width="15%">Job Position</th>
-                                <th width="10%">Telp</th>
-                                <th width="13%">Email</th>
+                                <td width="5%" align="middle"><b>No</b></td>
+                                <td width="25%" align="middle"><b>Project Title</b></td>
+                                <td width="18%" align="middle"><b>Client Nama</b></td>
+                                <td width="13%" align="middle"><b>Due Date</b></td>
+                                <td width="13%" align="middle"><b>Status</b></td>
+                                <td width="18%" align="middle"><b>Last History</b></td>
+                                <td width="15%" align="middle"><b>Action</b></td>
                             </tr>
-                            {foreach $rs_id as $result}
+                            {foreach $get as $result}
                             <tr>
                                 <td align="middle">{$no++}</td>
-                                <td align="middle">{$result.alias_name}</td>
+                                <td align="middle">{$result.project_title}</td>
                                 <td align="middle">{$result.client_name}</td>
-                                <td align="middle">{$result.client_address}</td>
-                                <td align="middle">{$result.person_name}</td>
-                                <td align="middle">{$result.job_position}</td>
-                                <td align="middle">{$result.telp}</td>
-                                <td align="middle">{$result.email}</td>
-                                <td>
-                                    <a href="{$config->site_url('initiation/initiation/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="{$config->site_url('initiation/initiation/delete')}/{$result.id_initiation}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                <td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
+                                <td align="middle">
+                                    <div id="autocolor">
+                                            JANGKRIK BOSS
+                                            </div>
+                                            <script type="text/javascript">
+                                            (function(){
+                                                var hexacode = ['#FF0000', '#33FF00'],
+                                                el = document.getElementById('autocolor').style,
+                                                counter = -1,
+                                                hexalen = hexacode.length;
+                                                function auto(){
+                                                    el.backgroundColor = hexacode[counter = ++counter % hexalen];
+                                                }
+                                         
+                                                        // $date1 = $_POST['{$result.start_date}'];
+                                                        // $date2 = $_POST['{$result.due_date}'];
+                                                           
+                                                        // $selisih = ((abs(strtotime ($date1) - strtotime ($date2)))/(60*60*24));
+                                                setInterval(auto, 2000);
+                                            })();
+                                            </script>
+                                    </td>
+                                <td align="middle">Belum dicari</td>
+                                <td align="middle">
+                                    <a href="{$config->site_url('initiation/initiation/edit/'|cat:$result.id_inisiasi)}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
+
+                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
                                 </td>
                             </tr>
                             {foreachelse}

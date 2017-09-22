@@ -17,6 +17,19 @@
 <body class="hold-transition skin-green-light sidebar-mini">
     <!-- load javascript -->
     {$LOAD_JAVASCRIPT}
+    <script type="text/javascript">
+    $(document).ready(function () {
+        // date picker
+        $(".tanggal").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            buttonImageOnly: true,
+            yearRange: '1970:2020',
+            format: 'dd-mm-yyyy'
+        });
+        
+    });
+</script>
     <!-- end of javascript	-->
     <!-- layout -->
     <div class="wrapper">
@@ -65,10 +78,10 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="#" class="btn btn-success">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="{$config->site_url('login/operatorlogin/logout_process')}" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="{$config->site_url('login/operatorlogin/logout_process')}" class="btn btn-danger ">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
