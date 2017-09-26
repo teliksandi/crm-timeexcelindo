@@ -15,7 +15,7 @@
 	                    <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
 	                </div>
 	                <div class="box-body">
-	                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/search_process')}" method="post">
+	                    <form class="form-horizontal" action="{$config->site_url('planning/planning/search_process')}" method="post">
 	                        <div class="box-body">
 	                            <div class="form-group">
 	                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
@@ -35,7 +35,7 @@
 	                <div class="box-header with-border">
 	                    <h3 class="box-title">Tabel Data Planning</h3>
 	                    <div class="box-tools">
-	                        <a class="btn btn-sm btn-success" href="{$config->site_url('initiation/initiation/add_initiation')}" ><i class="fa fa-plus"></i> Tambah Data</a>
+	                        <a class="btn btn-sm btn-success" href="{$config->site_url('planning/planning/add_planning')}" ><i class="fa fa-plus"></i> Tambah Data</a>
 	                    </div>
 	                </div>
 	               	<div class="box-body">
@@ -45,8 +45,6 @@
 		                            <td width="5%" align="middle"><b>No</b></td>
 		                            <td width="20%" align="middle"><b>Project Title</b></td>
 		                            <td width="18%" align="middle"><b>Client Nama</b></td>
-		                            <td width="25%" align="middle"><b>Comment</b></td>
-		                            <td width="10%" align="middle"><b>Action</b></td>
 		                        </tr>
 		                        {foreach $planning_project as $result}
 		                        <tr>
@@ -54,11 +52,10 @@
 		                            <td align="middle">{$result.project_title}</td>
 		                            <td align="middle">{$result.client_name}</td>
 
-		                            <!-- <td align="middle">
-		                                <a href="{$config->site_url('planning/closing/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
-		                                <a href="{$config->site_url('planning/planning/delete')}/{$result.id_planning}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
-		                            </td> -->
-
+		                            <td align="middle">
+		                                <a href="{$config->site_url('planning/planning/edit')}/{$result.id_planning}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
+		                                <a href="{$config->site_url('planning/planning/delete')}/{$result.id_client}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+		                            </td>
 		                        </tr>
 		                        {foreachelse}
 		                        <tr>

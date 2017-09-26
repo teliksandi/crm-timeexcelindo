@@ -50,16 +50,15 @@ class planning extends ApplicationBase {
             );
             $this->m_planning->insert_planning($params);
             redirect("initiation/initiation/index");
-   
-
     }
 
-    function delete($params){
+
+    function edit($params){
         // set page rules
         $this->_set_page_rule("U");
         // set template content
-        $this->smarty->assign("template_content", "planning/delete.html");
-        $this->smarty->assign("result", $this->m_planning->get_initiation_by_id($params));
+        $this->smarty->assign("template_content", "planning/edit.html");
+        $this->smarty->assign("result", $this->m_planning->get_planning_by_id($params));
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
@@ -67,30 +66,34 @@ class planning extends ApplicationBase {
         parent::display();
     }
 
-     function delete_process(){
+    function edit_process(){
         // set page rules
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('id_planning', 'ID Planning', 'trim|required');
+        $this->tnotification->set_rules('id_planning', 'Nomor Identitas Planning', 'trim|required');
+        $this->tnotification->set_rules('project_title', 'Nama Project', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
+                'id_department'     => $dep,
+                );
+            $where = array(
                 'id_planning' => $this->input->post('id_planning', TRUE),
             );
 
-            if ($this->m_planning->delete_planning($params)) {
+            if ($this->m_initiation->update_planning($params)) {
                 $this->tnotification->delete_last_field();
-                $this->tnotification->sent_notification("success", "Data berhasil dihapus");
+                $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
                 // default error
-                $this->tnotification->sent_notification("error", "Data gagal dihapus");
+                $this->tnotification->sent_notification("error", "Data gagal disimpan");
             }
         }else{
             // default error
-            $this->tnotification->sent_notification("error", "Data gagal dihapus");
+            $this->tnotification->sent_notification("error", "Data gagal disimpan");
         }
         // default redirect
-        redirect("planning/planning");
+        redirect("planning/planning/edit/".$this->input->post('id_planning', TRUE));
     }
 }
