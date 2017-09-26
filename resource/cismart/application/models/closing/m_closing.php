@@ -19,7 +19,7 @@ class m_closing extends CI_Model{
         $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
-            $result = $query->row_array();
+            $result = $query->row_array();  
             $query->free_result();
             return $result['total'];
         } else {
@@ -36,25 +36,39 @@ class m_closing extends CI_Model{
         return $query->result_array();
         
     }
-
+    
+    function get_koment(){
+        $sql   = "SELECT a.id_closing, a.id_initiation, b.id_initiation, b.komentar, b.tgl_komentar
+                    FROM closing a join(
+                        SELECT b1.* from komentar b1
+                        join(
+                            SELECT id_initiation, min(tgl_komentar) AS maxDate
+                            FROM komentar
+                            GROUP BY id_initiation
+                            ) b2 
+                            ON b1.id_initiation = b2.id_initiation
+                            AND b1.tgl_komentar = b2.maxDate                          
+                        ) b ON  a.id_initiation = b.id_initiation
+                        ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
     
     function insert_closing($params){
         return $this->db->insert('closing', $params);
     }
 
-    function insert_initiation($params){
-        return $this->db->insert('initiation', $params);
-    }
-
-     function update_closing($params, $where){
+    function update_closing($params, $where){
         return $this->db->update('closing', $params, $where);
     }
 
-       function update_initiation($params, $where){
-        return $this->db->update('initiation', $params, $where);
-    }
-
-        function delete_initation($params){
+    function delete_closing($params){
         $sql = "DELETE FROM initiation WHERE id_initiation= ?";
         return $this->db->query($sql, $params);
     }
