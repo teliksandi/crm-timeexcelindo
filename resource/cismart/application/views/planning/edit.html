@@ -57,7 +57,7 @@
         <div class="form-group">
             <label>Project Manager Department</label>
             <br>
-            <select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project">
+            <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
                     {foreach $datadepartment as $cth}
                 <option value={$cth.id_department}>{$cth.nama_department}</option>
                     {foreachelse}
