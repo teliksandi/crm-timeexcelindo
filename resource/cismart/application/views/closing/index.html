@@ -53,13 +53,15 @@
 		                            <td align="middle">{$no++}</td>
 		                            <td align="middle">{$result.project_title}</td>
 		                            <td align="middle">{$result.client_name}</td>
-
+		                        {/foreach}
+		                        {foreach $komen as $komentar}
+		                        	<td align="middle">{$komentar.komentar}</td>
 		                            <td align="middle">
-		                                <a href="{$config->site_url('closing/closing/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
+		                                <a href="{$config->site_url('closing/closing/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a> 
 		                                <a href="{$config->site_url('closing/closing/delete')}/{$result.id_client}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
 		                            </td>
+		                         {/foreach}
 		                        </tr>
-		                        {foreachelse}
 		                        <tr>
 		                            <td colspan="4">
 		                                Data tidak ditemukan!

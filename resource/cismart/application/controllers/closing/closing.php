@@ -14,6 +14,7 @@ class closing extends ApplicationBase {
         $this->load->model("closing/m_closing");
         $this->load->model("master/m_karyawan");
         $this->load->model("master/m_client");
+        $this->load->model("initiation/m_initiation");
         // load library
         $this->load->library('tnotification');
         $this->load->library('datetimemanipulation');
@@ -36,6 +37,7 @@ class closing extends ApplicationBase {
 
         // get list data
         $this->smarty->assign("close_project", $this->m_closing->get_data_initiation());
+        $this->smarty->assign("komen", $this->m_closing->get_koment());
         
         
         // output
