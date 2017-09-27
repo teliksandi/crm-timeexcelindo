@@ -112,4 +112,44 @@ class planning extends ApplicationBase {
         // default redirect
         redirect("planning/planning/edit/".$this->input->post('id_planning', TRUE));
     }
+
+    function delete($params){
+        // set page rules
+        $this->_set_page_rule("U");
+        // set template content
+        $this->smarty->assign("template_content", "planning/delete.html");
+        $this->smarty->assign("result", $this->m_planning->get_initiation_by_id($params));
+        // notification
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
+        // output
+        parent::display();
+    }
+
+     function delete_process(){
+        // set page rules
+        $this->_set_page_rule("U");
+
+        // cek input
+        $this->tnotification->set_rules('id_planning', 'ID Planning', 'trim|required');
+
+        if($this->tnotification->run() !== FALSE){
+            $params = array(
+                'id_planning' => $this->input->post('id_planning', TRUE),
+            );
+
+            if ($this->m_planning->delete_planning($params)) {
+                $this->tnotification->delete_last_field();
+                $this->tnotification->sent_notification("success", "Data berhasil dihapus");
+            }else{
+                // default error
+                $this->tnotification->sent_notification("error", "Data gagal dihapus");
+            }
+        }else{
+            // default error
+            $this->tnotification->sent_notification("error", "Data gagal dihapus");
+        }
+        // default redirect
+        redirect("planning/planning");
+    }
 }
