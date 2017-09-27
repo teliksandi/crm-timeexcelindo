@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class m_planning extends CI_Model{
 
-	function get_list_planning(){
+    function get_list_planning(){
         $sql = "SELECT * FROM planning";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
@@ -27,6 +27,18 @@ class m_planning extends CI_Model{
             return NULl;
         }
     }
+    function get_initiation_by_id($params){
+        $sql = "SELECT * FROM planning left join initiation on initiation.id_initiation = planning.id_initiation WHERE id_planning = ?";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return NULL;
+        }
+    }
+
     function get_data_planning() {
         $this->db->select('*');
         $this->db->from('planning');
@@ -53,7 +65,10 @@ class m_planning extends CI_Model{
         return $this->db->insert('planning', $params);
     }
 
-
+    function delete_planning($params){
+        $sql = "DELETE FROM planning WHERE id_planning= ?";
+        return $this->db->query($sql, $params);
+    }
 
 
 }
