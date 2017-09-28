@@ -36,7 +36,6 @@ class closing extends ApplicationBase {
 
 
         // get list data
-        $this->smarty->assign("close_project", $this->m_closing->get_data_initiation());
         $this->smarty->assign("komen", $this->m_closing->get_koment());
         
         
