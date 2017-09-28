@@ -269,7 +269,7 @@ public function index() {
         parent::display();
     }
 
-    function komentar_process(){
+     function komentar_process(){
 
         $this->_set_page_rule("C");
 
@@ -277,9 +277,9 @@ public function index() {
 
         if($this->tnotification->run() == FALSE){
             $params = array(
-                'komentar'    		=> $this->input->post("komentar"),
+                'komentar'          => $this->input->post("komentarin"),
                 'tgl_komentar'      => $this->input->post("tgl_komentar"),   
-                'id_initiation'     => $this->input->post("id_initiation")   
+                'id_initiation'     => $this->input->post("id_initiation_komentar")   
             );
 
             if ($this->m_initiation->insert_komentar($params)) {

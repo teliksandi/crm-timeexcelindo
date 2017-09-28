@@ -153,8 +153,7 @@
                             </center>
 
                     </form>
-                            
-
+                {/foreach}
                 <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
                         <div class="form-group">
                             <div class="col-md-6">
@@ -170,18 +169,16 @@
                                         <br>
                                     {/foreach}
                                 </div>
-                                    <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}">
+                                   <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
                                     <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
                                         <br>
-                                        <textarea name="komentar" class="form-control" id="komentar" title="Komentar"></textarea>
+                                        <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
                                             <br>
                                 <div align="right">
                                     <button type="submit" name="submit" class="btn btn-info">Comment</button>
                                 </div>
                             </div>
                         </div>
-                        {/foreach}
-
                 </form>
 
                         <!-- /.box-footer -->
