@@ -38,25 +38,28 @@
 						</div>
 						
 						<div class="form-group">
-							<label>Project Manager Department</label>
-								<br>
-									<select name="department[]" id="departments" class="form-control select2 department departmentsC" multiple title="Pilih Manager Department Project"></select>
-						</div>
+			<label>Project Manager Department</label>
+			<br>
+			<select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project">
+	    			{foreach $datadepartment as $cth}
+	    		<option value={$cth.id_department}>{$cth.nama_department}</option>
+	   				{foreachelse}
+	   				Data tidak ditemukan !
+	   				{/foreach}
+	   		</select>
+		</div>
 
-						<div class="form-group">
-							<label>Team Member Name</label>
-								<br>
-									<select name="karyawan[]" id="karyawans" title="Pilih Anggota Tim" class="form-control select2 karyawan karyawansC" data-value="" multiple>
-
-														<!-- <option value="1">test</option> -->
-														<!-- {foreach $marketing_kar as $value}
-															<option value="{$value.id_karyawan}">{$value.nama_karyawan}</option>
-														{foreachelse}
-														Data tidak ditemukan !
-														{/foreach} -->
-
-									</select>
-						</div>
+		<div class="form-group">
+			<label>Team Member Name</label>
+			<br>
+			<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
+			{foreach $marketing_kar as $value}
+				<option value="{$value.id_karyawan}">{$value.nama_karyawan}</option>
+			{foreachelse}
+			Data tidak ditemukan !
+			{/foreach}
+			</select>
+		</div>
 
 						<div class="form-group">
 								<label>Client</label>
