@@ -296,7 +296,7 @@ public function index() {
             $this->tnotification->sent_notification("error", "Gagal sirane blesak");
         }
         // default redirect
-        redirect("initiation/initiation/add_komentar/".$this->input->post('id_initiation', TRUE));
+        redirect("initiation/initiation/add_komentar/".$this->input->post('id_initiation_komentar', TRUE));
 
     }
 
