@@ -24,27 +24,31 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
+
                 <div class="box-body">
                     <form class="form-horizontal" action="{$config->site_url('master/karyawan/add_process')}" method="post" name="kywn">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="username" class="col-sm-2 control-label">Username</label>
-                                <div class="col-sm-4">
-                                    <input type="text" size="10" maxlength="40" name="username" value="{$result.username|default:''}" class="form-control" id="username" placeholder="" required title="Masukkan Username">
-                                </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" size="10" maxlength="40" name="username" value="{$result.username|default:''}" class="form-control" id="username" placeholder="" required title="Masukkan Username">
+                                    </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="password" class="col-sm-2 control-label">Password</label>
-                                <div class="col-sm-2">
-                                    <input type="password" size="10" maxlength="40" name="password" value="{$result.password|default:''}" class="form-control" id="password" placeholder="" required title="Masukkan Kata Sandi/Password">
-                                </div>
+                                    <div class="col-sm-2">
+                                        <input type="password" size="10" maxlength="40" name="password" value="{$result.password|default:''}" class="form-control" id="password" placeholder="" required title="Masukkan Kata Sandi/Password">
+                                    </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="nik" class="col-sm-2 control-label">NIK</label>
-                                <div class="col-sm-2">
-                                    <input type="text" name="nik" size="10" maxlength="40" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="" title="Masukkan Nomer Induk Karyawan">
-                                </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" name="nik" size="10" maxlength="40" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="" title="Masukkan Nomer Induk Karyawan">
+                                    </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="nama_karyawan" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-4">
@@ -54,93 +58,94 @@
                             
                             <div class="form-group">
                                 <label for="jenis_kelamin" class="col-sm-2 control-label">Sex</label>
-                                <div class="col-sm-4">                                    
-                                    <input type="radio" name="jenis_kelamin" value="Pria"/>Male
-                                    <input type="radio" name="jenis_kelamin" value="Wanita"/>Female
-                                </div>
+                                    <div class="col-sm-4">                                    
+                                        <input type="radio" name="jenis_kelamin" value="Pria"/>Male
+                                        <input type="radio" name="jenis_kelamin" value="Wanita"/>Female
+                                    </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="tempat_lahir" class="col-sm-2 control-label">Place, Date of Birth</label>
-                                <div class="col-sm-2">
-                                    <input type="text" size="10" maxlength="40" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="" title="Masukkan Tempat & Tanggal Lahir" required>
-                                </div>
-                                <div class="col-sm-2">
+                                    <div class="col-sm-2">
+                                        <input type="text" size="10" maxlength="40" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="" title="Masukkan Tempat & Tanggal Lahir" required>
+                                    </div>
 
+                                <div class="col-sm-2">
                                     <input type="text" name="tgl_lahir" type="text" maxlength="10" size="10" class="tanggal" required>&nbsp;&nbsp;
                                     <!-- <img src="{$BASEURL}/resource/doc/images/icon/tanggal.png" class="tanggal" title="..." alt="..." >
-                                     -->
-                                    
+                                     -->    
                                 </div> 
 
                             </div>
+
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-4">
-                                    <input type="email" size="10" maxlength="40" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="" title="Masukkan Email" required>
-                                </div>
+                                    <div class="col-sm-4">
+                                        <input type="email" size="10" maxlength="40" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="" title="Masukkan Email" required>
+                                    </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="telepon" class="col-sm-2 control-label">Contact Number</label>
                                 <label class="col-sm-1 control-label">+62-8</label>
-                                <div class="col-sm-2">
-                                    <input type="text" size="10" maxlength="40" id="telepon" name="telepon" placeholder="" title="Masukkan Nomer Telepon" required  onchange="myFunction()">
+                                    <div class="col-sm-2">
+                                        <input type="text" size="10" maxlength="40" id="telepon" name="telepon" placeholder="" title="Masukkan Nomer Telepon" required  onchange="myFunction()">
 
-                                    <script>
-                                            function myFunction() {
-                                            var x = '+628';
-                                            var y = document.getElementById("telepon").value;
-                                            var hasil = x + y;
-                                                document.kywn.telp.value = hasil;
-                                            }
-                                    </script>
-                                    <input type="hidden" name="telp" id="telp" value="{$result.telp|default:''}">
-                                </div>
+                                            <script>
+                                                    function myFunction() {
+                                                    var x = '+628';
+                                                    var y = document.getElementById("telepon").value;
+                                                    var hasil = x + y;
+                                                        document.kywn.telp.value = hasil;
+                                                    }
+                                            </script>
+                                        <input type="hidden" name="telp" id="telp" value="{$result.telp|default:''}">
+                                    </div>
                             </div>
 
-                           
                             <div class="form-group">
                                 <label for="id_department" class="col-sm-2 control-label">Department</label>
-                                <div class="col-sm-4">
-                                    <select name="department">
-                                        <option value="" disabled="disabled" selected="selected">--Choose Department--</option>
+                                    <div class="col-sm-4">
+                                        <select name="department">
+                                            <option value="" disabled="disabled" selected="selected">--Choose Department--</option>
                                                 {foreach $data_department as $d_dp}
-                                                    <option value={$d_dp.id_department}>{$d_dp.nama_department}</option>
-                                                    {foreachelse}
-                                                   Data tidak ditemukan !
+                                            <option value={$d_dp.id_department}>{$d_dp.nama_department}</option>
+                                                {foreachelse}
+                                                Data tidak ditemukan !
                                                 {/foreach}
-                                    </select>
-                                </div>
+                                        </select>
+                                    </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="id_position" class="col-sm-2 control-label">Position</label>
-                                <div class="col-sm-4">
-                                    <select name="id_position">
-                                        <option value="" disabled="disabled" selected="selected">--Choose Position--</option>
+                                    <div class="col-sm-4">
+                                        <select name="id_position">
+                                            <option value="" disabled="disabled" selected="selected">--Choose Position--</option>
                                                 {foreach $data_position as $d_pst}
-                                                    <option value={$d_pst.id_position}>{$d_pst.name}</option>
-                                                    {foreachelse}
-                                                   Data tidak ditemukan !
+                                            <option value={$d_pst.id_position}>{$d_pst.name}</option>
+                                                {foreachelse}
+                                                Data tidak ditemukan !
                                                 {/foreach}
-                                    </select>
-                                </div>
+                                        </select>
+                                    </div>
                             </div>
-
 
                             <div class="form-group">
                                 <label for="status" class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-4" >
-                                    <select name="status">
-                                        <option  value="Aktif">Aktif</option>
-                                        <option  value="Off">Off</option>                                           
-                                    </select>
-                                    <!--<input type="checkbox" name="status" value="{$result.status|default:''}" class="form-control" id="status" placeholder="">
-                                --></div>
+                                    <div class="col-sm-4" >
+                                        <select name="status">
+                                            <option  value="Aktif">Aktif</option>
+                                            <option  value="Off">Off</option>                                           
+                                        </select>
+
+                                            <!-- <input type="checkbox" name="status" value="{$result.status|default:''}" class="form-control" id="status" placeholder=""> -->
+
+                                    </div>
                             </div>
                         </div>
-                   
-                        
                         <!-- /.box-body -->
+                        
                         <div class="box-footer">
                             <div class="row">
                                 <div class="col-md-3 col-md-offset-2">                                    
@@ -149,15 +154,14 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- /.box-footer -->
                     </form>
                 </div>
-                 
-                <!-- /.box-body -->
-                <div class="box-footer clearfix">
-                    {$pagination.data|default:''}
-                </div>
+                 <!-- /.box-body -->
+                
+                    <div class="box-footer clearfix">
+                        {$pagination.data|default:''}
+                    </div>
             </div>
             <!-- /.box -->
         </div>

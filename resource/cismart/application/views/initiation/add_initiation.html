@@ -38,28 +38,28 @@
 						</div>
 						
 						<div class="form-group">
-			<label>Project Manager Department</label>
-			<br>
-			<select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project">
-	    			{foreach $datadepartment as $cth}
-	    		<option value={$cth.id_department}>{$cth.nama_department}</option>
-	   				{foreachelse}
-	   				Data tidak ditemukan !
-	   				{/foreach}
-	   		</select>
-		</div>
+							<label>Project Manager Department</label>
+							<br>
+								<select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project">
+	    							{foreach $datadepartment as $cth}
+	    								<option value={$cth.id_department}>{$cth.nama_department}</option>
+	   								{foreachelse}
+	   								Data tidak ditemukan !
+	   								{/foreach}
+	   							</select>
+						</div>
 
-		<div class="form-group">
-			<label>Team Member Name</label>
-			<br>
-			<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
-			{foreach $marketing_kar as $value}
-				<option value="{$value.id_karyawan}">{$value.nama_karyawan}</option>
-			{foreachelse}
-			Data tidak ditemukan !
-			{/foreach}
-			</select>
-		</div>
+						<div class="form-group">
+							<label>Team Member Name</label>
+							<br>
+								<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
+									{foreach $marketing_kar as $value}
+										<option value="{$value.id_karyawan}">{$value.nama_karyawan}</option>
+									{foreachelse}
+									Data tidak ditemukan !
+									{/foreach}
+								</select>
+						</div>
 
 						<div class="form-group">
 								<label>Client</label>
@@ -80,7 +80,6 @@
 									<textarea name="deskripsi" title="Masukkan Deskripsi tentang Project" rows="3" cols="35" class="ckeditor" id="ckedtor" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
 									</textarea>
 						</div>
-
 				</div>
 
 				<div class="col-md-6">
@@ -120,14 +119,12 @@
 							</div> -->
 
 
-
-			<div class="box box-success">
-				<div class="box-header with-border">
-					<tr>
-						<label><h4><b>
-							Date And Upload  - Target Penyelesaian Inisiasi
-						</b></h4></label>
-
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<tr>
+					<label><h4><b>
+						Date And Upload  - Target Penyelesaian Inisiasi
+					</b></h4></label>
 						<td>
 							<table>
 								<tr>
@@ -150,9 +147,9 @@
 								</tr>
 							</table>
 						</td>
-					</tr>
-				</div>
+				</tr>
 			</div>
+		</div>
 
 						<div class="form-group">
 							<center>
@@ -165,7 +162,6 @@
 
 	</form>
 		
-
 		<script>
 
 			$('#files').change(function(){
@@ -268,4 +264,5 @@
 			});
 
 		</script>
+		
 </section>
