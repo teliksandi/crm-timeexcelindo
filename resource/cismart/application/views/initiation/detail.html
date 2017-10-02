@@ -154,9 +154,13 @@
 
                     </form>
 
+
                 <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
-                        <div class="form-group" overflow:auto; width: 100px; height: 80px;>
+                        <center>
+                        <div class="form-group">
                             <div class="col-md-6">
+                                <table>
+                                <div style="overflow-y: scroll; height: 200px">
                                     Komentar :
                                     {foreach $komen as $km}
                                         <br>
@@ -169,19 +173,26 @@
                                         <br>
                                     {/foreach}
                                 </div>
+                                </div>
+                                </table>
                                    <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
                                     <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
                                         <br>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                         <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
                                             <br>
                                 <div align="right">
                                     <button type="submit" name="submit" class="btn btn-info">Comment</button>
                                 </div>
                             </div>
+                            </div>
                         </div>
+                       </div>
                      {/foreach}
+                 </center>
                 </form>
-
                         <!-- /.box-footer -->
                 </div>
                 <!-- /.box-body -->
