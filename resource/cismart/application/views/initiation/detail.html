@@ -39,44 +39,49 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="nama_karyawan">Team Members Name</label>
-                                            <input type="text" name="nama_karyawan" value="{$jn.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="" title="Nama Karyawan" readonly>
+                                        <label for="project_title">Project title</label>
+                                            <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
                                     </div>
-
+                            
                                     <div class="form-group">
                                         <label for="project_title">Project title</label>
                                             <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
                                     </div>
                             
                                     <div class="form-group">
-                                        <label for="nama_department">Project Manager Department</label>
-         
-                                               <!--  {foreach $list as $ls}
-                                                     {$ls}
-                                                {/foreach}-->
-                                                <!--{foreach $dp as $d}
-                                                {$d}
-                                                {$d.id_department}
-                                                {$s = explode(",",{$d.id_department})}
-                                                {print_r($s)}
-                                                {/foreach} -->
-                                                    <!-- {$s = explode(",",{$d})} -->
+                                            <label>Project Manager Department</label>
 
-                                            <input type="text" name="nama_department" value="{$jn.nama_department}" class="form-control" id="nama_department" placeholder="" title="Daftar nama department" readonly>
+                                            <br>
+                                            <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
 
-                               
-                                                <!-- {foreach $join as $i}
-                                                {$temp = explode(",",$i["nama_department"])}
-                                                {/foreach}
-                                                {print_r($temp)} -->
+                                                {foreach $datadepartment as $cth}
 
+                                                <option value="{$cth.id_department}" 
 
-                                                <!-- {foreach $s as $k}
-                                                    {var_dump($k)}
-                                                {/foreach}
-                                                {$jn.nama_department|default:''} -->
+                                                {if $cth.id_department|in_array:$ex}
+                                                 selected="selected"{/if}>{$cth.nama_department}
+                                                    
+                                                </option>
+                                                    {foreachelse}
+                                                    Data tidak ditemukan !
+                                                    {/foreach}
+                                            </select>
+                                        </div>
 
-                                    </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Team Member Name</label>
+                                            <br>
+                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
+                                                  {foreach $marketing_kar as $value}
+                                                    <option value="{$value.id_karyawan}"
+                                                    {if $value.id_karyawan|in_array:$exs}
+                                                 selected="selected"{/if}>{$value.nama_karyawan}</option>
+                                                  {foreachelse}
+                                                  Data tidak ditemukan !
+                                                  {/foreach}
+                                                </select>
+                                        </div>
 
                                     <div class="form-group">
                                         <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
