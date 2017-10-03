@@ -62,27 +62,42 @@
                                 <td align="middle">{$result.client_name}</td>
                                 <td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
                                 <td align="middle">
-                                    <div id="autocolor">
-                                            JANGKRIK BOSS
-                                            </div>
-                                            <script type="text/javascript">
-                                            (function(){
-                                                var hexacode = ['#FF0000', '#33FF00'],
-                                                el = document.getElementById('autocolor').style,
-                                                counter = -1,
-                                                hexalen = hexacode.length;
-                                                function auto(){
-                                                    el.backgroundColor = hexacode[counter = ++counter % hexalen];
-                                                }
-                                         
-                                                        // $date1 = $_POST['{$result.start_date}'];
-                                                        // $date2 = $_POST['{$result.due_date}'];
-                                                           
-                                                        // $selisih = ((abs(strtotime ($date1) - strtotime ($date2)))/(60*60*24));
-                                                setInterval(auto, 2000);
-                                            })();
-                                            </script>
+                                    <input type="hidden" value="{$result.start_date|default:''}" id="x_Begin_Date">
+                                    <input type="hidden" value="{$result.due_date|default:''}" id="x_End_Date">                                   
+                                    
+                                      <div id="myDIV">
+                                        <P id="dd"></P>
+                                      </div>
+                                        <script type="text/javascript">
+                                            //
+                                            
+                                            var dat1 = document.getElementById('x_Begin_Date').value;
+                                            var dat2 = document.getElementById('x_End_Date').value;
+                                            var date1 = new Date(dat1);
+                                            var date2 = new Date(dat2);
+                                            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                                            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+                                            
+                                            if (diffDays <= 1) {
+                                                document.getElementById("dd").innerHTML = "Deadline!";
+                                                // document.getElementById("d").style.color = "#ff1a1a";
+
+                                                var x = document.getElementById("myDIV");
+                                                //x.document.getElementsByTagName("P")[0].innerHTML = "Deadline";
+                                                x.getElementsByTagName("P")[0].style.color = "red";
+                                                
+                                               
+                                            } else {
+                                                document.getElementById("dd").innerHTML = "Aktif";
+                                                // document.getElementById("d").style.color = "#33cc33";
+                                                var x = document.getElementById("myDIV");
+                                                //x.document.getElementsByTagName("P")[1].innerHTML = "Aktif";
+                                                x.getElementsByTagName("P")[1].style.color = "green";
+
+                                            };
+                                        </script>
                                     </td>
+                                    
                                 <td align="middle">Belum dicari</td>
                                 <td align="middle">
                                     <a href="{$config->site_url('initiation/initiation/edit/'|cat:$result.id_inisiasi)}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
