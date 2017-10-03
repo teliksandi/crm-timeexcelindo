@@ -77,12 +77,15 @@
                                             </select>
                                         </div>
 
+                                        
                                         <div class="form-group">
                                             <label>Team Member Name</label>
                                             <br>
                                                 <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
-                                                  {foreach $karyawans as $value}
-                                                    <option value="{$value.id_karyawan}">{$value.nama_karyawan}</option>
+                                                  {foreach $marketing_kar as $value}
+                                                    <option value="{$value.id_karyawan}"
+                                                    {if $value.id_karyawan|in_array:$exs}
+                                                 selected="selected"{/if}>{$value.nama_karyawan}</option>
                                                   {foreachelse}
                                                   Data tidak ditemukan !
                                                   {/foreach}

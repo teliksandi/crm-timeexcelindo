@@ -485,6 +485,8 @@ public function index() {
         $kk = $this->m_initiation->get_initiation_by_id($params);
         $this->smarty->assign("ex", explode(",", $kk['id_department']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("exs", explode(",", $kk['id_karyawan']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
 
