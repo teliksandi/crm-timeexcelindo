@@ -482,6 +482,9 @@ public function index() {
         // set template content
         $this->smarty->assign("template_content", "initiation/edit.html");
         $this->smarty->assign("result", $this->m_initiation->get_initiation_by_id($params));
+        $kk = $this->m_initiation->get_initiation_by_id($params);
+        $this->smarty->assign("ex", explode(",", $kk['id_department']));
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
 
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
 

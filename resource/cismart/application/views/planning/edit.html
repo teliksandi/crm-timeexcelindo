@@ -56,10 +56,18 @@
 
         <div class="form-group">
             <label>Project Manager Department</label>
+
             <br>
             <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
-                    {foreach $datadepartment as $cth}
-                <option value={$cth.id_department}>{$cth.nama_department}</option>
+
+                {foreach $datadepartment as $cth}
+
+                <option value="{$cth.id_department}" 
+
+                {if $cth.id_department|in_array:$ex}
+                 selected="selected"{/if}>{$cth.nama_department}
+                    
+                </option>
                     {foreachelse}
                     Data tidak ditemukan !
                     {/foreach}
