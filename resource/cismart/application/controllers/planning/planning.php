@@ -59,11 +59,18 @@ class planning extends ApplicationBase {
         // set template content
         $this->smarty->assign("template_content", "planning/edit.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($params));
+
         $kk = $this->m_planning->get_planning_by_id($params);
         foreach ($kk as $k) {
             $this->smarty->assign("ex", explode(",", $k['id_department']));
         }
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+
+        $kks = $this->m_planning->get_planning_by_id($params);
+        foreach ($kks as $ks) {
+            $this->smarty->assign("exs", explode(",", $ks['id_karyawan']));
+        }
+        $this->smarty->assign("kar",$this->m_karyawan->get_all());
         
         
 
