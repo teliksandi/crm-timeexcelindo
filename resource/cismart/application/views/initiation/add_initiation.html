@@ -176,9 +176,9 @@
 			  {
 			   var name = files[count].name;
 			   var extension = name.split('.').pop().toLowerCase();
-			   if(jQuery.inArray(extension, ['png','jpg','jpeg','docx','pdf','xlsx','pptx','rar','zip']) == -1)
+			   if(jQuery.inArray(extension, ['png','jpg','jpeg','docx','pdf','xlsx','ppt','rar','zip']) == -1)
 			   {
-			    error = "Pilih file dengan format png, jpg, jpeg, docx, pdf, xlsx, pptx, rar, zip"
+			    error = "Pilih file dengan format png, jpg, jpeg, docx, pdf, xlsx, ppt, rar, zip"
 			   }
 			   else
 			   {
@@ -201,7 +201,6 @@
 			    success:function(data)
 			    {
 			     $('#uploaded_images').html(data);
-			     $('#files').val('');
 			    }
 			   })
 			  }

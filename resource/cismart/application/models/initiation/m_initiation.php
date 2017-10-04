@@ -189,6 +189,17 @@ class m_initiation extends CI_Model{
         }
     }
 
+
+    function tambah($params) {
+
+        $data = array (
+                'file'          =>  $params,
+                'tgl_upload'    =>  date('d-m-Y h:i:sa'),
+                'id_initiation' =>  $this->db->insert_id()
+        );  
+        $this->db->insert('file',$data);
+    }
+
     function insert_komentar($params){
         return $this->db->insert('komentar', $params);
     }

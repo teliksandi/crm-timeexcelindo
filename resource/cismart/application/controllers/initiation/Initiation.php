@@ -350,7 +350,7 @@ public function index() {
        $output = '';
 
        $config["upload_path"] = 'resource/doc/';
-       $config["allowed_types"] = 'png|jpg|jpeg|docx|pdf|xlsx|pptx|rar|zip';
+       $config["allowed_types"] = 'png|jpg|jpeg|docx|pdf|xlsx|ppt|rar|zip';
        $this->load->library('upload', $config);
        $this->upload->initialize($config);
        for($count = 0; $count<count($_FILES["files"]["name"]); $count++)
@@ -412,13 +412,12 @@ public function index() {
                 'not_in_project'    => $this->input->post("not_in"),
                 'start_date'        => $this->input->post("tanggal_start"),
                 'due_date'          => $this->input->post("tanggal_due"),
-                'file'              => $fl
-                
+
             );
 
 
             if ($this->m_initiation->insert_initiation($params)) {
-
+                $this->m_initiation->tambah($fl);
                 //$this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
