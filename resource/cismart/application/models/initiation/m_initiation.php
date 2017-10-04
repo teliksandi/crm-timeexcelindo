@@ -174,11 +174,11 @@ class m_initiation extends CI_Model{
     }
 
     function all_index_initiation(){
-        $sql = "SELECT initiation.id_initiation AS 'id_inisiasi',initiation.*, closing.*, planning.*, client.*
+        $sql = "SELECT initiation.id_initiation AS 'id_inisiasi',initiation.project_title, initiation.due_date, closing.id_closing, planning.id_planning, client.client_name, initiation.start_date
                 From initiation left join closing on initiation.id_initiation = closing.id_initiation 
                 left join planning on initiation.id_initiation = planning.id_initiation 
-                left join client on initiation.id_client = client.id_client 
-                where closing.id_initiation is NULL and planning.id_initiation is NULL ";
+                left join client on initiation.id_client = client.id_client
+                where closing.id_initiation is NULL and planning.id_initiation is NULL";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

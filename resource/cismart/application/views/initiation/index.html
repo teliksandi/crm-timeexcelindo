@@ -62,40 +62,53 @@
                                 <td align="middle">{$result.client_name}</td>
                                 <td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
                                 <td align="middle">
-                                    <input type="hidden" value="{$result.start_date|default:''}" id="x_Begin_Date">
-                                    <input type="hidden" value="{$result.due_date|default:''}" id="x_End_Date">                                   
-                                    
-                                      <div id="myDIV">
-                                        <P id="dd"></P>
+                                    <input type="text" value="{$result.start_date|default:''}" id="x_Begin_Date">
+                                    <input type="text" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                                  
+                                    <P id="dd"></P>
                                       </div>
                                         <script type="text/javascript">
                                             //
+                                            var today = new Date();
+                                            var dd = today.getDate();
+                                            var mm = today.getMonth()+1; //January is 0!
+                                            var yyyy = today.getFullYear();
+
+                                            if(dd<10) {
+                                                dd = '0'+dd
+                                            } 
+
+                                            if(mm<10) {
+                                                mm = '0'+mm
+                                            } 
+
+                                            today = yyyy + '/' + mm + '/' + dd;
                                             
                                             var dat1 = document.getElementById('x_Begin_Date').value;
                                             var dat2 = document.getElementById('x_End_Date').value;
-                                            var date1 = new Date(dat1);
+                                            var date1 = new Date(today);
                                             var date2 = new Date(dat2);
                                             var timeDiff = Math.abs(date2.getTime() - date1.getTime());
                                             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-                                            
-                                            if (diffDays <= 1) {
+                                           
+                                            if (diffDays <= 0) {
                                                 document.getElementById("dd").innerHTML = "Deadline!";
-                                                // document.getElementById("d").style.color = "#ff1a1a";
+                                                document.getElementById("dd").style.color = "#ff1a1a";
 
-                                                var x = document.getElementById("myDIV");
-                                                //x.document.getElementsByTagName("P")[0].innerHTML = "Deadline";
-                                                x.getElementsByTagName("P")[0].style.color = "red";
+                                                // var x = document.getElementById("myDIV");
+                                                // //x.document.getElementsByTagName("P")[0].innerHTML = "Deadline";
+                                                // x.getElementsByTagName("P")[0].style.color = "red";
                                                 
                                                
                                             } else {
                                                 document.getElementById("dd").innerHTML = "Aktif";
-                                                // document.getElementById("d").style.color = "#33cc33";
-                                                var x = document.getElementById("myDIV");
-                                                //x.document.getElementsByTagName("P")[1].innerHTML = "Aktif";
-                                                x.getElementsByTagName("P")[1].style.color = "green";
+                                                document.getElementById("dd").style.color = "#33cc33";
+                                                // var x = document.getElementById("myDIV");
+                                                // //x.document.getElementsByTagName("P")[1].innerHTML = "Aktif";
+                                                // x.getElementsByTagName("P")[1].style.color = "green";
 
                                             };
                                         </script>
+                                    
                                     </td>
                                     
                                 <td align="middle">Belum dicari</td>

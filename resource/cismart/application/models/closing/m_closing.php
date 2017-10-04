@@ -27,13 +27,13 @@ class m_closing extends CI_Model{
         }
     }
    function get_koment(){
-        $sql   = "SELECT a.id_closing, a.id_initiation, b.id_initiation, b.komentar AS 'komenb', b.tgl_komentar, c.*, d.*
+        $sql   = "SELECT  a.id_initiation,b.komentar AS 'komenb', c.project_title, d.client_name
                     FROM closing a left join initiation c on a.id_initiation = c.id_initiation
                     left join client d on c.id_client = d.id_client
                     join(
                         SELECT b1.* from komentar b1
                         join(
-                            SELECT id_initiation, min(tgl_komentar) AS maxDate
+                            SELECT id_initiation, max(tgl_komentar) AS maxDate
                             FROM komentar
                             GROUP BY id_initiation
                             ) b2 
