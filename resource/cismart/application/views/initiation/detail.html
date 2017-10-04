@@ -44,11 +44,6 @@
                                     </div>
                             
                                     <div class="form-group">
-                                        <label for="project_title">Project title</label>
-                                            <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
-                                    </div>
-                            
-                                    <div class="form-group">
                                             <label>Project Manager Department</label>
 
                                             <br>
@@ -131,17 +126,21 @@
                                 <div class="col-md-6">
 
                                     <div class="form-group">
+                                        {foreach $fls as $f}
                                         <label for="files[]">Files</label>
+                                        <input type="hidden" name="isi_file" value="{$f}">
                                             <a href="{$config->site_url('initiation/initiation/pdf_view')}" target="_blank">
                                                 <table>
                                                     <tr>
                                                         <td><img alt="file" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>apabae</td>
+                                                        <td>{$f}</td>
                                                     </tr>
                                                 </table>
                                             </a> 
+                                        {/foreach}
+
                                     </div>
 
                                     <div class="form-group">

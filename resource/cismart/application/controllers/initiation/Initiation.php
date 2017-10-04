@@ -85,7 +85,15 @@ public function index() {
         //var_dump($this->m_initiation->initiation_detail());
         $this->smarty->assign("join", $this->m_initiation->initiation_detail($where));
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($where));
-        
+        $kk = $this->m_initiation->get_initiation_by_id($where);
+        $this->smarty->assign("ex", explode(",", $kk['id_department']));
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("exs", explode(",", $kk['id_karyawan']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+
+        $this->smarty->assign("fls", explode(",", $kk['file']));
+
+
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
 
         // load Javascript
@@ -349,7 +357,7 @@ public function index() {
       {
        $output = '';
 
-       $config["upload_path"] = 'resource/doc/';
+       $config["upload_path"] = 'resource/doc/pdf';
        $config["allowed_types"] = 'png|jpg|jpeg|docx|pdf|xlsx|ppt|rar|zip';
        $this->load->library('upload', $config);
        $this->upload->initialize($config);
@@ -395,7 +403,7 @@ public function index() {
         // exit();
         $dep = implode(",", $this->input->post("department"));
         $kar = implode(",", $this->input->post("karyawan"));
-        $fl = implode(",", $this->input->post("file"));
+        $fl = implode(",", $this->input->post("files"));
         // $ex = explode("[","]", $ll);
         // var_dump($ll);
 
@@ -412,9 +420,8 @@ public function index() {
                 'not_in_project'    => $this->input->post("not_in"),
                 'start_date'        => $this->input->post("tanggal_start"),
                 'due_date'          => $this->input->post("tanggal_due"),
-
+                
             );
-
 
             if ($this->m_initiation->insert_initiation($params)) {
                 $this->m_initiation->tambah($fl);
@@ -483,6 +490,15 @@ public function index() {
         }
         // default redirect
         redirect("initiation/initiation/edit_komen/".$this->input->post('id_initiation', TRUE));
+    }
+
+
+    function pdf_view(){
+    $this->_set_page_rule("U");
+      // set template content
+    $this->smarty->assign("template_content", "tambahan/pdf.html");
+
+    parent::display();
     }
 
 
