@@ -29,8 +29,8 @@
                     <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
                       {foreach $join as $jn}
                         <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}" id="id_initiation">
-                        
-                            <div class="box-body">
+                            <div class="box-header with-border">
+
                                 <div class="col-md-6">
 
                                     <div class="form-group">
@@ -121,87 +121,98 @@
                                     </div>
 
                                 </div>
+                </form>
 
-                            <center>
-                                <div class="col-md-6">
+                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post">
+                            <div class="col-md-6">
+                                <div class="box-header with-border">
 
+                                    <label for="files[]">Files</label>
+                                    <div style="overflow-y: scroll; height: 200px;">
                                     <div class="form-group">
-                                        <label for="files[]">Files</label>
-                                            <a href="{$config->site_url('initiation/initiation/pdf_view')}" target="_blank">
-                                                <table>
-                                                    <tr>
-                                                        <td><img alt="file" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>apabae</td>
-                                                    </tr>
-                                                </table>
-                                            </a> 
+                                        <center>
+                                                {foreach $ef as $f}
+                                                        <table>
+                                                                <div class="form-group"><input type="image" name="submit" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px"></div>
+                                                                <div class="form-group">
+                                                                {$f}
+                                                                </div>
+                                                        </table>
+                                                    </a> 
+                                                {/foreach}
+                                        </center>
                                     </div>
+                                    </div>
+                        </form>
+                                    
 
+                                    <center>
+                                        <br>
                                     <div class="form-group">
                                         <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
-                                            <button type="submit" name="accept" class="btn btn-success">Accept</button>&nbsp;&nbsp;
-                                    </div>
+                                            <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
 
                                     <div class="form-group" action="{$config->site_url('closing/closing/closing_process')}" method="post">
                                         <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
-                                            <button type="submit" class="btn btn-danger">Reject</button>
-                                    </div>
+                                            <button type="submit" class="btn btn-danger">Reject</button></div>
+                                            <br>
+                                            <br>
+                                    </center>
+                            
 
-                                </div>
-                            </center>
+                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
+                                    <div class="form-group">
+                                            <table>
+                                                <div style="overflow-y: scroll; height: 200px">
+                                                    Komentar :
+                                                    {foreach $komen as $km}
+                                                        <br>
+                                                        <b><textarea disabled class="form-control">
+                                                            {$km.komentar}</textarea></b>
+                                                <div align="right">
+                                                    Dikomentari pada : 
+                                                        <br>
+                                                            {$km.tgl_komentar}
+                                                        <br>
+                                                    {/foreach}
+                                                </div>
+                                                </div>
+                                            </table>
+                                                <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
+                                                <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
+                                                    <br>
 
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
+                                                                    <br>
+                                                                <div align="right">
+                                                                    <button type="submit" name="submit" class="btn btn-info">Comment</button></div>
+                                                        </div>
+                                                    </div>
+                                   </div>
+                                        {/foreach}
                     </form>
 
 
-                <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
-                        <center>
-                        <div class="form-group">
-                            <div class="col-md-6">
-                                <table>
-                                <div style="overflow-y: scroll; height: 200px">
-                                    Komentar :
-                                    {foreach $komen as $km}
-                                        <br>
-                                        <b><textarea disabled class="form-control">
-                                            {$km.komentar}</textarea></b>
-                                <div align="right">
-                                    Dikomentari pada : 
-                                        <br>
-                                            {$km.tgl_komentar}
-                                        <br>
-                                    {/foreach}
-                                </div>
-                                </div>
-                                </table>
-                                   <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
-                                    <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
-                                        <br>
+                               </div>
+                               <!-- /.box-header --> 
+                            </div>
+                            <!-- /,col -->
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                        <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
-                                            <br>
-                                <div align="right">
-                                    <button type="submit" name="submit" class="btn btn-info">Comment</button>
-                                </div>
-                            </div>
-                            </div>
                         </div>
-                       </div>
-                     {/foreach}
-                 </center>
-                </form>
-                        <!-- /.box-footer -->
-                </div>
+                        <!-- /,box-header -->
+
+                </div> 
                 <!-- /.box-body -->
 
                 <div class="box-footer clearfix">
                     {$pagination.data|default:''}
                 </div>
+
             </div>
             <!-- /.box -->
+
         </div>
         <!-- /.col -->
     </div>
