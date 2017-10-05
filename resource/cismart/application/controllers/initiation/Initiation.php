@@ -91,6 +91,12 @@ public function index() {
         $this->smarty->assign("exs", explode(",", $kk['id_karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
+        
+        $vfls = $this->m_initiation->get_file($where);
+        foreach ($vfls as $f) {
+           $this->smarty->assign("ef",  explode(",", $f['file']));
+        }
+
 
 
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
