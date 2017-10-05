@@ -62,8 +62,8 @@
                                 <td align="middle">{$result.client_name}</td>
                                 <td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
                                 <td align="middle">
-                                    <input type="text" value="{$result.start_date|default:''}" id="x_Begin_Date">
-                                    <input type="text" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                                  
+                                    <input type="hidden" value="{$result.start_date|default:''}" id="x_Begin_Date">
+                                    <input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                                  
                                     <P id="dd"></P>
                                       </div>
                                         <script type="text/javascript">
