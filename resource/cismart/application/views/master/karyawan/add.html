@@ -30,25 +30,25 @@
                             <div class="form-group">
                                 <label for="username" class="col-sm-2 control-label">Username</label>
                                 <div class="col-sm-4">
-                                    <input type="text" size="10" maxlength="40" name="username" value="{$result.username|default:''}" class="form-control" id="username" placeholder="" required title="Masukkan Username">
+                                    <input type="text" size="10" maxlength="40" name="username" value="{$result.username|default:''}" class="form-control" id="username" placeholder="-- Nama User --" required title="Masukkan Username">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-2">
-                                    <input type="password" size="10" maxlength="40" name="password" value="{$result.password|default:''}" class="form-control" id="password" placeholder="" required title="Masukkan Kata Sandi/Password">
+                                    <input type="password" size="10" maxlength="40" name="password" value="{$result.password|default:''}" class="form-control" id="password" placeholder="-- Password --" required title="Masukkan Kata Sandi/Password">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nik" class="col-sm-2 control-label">NIK</label>
                                 <div class="col-sm-2">
-                                    <input type="text" name="nik" size="10" maxlength="40" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="" title="Masukkan Nomer Induk Karyawan">
+                                    <input type="text" name="nik" size="10" maxlength="40" value="{$result.nik|default:''}" class="form-control" id="nik" placeholder="-- NIK --" title="Masukkan Nomer Induk Karyawan">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_karyawan" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-4">
-                                    <input type="text" size="10" maxlength="40" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="" title="Masukkan Nama" required>
+                                    <input type="text" size="10" maxlength="40" name="nama_karyawan" value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="-- Nama --" title="Masukkan Nama" required>
                                 </div>
                             </div>
                             
@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label for="tempat_lahir" class="col-sm-2 control-label">Place, Date of Birth</label>
                                 <div class="col-sm-2">
-                                    <input type="text" size="10" maxlength="40" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="" title="Masukkan Tempat & Tanggal Lahir" required>
+                                    <input type="text" size="10" maxlength="40" name="tempat_lahir" value="{$result.tempat_lahir|default:''}" class="form-control" id="tempat_lahir" placeholder="- dd/mm/yyyy -" title="Masukkan Tempat & Tanggal Lahir" required>
                                 </div>
                                 <div class="col-sm-2">
 
@@ -76,14 +76,14 @@
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-4">
-                                    <input type="email" size="10" maxlength="40" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="" title="Masukkan Email" required>
+                                    <input type="email" size="10" maxlength="40" name="email" value="{$result.email|default:''}" class="form-control" id="email" placeholder="-- Email --" title="Masukkan Email" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="telepon" class="col-sm-2 control-label">Contact Number</label>
                                 <label class="col-sm-1 control-label">+62-8</label>
                                 <div class="col-sm-2">
-                                    <input type="text" size="10" maxlength="40" id="telepon" name="telepon" placeholder="" title="Masukkan Nomer Telepon" required  onchange="myFunction()">
+                                    <input type="text" size="10" maxlength="40" id="telepon" name="telepon" placeholder="- Telepon -" title="Masukkan Nomer Telepon" required  onchange="myFunction()">
 
                                     <script>
                                             function myFunction() {
