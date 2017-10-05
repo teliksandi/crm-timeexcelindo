@@ -34,15 +34,15 @@
 
 						<div class="form-group">
 							<label>Project Title</label>
-								<input type="text" name="judul_project" placeholder="" title="Masukkan Judul Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+								<input type="text" name="judul_project" placeholder="-- Judul Project --" title="Masukkan Judul Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
 						</div>
 						
 						<div class="form-group">
 			<label>Project Manager Department</label>
 			<br>
-			<select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project">
+			<select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project" placeholder="-- Manager Department Project --">
 	    			{foreach $datadepartment as $cth}
-	    		<option value={$cth.id_department}>{$cth.nama_department}</option>
+	    		<option value={$cth.id_department} placeholder="-- Manager Department Project --">{$cth.nama_department}</option>
 	   				{foreachelse}
 	   				Data tidak ditemukan !
 	   				{/foreach}
@@ -52,9 +52,9 @@
 		<div class="form-group">
 			<label>Team Member Name</label>
 			<br>
-			<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
+			<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple" placeholder="-- Nama Anggota Tim --">
 			{foreach $marketing_kar as $value}
-				<option value="{$value.id_karyawan}">{$value.nama_karyawan}</option>
+				<option value="{$value.id_karyawan}" placeholder="-- Nama Anggota Tim --">{$value.nama_karyawan}</option>
 			{foreachelse}
 			Data tidak ditemukan !
 			{/foreach}
@@ -63,6 +63,7 @@
 
 						<div class="form-group">
 								<label>Client</label>
+
 								<br>
 								<select name="client" class="select2_multiple form-control tags" min="0" max="40" required>
 			                                       <option value="" >- Select Client -</option>
@@ -72,12 +73,13 @@
 									           				Data tidak ditemukan !
 									           				{/foreach}
 			                    </select>
+
 						</div>
 
 						<div class="form-group">
 							<script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 								<label>Project Description</label>
-									<textarea name="deskripsi" title="Masukkan Deskripsi tentang Project" rows="3" cols="35" class="ckeditor" id="ckedtor" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+									<textarea name="deskripsi" title="Masukkan Deskripsi tentang Project" rows="3" cols="35" class="ckeditor" id="ckedtor" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" placeholder="-- Deskripsi Project --">
 									</textarea>
 						</div>
 
@@ -88,7 +90,7 @@
 						<div class="form-group">
 							<script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 								<label>Project Justification</label> 
-									<textarea height="300" name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+									<textarea height="300" name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" placeholder="-- Justifikasi Project --">
 									</textarea>
 						</div>
 
@@ -100,7 +102,7 @@
 						<div class="form-group">
 							<script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 								<label>Not in this Project</label> 
-									<textarea name="not_in" rows="3" cols="35" class="ckeditor" id="ckedtor3" title="Masukkan Data yang tidak ada pada Project" placeholder="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+									<textarea name="not_in" rows="3" cols="35" class="ckeditor" id="ckedtor3" title="Masukkan Data yang tidak ada pada Project" placeholder="-- Data yang tidak ada dalam Project" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
 									</textarea>
 						</div>
 
@@ -137,10 +139,10 @@
 								</tr>
 								<tr>
 									<td align="center">
-										<input type="text" name="tanggal_start" class="tanggal" maxlength="10" size="10">
+										<input type="text" name="tanggal_start" class="tanggal" maxlength="10" size="10" placeholder="- dd/mm/yyyy -">
 									</td>
 									<td align="center">
-										<input type="text" name="tanggal_due" class="tanggal" maxlength="10" size="10">
+										<input type="text" name="tanggal_due" class="tanggal" maxlength="10" size="10" placeholder="- dd/mm/yyyy -">
 									</td>
 									<td align="center">
 									(File Berbentuk png, jpg, jpeg, docx, pdf, xlsx, ppt , rar, zip.)<br>
