@@ -17,6 +17,19 @@ class Initiation extends ApplicationBase {
         $this->load->library('tnotification');
         $this->load->library('datetimemanipulation');
         $this->load->library('pagination');
+
+
+        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
+
+        // load Javascript
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
+        $this->smarty->load_javascript("resource/custom/js/custom.js");
     }
 
 
@@ -97,75 +110,6 @@ public function index() {
            $this->smarty->assign("ef",  explode(",", $f['file']));
         }
 
-
-
-        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
-
-        // load Javascript
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
-        $this->smarty->load_javascript("resource/custom/js/custom.js");
-       
-        //======================================================
-        // $emp = "";
-        // $dp = $this->m_initiation->list_department_where($where);
-        // foreach ($dp as $k) {
-        //     $emp = $k['id_department']; 
-        // }
-        
-        // $ex = explode(",", $emp);
-        // for ($x = 0; $x <= count($ex); $x++) {
-        //     $nm_dp = $this->m_initiation->ini_department_where($ex);
-        //      var_dump($nm_dp);
-        // }
-       
-        // exit();
-            // $this->smarty->assign("dp", $ex);
-            
-       
-
-        // foreach ($dk as $d) {
-        //  var_dump($d['nama_department']);
-        // }
-
-
-            // $dk = $this->m_initiation->ini_department_where();
-            // foreach ($dk as $d) {
-            //     // var_dump($d['nama_department']);
-            // }
-
-        //     $ddk = $this->m_initiation->ini_department_where(echo $ddp[1]);
-        //     foreach ($dk as $d) {
-        //         // var_dump($d['nama_department']);
-        //     }
-        // $this->smarty->assign("dp", $dp);
-
-
-
-        // $kr = $this->m_initiation->get_id_karyawan($where);
-        // foreach ($kr as $k) {
-        //     $k['id_karyawan'];
-
-        //     $ddp = explode(",", $k['id_karyawan']);
-        //      // print_r($ddp); 
-        // }
-
-        // $kk = $this->m_initiation->initiation_detail($where);
-        // foreach ($kk as $k) {
-        //     $fls = explode(",", $k['file']);
-        //      // print_r($fls); 
-        // }
-        //  $this->smarty->assign("fls", $fls);
-
-        // $ex = explode(",", $k);
-        // print_r($ex);
-
-        //=======================================================
         $this->smarty->assign("let", $this->m_initiation->list_department_where($where));
        
         $this->tnotification->display_notification();
@@ -243,19 +187,7 @@ public function index() {
 
         $this->smarty->assign("template_content", "initiation/add_initiation.html");
 
-        // Load Style
-        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
-
-        // load Javascript
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
-        $this->smarty->load_javascript("resource/custom/js/custom.js");
-
+        
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -541,19 +473,9 @@ public function index() {
         $this->smarty->assign("ex", explode(",", $kk['id_department']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
         $this->smarty->assign("exs", explode(",", $kk['id_karyawan']));
-        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());             
+        $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
 
-        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
-
-        // load Javascript
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
-        $this->smarty->load_javascript("resource/custom/js/custom.js");
 
         // notification
         $this->tnotification->display_notification();
