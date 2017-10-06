@@ -15,7 +15,6 @@
     <!-- end of notification template-->
     <div class="row">
         <div class="col-md-12">
-
             <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">Data Client</h3>
@@ -26,64 +25,62 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form class="form-horizontal" action="{$config->site_url('master/client/add_process')}" method="post" name="kk">
-                <div class="box-header with-border">
-     <div class="col-md-6">
-        <tr>
-            <label>Client Name</label>
-            <input type="text" name="client_name" size="10" maxlength="40" placeholder="" class="form-control" title="Masukkan Nama Client" required>
-        </tr>
-        <tr>
-            <label>Client Address</label>
-            <textarea name="client_address" size="10" maxlength="40" placeholder="" class="form-control" title="Masukkan Alamat Client" required></textarea>
-        </tr>
-        <tr>
-            <label>Person Name</label>
-            <input type="text" name="person_name" size="10" maxlength="40" placeholder="" class="form-control" title="Masukkan Nama Personal" required>
-        </tr>
-        <tr>
-            <label>Job Position</label>
-            <input type="text" name="job_position" size="10" maxlength="40" placeholder="" class="form-control" title="Masukkan Posisi Pekerjaan" required>
-        </tr>
-        <br>
-                <tr>
-            <label>No. Telp</label>&nbsp;&nbsp;
-            <br>
-            <b>+62-8</b>&nbsp;
-            <input type="number" id="telepon" size="10" maxlength="40" name="telepon" placeholder="" title="Masukkan Nomor Telepon" required  onchange="myFunction()">
-                <script>
-    function myFunction() {
-    var x = '+628';
-    var y = document.getElementById("telepon").value;
-    var hasil = x + y;
-        document.kk.hsl_telp.value = hasil;
-}
-</script>
-<input type="hidden" name="hsl_telp" id="hsl_telp">
-        </tr>
-        <br>
-        <br>
-        <tr>
-            <label>Email</label> 
-            <input type="email" name="email" size="10" maxlength="40" placeholder="" class="form-control" title="Masukkan Email">
-        </tr>
-     </div>
-    </div>
-                        <!-- /.box-footer -->
-<div class="box-header with-border">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-success">Simpan</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
-    </div>
+                        <div class="box-header with-border">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Client Name</label>
+                                    <input type="text" name="client_name" size="10" maxlength="40" placeholder="-- Nama Client --" class="form-control" title="Masukkan Nama Client" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Client Address</label>
+                                    <textarea name="client_address" size="10" maxlength="40" placeholder="-- Alamat Client --" class="form-control" title="Masukkan Alamat Client" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Person Name</label>
+                                    <input type="text" name="person_name" size="10" maxlength="40" placeholder="-- Nama Person/Orang --" class="form-control" title="Masukkan Nama Personal" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Job Position</label>
+                                    <input type="text" name="job_position" size="10" maxlength="40" placeholder="-- Posisi Pekerjaan --" class="form-control" title="Masukkan Posisi Pekerjaan" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>No. Telp</label>&nbsp;&nbsp;
+                                    <br>
+                                    <b>+62-8</b>&nbsp;
+                                    <input type="number" id="telepon" size="10" maxlength="40" name="telepon" placeholder="-- No.Telp --" title="Masukkan Nomor Telepon" required  onchange="myFunction()">
+                                                
+                                                <script>
+                                                    function myFunction() {
+                                                    var x = '+628';
+                                                    var y = document.getElementById("telepon").value;
+                                                    var hasil = x + y;
+                                                        document.kk.hsl_telp.value = hasil;
+                                                    }
+                                                </script>
+
+                                    <input type="hidden" name="hsl_telp" id="hsl_telp">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label> 
+                                    <input type="email" name="email" size="10" maxlength="40" placeholder="-- Email --" class="form-control" title="Masukkan Email">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                            <div class="box-header with-border">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-success">Simpan</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
+                            </div>
 
                     </form>
                 </div>
-                 
                 <!-- /.box-body -->
-                <div class="box-footer clearfix">
-                    {$pagination.data|default:''}
-                </div>
+                    <div class="box-footer clearfix">
+                        {$pagination.data|default:''}
+                    </div>
             </div>
-            <!-- /.box -->
+            <!-- /.box-success -->
         </div>
         <!-- /.col -->
     </div>
