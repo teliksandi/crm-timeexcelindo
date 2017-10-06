@@ -488,11 +488,15 @@ public function index() {
         // set page rules
         $this->_set_page_rule("U");
 
+
+        $dep = implode(",", $this->input->post("department"));
+        $kar = implode(",", $this->input->post("karyawan"));
+        $fl = implode(",", $this->input->post("files"));
         // cek input
         $this->tnotification->set_rules('id_initiation', 'Nomor Identitas Initiation', 'trim|required');
-        $this->tnotification->set_rules('project_title', 'Nama Project', 'trim|required');
+        $this->tnotification->set_rules('judul_project', 'Nama Project', 'trim|required');
 
-        if($this->tnotification->run() !== FALSE){
+                if($this->tnotification->run() !== FALSE){
             $params = array(
                 'project_title'     => $this->input->post("judul_project"),
                 'id_karyawan'       => $kar,
@@ -504,14 +508,13 @@ public function index() {
                 'not_in_project'    => $this->input->post("not_in"),
                 'start_date'        => $this->input->post("tanggal_start"),
                 'due_date'          => $this->input->post("tanggal_due"),
-                'file'              => $fl
                 
             );
             $where = array(
                 'id_initiation' => $this->input->post('id_initiation', TRUE),
             );
 
-            if ($this->m_initiation->update_initiation($params)) {
+            if ($this->m_initiation->update_initiation($params,$where)) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
