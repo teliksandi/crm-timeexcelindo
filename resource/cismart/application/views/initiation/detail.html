@@ -126,41 +126,47 @@
                         <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
                             <div class="col-md-6">
                                 <div class="box-header with-border">
-
+                                    <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
                                     <label for="files[]">Files</label>
                                     <div style="overflow-y: scroll; height: 200px;">
                                     <div class="form-group">
                                         <center>
                                                 {foreach $ef as $f}
                                                         <table>
+
+                                                            <input type="hidden" name="id_i" value="{$f}">
                                                                 <div class="form-group">
+                                                                    <a href="{$f}">{$f}</a>
                                                                     <input type="image" name="submit" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px">
                                                                 </div>
                                                                 <div class="form-group">
                                                                 {$f}
                                                                 </div>
                                                         </table>
-                                                    </a> 
                                                 {/foreach}
                                         </center>
                                     </div>
                                     </div>
                         </form>
-                                    
-
+                        
+                        <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
                                     <center>
                                         <br>
                                     <div class="form-group">
                                         <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
                                             <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
+                                    </center>
 
-                                    <div class="form-group" action="{$config->site_url('closing/closing/closing_process')}" method="post">
+                        </form>
+                        <form class="form-horizontal" action="{$config->site_url('closing/closing/closing_process')}" method="post">
+                                    <center>
+                                    <div class="form-group">
                                         <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
                                             <button type="submit" class="btn btn-danger">Reject</button></div>
                                             <br>
                                             <br>
                                     </center>
-                            
+                        </form>
 
                     <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
                                     <div class="form-group">

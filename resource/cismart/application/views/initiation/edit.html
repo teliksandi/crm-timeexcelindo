@@ -91,28 +91,19 @@
                                                   {/foreach}
                                                 </select>
                                         </div>
-
-                                            <label>Client</label>
-                                            <br>
-
-                    <select name="client" class="select2_multiple form-control tags" min="0" max="40" required>
-                                       <option value="" >- Select Client -</option>
-                                                {foreach $dataclient as $cth}
-
-                                                <option value="{$result.id_client|default:''}" {if $result.id_client == $cth.id_client} selected {/if}>{$cth.client_name}</option>
-
-                                                {foreachelse}
-                                                Data tidak ditemukan !
-                                                {/foreach}
-                                    </select>
-
                                         <div class="form-group">
-                                                    <input name="client" title="Pilih Client" value ="{$result.id_client|default:''}"  list="list_client" class="form-control">
-                                                        <datalist id = "list_client">
-                                                            {foreach $dataclient as $cth}
-                                                            <option label="{$cth.client_name}" value="{$cth.id_client}">
-                                                            {/foreach}
-                                                        </datalist>
+                                            <label>Client</label>
+                                                <br>
+                                                <select name="client" class="form-control select2" min="0" max="40" multiple>
+                                                                  
+                                                                            {foreach $clientedit as $cath}
+
+                                                                            <option value="{$result.id_client|default:''}" {if $result.id_client == $cath.id_client} selected {/if}>{$cath.client_name}</option>
+
+                                                                            {foreachelse}
+                                                                            Data tidak ditemukan !
+                                                                            {/foreach}
+                                                                </select>
                                         </div>
 
                                         <div class="form-group">
