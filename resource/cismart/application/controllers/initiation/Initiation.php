@@ -529,34 +529,4 @@ public function index() {
         redirect("initiation/initiation/edit/".$this->input->post('id_initiation', TRUE));
     }
 
-    function get_list_department2(){
-       $sql = "SELECT * FROM department";
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            header('Content-Type: application/json');
-            echo json_encode($result);
-        } else {
-            return array();
-        }
-    }
-
-    // JSON GET DATA
-    function get_market_karyawan2($id) {
-
-        $sql = "SELECT * FROM karyawan WHERE id_department in ($id)";
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            // $query->free_result();
-            // return $result;
-            
-            header('Content-Type: application/json');
-            echo json_encode($result);
-        } else {
-            return array();
-        }
-    }
-   
-
 }

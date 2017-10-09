@@ -205,6 +205,11 @@ class m_initiation extends CI_Model{
     }
 
 
+    function getComment($id_initiation) {
+        $sql = "SELECT tgl_komentar from komentar KM1 INNER JOIN( SELECT max(id_komentar)as id_kom from komentar where id_initiation =" . $id_initiation . " ) KM2 on KM2.id_kom=KM1.id_komentar ";
+        return $query = $this->db->query($sql)->result_array();
+    }
+   
     function tambah($params) {
 
         $data = array (

@@ -67,7 +67,7 @@ $autoload['libraries'] = array('database', 'tsession', 'smarty', 'email', 'datet
   |	$autoload['helper'] = array('url', 'file');
  */
 
-$autoload['helper'] = array('file', 'url', 'form', 'html');
+$autoload['helper'] = array('file', 'url', 'form', 'html', 'getdatecomment');
 
 
 /*
