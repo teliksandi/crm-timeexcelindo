@@ -107,25 +107,29 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label>Budget</label><br><b>Rp.</b>
+                                                <input type="text" name="money" value ="{number_format($result.budget|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
+                                        </div>
+                                        
+                                  </div>
+
+                                  <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <div style="overflow: width: 500px; height: 400px;">
+
+                                        <div class="form-group">
                                             <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
                                                 <label>Project Description</label>
                                                     <textarea name="deskripsi" title="Masukkan Deskripsi tentang Project" rows="3" cols="35" class="ckeditor" id="ckedtor" placeholder="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">{$result.project_desc|default:''}
                                                     </textarea>
                                         </div>
-                                  </div>
-
-                                  <div class="col-md-6">
 
                                         <div class="form-group">
                                             <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
                                                 <label>Project Justification</label> 
                                                     <textarea name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">{$result.project_just|default:''}
                                                     </textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Budget</label><br><b>Rp.</b>
-                                                <input type="text" name="money" value ="{number_format($result.budget|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
                                         </div>
                                     
                                         <div class="form-group">
@@ -134,6 +138,9 @@
                                                     <textarea name="not_in" rows="3" cols="35" class="ckeditor" id="ckedtor3" title="Masukkan Data yang tidak ada pada Project" placeholder="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">{$result.not_in_project|default:''}
                                                     </textarea>
                                         </div>
+
+                                        </div>
+                                    </div>
 
                                   </div>
                                 </div>
