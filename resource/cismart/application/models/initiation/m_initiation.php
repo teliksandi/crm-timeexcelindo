@@ -193,7 +193,8 @@ class m_initiation extends CI_Model{
                 From initiation left join closing on initiation.id_initiation = closing.id_initiation 
                 left join planning on initiation.id_initiation = planning.id_initiation 
                 left join client on initiation.id_client = client.id_client
-                where closing.id_initiation is NULL and planning.id_initiation is NULL";
+                where closing.id_initiation is NULL and planning.id_initiation is NULL
+                ORDER BY initiation.id_initiation DESC";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
