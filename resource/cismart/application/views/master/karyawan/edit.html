@@ -1,34 +1,3 @@
-<script type="text/javascript">
-    $(document).ready(function () {
-        // date picker
-        $(".tanggal").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            buttonImageOnly: true,
-            yearRange: '1970:2000',
-            dateFormat: 'yy-mm-dd'
-        });
-        // change person
-        $('#status-person').change(function () {
-            var x = $('#status-person').val();
-            if (x === 'karyawan') {
-                $('.karyawan').show(500);
-            } else {
-                $('.karyawan').hide(500);
-            }
-
-        });
-        // hak akses
-        $('#log_in').change(function () {
-            var y = $("input[name=akses]:checked").val();
-            if (y === 'y') {
-                $('.log_in').show(500);
-            } else {
-                $('.log_in').hide(500);
-            }
-        });
-    });
-</script>
 <section class="content-header">
     <h1>
         Pengolahan Data Karyawan

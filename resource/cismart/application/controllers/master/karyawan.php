@@ -208,7 +208,6 @@ class karyawan extends ApplicationBase{
                 'username'          => $this->input->post('username'),
                 'password'          => md5($this->input->post('password')),
                 'nik'               => $this->input->post('nik'),
-                'nama_alias'        => $this->input->post('nama_alias'),
                 'jenis_kelamin'     => $this->input->post('jenis_kelamin'),
                 'tempat_lahir'      => $this->input->post('tempat_lahir'),
                 'tgl_lahir'         => $this->input->post('tgl_lahir'),

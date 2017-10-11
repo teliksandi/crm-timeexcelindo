@@ -347,20 +347,6 @@ public function index() {
         $this->_set_page_rule("C");
 
         $this->tnotification->set_rules('judul_project', 'Data Initiation', 'trim|required');
-
-
-     //  $split = explode('|', $this->input->post('Client'));
-     //  $getid_client = $split[0];
-        
-        // $client = $this->m_client->get_id_client_name($this->input->post("client"));
-
-        // var_dump($this->m_client->get_id_client_name($this->input->post("client")));
-
-        // $cl =$this->input->post("client");
-        // $ll = $this->m_client->get_id_client_name($cl);
-        // // $dl = implode(",",$ll);
-        // echo $ll.id_client;
-        // exit();
         $dep = implode(",", $this->input->post("department"));
         $kar = implode(",", $this->input->post("karyawan"));
         $fl = implode(",", $this->input->post("files"));

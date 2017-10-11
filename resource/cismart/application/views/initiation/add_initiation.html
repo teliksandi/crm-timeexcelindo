@@ -37,7 +37,7 @@
 								<input type="text" name="judul_project" placeholder="-- Judul Project --" title="Masukkan Judul Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
 						</div>
 						
-						<div class="form-group">
+				<div class="form-group">
 			<label>Project Manager Department</label>
 			<br>
 			<select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project" placeholder="-- Manager Department Project --">
@@ -61,20 +61,17 @@
 			</select>
 		</div>
 
-						<div class="form-group">
-								<label>Client</label>
-
-								<br>
-								<select name="client" class="select2_multiple form-control tags" min="0" max="40" required>
-			                                       <option value="" >- Select Client -</option>
-			                                                {foreach $dataclient as $cth}
-															<option value={$cth.id_client}>{$cth.client_name}</option>
-									           				{foreachelse}
-									           				Data tidak ditemukan !
-									           				{/foreach}
-			                    </select>
-
-						</div>
+		<div class="form-group">
+			<label>Client</label>
+			<br>
+			<select name="client" class="form-control select2" min="0" max="40" multiple>
+                                        {foreach $dataclient as $cth}
+										<option value={$cth.id_client}>{$cth.client_name}</option>
+				           				{foreachelse}
+				           				Data tidak ditemukan !
+				           				{/foreach}
+                            </select>							
+		</div>
 
 						<div class="form-group">
 							<label>Budget</label><br><b>Rp.</b>
@@ -85,8 +82,8 @@
 
 				<div class="col-md-6">
 
-					<div class="form-group">
-						<div style="overflow: width: 500px; height: 400px;">
+					<!-- <div class="form-group">
+						<div style="overflow: width: 500px; height: 400px;"> -->
 
 						<div class="form-group">
 							<script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
@@ -109,8 +106,8 @@
 									</textarea>
 						</div>
 
-						</div>
-					</div>
+						<!-- </div>
+					</div> -->
 
 				</div>
 			</div>
@@ -145,7 +142,7 @@
 								</tr>
 								<tr>
 									<td align="center">
-										<input type="text" name="tanggal_start" class="tanggal" maxlength="10" size="10" placeholder="- dd/mm/yyyy -">
+										<input type="text" name="tanggal_start" class="tanggal" id="mydate" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="">
 									</td>
 									<td align="center">
 										<input type="text" name="tanggal_due" class="tanggal" maxlength="10" size="10" placeholder="- dd/mm/yyyy -">
@@ -219,60 +216,7 @@
 			 });
 		 	
 		</script>
-
-		<script>
-
-			/**/
-			// multi values, with last selected
-			var old_values = [];
-			var test = $("#test");
-			test.on("select2:select", function(event) {
-			  var values = [];
-			  // copy all option values from selected
-			  $(event.currentTarget).find("option:selected").each(function(i, selected){ 
-			    values[i] = $(selected).text();
-			  });
-			  // doing a diff of old_values gives the new values selected
-			  var last = $(values).not(old_values).get();
-			  // update old_values for future use
-			  old_values = values;
-			  // output values (all current values selected)
-			  console.log("selected values: ", values);
-			  // output last added value
-			  console.l
-
-			$(document).ready(function() {
-				$.getJSON(window.location.origin+"/crm/index.php/initiation/initiation/get_list_department2", function( data ) {
-
-				  $.each(data, function(key, val) {
-				    $(".departmentsC").append("<option value="+val.id_department+">"+val.nama_department+"</option>");		
-				  });  
-				});
-
-				$("#departments").select2();
-
-				$(".departmentsC").on('change', function() {
-			        var valPrm = $(this).val();
-			        console.log(valPrm);
-			        if(valPrm) {
-				    	$.ajax({
-				            url: window.location.origin+"/crm/index.php/initiation/initiation/get_market_karyawan2/"+valPrm,
-				            type: "GET",
-				            dataType: "json",
-				            success:function(data) {
-				                $('.karyawansC').empty();
-				                $.each(data, function(key, value) {
-				                    $('.karyawansC').append('<option value="'+ value.id_karyawan +'">'+ value.nama_karyawan +'</option>');
-				                });
-				            }
-				    	});
-			        } else {
-			    		$('.karyawansC').empty();
-			        }
-			    });
-			    $("#karyawans").select2();
-
-			});
-
+		<script type="text/javascript">
+			$("#mydate").datepicker().datepicker("setDate", new Date());
 		</script>
 </section>
