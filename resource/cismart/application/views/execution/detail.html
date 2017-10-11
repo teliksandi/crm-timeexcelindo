@@ -1,11 +1,11 @@
-<section class="content-header"> 
+<section class="content-header">
     <h1>
-        Pengolahan Data Initiation
+        Pengolahan Data Execution
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-book"></i> Initiation</a></li>
-        <li><a href="#">Data Initiation</a></li>
-        <li class="active">Detail Data Initiation</li>
+        <li><a href="#"><i class="fa fa-archive"></i> Execution</a></li>
+        <li><a href="#">Data Execution</a></li>
+        <li class="active">Detail Data Execution</li>
     </ol>
 </section>
 
@@ -19,14 +19,14 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Form detail initiation</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-primary" href="{$config->site_url('initiation/initiation')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                        <a class="btn btn-sm btn-primary" href="{$config->site_url('execution/execution')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
 
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
+                    <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
                       {foreach $join as $jn}
                         <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}" id="id_initiation">
                             <div class="box-header with-border">
@@ -153,6 +153,25 @@
                                     </div>
                                     </div>
                         </form>
+                        
+                        <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
+                                    <center>
+                                        <br>
+                                    <div class="form-group">
+                                        <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
+                                            <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
+                                    </center>
+
+                        </form>
+                        <form class="form-horizontal" action="{$config->site_url('closing/closing/closing_process')}" method="post">
+                                    <center>
+                                    <div class="form-group">
+                                        <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
+                                            <button type="submit" class="btn btn-danger">Reject</button></div>
+                                            <br>
+                                            <br>
+                                    </center>
+                        </form>
 
                     <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
                                     <div class="form-group">
@@ -179,33 +198,14 @@
                                                     <div class="form-group">
                                                         <div class="col-md-12">
                                                             <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
-                                                            <br>
-                                                            <center>
-                                                                <button type="submit" name="submit" class="btn btn-info">Comment</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <table>
-                                                                        <tr>
-                                                                            <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
-                                                                            </form>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <form class="" action="{$config->site_url('closing/closing/closing_process')}" method="post">
-                                                                                <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
-                                                                                    <button type="submit" class="btn btn-danger">Reject</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                            </form>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <form class="" action="{$config->site_url('planning/planning/planning_process')}" method="post">
-                                                                                <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
-                                                                                    <button type="submit" name="accept" class="btn btn-success">Accept</button>
-                                                                            </form>
-                                                                        </tr>
-                                                                    </table>
-                                                            </center>   
+                                                                    <br>
+                                                                <div align="right">
+                                                                    <button type="submit" name="submit" class="btn btn-info">Comment</button></div>
                                                         </div>
                                                     </div>
                                    </div>
-                                    {/foreach}
-                        </form>
+                                        {/foreach}
+                    </form>
 
 
                                </div>

@@ -2,7 +2,88 @@
     <h1>
         Pengolahan Data Eksekusi
     </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-archive"></i> Execution</a></li>
+        <li class="active">Data Execution</li>
+    </ol>
 </section>
-<section class="content">
+<!-- notification template -->
+{include file="base/templates/notification.html"}
+<!-- end of notification template-->
 
+<section class="content">
+	<div class="row">
+	        <div class="col-md-12">
+	            <div class="box box-success">
+	                <div class="box-header with-border">
+	                    <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
+	                </div>
+	                <div class="box-body">
+	                    <form class="form-horizontal" action="{$config->site_url('planning/planning/search_process')}" method="post">
+	                        <div class="box-body">
+	                            <div class="form-group">
+	                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
+	                                <div class="col-sm-4">
+	                                    <input type="text" title="Masukkan Nama Project" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
+	                                </div>
+	                                <div class="col-sm-4">
+	                                    <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
+	                                    <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </form>
+	                </div>
+	            </div>
+	            <div class="box">
+	               	<div class="box-body">
+		                <table class="table table-striped">
+		                    <tbody>
+		                        <tr>
+		                            <td width="5%" align="middle"><b>No</b></td>
+                                	<td width="25%" align="middle"><b>Project Title</b></td>
+                                	<td width="18%" align="middle"><b>Client Nama</b></td>
+                               		<td width="13%" align="middle"><b>Due Date</b></td>
+                                	<td width="13%" align="middle"><b>Status</b></td>
+                                	<td width="18%" align="middle"><b>Last History</b></td>
+                                	<td width="15%" align="middle"><b>Action</b></td>
+		                        </tr>
+		                        	{foreach $planning_project as $result}
+		                        <tr>
+		                        	<td align="middle">{$no++}</td>
+                                	<td align="middle">{$result.project_title}</td>
+                                	<td align="middle">{$result.client_name}</td>
+                                	<td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
+                                	<td align="middle">                                    
+                                    	<input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                             
+                                        	<P id="dd"></P>
+		                                        {$dueDate = date('Y-m-d', strtotime($result.due_date|default:''))}
+		                                        {$dateNow = date('Y-m-d')}                                       
+		                                        {if $dueDate|strtotime < $dateNow|strtotime}
+		                                            <font color="red">Deadline</font> 
+		                                        {elseif $dueDate|strtotime == $dateNow|strtotime}
+		                                            <font color="red">Deadline</font> 
+		                                        {else}
+		                                            <font color="#33cc33">Aktif</font> 
+		                                        {/if}
+                                    </td>
+                                    <td align="middle">{getComment($result.id_inisiasi)}</td>
+		                            <td align="middle">
+		                                <a href="{$config->site_url('planning/planning/edit')}/{$result.id_planning}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
+		                                <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+		                            </td>
+		                        </tr>
+		                        {foreachelse}
+		                        <tr>
+		                            <td colspan="4">
+		                                Data tidak ditemukan!
+		                            </td>
+		                        </tr>
+		                        {/foreach}
+		                    </tbody>
+		                </table>
+                	</div>
+	            </div>
+	        </div>
+		</div>
 </section>

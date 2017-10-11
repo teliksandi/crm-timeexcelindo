@@ -2,6 +2,10 @@
     <h1>
         Pengolahan Data Closing
     </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-sticky-note"></i> Closing</a></li>
+        <li class="active">Data Closing</li>
+    </ol>
 </section>
 <!-- notification template -->
 {include file="base/templates/notification.html"}
@@ -44,9 +48,11 @@
 		                        <tr>
 		                            <td width="5%" align="middle"><b>No</b></td>
 		                            <td width="20%" align="middle"><b>Project Title</b></td>
-		                            <td width="18%" align="middle"><b>Client</b></td>
-		                             <td width="20%" align="middle"><b>Comment</b></td>
-		                            <td width="25%" align="middle"><b>Action</b></td>
+		                            <td width="18%" align="middle"><b>Client Nama</b></td>
+                               		<td width="13%" align="middle"><b>Due Date</b></td>
+                                	<td width="13%" align="middle"><b>Status</b></td>
+                                	<td width="18%" align="middle"><b>Last History</b></td>
+                                	<td width="15%" align="middle"><b>Action</b></td>
 		                        </tr>
 		                        {foreach $komen as $result}
 		                        <tr>
@@ -54,9 +60,24 @@
 		                            <td align="middle">{$result.project_title}</td>
 		                            <td align="middle">{$result.client_name}</td>		                       
 		                        	<td align="middle">{$result.komenb}</td>
+		                        	<td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
+		                        	<td align="middle">                                    
+                                    	<input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                             
+                                        	<P id="dd"></P>
+		                                        {$dueDate = date('Y-m-d', strtotime($result.due_date|default:''))}
+		                                        {$dateNow = date('Y-m-d')}                                       
+		                                        {if $dueDate|strtotime < $dateNow|strtotime}
+		                                            <font color="red">Deadline</font> 
+		                                        {elseif $dueDate|strtotime == $dateNow|strtotime}
+		                                            <font color="red">Deadline</font> 
+		                                        {else}
+		                                            <font color="#33cc33">Aktif</font> 
+		                                        {/if}
+                                    </td>
+                                    <td align="middle">{getComment($result.id_inisiasi)}</td>
 		                            <td align="middle">
 		                                <a href="{$config->site_url('closing/closing/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a> 
-		                                <a href="{$config->site_url('closing/closing/delete')}/{$result.id_client}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+		                                <a href="{$config->site_url('closing/closing/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
 		                            </td>
 		                        </tr>
 		                        {foreachelse}

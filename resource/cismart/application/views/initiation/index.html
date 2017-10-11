@@ -1,9 +1,9 @@
-<section class="content-header">
+ <section class="content-header">
     <h1>
         Pengolahan Data Inisiasi
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-database"></i> Initiation</a></li>
+        <li><a href="#"><i class="fa fa-book"></i> Initiation</a></li>
         <li class="active">Data Initiation</li>
     </ol>
 </section>
@@ -87,6 +87,8 @@
                                     <a href="{$config->site_url('initiation/initiation/edit/'|cat:$result.id_inisiasi)}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
 
                                     <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+
+                                    <a href="{$config->site_url('initiation/initiation/delete')}/{$result.id_inisiasi}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
                                 </td>
                             </tr>
                             {foreachelse}
