@@ -18,7 +18,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
                 </div>
-                <div class="box-body">
+               <div class="box-body">
                     <form class="form-horizontal" action="{$config->site_url('initiation/initiation/search_process')}" method="post">
                         <div class="box-body">
                             <div class="form-group">
@@ -26,15 +26,22 @@
                                 <div class="col-sm-4">
                                     <input type="text" title="Masukkan Nama Project" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
+                                <select name="client" min="0" max="40" class="form-control" widht='100px' required>
+                                    <option value="" >- Select Filter -</option>
+                                    <option value=''>Client Name</option>
+                                    <option value=''>Status</option>
+                                    <option value=''>Date</option>
+                                    <option value=''>Year</option>
+                                </select>
+                                </div>
                                     <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
                                     <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
-                                </div>
+                                
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tabel Data Inisiasi</h3>
