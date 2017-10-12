@@ -63,20 +63,7 @@ class client extends ApplicationBase {
     
         parent::display();       
     }
-
-     function delete($params){
-        // set page rules
-        $this->_set_page_rule("U");
-        // set template content
-        $this->smarty->assign("template_content", "master/client/delete.html");
-        $this->smarty->assign("result", $this->m_client->get_client_by_id($params));
-        // notification
-        $this->tnotification->display_notification();
-        $this->tnotification->display_last_field();
-        // output
-        parent::display();
-    }
-
+    
     function delete_process(){
         // set page rules
         $this->_set_page_rule("U");

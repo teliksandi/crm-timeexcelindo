@@ -237,19 +237,6 @@ class karyawan extends ApplicationBase{
         redirect("master/karyawan/edit/".$this->input->post('id_karyawan', TRUE));
     }
 
-    function delete($params){
-        // set page rules
-        $this->_set_page_rule("U");
-        // set template content
-        $this->smarty->assign("template_content", "master/karyawan/delete.html");
-        $this->smarty->assign("result", $this->m_karyawan->get_karyawan_by_id($params));
-        // notification
-        $this->tnotification->display_notification();
-        $this->tnotification->display_last_field();
-        // output
-        parent::display();
-    }
-
     function delete_process(){
         // set page rules
         $this->_set_page_rule("U");

@@ -66,7 +66,48 @@
                                 <td align="middle">{$result.status}</td>
                                 <td>
                                     <a href="{$config->site_url('master/karyawan/edit')}/{$result.id_karyawan}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a href="{$config->site_url('master/karyawan/delete')}/{$result.id_karyawan}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deletekaryaawan"><i class="fa fa-trash-o"></i> Delete</a>
+
+                                     <!-- Modal -->
+                                      <div class="modal fade" id="deletekaryaawan" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Delete Karyawan</h4>
+                                            </div>
+                                            <div class="modal-body"> 
+
+                                                <div class="box-body">
+                                                    <form class="form-horizontal" action="{$config->site_url('master/karyawan/delete_process')}" method="post">
+                                                        <input type="hidden" name="id_karyawan" value="{$result.id_karyawan|default:''}">
+                                                        <div class="box-body">
+                                                            <div class="form-group">
+                                                                <label for="nama_karyawan" class="col-sm-2 control-label">Nama Karyawan</label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" name="nama_karyawan" disabled value="{$result.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="" title="Masukkan Nama Karyawan">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.box-body -->
+                                                        <div class="box-footer">
+                                                            <div class="row">
+                                                                <div class="col-md-3 col-md-offset-8">
+                                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.box-footer -->
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                     </div>
                                 </td>
                             </tr>
                             {foreachelse}
