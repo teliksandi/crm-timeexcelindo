@@ -237,7 +237,7 @@ class m_initiation extends CI_Model{
         return $this->db->update('initiation', $params, $where);
     }
 
-        function delete_initation($params){
+        function delete_initiation($params){
         $sql = "DELETE FROM initiation WHERE id_initiation= ?";
         return $this->db->query($sql, $params);
     }
