@@ -121,19 +121,6 @@ public function index() {
     }
 
 
-     function delete($params){
-        // set page rules
-        $this->_set_page_rule("U");
-        // set template content
-        $this->smarty->assign("template_content", "initiation/delete.html");
-        $this->smarty->assign("result", $this->m_initiation->get_initiation_by_id($params));
-        // notification
-        $this->tnotification->display_notification();
-        $this->tnotification->display_last_field();
-        // output
-        parent::display();
-    }
-
      function delete_process(){
         // set page rules
         $this->_set_page_rule("U");
@@ -158,7 +145,7 @@ public function index() {
             $this->tnotification->sent_notification("error", "Data gagal dihapus");
         }
         // default redirect
-        redirect("inititiation/initiation");
+        redirect("initiation/initiation");
     }
 
 
