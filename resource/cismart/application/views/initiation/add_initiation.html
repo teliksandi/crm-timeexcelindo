@@ -137,7 +137,7 @@
 								</tr>
 								<tr>
 									<td align="center">
-										<input type="text" name="tanggal_start" class="tanggal" id="mydate" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="">
+										<input type="text" name="tanggal_start" class="tanggal" id="DATE" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="">
 									</td>
 									<td align="center">
 										<input type="text" name="tanggal_due" class="tanggal" maxlength="10" size="10" placeholder="- dd/mm/yyyy -">
@@ -212,7 +212,19 @@
 		 	
 		</script>
 		<script type="text/javascript">
-			$("#mydate").datepicker().datepicker("setDate", new Date());
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+
+			var yyyy = today.getFullYear();
+			if(dd<10){
+			    dd='0'+dd;
+			} 
+			if(mm<10){
+			    mm='0'+mm;
+			} 
+			var today = dd+'/'+mm+'/'+yyyy;
+			document.getElementById("DATE").value = today;
 		</script>
 		<script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 </section>
