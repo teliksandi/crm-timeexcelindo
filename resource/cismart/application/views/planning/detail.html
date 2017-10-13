@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        Pengolahan Data Initiation
+        Pengolahan Data Planning
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-briefcase"></i> Planning</a></li>
@@ -22,268 +22,28 @@
                         <a class="btn btn-sm btn-primary" href="{$config->site_url('planning/planning')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
-
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
-                      {foreach $join as $jn}
-                        <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}" id="id_initiation">
-                            <div class="box-header with-border">
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="client_name">Client Name</label>
-                                            <input type="text" name="client" value="{$jn.client_name|default:''}" class="form-control"  title="Nama Client" readonly>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="project_title">Project title</label>
-                                            <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
-                                    </div>
-                                                     
-                                    <div class="form-group">
-                                            <label>Project Manager Department</label>
-
-                                            <br>
-                                            <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
-
-                                                {foreach $datadepartment as $cth}
-
-                                                <option value="{$cth.id_department}" 
-
-                                                {if $cth.id_department|in_array:$ex}
-                                                 selected="selected"{/if}>{$cth.nama_department}
-                                                    
-                                                </option>
-                                                    {foreachelse}
-                                                    Data tidak ditemukan !
-                                                    {/foreach}
-                                            </select>
-                                        </div>
-
-                                        
-                                        <div class="form-group">
-                                            <label>Team Member Name</label>
-                                            <br>
-                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
-                                                  {foreach $marketing_kar as $value}
-                                                    <option value="{$value.id_karyawan}"
-                                                    {if $value.id_karyawan|in_array:$exs}
-                                                 selected="selected"{/if}>{$value.nama_karyawan}</option>
-                                                  {foreachelse}
-                                                  Data tidak ditemukan !
-                                                  {/foreach}
-                                                </select>
-                                        </div>
-
-                                    <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
-                                                <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$jn.project_desc|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
-                                                <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$jn.project_just|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$jn.not_in_project|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    </div>
-                                    <!-- ./scroll -->
-
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="budget">Budget</label>
-                                                <input type="text" name="budget" value="Rp. {number_format($jn.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="start_date">Start date</label>    
-                                                <input type="text" name="start_date" value="{date('d F Y', strtotime($jn.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="due_date">Due date</label>
-                                                <input type="text" name="due_date" value="{date('d F Y', strtotime($jn.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
-                                        </div>
-                                    </div>
-
-                                </div>
-                </form>
-
-                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
-                            <div class="col-md-6">
-                                <div class="box-header with-border">
-                                    <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
-                                    <label for="files[]">Files</label>
-                                    <div style="overflow-y: scroll; height: 200px;">
-                                    <div class="form-group">
-                                        <center>
-                                                {foreach $ef as $f}
-                                                        <table>
-
-                                                            <input type="hidden" name="id_i" value="{$f}">
-                                                                <div class="form-group">
-                                                                    <a href="{$f}">{$f}</a>
-                                                                    <input type="image" name="submit" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                {$f}
-                                                                </div>
-                                                        </table>
-                                                {/foreach}
-                                        </center>
-                                    </div>
-                                    </div>
-                        </form>
-                        
-                        <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
-                                    <center>
-                                        <br>
-                                    <div class="form-group">
-                                        <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
-                                            <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
-                                    </center>
-
-                        </form>
-                        <form class="form-horizontal" action="{$config->site_url('closing/closing/closing_process')}" method="post">
-                                    <center>
-                                    <div class="form-group">
-                                        <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
-                                            <button type="submit" class="btn btn-danger">Reject</button></div>
-                                            <br>
-                                            <br>
-                                    </center>
-                        </form>
-
-                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
-                                    <div class="form-group">
-                                            <table>
-                                                <div style="overflow-y: scroll; height: 200px">
-                                                    Komentar :
-                                                    {foreach $komen as $km}
-                                                        <br>
-                                                        <b><textarea disabled class="form-control">
-                                                            {$km.komentar}</textarea></b>
-                                                <div align="right">
-                                                    Dikomentari pada : 
-                                                        <br>
-                                                            {$km.tgl_komentar}
-                                                        <br>
-                                                    {/foreach}
-                                                </div>
-                                                </div>
-                                            </table>
-                                                <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
-                                                <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
-                                                    <br>
-
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
-                                                                    <br>
-                                                                <div align="right">
-                                                                    <button type="submit" name="submit" class="btn btn-info">Comment</button></div>
-                                                        </div>
-                                                    </div>
-                                   </div>
-                                        {/foreach}
-                    </form>
-
-
-                               </div>
-                               <!-- /.box-header --> 
-                            </div>
-                            <!-- /,col -->
-
-                        </div>
-                        <!-- /,box-header -->
-
-                </div> 
-                <!-- /.box-body -->
-
-                <div class="box-footer clearfix">
-                    {$pagination.data|default:''}
-                </div>
-
-            </div>
-            <!-- /.box -->
-
-        </div>
-        <!-- /.col -->
-    </div>
-</section><section class="content-header">
-    <h1>
-        Pengolahan Data Planning
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-database"></i> Planning</a></li>
-        <li><a href="#"> Kategori</a></li>
-        <li class="active">Hapus Data</li>
-    </ol>
-</section>
-
-<section class="content">
-    <!-- notification template -->
-    {include file="base/templates/notification.html"}
-    <!-- end of notification template-->
-    <div class="row">
-        <div class="col-md-12">
-
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Apakah anda yakin ingin menghapus data ini ?</h3>
-                    <div class="box-tools">
-                        <a class="btn btn-sm btn-primary" href="{$config->site_url('planning/planning')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('planning/planning/delete_process')}" method="post">
-                        <input type="hidden" name="id_planning" value="{$result.id_planning|default:''}">
-                        <div class="box-body">
+                    <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="project_title" class="col-sm-2 control-label">Nama Projek</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="project_title" disabled value="{$result.project_title|default:''}" class="form-control" id="project_titles" placeholder="" title="Masukkan Nama Projek">
-                                </div>
+                                <button type="submit" name="Hallo" class="btn btn-primary"><i> Hallo </i></button>
                             </div>
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <div class="row">
-                                <div class="col-md-3 col-md-offset-2">
-                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-footer -->
                     </form>
                 </div>
                 <!-- /.box-body -->
+
+
+            </div>
+            <!-- /.box-box -->
+        </div> 
+        <!-- /.col -->
+
                 <div class="box-footer clearfix">
                     {$pagination.data|default:''}
                 </div>
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
+
     </div>
 </section>

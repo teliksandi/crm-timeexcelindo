@@ -41,20 +41,20 @@
 		                    <tbody>
 		                        <tr>
 		                            <td width="5%" align="middle"><b>No</b></td>
-                                	<td width="25%" align="middle"><b>Project Title</b></td>
-                                	<td width="18%" align="middle"><b>Client Nama</b></td>
-                               		<td width="13%" align="middle"><b>Due Date</b></td>
+		                            <td width="20%" align="middle"><b>Project Title</b></td>
+		                            <td width="18%" align="middle"><b>Client Nama</b></td>
+		                            <td width="13%" align="middle"><b>Due Date</b></td>
                                 	<td width="13%" align="middle"><b>Status</b></td>
                                 	<td width="18%" align="middle"><b>Last History</b></td>
                                 	<td width="15%" align="middle"><b>Action</b></td>
 		                        </tr>
-		                        	{foreach $planning_project as $result}
+		                        {foreach $planning_project as $result}
 		                        <tr>
-		                        	<td align="middle">{$no++}</td>
-                                	<td align="middle">{$result.project_title}</td>
-                                	<td align="middle">{$result.client_name}</td>
-                                	<td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
-                                	<td align="middle">                                    
+		                            <td align="middle">{$no++}</td>
+		                            <td align="middle">{$result.project_title}</td>
+		                            <td align="middle">{$result.client_name}</td>
+		                            <td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
+		                            <td align="middle">                                    
                                     	<input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                             
                                         	<P id="dd"></P>
 		                                        {$dueDate = date('Y-m-d', strtotime($result.due_date|default:''))}
@@ -67,10 +67,10 @@
 		                                            <font color="#33cc33">Aktif</font> 
 		                                        {/if}
                                     </td>
-                                    <td align="middle">{getComment($result.id_inisiasi)}</td>
+                                    <td align="middle">Belum Ditemukan</td>
 		                            <td align="middle">
 		                                <a href="{$config->site_url('planning/planning/edit')}/{$result.id_planning}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
-		                                <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+		                                <a href="{$config->site_url('planning/planning/detail')}/{$result.id_planning}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
 		                            </td>
 		                        </tr>
 		                        {foreachelse}
