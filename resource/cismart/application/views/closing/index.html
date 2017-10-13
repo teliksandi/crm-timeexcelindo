@@ -57,7 +57,7 @@
 		                        	<td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
                                 	<td align="middle">                                    
                                     	<input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                             
-                                        	<P id="dd"></P>
+                                        	<a id="dd"></a>
 		                                        {$dueDate = date('Y-m-d', strtotime($result.due_date|default:''))}
 		                                        {$dateNow = date('Y-m-d')}                                       
 		                                        {if $dueDate|strtotime < $dateNow|strtotime}
