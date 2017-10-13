@@ -19,7 +19,7 @@
 	                    <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
 	                </div>
 	                <div class="box-body">
-	                    <form class="form-horizontal" action="{$config->site_url('planning/planning/search_process')}" method="post">
+	                    <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
 	                        <div class="box-body">
 	                            <div class="form-group">
 	                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
@@ -40,13 +40,13 @@
 		                <table class="table table-striped">
 		                    <tbody>
 		                        <tr>
-		                            <td width="5%" align="middle"><b>No</b></td>
-                                	<td width="25%" align="middle"><b>Project Title</b></td>
-                                	<td width="18%" align="middle"><b>Client Nama</b></td>
-                               		<td width="13%" align="middle"><b>Due Date</b></td>
-                                	<td width="13%" align="middle"><b>Status</b></td>
-                                	<td width="18%" align="middle"><b>Last History</b></td>
-                                	<td width="15%" align="middle"><b>Action</b></td>
+		                            <td width="3%" align="middle"><b>No</b></td>
+	                                <td width="20%" align="middle"><b>Project Title</b></td>
+	                                <td width="15%" align="middle"><b>Client Nama</b></td>
+	                                <td width="10%" align="middle"><b>Due Date</b></td>
+	                                <td width="7%" align="middle"><b>Status</b></td>
+	                                <td width="10%" align="middle"><b>Last History</b></td>
+	                                <td width="18%" align="middle"><b>Action</b></td>
 		                        </tr>
 		                        	{foreach $planning_project as $result}
 		                        <tr>
@@ -67,10 +67,10 @@
 		                                            <font color="#33cc33">Aktif</font> 
 		                                        {/if}
                                     </td>
-                                    <td align="middle">{getComment($result.id_inisiasi)}</td>
+                                    <td align="middle">Belum dicari</td>
 		                            <td align="middle">
-		                                <a href="{$config->site_url('planning/planning/edit')}/{$result.id_planning}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
-		                                <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+		                                <a href="{$config->site_url('execution/execution/edit')}/{$result.id_execution}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
+		                                <a href="{$config->site_url('execution/execution/detail')}/{$result.id_execution}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
 		                            </td>
 		                        </tr>
 		                        {foreachelse}

@@ -36,23 +36,17 @@
 	                </div>
 	            </div>
 	            <div class="box">
-	                <div class="box-header with-border">
-	                    <h3 class="box-title">Tabel Data Closing</h3>
-	                    <div class="box-tools">
-	                        <a class="btn btn-sm btn-success" href="{$config->site_url('initiation/initiation/add_initiation')}" ><i class="fa fa-plus"></i> Tambah Data</a>
-	                    </div>
-	                </div>
 	               	<div class="box-body">
 		                <table class="table table-striped">
 		                    <tbody>
 		                        <tr>
-		                            <td width="5%" align="middle"><b>No</b></td>
-		                            <td width="20%" align="middle"><b>Project Title</b></td>
-		                            <td width="18%" align="middle"><b>Client Nama</b></td>
-                               		<td width="13%" align="middle"><b>Due Date</b></td>
-                                	<td width="13%" align="middle"><b>Status</b></td>
-                                	<td width="18%" align="middle"><b>Last History</b></td>
-                                	<td width="15%" align="middle"><b>Action</b></td>
+		                            <td width="3%" align="middle"><b>No</b></td>
+	                                <td width="20%" align="middle"><b>Project Title</b></td>
+	                                <td width="15%" align="middle"><b>Client Nama</b></td>
+	                                <td width="10%" align="middle"><b>Due Date</b></td>
+	                                <td width="7%" align="middle"><b>Status</b></td>
+	                                <td width="10%" align="middle"><b>Last History</b></td>
+	                                <td width="18%" align="middle"><b>Action</b></td>
 		                        </tr>
 		                        {foreach $komen as $result}
 		                        <tr>
@@ -61,7 +55,7 @@
 		                            <td align="middle">{$result.client_name}</td>		                       
 		                        	<td align="middle">{$result.komenb}</td>
 		                        	<td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
-		                        	<td align="middle">                                    
+                                	<td align="middle">                                    
                                     	<input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                             
                                         	<P id="dd"></P>
 		                                        {$dueDate = date('Y-m-d', strtotime($result.due_date|default:''))}
@@ -74,7 +68,7 @@
 		                                            <font color="#33cc33">Aktif</font> 
 		                                        {/if}
                                     </td>
-                                    <td align="middle">{getComment($result.id_inisiasi)}</td>
+                                    <td align="middle">Belum Dicari</td>
 		                            <td align="middle">
 		                                <a href="{$config->site_url('closing/closing/edit')}/{$result.id_initiation}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a> 
 		                                <a href="{$config->site_url('closing/closing/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
