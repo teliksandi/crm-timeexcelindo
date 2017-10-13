@@ -26,12 +26,107 @@
 
                 <div class="box-body">
                     <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+
                             <div class="form-group">
-                                <button type="submit" name="Hallo" class="btn btn-primary"><i> Hallo </i></button>
+                                <button type="submit" name="Hallo" class="btn btn-info"><i>Riwayat Initiation</i></button>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label>DPP</label><br><b>Rp.</b>
+                                    <input type="text" name="money" title="Masukkan Jumlah DPP" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                <label for="budget">PPN</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="PPN" readonly >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                <label for="budget">PPH</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="PPH" readonly >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                <label for="budget">Pendapatan setelah pajak</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="Pendapatan setelah pajak" readonly style="color: red">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <br>
+                        <label><h5><b>
+                            Rincian Biaya
+                        </b></h5></label>
+                            <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Biaya Administrasi</label><br><b>Rp.</b>
+                                        <input type="text" name="money" title="Masukkan Jumlah Biaya Administrasi" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="col-md-7">
+                                        <label>Biaya Hardware & Infrastruktur</label><br><b>Rp.</b>
+                                        <input type="text" name="money" title="Masukkan Jumlah Biaya Hardware & Infrastruktur" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                <label for="budget">Biaya Produksi dan Operasional</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="Biaya Produksi dan Operasional" readonly >
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <br>
+                                <br>
+                                <br>
+                                <div class="col-md-7">
+                                <label for="budget">Biaya Perawatan / Garansi</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="Biaya Perawatan / Garansi" readonly >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                <label for="budget">Biaya Lain - Lain</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="Biaya Lain - Lain" readonly >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                <label for="budget">Entertaint</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="Entertaint" readonly >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7">
+                                <label for="budget">Total Biaya</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" class="form-control" id="budget" placeholder="" title="Total Biaya" readonly style="color: red">
+                                </div>
                             </div>
                         </div>
                     </form>
+                </div>
+
+                <div class="box box-success">
+                    <center>
+                    <div class="box-header with-border">
+                        <label><h4><b>
+                            Total
+                        </b></h4></label>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="budget">Perkiraan Laba Rugi</label>
+                                    <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" style="text-align: center; color: red" class="form-control" id="budget" placeholder="" title="Total Biaya" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    </center>
                 </div>
                 <!-- /.box-body -->
 
