@@ -196,6 +196,8 @@
                                                                         <tr>
                                                                             <form class="" action="{$config->site_url('planning/planning/planning_process')}" method="post">
                                                                                 <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
+                                                                                <input type="hidden" name="start_planning" id="mulai_planning">
+                                                                                <input type="hidden" name="due_planning" value="{date('d F Y', strtotime($jn.due_date|default:''))}">
                                                                                     <button type="submit" name="accept" class="btn btn-success">Accept</button>
                                                                             </form>
                                                                         </tr>
@@ -229,4 +231,19 @@
         </div>
         <!-- /.col -->
     </div>
+    <script type="text/javascript">
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            var today = dd+'-'+mm+'-'+yyyy;
+            document.getElementById("mulai_planning").value = today;
+    </script>
 </section>

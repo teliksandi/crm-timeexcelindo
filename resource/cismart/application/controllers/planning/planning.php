@@ -45,7 +45,9 @@ class planning extends ApplicationBase {
  
        
             $params = array(
-                'id_initiation'     => $this->input->post('init_planning')
+                'id_initiation'     => $this->input->post('init_planning'),
+                'start_date'        => $this->input->post('start_planning'),
+                'due_date'          => $this->input->post('due_planning')
                 
             );
             $this->m_planning->insert_planning($params);
