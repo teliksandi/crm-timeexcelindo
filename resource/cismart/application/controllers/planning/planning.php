@@ -19,6 +19,19 @@ class planning extends ApplicationBase {
         // load library
         $this->load->library('tnotification');
         $this->load->library('datetimemanipulation');
+
+        //load plugin
+        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
+
+        // load Javascript
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
+        $this->smarty->load_javascript("resource/custom/js/custom.js");
     }
 
     
