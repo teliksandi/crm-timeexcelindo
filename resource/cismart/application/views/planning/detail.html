@@ -150,13 +150,53 @@
                                     <div class="form-group">
                                             <label for="budget">Perkiraan Laba Rugi</label>
                                                 <input type="text" name="budget" value="Rp. 4444444,2,",",".")}" style="text-align: center; color: red" class="form-control" id="budget" placeholder="" title="Total Biaya" readonly>
+                                                <br><br>
+                                                    <button type="submit" name="submit" class="btn btn-success">Simpan</button>
                                     </div>
                                 </div>
                             </div>
                             </center>
-                </div>
 
-                
+                            <div class="box box-success">
+                                <div class="box-header with-border">
+                                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <table>
+                                                <br>
+                                                <div style="overflow-y: scroll; height: 200px">
+                                                    Komentar :
+                                                    {foreach $komen as $km}
+                                                        <br>
+                                                        <b><textarea disabled class="form-control">
+                                                            {$km.komentar}</textarea></b>
+                                                <div align="right">
+                                                    Dikomentari pada : 
+                                                        <br>
+                                                            {$km.tgl_komentar}
+                                                        <br>
+                                                    {/foreach}
+                                                </div>
+                                                </div>
+                                            </table>
+                                                <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
+                                                <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
+                                                            <br>
+                                                            <div align="right">
+                                                                <button type="submit" name="submit" class="btn btn-info">Comment</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box-box -->
