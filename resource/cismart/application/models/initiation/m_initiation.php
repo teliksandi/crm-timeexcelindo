@@ -229,16 +229,26 @@ class m_initiation extends CI_Model{
         return $this->db->insert('initiation', $params);
     }
 
-     function update_komentar($params, $where){
+    function update_komentar($params, $where){
         return $this->db->update('komentar', $params, $where);
     }
 
-       function update_initiation($params, $where){
+    function update_initiation($params, $where){
         return $this->db->update('initiation', $params, $where);
     }
 
-        function delete_initiation($params){
+    function delete_initiation($params){
         $sql = "DELETE FROM initiation WHERE id_initiation= ?";
+        return $this->db->query($sql, $params);
+    }
+
+    function delete_file($params){
+        $sql = "DELETE FROM file WHERE id_initiation= ?";
+        return $this->db->query($sql, $params);
+    }
+
+    function delete_komentar($params){
+        $sql = "DELETE FROM komentar WHERE id_initiation= ?";
         return $this->db->query($sql, $params);
     }
 

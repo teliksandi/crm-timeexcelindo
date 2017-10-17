@@ -132,7 +132,8 @@ public function index() {
             $params = array(
                 'id_initiation' => $this->input->post('id_initiation', TRUE),
             );
-
+            $this->m_initiation->delete_file($params);
+            $this->m_initiation->delete_komentar($params);
             if ($this->m_initiation->delete_initiation($params)) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil dihapus");
