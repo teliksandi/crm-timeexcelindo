@@ -49,7 +49,7 @@ class m_planning extends CI_Model{
         
     }
 
-        function get_planning_by_id($where){
+    function get_planning_by_id($where){
 
         $this->db->select('*');
         $this->db->from('planning');
@@ -60,6 +60,9 @@ class m_planning extends CI_Model{
          
     }
 
+    function update_planning_b($params, $where){
+        return $this->db->update('planning', $params, $where);
+    }
 
     function insert_planning($params){
         return $this->db->insert('planning', $params);

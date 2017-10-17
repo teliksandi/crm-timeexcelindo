@@ -60,11 +60,116 @@ class planning extends ApplicationBase {
             $params = array(
                 'id_initiation'     => $this->input->post('init_planning'),
                 'start_date'        => $this->input->post('start_planning'),
-                'due_date'          => $this->input->post('due_planning')
-                
+                'due_date'          => $this->input->post('due_planning'),
+                'DPP'                           => "0",
+                'PPN'                           => "0",
+                'PPH'                           => "0",
+                'pendapatan_stlh_pajak'         => "0",
+                'b_administrasi'                => "0",
+                'b_produksi_dan_operasional'    => "0",
+                'b_hardware_dan_infrastruktur'  => "0",
+                'b_perawatan'                   => "0",
+                'b_lain_lain'                   => "0",
+                'b_entertaint'                  => "0",
+                'total_biaya'                   => "0",
+                'perkiraan_rugi_laba'           => "0",
+                              
             );
             $this->m_planning->insert_planning($params);
             redirect("initiation/initiation/index");
+    }
+
+
+     function add_planning(){
+        // set page rules
+        $this->_set_page_rule("C");
+
+        $this->smarty->assign("template_content", "planning/detail.html");
+
+        
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
+
+
+        // cek input
+        parent::display();
+    }
+
+    function detail($where){
+        $this->_set_page_rule("U");
+        // set template content
+        $this->smarty->assign("template_content", "planning/detail.html");
+        $this->smarty->assign("result", $this->m_planning->get_planning_by_id($where));
+       
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
+
+        // output
+        parent::display();
+
+    }
+
+
+    function add_process(){
+
+        $this->_set_page_rule("U"); 
+
+        $this->tnotification->set_rules('PPN', 'Biaya PPN', 'trim|required');
+
+        // var_dump($this->input->post("id_planning"));
+        // exit();
+
+        if($this->tnotification->run() !== FALSE){
+            $params = array(
+                'DPP'                           => $this->idrToInt($this->input->post("DPP")),
+                'PPN'                           => $this->idrToInt($this->input->post("PPN")),
+                'PPH'                           => $this->idrToInt($this->input->post("PPH")),
+                'pendapatan_stlh_pajak'         => $this->idrToInt($this->input->post("Pendapatan")),
+                'b_administrasi'                => $this->idrToInt($this->input->post("Adm")),
+                'b_produksi_dan_operasional'    => $this->idrToInt($this->input->post("Produksi")),
+                'b_hardware_dan_infrastruktur'  => $this->idrToInt($this->input->post("Hardware")),
+                'b_perawatan'                   => $this->idrToInt($this->input->post("Perawatan")),
+                'b_lain_lain'                   => $this->idrToInt($this->input->post("Lain")),
+                'b_entertaint'                  => $this->idrToInt($this->input->post("Entertaint")),
+                'total_biaya'                   => $this->idrToInt($this->input->post("Total")),
+                'perkiraan_rugi_laba'           => $this->idrToInt($this->input->post("laba")),
+                'Catatan'                       => $this->input->post("Ket")
+                
+            );
+
+            $where = array(
+                'id_planning' => $this->input->post('id_planning', TRUE),
+            );
+
+            if ($this->m_planning->update_planning_b($params,$where)) {
+                $this->tnotification->delete_last_field();
+                $this->tnotification->sent_notification("success", "Data berhasil disimpan");
+            }else{
+                // default error
+
+                $this->tnotification->sent_notification("error", "Data gagal disimpan");
+            }
+        }else{
+            // default error
+            $this->tnotification->sent_notification("error", "Data gagal disimpan");
+        }
+        // default redirect
+        redirect("planning/planning/detail/".$this->input->post('id_planning', TRUE));
+
+    }
+
+    function idrToInt($idr) {
+        $search = [
+                
+                '.',
+                ','
+            ];
+
+            $replace = [
+                ''
+            ];
+
+        return $currToIn = str_ireplace($search, $replace, $idr);
     }
 
 
@@ -181,17 +286,5 @@ class planning extends ApplicationBase {
         redirect("planning/planning");
     }
 
-    function detail($where){
-        $this->_set_page_rule("U");
-        // set template content
-        $this->smarty->assign("template_content", "planning/detail.html");
-        
-       
-        $this->tnotification->display_notification();
-        $this->tnotification->display_last_field();
-
-        // output
-        parent::display();
-
-    }
+    
 }
