@@ -50,7 +50,7 @@ public function index() {
         $project_title = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
         $params = array($project_title);
 
-        $config['base_url'] = site_url("Initiation/index/");
+        $config['base_url'] = site_url("initiation/initiation/index/");
         $config['total_rows'] = $this->m_initiation->get_total_initiation($params);
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
@@ -73,14 +73,10 @@ public function index() {
         // get list data
         // get list data
         $params = array($project_title, ($start - 1), $config['per_page']);
-        $this->smarty->assign("initiation_client", $this->m_initiation->initiation_client_get());
+        $this->smarty->assign("initiation_client", $this->m_initiation->get_list_initiation($params));
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen_get());
-        $this->smarty->assign("get", $this->m_initiation->all_index_initiation());
-
-        // var_dump($this->m_initiation->initiation_client_get());
-        // exit();
-        // var_dump($this->m_initiation->initiation_komen_get());
-        // exit();
+        
+        $this->smarty->assign("get", $this->m_initiation->get_list_initiation($params));
         
         // output
 
