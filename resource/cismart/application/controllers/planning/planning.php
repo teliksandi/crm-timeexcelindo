@@ -192,6 +192,8 @@ class planning extends ApplicationBase {
         }
         $this->smarty->assign("kar",$this->m_karyawan->get_all());
         
+        $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
+        
         
 
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");

@@ -1,16 +1,3 @@
-<script type="text/javascript">
-    $(document).ready(function () {
-        // date picker
-        $(".tanggal").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            buttonImageOnly: true,
-            yearRange: '1970:2000',
-            dateFormat: 'yy-mm-dd'
-        });
-        
-    }); 
-</script>
 <section class="content-header">
     <h1>
         Pengolahan Data Initiation
@@ -61,7 +48,7 @@
                                             <label>Project Manager Department</label>
 
                                             <br>
-                                            <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
+                                            <select name="department[]" id="department" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project">
 
                                                 {foreach $datadepartment as $cth}
 
@@ -81,7 +68,7 @@
                                         <div class="form-group">
                                             <label>Team Member Name</label>
                                             <br>
-                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
+                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple">
                                                   {foreach $marketing_kar as $value}
                                                     <option value="{$value.id_karyawan}"
                                                     {if $value.id_karyawan|in_array:$exs}

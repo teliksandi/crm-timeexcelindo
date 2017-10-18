@@ -39,7 +39,7 @@
 				<div class="form-group">
 			<label>Project Manager Department</label>
 			<br>
-			<select name="department[]" class="form-control select2 department" multiple title="Pilih Manager Department Project" placeholder="-- Manager Department Project --">
+			<select name="department[]" class="form-control select2" multiple title="Pilih Manager Department Project" placeholder="-- Manager Department Project --">
 	    			{foreach $datadepartment as $cth}
 	    		<option value={$cth.id_department} placeholder="-- Manager Department Project --">{$cth.nama_department}</option>
 	   				{foreachelse}
@@ -51,7 +51,7 @@
 		<div class="form-group">
 			<label>Team Member Name</label>
 			<br>
-			<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple" placeholder="-- Nama Anggota Tim --">
+			<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" placeholder="-- Nama Anggota Tim --">
 			{foreach $marketing_kar as $value}
 				<option value="{$value.id_karyawan}" placeholder="-- Nama Anggota Tim --">{$value.nama_karyawan}</option>
 			{foreachelse}
