@@ -198,6 +198,8 @@
                                                                                 <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
                                                                                 <input type="hidden" name="start_planning" id="mulai_planning">
                                                                                 <input type="hidden" name="due_planning" value="{date('d F Y', strtotime($jn.due_date|default:''))}">
+                                                                                <input type="hidden" name="department_planning[]" id="department_planning">
+                                                                                <input type="hidden" name="karyawan_planning[]" id="karyawan_planning">
                                                                                     <button type="submit" name="accept" class="btn btn-success">Accept</button>
                                                                             </form>
                                                                         </tr>
@@ -245,5 +247,16 @@
             } 
             var today = dd+'-'+mm+'-'+yyyy;
             document.getElementById("mulai_planning").value = today;
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        
+            var dprtm = $('#department').val();
+            var kywn = $('#karyawan').val();
+            
+            document.getElementById("department_planning").value = dprtm;
+            document.getElementById("karyawan_planning").value = kywn;
+         
+    });
     </script>
 </section>

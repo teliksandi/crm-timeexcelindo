@@ -55,12 +55,15 @@ class planning extends ApplicationBase {
     function planning_process(){
 
         $this->_set_page_rule("C");
- 
+        $dep = implode(",", $this->input->post("department_planning"));
+        $kar = implode(",", $this->input->post("karyawan_planning"));      
        
             $params = array(
                 'id_initiation'     => $this->input->post('init_planning'),
                 'start_date'        => $this->input->post('start_planning'),
                 'due_date'          => $this->input->post('due_planning'),
+                'id_karyawan'       => $kar,
+                'id_department'     => $dep,
                 'DPP'                           => "0",
                 'PPN'                           => "0",
                 'PPH'                           => "0",
@@ -191,7 +194,7 @@ class planning extends ApplicationBase {
             $this->smarty->assign("exs", explode(",", $ks['id_karyawan']));
         }
         $this->smarty->assign("kar",$this->m_karyawan->get_all());
-        
+
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
         
         
