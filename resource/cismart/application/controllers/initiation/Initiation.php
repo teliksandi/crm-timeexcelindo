@@ -40,18 +40,38 @@ public function index() {
         // set template content
         $this->smarty->assign("template_content", "initiation/index.html");
         //$this->smarty->assign('user', $this->com_user['user_id']);
-
     
 // session
         $search = $this->tsession->userdata('search_initiation');
         $this->smarty->assign('search', $search);
 
         // params
-        $project_title = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
-        $params = array($project_title);
+        $project_title  = !empty($search['project_title']) ? $search['project_title'] : "%";
+        $filter         = !empty($search['filter']) ? $search['filter'] : "%";
+        $params         =  array($project_title);
+
+
+        $ttl_rows = "";
+        if ($filter == "client_id") {
+            $nm_client = !empty($search['project_title']) ? $search['project_title'] : "%";
+            $hsl = $this->m_client->get_id($nm_client);
+            $ttl_rows = $hsl['id_client'];
+            $filter = "initiation.id_client";
+        }elseif ($filter == "start_date") {
+            $project_title = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
+            $ttl_rows = $project_title;
+            $filter = "initiation.start_date";
+        }elseif ($filter == "project_title") {
+            $project_title = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
+            $ttl_rows = $project_title;
+            $filter = "initiation.project_title";
+        }else{
+
+        }
+
 
         $config['base_url'] = site_url("initiation/initiation/index/");
-        $config['total_rows'] = $this->m_initiation->get_total_initiation($params);
+        $config['total_rows'] = $this->m_initiation->search_initiation($filter, $ttl_rows);
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
@@ -73,10 +93,11 @@ public function index() {
         // get list data
         // get list data
         $params = array($project_title, ($start - 1), $config['per_page']);
-        $this->smarty->assign("initiation_client", $this->m_initiation->get_list_initiation($params));
+        // $this->smarty->assign("initiation_client", $this->m_initiation->get_list_initiation($params));
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen_get());
-        
-        $this->smarty->assign("get", $this->m_initiation->get_list_initiation($params));
+
+        $this->smarty->assign("get", $this->m_initiation->get_list_initiation($filter, $params));
+
         
         // output
 
