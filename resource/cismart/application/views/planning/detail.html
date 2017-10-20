@@ -25,138 +25,149 @@
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('planning/planning/execution_process')}" method="post">
+                    <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
                         <div class="box-header with-border">
                                 <center>
                                     <div class="form-group">
-                                        <button type="submit" name="Riwayat_i" class="btn btn-warning"><i>Riwayat Initiation</i></button>
+                                        <button type="submit" name="Hallo" class="btn btn-warning"><i>Riwayat Initiation</i></button>
                                     </div>
                                 </center>
                         </div>
-                    </form>
-                    <form class="form-horizontal" action="{$config->site_url('planning/planning/add_process')}" method="post">
-                    {foreach $result as $rs}
-                        <input type="hidden" name="id_planning" value="{$rs.id_planning|default:''}">
+
                         <div class="box box-default">
-                        <div class="box-header with-border">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                            <label>DPP</label><br>
-                                            Rp.&nbsp;<input type="text" name="DPP" value ="{number_format($rs.DPP|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                        <label for="budget">PPN</label><br>
-                                            Rp.&nbsp;<input type="text" name="PPN" value ="{number_format($rs.PPN|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                        <label for="budget">PPH</label><br>
-                                            Rp.&nbsp;<input type="text" value ="{number_format($rs.PPH|default:'',2,",",".")}" name="PPH" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-8">
-                                        <label for="budget">Pendapatan setelah pajak</label><br>
-                                            Rp.&nbsp;<input type="text" name="Pendapatan"  value ="{number_format($rs.pendapatan_stlh_pajak|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <center>
-                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▬ &nbsp;Rincian Biaya &nbsp;▬</label></center>
-                                    <br>
-                                
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <label>Biaya  Administrasi</label><br>
-                                                Rp.&nbsp;<input type="text" value ="{number_format($rs.b_administrasi|default:'',2,",",".")}" name="Adm" title="Masukkan Jumlah Biaya Administrasi" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
+                            <div class="box-header with-border">
+                                <div class="col-md-4" style="border: 5px groove black; ">
+                                    <table align="center">
+                                        <tr>
+                                            <div class="form-group">
                                                 <div class="col-md-8">
                                                     <br>
-                                                    <label>Biaya Hardware & Infrastruktur</label><br>
-                                                    Rp.&nbsp;<input type="text" name="Hardware" value ="{number_format($rs.b_produksi_dan_operasional|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
+                                                    <div align="center">          <label>Total Anggaran</label></div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
                                                 </div>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div align="center"><label>DPP</label></div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div align="center"><label for="budget">PPN</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div align="center"><label for="budget">PPH</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="budget">Pendapatan setelah pajak</label></div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-8" style="border: 5px groove black; ">
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <center>
+                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▬▬ &nbsp;Rincian Biaya &nbsp;▬▬</label>
+                                        </center>
+                                        <br>
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                <div align="center">&nbsp;&nbsp;&nbsp;<label>Biaya  Administrasi</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </div>
                                         </div>
-                                        
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                    <br>
+                                                <div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Biaya Produksi & Operasional</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="col-md-8">
                                                 <br>
-                                            <label for="budget">Biaya Produksi & Operasional</label><br>
-                                                Rp.&nbsp;<input type="text" name="Produksi" value ="{number_format($rs.b_hardware_dan_infrastruktur|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
+                                                <div align="center">&nbsp;&nbsp;&nbsp;<label for="budget">Biaya Hardware & Infrastruktur</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
                                             </div>
                                         </div>
+                                    </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <br>
+                                        <br>
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                <div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="budget">Biaya Perawatan / Garansi</label>        <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                <div align="center">            <label for="budget">Biaya Lain - Lain</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                <div align="center">            <label for="budget">Entertaint</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                <div align="center"><label for="budget">Total Biaya</label></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <br>
-                                    <br>
-                                    <div class="col-md-8">
-                                    <label for="budget">Biaya Perawatan / Garansi</label><br>
-                                        Rp.&nbsp;<input type="text" name="Perawatan" value ="{number_format($rs.b_perawatan|default:'',2,",",".")}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-8">
-                                    <label for="budget">Biaya Lain - Lain</label><br>
-                                        Rp.&nbsp;<input type="text" value ="{number_format($rs.b_lain_lain|default:'',2,",",".")}" name="Lain" title="Masukkan Jumlah DPP" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-8">
-                                    <label for="budget">Entertaint</label><br>
-                                        Rp.&nbsp;<input type="text" value ="{number_format($rs.b_entertaint|default:'',2,",",".")}" name="Entertaint" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                    </div>
-                                </div>
-                            
-                                <div class="form-group">
-                                    <div class="col-md-8">
-                                    <label for="budget">Total Biaya</label><br>
-                                        Rp.&nbsp;<input type="text" value ="{number_format($rs.total_biaya|default:'',2,",",".")}" name="Total" title="Masukkan Jumlah Total Biaya" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- ./box-header -->
                         </div>
-                        </div>
+                        <!-- ./box-box -->
+                    </form>
 
                             <center>
                             <div class="col-md-12">
                                 <div class="box box-default">
                                     <div class="box-header with-border">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                    <label><h4><b>
+                                            <label><h4><b>
                                                         Total
-                                                    </b></h4></label><br>
-                                                    <label for="budget">Perkiraan Laba Rugi</label><br>
-                                                        Rp.&nbsp;<input type="text" value ="{number_format($rs.perkiraan_rugi_laba|default:'',2,",",".")}"  name="laba" title="Masukkan Jumlah DPP" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>    
+                                            </b></h4></label><br>
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <div align="center"><label for="budget">Perkiraan Laba Rugi</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <br>
                                             <div class="form-group">
-                                                <label>Catatan</label><br>
-                                                <textarea name="Ket" class="form-control" title="-- Keterangan --">{$rs.Catatan|default:''}</textarea>
+                                                <label>Keterangan</label><br>
+                                                <textarea name="keterangan" class="form-control" title="-- Keterangan --"></textarea>
                                             <br>
                                             <br>
                                             </div>
@@ -169,8 +180,7 @@
                             </div>
                             </center>
                 </div>
-                {/foreach}
-            </form>
+
                             <div class="box box-primary">
                                 <div class="box-header with-border">
                                     <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
