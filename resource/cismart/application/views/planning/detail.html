@@ -25,160 +25,165 @@
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
-                        <div class="box-header with-border">
-                                <center>
-                                    <div class="form-group">
-                                        <button type="submit" name="Hallo" class="btn btn-warning"><i>Riwayat Initiation</i></button>
+                    <form class="form-horizontal" action="{$config->site_url('planning/planning/add_process')}" method="post">
+                        <!-- RIWAYAT INITIATION -->
+                        <div class="container">                          
+                          <!-- Trigger the modal with a button -->
+                         <div class="box-header with-border">
+                                    <div class="form-group" align="center">
+                                        <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
                                     </div>
-                                </center>
+                        </div>
+                          <!-- Modal -->
+                          <div class="modal fade" id="r_inisiasi" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">Modal Header</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    contoh
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
                         <div class="box box-default">
                             <div class="box-header with-border">
-                                <div class="col-md-4" style="border: 5px groove black; ">
-                                    <table align="center">
+                                <table class="table table-striped" border="3" align="center">
+                                    <tbody>
                                         <tr>
-                                            <div class="form-group">
-                                                <div class="col-md-8">
-                                                    <br>
-                                                    <div align="center">          <label>Total Anggaran</label></div>
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
-                                                </div>
-                                            </div>
+                                            <td width="15%" align="middle"><b> Uraian </b></td>
+                                            <td width="5%" align="middle"><b> % </b></td>
+                                            <td width="15%" align="middle"><b> Total </b></td>
                                         </tr>
                                         <tr>
-                                            <div class="form-group">
-                                                <div class="col-md-8">
-                                                    <div align="center"><label>DPP</label></div>
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
-                                                </div>
-                                            </div>
+                                            <td align="middle"> Total Anggaran </td>
+                                            <td align="middle"></td>
+                                            <td align="middle">
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <div class="form-group">
-                                                <div class="col-md-8">
-                                                    <div align="center"><label for="budget">PPN</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                                </div>
-                                            </div>
+                                            <td align="middle"> DPP </td>
+                                            <td align="middle"></td>
+                                            <td align="middle">
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="DPP" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <div class="form-group">
-                                                <div class="col-md-8">
-                                                    <div align="center"><label for="budget">PPH</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                                </div>
-                                            </div>
+                                            <td align="middle"> PPN </td>
+                                            <td align="middle"> 10 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <div class="form-group">
-                                                <div class="col-md-8">
-                                                    <div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="budget">Pendapatan setelah pajak</label></div>
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
-                                                </div>
-                                            </div>
+                                            <td align="middle"> PPH </td>
+                                            <td align="middle"> 2 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
                                         </tr>
-                                    </table>
-                                </div>
-                                <div class="col-md-8" style="border: 5px groove black; ">
-                                    <div class="col-md-6">
-                                    <div class="form-group">
-                                        <center>
-                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▬▬ &nbsp;Rincian Biaya &nbsp;▬▬</label>
-                                        </center>
-                                        <br>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <div align="center">&nbsp;&nbsp;&nbsp;<label>Biaya  Administrasi</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                    <br>
-                                                <div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Biaya Produksi & Operasional</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <br>
-                                                <div align="center">&nbsp;&nbsp;&nbsp;<label for="budget">Biaya Hardware & Infrastruktur</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                    <div class="form-group">
-                                        <br>
-                                        <br>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="budget">Biaya Perawatan / Garansi</label>        <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <div align="center">            <label for="budget">Biaya Lain - Lain</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <div align="center">            <label for="budget">Entertaint</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <div align="center"><label for="budget">Total Biaya</label></div>
-                                                <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                        <tr>
+                                            <td align="middle" style="background-color: yellow"> Pendapatan Setelah Pajak </td>
+                                            <td align="middle" style="background-color: yellow"></td>
+                                            <td align="middle" style="background-color: yellow">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Pendapatan" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle">  </td>
+                                            <td align="middle">  </td>
+                                            <td align="middle">  </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle"> Rincian Biaya </td>
+                                            <td align="middle"></td>
+                                            <td align="middle"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle"> Biaya Administrasi </td>
+                                            <td align="middle"> 0 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Adm" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle"> Biaya Produksi dan Operasional </td>
+                                            <td align="middle"> 33 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Produksi" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle"> Biaya Hardware & Infrastruktur </td>
+                                            <td align="middle"> 0 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Hardware" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle"> Biaya Perawatan / Garansi </td>
+                                            <td align="middle"> 4 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle"> Biaya Lain-Lain </td>
+                                            <td align="middle"> 14 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Lain" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle"> Biaya Entertaint </td>
+                                            <td align="middle"> 18 % </td>
+                                            <td align="middle">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle" style="background-color: yellow"> Total Biaya </td>
+                                            <td align="middle" style="background-color: yellow"></td>
+                                            <td align="middle" style="background-color: yellow">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle">  </td>
+                                            <td align="middle">  </td>
+                                            <td align="middle">  </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle" style="background-color: yellow"> Perkiraan Laba Rugi </td>
+                                            <td align="middle" style="background-color: yellow"> 30 % </td>
+                                            <td align="middle" style="background-color: yellow">
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Laba" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+                                        <tr>
+                                            <td align="middle">
+                                                <div class="col-md-12">
+                                                    <label>Keterangan</label><br>
+                                                    <textarea name="keterangan" class="form-control" title="-- Keterangan --"></textarea>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <!-- ./box-header -->
                         </div>
-                        <!-- ./box-box -->
                     </form>
-
-                            <center>
-                            <div class="col-md-12">
-                                <div class="box box-default">
-                                    <div class="box-header with-border">
-                                        <div class="col-md-6">
-                                            <label><h4><b>
-                                                        Total
-                                            </b></h4></label><br>
-                                            <div class="form-group">
-                                                <div class="col-md-6">
-                                                    <div align="center"><label for="budget">Perkiraan Laba Rugi</label>  <input type="number" name="persen" style="width: 20%; height: 4%; text-align: center;">  %</div>
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <br>
-                                            <div class="form-group">
-                                                <label>Keterangan</label><br>
-                                                <textarea name="keterangan" class="form-control" title="-- Keterangan --"></textarea>
-                                            <br>
-                                            <br>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-success" name="submit" >Simpan</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </center>
                 </div>
 
                             <div class="box box-primary">
