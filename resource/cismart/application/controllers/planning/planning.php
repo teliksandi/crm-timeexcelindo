@@ -101,6 +101,7 @@ class planning extends ApplicationBase {
         // set template content
         $this->smarty->assign("template_content", "planning/detail.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($where));
+        $this->smarty->assign("komen", $this->m_planning->planning_komen($where));
        
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();

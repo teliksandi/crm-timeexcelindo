@@ -39,6 +39,12 @@ class m_planning extends CI_Model{
         }
     }
 
+    function planning_komen($where) {  
+        $sql = "SELECT * FROM komentar WHERE id_planning = ?";
+        $query = $this->db->query($sql, $where);
+        return $query->result_array();
+    }
+
     function get_data_planning() {
         $this->db->select('*');
         $this->db->from('planning');
