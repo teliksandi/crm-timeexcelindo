@@ -66,7 +66,8 @@ public function index() {
             $ttl_rows = $project_title;
             $filter = "initiation.project_title";
         }else{
-
+            $filter = "initiation.project_title";
+            $ttl_rows = "%";
         }
 
 
