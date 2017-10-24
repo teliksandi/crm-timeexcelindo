@@ -124,9 +124,17 @@ public function index() {
 
         
         $vfls = $this->m_initiation->get_file($where);
+
         foreach ($vfls as $f) {
-           $this->smarty->assign("ef",  explode(",", $f['file']));
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $ls = $f['id_file'];
         }
+        $list = $this->m_initiation->get_list_file($ls);
+
+        foreach ($list as $l) {
+           $this->smarty->assign("ef",  explode(",", $l['file']));
+        }
+
 
         $this->smarty->assign("let", $this->m_initiation->list_department_where($where));
        

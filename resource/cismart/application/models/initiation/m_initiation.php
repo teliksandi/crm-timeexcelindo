@@ -32,11 +32,25 @@ class m_initiation extends CI_Model{
         }
     }
 
-      function get_file($where){
+    function get_file($where){
         $this->db->select('*');
         $this->db->from('file');
         $this->db->join('initiation', 'file.id_initiation = initiation.id_initiation', 'left'); 
         $this->db->where('initiation.id_initiation', $where);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+    function get_list_file($where){
+        $this->db->select('*');
+        $this->db->from('file');
+        $this->db->where('id_file', $where);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
