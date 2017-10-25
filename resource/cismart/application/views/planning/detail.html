@@ -25,14 +25,15 @@
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('planning/planning/add_process')}" method="post">
-                        <!-- RIWAYAT INITIATION -->
+                       <!-- RIWAYAT INITIATION -->
                         <div class="container">                          
                           <!-- Trigger the modal with a button -->
                          <div class="box-header with-border">
-                                    <div class="form-group" align="center">
+                                <center>
+                                    <div class="form-group">
                                         <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
                                     </div>
+                                </center>
                         </div>
                           <!-- Modal -->
                           <div class="modal fade" id="r_inisiasi" role="dialog">
@@ -47,13 +48,15 @@
                                     contoh
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> 
 
+                    <form class="form-horizontal" action="{$config->site_url('planning/planning/add_process')}" method="post">
+                    {foreach $result as $rs}
                         <div class="box box-default">
                             <div class="box-header with-border">
                                 <table class="table table-striped" border="3" align="center">
@@ -61,41 +64,41 @@
                                         <tr>
                                             <td width="15%" align="middle"><b> Uraian </b></td>
                                             <td width="5%" align="middle"><b> % </b></td>
-                                            <td width="15%" align="middle"><b> Total </b></td>
+                                            <td width="15%" align="middle"><b> Totalotal </b></td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Total Anggaran </td>
                                             <td align="middle"></td>
                                             <td align="middle">
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$rs.budget|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> DPP </td>
                                             <td align="middle"></td>
                                             <td align="middle">
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="DPP" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="DPP" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="dpp_hasil" readonly></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> PPN </td>
                                             <td align="middle"> 10 % </td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="ppn_hasil"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> PPH </td>
                                             <td align="middle"> 2 % </td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="pph_hasil"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle" style="background-color: yellow"> Pendapatan Setelah Pajak </td>
                                             <td align="middle" style="background-color: yellow"></td>
                                             <td align="middle" style="background-color: yellow">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Pendapatan" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Pendapatan" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="netto" readonly></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -110,51 +113,51 @@
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Administrasi </td>
-                                            <td align="middle"> 0 % </td>
+                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi"> %</td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Adm" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" ></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Produksi dan Operasional </td>
-                                            <td align="middle"> 33 % </td>
+                                            <td align="middle"><input type="text" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi"> %</td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Produksi" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" ></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Hardware & Infrastruktur </td>
-                                            <td align="middle"> 0 % </td>
+                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware"> %</td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Hardware" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Perawatan / Garansi </td>
-                                            <td align="middle"> 4 % </td>
+                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan"> %</td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Lain-Lain </td>
-                                            <td align="middle"> 14 % </td>
+                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain"> %</td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Lain" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Lain" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Entertaint </td>
-                                            <td align="middle"> 18 % </td>
+                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint"> %</td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle" style="background-color: yellow"> Total Biaya </td>
                                             <td align="middle" style="background-color: yellow"></td>
                                             <td align="middle" style="background-color: yellow">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="total_biaya" readonly readonly></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -164,9 +167,9 @@
                                         </tr>
                                         <tr>
                                             <td align="middle" style="background-color: yellow"> Perkiraan Laba Rugi </td>
-                                            <td align="middle" style="background-color: yellow"> 30 % </td>
+                                            <td align="middle" style="background-color: yellow"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba"> %</td>
                                             <td align="middle" style="background-color: yellow">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Laba" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Laba" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="hasil_laba"></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -181,14 +184,17 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div class="form-group">
+                                            <button type="submit" class="btn btn-success" name="submit" >Simpan</button>
+                                        </div>
                             </div>
                         </div>
                     </form>
                 </div>
-
+{/foreach}
                             <div class="box box-primary">
                                 <div class="box-header with-border">
-                                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
+                                    <form class="form-horizontal" action="{$config->site_url('planning/planning/komentar_process')}" method="post">
                                         <div class="col-md-8">
                                         <div class="form-group">
                                             <table>
@@ -197,7 +203,7 @@
                                                     Komentar :
                                                     {foreach $komen as $km}
                                                         <br>
-                                                        <b><textarea disabled class="form-control">
+                                                        <b><textarea readonly class="form-control">
                                                             {$km.komentar}</textarea></b>
                                                 <div align="right">
                                                     Dikomentari pada : 
@@ -208,7 +214,7 @@
                                                 </div>
                                                 </div>
                                             </table>
-                                                <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
+                                                <input type="hidden" name="id_planning_komentar" value="{$jn.id_planning|default:''}">
                                                 <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
                                                     <br>
                                                     <div class="form-group">
@@ -232,4 +238,296 @@
         </div> 
         <!-- /.col -->
     </div>
+
+    <script type="text/javascript">
+
+        var x = {$rs.budget} / 11 * 10 ;
+        var y = {$rs.budget} / 11 ;
+        var z = x * 0.02 ;  
+        var tot_s_pajak = x - z ;
+        document.getElementById("dpp_hasil").value = x;
+        document.getElementById("ppn_hasil").value = y; 
+        document.getElementById("pph_hasil").value = z;
+        document.getElementById("netto").value = tot_s_pajak;
+
+       
+        function biayaAdministrasi(){
+            var xx = document.getElementById("b_administrasi").value;
+            var ret = xx.replace(',','');
+            var rat = ret.replace(',','');
+            var rot = parseInt(rat.replace(',',''));
+            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+          
+            document.getElementById("persen_b_administrasi").value = persen_prod;
+
+            var prod  = document.getElementById("b_produksi").value;
+            var a_prod = prod.replace(',','');
+            var b_prod = a_prod.replace(',','');
+            var c_prod = parseInt(b_prod.replace(',',''));
+            
+
+            var hard  = document.getElementById("b_hardware").value;
+            var a_hard = hard.replace(',','');
+            var b_hard = a_hard.replace(',','');
+            var c_hard = parseInt(b_hard.replace(',',''));
+            
+
+            var para  = document.getElementById("b_perawatan").value;
+            var a_para = para.replace(',','');
+            var b_para = a_para.replace(',','');
+            var c_para = parseInt(b_para.replace(',',''));
+            
+
+            var lain  = document.getElementById("b_lain").value;
+            var a_lain = lain.replace(',','');
+            var b_lain = a_lain.replace(',','');
+            var c_lain = parseInt(b_lain.replace(',',''));
+            
+
+            var entert= document.getElementById("b_entertaint").value   ;
+            var a_entert = entert.replace(',','');
+            var b_entert = a_entert.replace(',','');
+            var c_entert = parseInt(b_entert.replace(',',''));
+            
+            var total_semua = rot + c_prod + c_hard + c_para + c_lain + c_entert ;
+            document.getElementById("total_biaya").value = total_semua;
+
+            var laba = tot_s_pajak - total_semua;
+            document.getElementById("hasil_laba").value = laba;
+            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            document.getElementById("persen_laba").value = p_laba;
+        }   
+
+        function biayaProduksi(){
+            var xx = document.getElementById("b_produksi").value;
+            var ret = xx.replace(',','');
+            var rat = ret.replace(',','');
+            var rot = parseInt(rat.replace(',',''));
+            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+          
+            document.getElementById("persen_b_produksi").value = persen_prod;
+
+            var admin = document.getElementById("b_administrasi").value;            
+            var a_admin = admin.replace(',','');
+            var b_admin = a_admin.replace(',','');
+            var c_admin = parseInt(b_admin.replace(',','')); 
+
+            var hard  = document.getElementById("b_hardware").value;
+            var a_hard = hard.replace(',','');
+            var b_hard = a_hard.replace(',','');
+            var c_hard = parseInt(b_hard.replace(',',''));
+            
+
+            var para  = document.getElementById("b_perawatan").value;
+            var a_para = para.replace(',','');
+            var b_para = a_para.replace(',','');
+            var c_para = parseInt(b_para.replace(',',''));
+            
+
+            var lain  = document.getElementById("b_lain").value;
+            var a_lain = lain.replace(',','');
+            var b_lain = a_lain.replace(',','');
+            var c_lain = parseInt(b_lain.replace(',',''));
+            
+
+            var entert= document.getElementById("b_entertaint").value   ;
+            var a_entert = entert.replace(',','');
+            var b_entert = a_entert.replace(',','');
+            var c_entert = parseInt(b_entert.replace(',',''));
+            
+            var total_semua = c_admin + rot + c_hard + c_para + c_lain + c_entert ;
+            document.getElementById("total_biaya").value = total_semua;
+            var laba = tot_s_pajak - total_semua;
+            document.getElementById("hasil_laba").value = laba;
+            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            document.getElementById("persen_laba").value = p_laba;
+        }
+
+        function biayaHardware(){
+            var xx = document.getElementById("b_hardware").value;
+            var ret = xx.replace(',','');
+            var rat = ret.replace(',','');
+            var rot = parseInt(rat.replace(',',''));
+            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+          
+            document.getElementById("persen_b_hardware").value = persen_prod;
+
+             var admin = document.getElementById("b_administrasi").value;            
+            var a_admin = admin.replace(',','');
+            var b_admin = a_admin.replace(',','');
+            var c_admin = parseInt(b_admin.replace(',','')); 
+
+            
+
+            var prod  = document.getElementById("b_produksi").value;
+            var a_prod = prod.replace(',','');
+            var b_prod = a_prod.replace(',','');
+            var c_prod = parseInt(b_prod.replace(',',''));
+
+            var para  = document.getElementById("b_perawatan").value;
+            var a_para = para.replace(',','');
+            var b_para = a_para.replace(',','');
+            var c_para = parseInt(b_para.replace(',',''));
+            
+
+            var lain  = document.getElementById("b_lain").value;
+            var a_lain = lain.replace(',','');
+            var b_lain = a_lain.replace(',','');
+            var c_lain = parseInt(b_lain.replace(',',''));
+            
+
+            var entert= document.getElementById("b_entertaint").value   ;
+            var a_entert = entert.replace(',','');
+            var b_entert = a_entert.replace(',','');
+            var c_entert = parseInt(b_entert.replace(',',''));
+            
+            var total_semua = c_admin + c_prod + rot + c_para + c_lain + c_entert ;
+            document.getElementById("total_biaya").value = total_semua;
+            var laba = tot_s_pajak - total_semua;
+            document.getElementById("hasil_laba").value = laba;
+            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            document.getElementById("persen_laba").value = p_laba;
+        }   
+
+        function biayaPerawatan(){
+            var xx = document.getElementById("b_perawatan").value;
+            var ret = xx.replace(',','');
+            var rat = ret.replace(',','');
+            var rot = parseInt(rat.replace(',',''));
+            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+          
+            document.getElementById("persen_b_perawatan").value = persen_prod;
+
+             var admin = document.getElementById("b_administrasi").value;            
+            var a_admin = admin.replace(',','');
+            var b_admin = a_admin.replace(',','');
+            var c_admin = parseInt(b_admin.replace(',','')); 
+
+            
+
+            var prod  = document.getElementById("b_produksi").value;
+            var a_prod = prod.replace(',','');
+            var b_prod = a_prod.replace(',','');
+            var c_prod = parseInt(b_prod.replace(',',''));
+            
+
+            var hard  = document.getElementById("b_hardware").value;
+            var a_hard = hard.replace(',','');
+            var b_hard = a_hard.replace(',','');
+            var c_hard = parseInt(b_hard.replace(',',''));            
+
+            var lain  = document.getElementById("b_lain").value;
+            var a_lain = lain.replace(',','');
+            var b_lain = a_lain.replace(',','');
+            var c_lain = parseInt(b_lain.replace(',',''));
+            
+
+            var entert= document.getElementById("b_entertaint").value   ;
+            var a_entert = entert.replace(',','');
+            var b_entert = a_entert.replace(',','');
+            var c_entert = parseInt(b_entert.replace(',',''));
+            
+            var total_semua = c_admin + c_prod + c_hard + rot + c_lain + c_entert ;
+            document.getElementById("total_biaya").value = total_semua;
+            var laba = tot_s_pajak - total_semua;
+            document.getElementById("hasil_laba").value = laba;
+            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            document.getElementById("persen_laba").value = p_laba;
+        }  
+
+        function biayaLain(){
+            var xx = document.getElementById("b_lain").value;
+            var ret = xx.replace(',','');
+            var rat = ret.replace(',','');
+            var rot = parseInt(rat.replace(',',''));
+            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+          
+            document.getElementById("persen_b_lain").value = persen_prod;
+             var admin = document.getElementById("b_administrasi").value;            
+            var a_admin = admin.replace(',','');
+            var b_admin = a_admin.replace(',','');
+            var c_admin = parseInt(b_admin.replace(',','')); 
+
+            
+
+            var prod  = document.getElementById("b_produksi").value;
+            var a_prod = prod.replace(',','');
+            var b_prod = a_prod.replace(',','');
+            var c_prod = parseInt(b_prod.replace(',',''));
+            
+
+            var hard  = document.getElementById("b_hardware").value;
+            var a_hard = hard.replace(',','');
+            var b_hard = a_hard.replace(',','');
+            var c_hard = parseInt(b_hard.replace(',',''));
+            
+
+            var para  = document.getElementById("b_perawatan").value;
+            var a_para = para.replace(',','');
+            var b_para = a_para.replace(',','');
+            var c_para = parseInt(b_para.replace(',',''));
+            
+
+            var entert= document.getElementById("b_entertaint").value   ;
+            var a_entert = entert.replace(',','');
+            var b_entert = a_entert.replace(',','');
+            var c_entert = parseInt(b_entert.replace(',',''));
+            
+            var total_semua = c_admin + c_prod + c_hard + c_para + rot + c_entert ;
+            document.getElementById("total_biaya").value = total_semua;
+            var laba = tot_s_pajak - total_semua;
+            document.getElementById("hasil_laba").value = laba;
+            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            document.getElementById("persen_laba").value = p_laba;
+        }
+
+        function biayaEntertaint(){
+            var xx = document.getElementById("b_entertaint").value;
+            var ret = xx.replace(',','');
+            var rat = ret.replace(',','');
+            var rot = parseInt(rat.replace(',',''));
+            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+          
+            document.getElementById("persen_b_entertaint").value = persen_prod;
+
+             var admin = document.getElementById("b_administrasi").value;            
+            var a_admin = admin.replace(',','');
+            var b_admin = a_admin.replace(',','');
+            var c_admin = parseInt(b_admin.replace(',','')); 
+
+            
+
+            var prod  = document.getElementById("b_produksi").value;
+            var a_prod = prod.replace(',','');
+            var b_prod = a_prod.replace(',','');
+            var c_prod = parseInt(b_prod.replace(',',''));
+            
+
+            var hard  = document.getElementById("b_hardware").value;
+            var a_hard = hard.replace(',','');
+            var b_hard = a_hard.replace(',','');
+            var c_hard = parseInt(b_hard.replace(',',''));
+            
+
+            var para  = document.getElementById("b_perawatan").value;
+            var a_para = para.replace(',','');
+            var b_para = a_para.replace(',','');
+            var c_para = parseInt(b_para.replace(',',''));
+            
+
+            var lain  = document.getElementById("b_lain").value;
+            var a_lain = lain.replace(',','');
+            var b_lain = a_lain.replace(',','');
+            var c_lain = parseInt(b_lain.replace(',',''));
+            
+
+            var total_semua = c_admin + c_prod + c_hard + c_para + c_lain + rot ;
+            document.getElementById("total_biaya").value = total_semua;
+            var laba = tot_s_pajak - total_semua;
+            document.getElementById("hasil_laba").value = laba;
+            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            document.getElementById("persen_laba").value = p_laba;
+        }   
+
+    </script>
 </section>
