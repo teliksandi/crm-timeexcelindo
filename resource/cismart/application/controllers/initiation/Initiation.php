@@ -453,12 +453,12 @@ public function index() {
     }
 
 
-    function pdf_view(){
-    $this->_set_page_rule("U");
-      // set template content
-    $this->smarty->assign("template_content", "tambahan/pdf.html");
-
-    parent::display();
+    function pdf_view($judul){
+        $this->_set_page_rule("U");
+          // set template content
+        $this->smarty->assign("template_content", "tambahan/pdf.html");
+        $this->smarty->assign("judul", $judul);
+        parent::display();
     }
 
 
