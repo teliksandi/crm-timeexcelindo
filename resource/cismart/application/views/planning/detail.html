@@ -45,10 +45,103 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    contoh
+                                <div class="box-body">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="client_name">Client Name</label>
+                                                <input type="text" name="client" class="form-control"  title="Nama Client" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="project_title">Project title</label>
+                                                <input type="text" name="project_title" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Project Manager Department</label>
+                                            <br>
+                                                <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
+                                                    {foreach $datadepartment as $cth}
+                                                        <option value="{$cth.id_department}" 
+                                                    {if $cth.id_department|in_array:$ex} selected="selected"{/if}>{$cth.nama_department}
+                                                        </option>
+                                                    {foreachelse}
+                                                    Data tidak ditemukan !
+                                                    {/foreach}
+                                                </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Team Member Name</label>
+                                            <br>
+                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
+                                                    {foreach $marketing_kar as $value}
+                                                        <option value="{$value.id_karyawan}"
+                                                    {if $value.id_karyawan|in_array:$exs} selected="selected"{/if}>{$value.nama_karyawan}
+                                                        </option>
+                                                    {foreachelse}
+                                                    Data tidak ditemukan !
+                                                    {/foreach}
+                                                </select>
+                                        </div>
+                                        <div class="form-group" style="overflow: scroll; height: 400px; width: 105%;">
+                                            <div class="form-group">
+                                                <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
+                                                    <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$jn.project_desc|default:''}
+                                                    </textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
+                                                    <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$jn.project_just|default:''}
+                                                    </textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
+                                                    <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$jn.not_in_project|default:''}
+                                                    </textarea>
+                                            </div>
+                                        </div>
+                                        <!-- ./scroll -->
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <label for="budget">Budget</label>
+                                                    <input type="text" name="budget" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <label for="start_date">Start date</label>    
+                                                    <input type="text" name="start_date" value="{date('d F Y', strtotime($jn.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <label for="due_date">Due date</label>
+                                                    <input type="text" name="due_date" value="{date('d F Y', strtotime($jn.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="files[]">Files</label>
+                                            <div style="overflow-y: scroll; height: 200px;">
+                                                <div class="form-group">
+                                                <center>
+                                                    {foreach $ef as $f}
+                                                    <table>
+                                                        <input type="hidden" name="nm" value="{$f}">
+                                                            <div class="form-group">
+                                                                <a href="{$f}">
+                                                                    <input type="image" name="submit" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px"></a>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                {$f}
+                                                            </div>
+                                                    </table>
+                                                    {/foreach}
+                                                </center>
+                                                </div>
+                                            </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                               </div>
                             </div>
@@ -172,8 +265,10 @@
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Laba" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="hasil_laba"></div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table border="3" align="center"  width="100%" height="120px">
+                                    <tbody>
                                         <tr>
                                             <td align="middle">
                                                 <div class="col-md-12">
@@ -184,9 +279,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="form-group">
-                                            <button type="submit" class="btn btn-success" name="submit" >Simpan</button>
-                                        </div>
+                                <br>
+                                <center>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success" name="submit" >Simpan</button>
+                                    </div>
+                                </center>
                             </div>
                         </div>
                     </form>
@@ -199,8 +297,25 @@
                                         <div class="form-group">
                                             <table>
                                                 <br>
-                                                <div style="overflow-y: scroll; height: 200px">
-                                                    Komentar :
+                                                <div id="scroll-hide">
+                                                    <div class="inner">
+
+                                                <style type="text/css">
+                                                    #scroll-hide{
+                                                        width:100%;
+                                                        overflow:hidden;
+                                                        background:#fff;
+                                                        }
+                                                    #scroll-hide .inner{
+                                                        width:100%;
+                                                        height:100px;
+                                                        overflow:auto;
+                                                        margin:20px;
+                                                        padding-right:20px;
+                                                        }
+                                                </style>
+
+                                                    <b>Komentar :</b>
                                                     {foreach $komen as $km}
                                                         <br>
                                                         <b><textarea readonly class="form-control">
@@ -212,6 +327,7 @@
                                                         <br>
                                                     {/foreach}
                                                 </div>
+                                                    </div>
                                                 </div>
                                             </table>
                                                 <input type="hidden" name="id_planning_komentar" value="{$jn.id_planning|default:''}">
@@ -231,6 +347,13 @@
                                     </form>
                                 </div>
                             </div>
+                            <br>
+                            <center>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success" name="submit" >Simpan</button>
+                                                 <button type="submit" class="btn btn-danger" name="reset" >Reset</button>
+                                </div>
+                            </center>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -238,6 +361,8 @@
         </div> 
         <!-- /.col -->
     </div>
+
+    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 
     <script type="text/javascript">
 
