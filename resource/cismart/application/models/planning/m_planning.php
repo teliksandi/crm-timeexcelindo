@@ -39,6 +39,23 @@ class m_planning extends CI_Model{
         }
     }
 
+    function initiation_detail($where){
+        $sql = "SELECT a.id_initiation, b.*, c.*, d.*, e.* FROM planning a 
+                left JOIN initiation b on a.id_initiation = b.id_initiation
+                left JOIN client c on b.id_client = c.id_client 
+                left JOIN karyawan d on b.id_karyawan = d.id_karyawan
+                left JOIN department e on b.id_department = e.id_department
+                WHERE  a.id_planning = ?";
+        $query = $this->db->query($sql, $where);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
     function planning_komen($where) {  
         $sql = "SELECT * FROM komentar WHERE id_planning = ?";
         $query = $this->db->query($sql, $where);
@@ -64,6 +81,18 @@ class m_planning extends CI_Model{
         $query = $this->db->get();
         return $query->result_array();
          
+    }
+
+    function get_department_by_id($where){
+        $sql = "SELECT * FROM initiation left join planning on initiation.id_initiation = planning.id_initiation WHERE planning.id_planning = ?";
+        $query = $this->db->query($sql, $where);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return NULL;
+        }
     }
 
     function update_planning_b($params, $where){

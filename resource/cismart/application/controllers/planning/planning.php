@@ -101,8 +101,15 @@ class planning extends ApplicationBase {
         // set template content
         $this->smarty->assign("template_content", "planning/detail.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($where));
-        $this->smarty->assign("komen", $this->m_planning->planning_komen($where));
-       
+
+        $this->smarty->assign("join", $this->m_planning->initiation_detail($where));
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($where));
+        $kk = $this->m_planning->get_department_by_id($where);
+        $this->smarty->assign("dprt", explode(",", $kk['id_department']));
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("kry", explode(",", $kk['id_karyawan']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -114,16 +121,13 @@ class planning extends ApplicationBase {
 
     function add_process(){
 
-        $this->_set_page_rule("U"); 
+         $this->_set_page_rule("U"); 
 
-        $this->tnotification->set_rules('PPN', 'Biaya PPN', 'trim|required');
+        $this->tnotification->set_rules('id_planning', 'DPP', 'trim|required');
 
-        // var_dump($this->input->post("id_planning"));
-        // exit();
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
-                'total_anggaran'                => $this->idrToInt($this->input->post("Anggaran")),
                 'DPP'                           => $this->idrToInt($this->input->post("DPP")),
                 'PPN'                           => $this->idrToInt($this->input->post("PPN")),
                 'PPH'                           => $this->idrToInt($this->input->post("PPH")),
@@ -144,7 +148,7 @@ class planning extends ApplicationBase {
                 'id_planning' => $this->input->post('id_planning', TRUE),
             );
 
-            if ($this->m_planning->update_planning_b($params,$where)) {
+            if ($this->m_planning->update_planning_b($params, $where    )) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
