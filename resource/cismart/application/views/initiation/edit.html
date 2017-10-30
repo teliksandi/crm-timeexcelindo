@@ -153,9 +153,28 @@
                                                         <input type="text" name="tanggal_due" value ="{$result.due_date|default:''}" class="tanggal" maxlength="10" size="10">
                                                     </td>
                                                     <td align="center">
-                                                    (File Berbentuk png, jpg, jpeg, docx, pdf, xlsx, pptx , rar, zip.)<br>
-                                                    Ket : Gunakan Ctrl + Click Untuk Memilih > 1 File Pada Folder File
-                                                        <input type="file" name="files[]" id="files" multiple>
+                                                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                                        <div class="col-md-6">
+                                                            <div class="box-header with-border">
+                                                                <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
+                                                                <div style="overflow-y: scroll; height: 100px; width: 500px;">
+                                                                <div class="form-group">
+                                                                    <center>
+                                                                            {foreach $ef as $f}
+                                                                                    <table>
+                                                                                        <input type="hidden" name="nm" value="{$f}">
+                                                                                            <div class="form-group">
+                                                                                                <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>    {if $f !== ""}<a href="" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i></a>  <a href="{$config->site_url('initiation/initiation/delete_file')}/{$f}" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash-o" title="Delete"></i></a>{/if}
+                                                                                            </div>
+                                                                                            {if $f !== ""}
+                                                                                            <hr></hr>
+                                                                                            {/if}
+                                                                                    </table>
+                                                                            {/foreach}
+                                                                    </center>
+                                                                </div>
+                                                            </div>
+                                                    </form>
                                                     </td>
                                                 </tr>
                                             </table>
