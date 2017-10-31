@@ -76,6 +76,13 @@ class planning extends ApplicationBase {
                 'b_entertaint'                  => "0",
                 'total_biaya'                   => "0",
                 'perkiraan_rugi_laba'           => "0",
+                'p_b_administrasi'              => "0",
+                'p_b_produksi_dan_operasional'  => "0",
+                'p_b_hardware_dan_infrastruktur'=> "0",
+                'p_b_perawatan'                 => "0",
+                'p_b_lain_lain'                 => "0",
+                'p_b_entertaint'                => "0",
+                'p_perkiraan_rugi_laba'         => "0",
                               
             );
             $this->m_planning->insert_planning($params);
@@ -142,6 +149,13 @@ class planning extends ApplicationBase {
                 'b_entertaint'                  => $this->idrToInt($this->input->post("Entertaint")),
                 'total_biaya'                   => $this->idrToInt($this->input->post("Total")),
                 'perkiraan_rugi_laba'           => $this->idrToInt($this->input->post("laba")),
+                'p_b_administrasi'              => $this->idrToInt($this->input->post("persen_biaya_administrasi")),
+                'p_b_produksi_dan_operasional'  => $this->idrToInt($this->input->post("persen_biaya_produksi")),
+                'p_b_hardware_dan_infrastruktur'=> $this->idrToInt($this->input->post("persen_biaya_hardware")),
+                'p_b_perawatan'                 => $this->idrToInt($this->input->post("persen_biaya_perawatan")),
+                'p_b_lain_lain'                 => $this->idrToInt($this->input->post("persen_biaya_lain")),
+                'p_b_entertaint'                => $this->idrToInt($this->input->post("persen_biaya_entertaint")),
+                'p_perkiraan_rugi_laba'         => $this->idrToInt($this->input->post("persen_rugi_laba")),
                 'Catatan'                       => $this->input->post("Ket")
                 
             );

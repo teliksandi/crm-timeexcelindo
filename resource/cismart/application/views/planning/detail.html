@@ -53,7 +53,7 @@
                                             <div class="form-group">
                                                 <label>Project Manager Department</label>
                                                 <br>
-                                                    <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" disabled >
+                                                    <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" disabled style="width: 100%;">
                                                         {foreach $datadepartment as $cth}
                                                             <option value="{$cth.id_department}" 
                                                         {if $cth.id_department|in_array:$dprt} selected="selected"{/if}>{$cth.nama_department}
@@ -66,7 +66,7 @@
                                             <div class="form-group">
                                                 <label>Team Member Name</label>
                                                 <br>
-                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" disabled>
+                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" disabled style="width: 100%;">
                                                         {foreach $marketing_kar as $value}
                                                             <option value="{$value.id_karyawan}"
                                                         {if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}
@@ -152,7 +152,7 @@
                                             <div class="form-group">
                                                 <label>Project Manager Department</label>
                                                 <br>
-                                                    <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" readonly disabled >
+                                                    <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" readonly disabled style="width: 100%;">
                                                         {foreach $datadepartment as $cth}
                                                             <option value="{$cth.id_department}" 
                                                         {if $cth.id_department|in_array:$dprt} selected="selected"{/if}>{$cth.nama_department}
@@ -165,7 +165,7 @@
                                             <div class="form-group">
                                                 <label>Team Member Name</label>
                                                 <br>
-                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled>
+                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled style="width: 100%;">
                                                         {foreach $marketing_kar as $value}
                                                             <option value="{$value.id_karyawan}"
                                                         {if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}
@@ -266,42 +266,42 @@
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Administrasi </td>
-                                                    <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$rs.p_b_administrasi|default:''}"> %</td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_administrasi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$rs.p_b_administrasi|default:''}"> %</td>
                                                     <td align="middle">
                                                         <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="{$rs.b_administrasi|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" ></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Produksi dan Operasional </td>
-                                                    <td align="middle"><input type="text" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$rs.p_b_produksi_dan_operasional|default:''}"> %</td>
+                                                    <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$rs.p_b_produksi_dan_operasional|default:''}"> %</td>
                                                     <td align="middle">
                                                         <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="{$rs.b_produksi_dan_operasional|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" ></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Hardware & Infrastruktur </td>
-                                                    <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$rs.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_hardware" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$rs.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
                                                     <td align="middle">
                                                         <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="{$rs.b_hardware_dan_infrastruktur|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Perawatan / Garansi </td>
-                                                    <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$rs.p_b_perawatan|default:''}"> %</td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_perawatan" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$rs.p_b_perawatan|default:''}"> %</td>
                                                     <td align="middle">
                                                         <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="{$rs.b_perawatan|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Lain-Lain </td>
-                                                    <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$rs.p_b_lain_lain|default:''}"> %</td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_lain" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$rs.p_b_lain_lain|default:''}"> %</td>
                                                     <td align="middle">
                                                         <div align="center">Rp.&nbsp;<input type="text" name="Lain" value="{$rs.b_lain_lain|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Entertaint </td>
-                                                    <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$rs.p_b_entertaint|default:''}"> %</td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_entertaint" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$rs.p_b_entertaint|default:''}"> %</td>
                                                     <td align="middle">
                                                         <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value="{$rs.b_entertaint|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint"></div>
                                                     </td>
@@ -320,7 +320,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td align="middle" style="background-color: yellow"> Perkiraan Laba Rugi </td>
-                                                    <td align="middle" style="background-color: yellow"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$rs.p_perkiraan_rugi_laba|default:''}"> %</td>
+                                                    <td align="middle" style="background-color: yellow"><input type="number" name="persen_rugi_laba" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$rs.p_perkiraan_rugi_laba|default:''}"> %</td>
                                                     <td align="middle" style="background-color: yellow">
                                                         <div align="center">Rp.&nbsp;<input type="text" name="laba" value="{$rs.perkiraan_rugi_laba|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="hasil_laba"></div>
                                                     </td>
@@ -398,42 +398,42 @@
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Administrasi </td>
-                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$rs.p_b_administrasi|default:''}"> %</td>
+                                            <td align="middle"><input type="number" name="persen_biaya_administrasi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$rs.p_b_administrasi|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="{$rs.b_administrasi|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" ></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Produksi dan Operasional </td>
-                                            <td align="middle"><input type="text" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$rs.p_b_produksi_dan_operasional|default:''}"> %</td>
+                                            <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$rs.p_b_produksi_dan_operasional|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="{$rs.b_produksi_dan_operasional|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" ></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Hardware dan Infrastruktur </td>
-                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$rs.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
+                                            <td align="middle"><input type="number" name="persen_biaya_hardware" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$rs.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="{$rs.b_hardware_dan_infrastruktur|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Perawatan / Garansi </td>
-                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$rs.p_b_perawatan|default:''}"> %</td>
+                                            <td align="middle"><input type="number" name="persen_biaya_perawatan" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$rs.p_b_perawatan|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="{$rs.b_perawatan|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Lain-Lain </td>
-                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$rs.p_b_lain_lain|default:''}"> %</td>
+                                            <td align="middle"><input type="number" name="persen_biaya_lain" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$rs.p_b_lain_lain|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Lain" value="{$rs.b_lain_lain|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Entertaint </td>
-                                            <td align="middle"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$rs.p_b_entertaint|default:''}"> %</td>
+                                            <td align="middle"><input type="number" name="persen_biaya_entertaint" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$rs.p_b_entertaint|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value="{$rs.b_entertaint|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint"></div>
                                             </td>
@@ -452,7 +452,7 @@
                                         </tr>
                                         <tr>
                                             <td align="middle" style="background-color: yellow"> Perkiraan Laba Rugi </td>
-                                            <td align="middle" style="background-color: yellow"><input type="number" name="persen" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$rs.p_perkiraan_rugi_laba|default:''}"> %</td>
+                                            <td align="middle" style="background-color: yellow"><input type="number" name="persen_rugi_laba" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$rs.p_perkiraan_rugi_laba|default:''}"> %</td>
                                             <td align="middle" style="background-color: yellow">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="laba" value="{$rs.perkiraan_rugi_laba|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="hasil_laba"></div>
                                             </td>
