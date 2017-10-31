@@ -66,10 +66,10 @@
                                 <td align="middle">{$result.email}</td>
                                 <td>
                                    <a href="{$config->site_url('master/client/edit')}/{$result.id_client}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteclient"><i class="fa fa-trash-o"></i> Delete</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_client|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
 
                                      <!-- Modal -->
-                                      <div class="modal fade" id="deleteclient" role="dialog">
+                                      <div class="modal fade" id="{$result.id_client|default:''}" role="dialog">
                                         <div class="modal-dialog modal-lg">
                                           <div class="modal-content">
                                             <div class="modal-header">
