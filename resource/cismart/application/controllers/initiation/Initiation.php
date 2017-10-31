@@ -50,29 +50,28 @@ public function index() {
         $filter         = !empty($search['filter']) ? $search['filter'] : "%";
         $params         =  array($project_title);
 
-
         $ttl_rows = "";
         if ($filter == "client_id") {
-            $nm_client = !empty($search['project_title']) ? $search['project_title'] : "%";
-            $hsl = $this->m_client->get_id($nm_client);
-            $ttl_rows = $hsl['id_client'];
-            $filter = "initiation.id_client";
+            $nm_client = !empty($search['project_title']) ? $search['project_title']  : "%";
+            $ttl_rows = $project_title;
+            $filter = "client.client_name";
         }elseif ($filter == "start_date") {
             $project_title = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
             $ttl_rows = $project_title;
-            $filter = "initiation.start_date";
+            $filter = "initiation.due_date";
         }elseif ($filter == "project_title") {
             $project_title = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
             $ttl_rows = $project_title;
             $filter = "initiation.project_title";
         }else{
             $filter = "initiation.project_title";
-            $ttl_rows = "%";
+            $ttl_rows = "";
         }
 
 
         $config['base_url'] = site_url("initiation/initiation/index/");
         $config['total_rows'] = $this->m_initiation->search_initiation($filter, $ttl_rows);
+        $this->smarty->assign("k", $this->m_initiation->search_initiation($filter, $ttl_rows));
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
@@ -96,7 +95,6 @@ public function index() {
         $params = array($project_title, ($start - 1), $config['per_page']);
         // $this->smarty->assign("initiation_client", $this->m_initiation->get_list_initiation($params));
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen_get());
-
         $this->smarty->assign("get", $this->m_initiation->get_list_initiation($filter, $params));
 
         
@@ -106,7 +104,24 @@ public function index() {
         parent::display();       
     }
 
-
+    function search_process(){
+        // set page rules
+        $this->_set_page_rule("R");
+        //--
+        if ($this->input->post('save') == 'Cari') {
+            $params = array(
+                "project_title" => $this->input->post('project_title'),
+                "filter"        => $this->input->post('filter')
+            );
+            // set
+            $this->tsession->set_userdata('search_initiation', $params);
+        } else {
+            // unset
+            $this->tsession->unset_userdata('search_initiation');
+        }
+        //--
+        redirect('initiation/initiation');
+    }
 
     function detail($where){
         $this->_set_page_rule("U");
@@ -237,24 +252,6 @@ public function index() {
         return $currToIn = str_ireplace($search, $replace, $nm_fl);
     }
 
-
-  function search_process(){
-        // set page rules
-        $this->_set_page_rule("R");
-        //--
-        if ($this->input->post('save') == 'Cari') {
-            $params = array(
-                "project_title" => $this->input->post('project_title'),
-            );
-            // set
-            $this->tsession->set_userdata('search_initiation', $params);
-        } else {
-            // unset
-            $this->tsession->unset_userdata('search_initiation');
-        }
-        //--
-        redirect('initiation/initiation');
-    }
 
    function add_initiation(){
         // set page rules

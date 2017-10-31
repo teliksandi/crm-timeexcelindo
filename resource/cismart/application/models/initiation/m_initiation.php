@@ -267,7 +267,7 @@ class m_initiation extends CI_Model{
     }
 
     function search_initiation($filter, $params){
-        $sql = "SELECT  COUNT(*) as 'total'
+        $sql = "SELECT  COUNT(*) as 'total', client.client_name
                 From initiation left join closing on initiation.id_initiation = closing.id_initiation 
                 left join planning on initiation.id_initiation = planning.id_initiation 
                 left join client on initiation.id_client = client.id_client
