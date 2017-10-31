@@ -176,6 +176,67 @@ public function index() {
     }
 
 
+    function delete_file($judul){
+        // set page rules
+        $this->_set_page_rule("U");
+
+        // cek input
+        $this->tnotification->set_rules($judul, 'Judul', 'trim|required');
+        $get_fl = $this->m_initiation->get_id_file($judul);
+
+        foreach ($get_fl as $i) {
+            $id_fl = $i['id_file'];
+            $id_ini = $i['id_initiation'];
+        }
+
+
+        $nm_fl = $this->m_initiation->nm_file($id_fl);
+
+        foreach ($nm_fl as $l) {
+            $fl = $l['file'];
+        }
+
+        $replaceJudul = $this->judulTojudul($judul, $fl);
+
+
+        if($this->tnotification->run() == FALSE){
+            $params = array(
+                'id_file' => $id_fl,
+            );
+            $pr = array(
+                'file'     => $replaceJudul,
+            );
+            
+            if ($this->m_initiation->delete_file($fl, $pr)){
+                unlink('resource/doc/pdf/'.$judul);
+                $this->tnotification->delete_last_field();
+                $this->tnotification->sent_notification("success", "Data berhasil dihapus");
+            }else{
+                // default error
+                $this->tnotification->sent_notification("error", "Data gagal dihapus");
+            }
+        }else{
+            // default error
+            $this->tnotification->sent_notification("error", "Data gagal dihapus");
+        }
+        // default redirect
+        redirect("initiation/initiation/edit/".$id_ini);
+    }
+
+    function judulTojudul($judul, $nm_fl) {
+        
+         $search = [
+                
+                $judul
+            ];
+
+            $replace = [
+                ''
+            ];
+
+        return $currToIn = str_ireplace($search, $replace, $nm_fl);
+    }
+
 
   function search_process(){
         // set page rules
@@ -476,6 +537,18 @@ public function index() {
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());             
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
 
+        $vfls = $this->m_initiation->get_file($params);
+
+        foreach ($vfls as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $ls = $f['id_file'];
+        }
+        $list = $this->m_initiation->get_list_file($ls);
+
+        foreach ($list as $l) {
+        $this->smarty->assign("ef",  explode(",", $l['file']));
+        }
+        
 
         // notification
         $this->tnotification->display_notification();

@@ -32,11 +32,41 @@ class m_initiation extends CI_Model{
         }
     }
 
+    function get_id_file($judul){
+        $this->db->select('*');
+        $this->db->from('file');
+        $this->db->join('initiation', 'file.id_initiation = initiation.id_initiation', 'left'); 
+        $this->db->like('file.file', $judul);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+
     function get_file($where){
         $this->db->select('*');
         $this->db->from('file');
         $this->db->join('initiation', 'file.id_initiation = initiation.id_initiation', 'left'); 
         $this->db->where('initiation.id_initiation', $where);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+    function nm_file($id){
+        $this->db->select('*');
+        $this->db->from('file');
+        $this->db->like('id_file', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -289,9 +319,9 @@ class m_initiation extends CI_Model{
         return $this->db->query($sql, $params);
     }
 
-    function delete_file($params){
-        $sql = "DELETE FROM file WHERE id_initiation= ?";
-        return $this->db->query($sql, $params);
+    function delete_file($judul, $pengganti){
+        $this->db->where('file LIKE ', $judul); 
+        return $this->db->update('file', $pengganti);
     }
 
     function delete_komentar($params){
