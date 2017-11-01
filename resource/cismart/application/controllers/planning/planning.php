@@ -193,6 +193,27 @@ class planning extends ApplicationBase {
         $this->smarty->assign("kry", explode(",", $kk['id_karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
+        $get_in = $this->m_planning->initiation_detail($where);
+        foreach ($get_in as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $id_ini = $f['id_initiation'];
+        }
+
+        $vfls = $this->m_initiation->get_file($id_ini);
+
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
+
+        foreach ($vfls as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $ls = $f['id_file'];
+        }
+
+        $list = $this->m_initiation->get_list_file($ls);
+
+        foreach ($list as $l) {
+           $this->smarty->assign("ef",  explode(",", $l['file']));
+        }
+
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 

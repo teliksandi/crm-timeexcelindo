@@ -94,26 +94,65 @@
                                                 </div>
                                             </div>
                                             <!-- ./scroll -->
+                                            <div class="col-md-6">
                                             <div class="form-group">
-                                                <div class="col-md-6">
                                                     <label for="budget">Budget</label>
-                                                        <input type="text" name="budget" class="form-control" id="budget" placeholder="" title="Estimasi harga" value="Rp. {number_format($init_rwyt.budget|default:'',0,",",".")}" readonly >
-                                                </div>
+                                                        <input type="text" name="budget" class="form-control" id="budget" placeholder="" title="Estimasi harga" value="Rp. {number_format($init_rwyt.budget|default:'',0,",",".")}" readonly style="width: 70%;">
                                             </div>
                                             <div class="form-group">
-                                                <div class="col-md-6">
                                                     <label for="start_date">Start date</label>    
-                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($init_rwyt.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
-                                                </div>
+                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($init_rwyt.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly style="width: 70%;">
                                             </div>
                                             <div class="form-group">
-                                                <div class="col-md-6">
                                                     <label for="due_date">Due date</label>
-                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($init_rwyt.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
-                                                </div>
+                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($init_rwyt.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly style="width: 70%;">
+                                            </div>
                                             </div>
                                         {/foreach}
+
+                                        <div class="col-md-6">
+                                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                                <div class="box-header with-border">
+                                                    <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
+                                                    <label for="files[]">Files</label>
+                                                    <div style="overflow-y: scroll; height: 200px;">
+                                                        <div class="form-group">
+                                                            <center>
+                                                                {foreach $ef as $f}
+                                                                        <table>
+                                                                            <input type="hidden" name="nm" value="{$f}">
+                                                                                <div class="form-group">
+                                                                                    <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>
+                                                                                </div>
+                                                                                {if $f !== ""}
+                                                                                <hr></hr>
+                                                                                {/if}
+                                                                        </table>
+                                                                {/foreach}
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                        </div>
+
                                     </div>
+                                    <table>
+                                        <div style="overflow-y: scroll; height: 200px">
+                                            Komentar :
+                                            {foreach $komen as $km}
+                                            <br>
+                                            <b><textarea disabled class="form-control">
+                                            {$km.komentar}</textarea></b>
+                                            <div align="right">
+                                            Dikomentari pada : 
+                                                <br>
+                                                    {$km.tgl_komentar}
+                                                <br>
+                                            {/foreach}
+                                            </div>
+                                        </div>
+                                    </table>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                         </div>
