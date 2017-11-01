@@ -46,13 +46,13 @@ public function index() {
         $this->smarty->assign('search', $search);
 
         // params
-        $project_title  = !empty($search['project_title']) ? $search['project_title'] : "%";
+        $project_title  = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
         $filter         = !empty($search['filter']) ? $search['filter'] : "%";
         $params         =  array($project_title);
 
         $ttl_rows = "";
         if ($filter == "client_id") {
-            $nm_client = !empty($search['project_title']) ? $search['project_title']  : "%";
+            $nm_client = !empty($search['project_title']) ? '%'. $search['project_title'] . '%' : "%";
             $ttl_rows = $project_title;
             $filter = "client.client_name";
         }elseif ($filter == "start_date") {
