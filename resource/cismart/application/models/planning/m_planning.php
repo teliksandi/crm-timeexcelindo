@@ -3,9 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class m_planning extends CI_Model{
 
-    function get_list_planning(){
-        $sql = "SELECT * FROM planning";
-        $query = $this->db->query($sql);
+    function get_list_planning($filter, $params){
+        $sql = "SELECT planning.id_planning AS 'id_planning', initiation.project_title, planning.due_date, initiation.id_initiation, client.client_name, planning.start_date
+                        From planning left join initiation on initiation.id_initiation = planning.id_initiation 
+                        left join client on planning.id_client = client.id_client
+                        where planning.id_initiation is NOT NULL
+                        and $filter LIKE ? LIMIT ?,?";
+        $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
             $query->free_result();
@@ -38,6 +42,20 @@ class m_planning extends CI_Model{
             return NULL;
         }
     }
+
+    function search_planning($filter, $params){
+
+        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where planning.id_initiation is NOT NULL and $filter like ?";
+        $query = $this->db->query($sql,$params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return NULl;
+        }
+    }
+
 
     function initiation_detail($where){
         $sql = "SELECT a.id_initiation, b.*, c.*, d.*, e.* FROM planning a 

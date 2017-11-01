@@ -19,6 +19,7 @@ class planning extends ApplicationBase {
         // load library
         $this->load->library('tnotification');
         $this->load->library('datetimemanipulation');
+        $this->load->library('pagination');
 
         //load plugin
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
@@ -40,17 +41,89 @@ class planning extends ApplicationBase {
         $this->_set_page_rule("R");
         // set template content
         $this->smarty->assign("template_content", "planning/index.html");
-        $this->smarty->assign('user', $this->com_user['user_id']);
+
+        $search = $this->tsession->userdata('search_planning');
+        $this->smarty->assign('search', $search);
+        $keyword  = !empty($search['keyword']) ? $search['keyword'] : "%";
+        $filter         = !empty($search['filter']) ? $search['filter'] : "%";
+        $params         =  array($keyword);
+
+        $ttl_rows = "";
+        if ($filter == "client_name") {
+            $nm_client = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
+            $ttl_rows = $nm_client;
+            $filter = "client.client_name";
+        }elseif ($filter == "due_date") {
+            $keyword = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
+            $ttl_rows = $keyword;
+            $filter = "planning.due_date";
+        }elseif ($filter == "project_title") {
+            $keyword = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
+            $ttl_rows = $keyword;
+            $filter = "initiation.project_title";
+        }else{
+            $filter = "initiation.project_title";
+            $ttl_rows = "";
+        }
+
+
+        $config['base_url'] = site_url("planning/planning/index/");
+        $config['total_rows'] = $this->m_planning->search_planning($filter, $ttl_rows);
+        $config['uri_segment'] = 4;
+        $config['per_page'] = 10;
+        $this->pagination->initialize($config);
+        $pagination['data'] = $this->pagination->create_links();
+
+        // pagination attribute
         $start = $this->uri->segment(4, 0) + 1;
+        $end = $this->uri->segment(4, 0) + $config['per_page'];
+        $end = (($end > $config['total_rows']) ? $config['total_rows'] : $end);
+        $pagination['start'] = ($config['total_rows'] == 0) ? 0 : $start;
+        $pagination['end'] = $end;
+        $pagination['total'] = $config['total_rows'];
+
+        // pagination assign value
+        $this->smarty->assign("pagination", $pagination);
         $this->smarty->assign("no", $start);
 
+        // /* end of pagination ---------------------- */
+        // get list data
+        // get list data
+        $params = array($keyword, ($start - 1), $config['per_page']);
+
+///////////////////////////////////////////////////////////////////////////////////////
+//  Belum dicari                                                                     //
+//////////////////////////////////////////////////////////////////////////////////////
+//        $this->smarty->assign("komen", $this->m_planning->planning_komen_get());  //
+//////////////////////////////////////////////////////////////////////////////////////
+        $this->smarty->assign("get", $this->m_planning->get_list_planning($filter, $params));
 
         // get list data
-        $this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
+        // $this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
         
         // output
         parent::display();
     }
+
+    function search_process(){
+        // set page rules
+        $this->_set_page_rule("R");
+        //--
+        if ($this->input->post('save') == 'Cari') {
+            $params = array(
+                "keyword"       => $this->input->post('keyword'),
+                "filter"        => $this->input->post('filter')
+            );
+            // set
+            $this->tsession->set_userdata('search_planning', $params);
+        } else {
+            // unset
+            $this->tsession->unset_userdata('search_planning');
+        }
+        //--
+        redirect('planning/planning');
+    }
+
 
     function planning_process(){
 
@@ -64,6 +137,7 @@ class planning extends ApplicationBase {
                 'due_date'          => $this->input->post('due_planning'),
                 'id_karyawan'       => $kar,
                 'id_department'     => $dep,
+                'id_client'         => $this->input->post("id_client"),
                 'DPP'                           => "0",
                 'PPN'                           => "0",
                 'PPH'                           => "0",
