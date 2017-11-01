@@ -510,12 +510,19 @@ public function index() {
         redirect("initiation/initiation/edit_komen/".$this->input->post('id_initiation', TRUE));
     }
 
-
     function pdf_view($judul){
         $this->_set_page_rule("U");
           // set template content
-        $this->smarty->assign("template_content", "tambahan/pdf.html");
-        $this->smarty->assign("judul", $judul);
+        if(preg_match("/.pdf/i", $judul)) {
+            $this->smarty->assign("template_content", "tambahan/pdf.html");
+            $this->smarty->assign("judul", $judul);
+            $this->smarty->assign("val",  $judul);
+        } else {
+            $this->smarty->assign("template_content", "tambahan/pdf.html");
+            $this->smarty->assign("judul", $judul);
+            $this->smarty->assign("val",  "");
+        }
+
         parent::display();
     }
 

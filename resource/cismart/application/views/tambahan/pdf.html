@@ -1,2 +1,13 @@
+{if $val !== ""}
+	<embed src="{$BASEURL}resource/doc/pdf/{$judul}" type="application/pdf" width="100%" height="700px">
+{else}
+	<br>
+	</br>
+	<br>
+	</br>
+	<center>
+	<b>{$judul}</b>
+	<a href="{$BASEURL}resource/doc/pdf/{$judul}"><h2>klik Disini download File</h2></a>
+	</center>
+{/if}
 
-<embed src="{$BASEURL}resource/doc/pdf/{$judul}" type="application/pdf" width="100%" height="700px">
