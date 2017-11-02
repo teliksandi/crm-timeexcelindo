@@ -547,7 +547,7 @@
                                                 </style>
 
                                                     <b>Komentar :</b>
-                                                    {foreach $komen as $km}
+                                                    {foreach $komen_plan as $km}
                                                         <br>
                                                         <b><textarea readonly class="form-control">
                                                             {$km.komentar}</textarea></b>
@@ -561,12 +561,12 @@
                                                     </div>
                                                 </div>
                                             </table>
-                                                <input type="hidden" name="id_planning_komentar" value="{$init_rwyt.id_planning|default:''}">
+                                                <input type="hidden" name="id_planning_komentar" value="{$rs.id_planning|default:''}">
                                                 <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
                                                     <br>
                                                     <div class="form-group">
                                                         <div class="col-md-12">
-                                                            <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
+                                                            <textarea name="isi_komentar" class="form-control" title="Komentar"></textarea>
                                                             <br>
                                                             <div align="right">
                                                                 <button type="submit" name="submit" class="btn btn-info">Comment</button>
