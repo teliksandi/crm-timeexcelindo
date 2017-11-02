@@ -20,12 +20,6 @@ class m_planning extends CI_Model{
     }
 
 
-    function planning_komen($where) {  
-        $sql = "SELECT * FROM komentar WHERE id_planning = ?";
-        $query = $this->db->query($sql, $where);
-        return $query->result_array();
-    }
-
     function get_total_planning($params){
         $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";
         $query = $this->db->query($sql, $params);
@@ -79,12 +73,14 @@ class m_planning extends CI_Model{
             return array();
         }
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////
 
     function planning_komen($where) {  
         $sql = "SELECT * FROM komentar WHERE id_planning = ?";
         $query = $this->db->query($sql, $where);
         return $query->result_array();
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     function get_data_planning() {
         $this->db->select('*');
@@ -107,7 +103,7 @@ class m_planning extends CI_Model{
          
     }
 
-   function get_department_by_id($where){
+    function get_department_by_id($where){
         $sql = "SELECT * FROM initiation left join planning on initiation.id_initiation = planning.id_initiation WHERE planning.id_planning = ?";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
