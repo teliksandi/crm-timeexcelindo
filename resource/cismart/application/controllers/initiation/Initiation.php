@@ -345,7 +345,7 @@ public function index() {
             }
         }else{
             // default error
-            $this->tnotification->sent_notification("error", "Gagal sirane blesak");
+            $this->tnotification->sent_notification("error", "Data Gagal Dikirim");
         }
         // default redirect
         redirect("initiation/initiation/add_komentar/".$this->input->post('id_initiation_komentar', TRUE));
