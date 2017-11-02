@@ -20,6 +20,12 @@ class m_planning extends CI_Model{
     }
 
 
+    function planning_komen($where) {  
+        $sql = "SELECT * FROM komentar WHERE id_planning = ?";
+        $query = $this->db->query($sql, $where);
+        return $query->result_array();
+    }
+
     function get_total_planning($params){
         $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";
         $query = $this->db->query($sql, $params);
@@ -119,6 +125,10 @@ class m_planning extends CI_Model{
 
     function insert_planning($params){
         return $this->db->insert('planning', $params);
+    }
+
+    function insert_komentar($params){
+        return $this->db->insert('komentar', $params);
     }
 
     function delete_planning($params){

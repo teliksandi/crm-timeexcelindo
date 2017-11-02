@@ -179,6 +179,86 @@ class planning extends ApplicationBase {
         parent::display();
     }
 
+    function add_komentar($where){
+        // set page rules
+        $this->_set_page_rule("C");
+
+        $this->smarty->assign("template_content", "planning/detail.html");
+        $this->smarty->assign("result", $this->m_planning->get_planning_by_id($where));
+        $this->smarty->assign("join", $this->m_planning->initiation_detail($where));
+        $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
+        $kk = $this->m_planning->get_department_by_id($where);
+        $this->smarty->assign("dprt", explode(",", $kk['id_department']));
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("kry", explode(",", $kk['id_karyawan']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+
+         $get_in = $this->m_planning->initiation_detail($where);
+        foreach ($get_in as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $id_ini = $f['id_initiation'];
+        }
+
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
+
+        $vfls = $this->m_initiation->get_file($id_ini);
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
+
+        foreach ($vfls as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $ls = $f['id_file'];
+        }
+
+        $list = $this->m_initiation->get_list_file($ls);
+
+        foreach ($list as $l) {
+           $this->smarty->assign("ef",  explode(",", $l['file']));
+        }
+
+
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
+
+       
+        // cek input
+
+        // cek input
+        parent::display();
+    }
+
+
+    function komentar_process(){
+
+        $this->_set_page_rule("C");
+
+        $this->tnotification->set_rules('isi_komentar', 'komentar', 'trim|required');
+
+        if($this->tnotification->run() !== FALSE){
+
+            $params = array(
+                'komentar'          => $this->input->post("isi_komentar"),
+                'tgl_komentar'      => $this->input->post("tgl_komentar"),   
+                'id_planning'       => $this->input->post("id_planning_komentar")   
+            );
+
+            if ($this->m_planning->insert_komentar($params)) {
+
+                //$this->tnotification->delete_last_field();
+                $this->tnotification->sent_notification("success", "Telah dikomentari");
+            }else{
+                // default error
+                $this->tnotification->sent_notification("error", "Gagal menuliskan komentar");
+            }
+        }else{
+            // default error
+            $this->tnotification->sent_notification("error", "Gagal mengirim komentar");
+        }
+        // default redirect
+        redirect("planning/planning/add_komentar/".$this->input->post('id_planning_komentar', TRUE));
+
+    }
+    
+
     function detail($where){
         $this->_set_page_rule("U");
         // set template content
@@ -190,6 +270,7 @@ class planning extends ApplicationBase {
         $kk = $this->m_planning->get_department_by_id($where);
         $this->smarty->assign("dprt", explode(",", $kk['id_department']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
         $this->smarty->assign("kry", explode(",", $kk['id_karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
