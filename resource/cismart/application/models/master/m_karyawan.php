@@ -24,7 +24,7 @@ class m_karyawan extends CI_Model{
 
 
     function get_market_karyawan(){
-        $sql = "SELECT * FROM karyawan WHERE id_department = '8' OR id_department = '2'";
+        $sql = "SELECT * FROM karyawan";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

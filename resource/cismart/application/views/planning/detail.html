@@ -202,18 +202,18 @@
                                                     </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Team Member Name</label>
-                                                <br>
-                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled style="width: 100%;">
-                                                        {foreach $marketing_kar as $value}
-                                                            <option value="{$value.id_karyawan}"
-                                                        {if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}
-                                                            </option>
-                                                        {foreachelse}
-                                                        Data tidak ditemukan !
-                                                        {/foreach}
-                                                    </select>
-                                            </div>
+                                            <label>Team Member Name</label>
+                                            <br>
+                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled>
+                                                    {foreach $marketing_kar as $value}
+                                                        <option value="{$value.id_karyawan}"
+                                                    {if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}
+                                                        </option>
+                                                    {foreachelse}
+                                                    Data tidak ditemukan !
+                                                    {/foreach}
+                                                </select>
+                                        </div>
                                             <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
                                                 <div class="form-group">
                                                     <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
