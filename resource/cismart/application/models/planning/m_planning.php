@@ -101,7 +101,7 @@ class m_planning extends CI_Model{
          
     }
 
-    function get_department_by_id($where){
+   function get_department_by_id($where){
         $sql = "SELECT * FROM initiation left join planning on initiation.id_initiation = planning.id_initiation WHERE planning.id_planning = ?";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
