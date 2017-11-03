@@ -51,8 +51,7 @@ class m_initiation extends CI_Model{
     function get_file($where){
         $this->db->select('*');
         $this->db->from('file');
-        $this->db->join('initiation', 'file.id_initiation = initiation.id_initiation', 'left'); 
-        $this->db->where('initiation.id_initiation', $where);
+        $this->db->where('id_initiation', $where);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -319,9 +318,9 @@ class m_initiation extends CI_Model{
         return $this->db->query($sql, $params);
     }
 
-    function delete_file($judul, $pengganti){
-        $this->db->where('file LIKE ', $judul); 
-        return $this->db->update('file', $pengganti);
+    function delete_file($judul, $id){
+        $sql = "DELETE FROM file WHERE id_initiation = $id and file = '$judul'";
+        return $this->db->query($sql);
     }
 
     function delete_komentar($params){

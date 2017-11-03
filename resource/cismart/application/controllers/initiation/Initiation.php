@@ -138,18 +138,13 @@ public function index() {
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
         
-        $vfls = $this->m_initiation->get_file($where);
+        $as = $this->m_initiation->get_file($where);
 
-        foreach ($vfls as $f) {
-           // $this->smarty->assign("ef",  explode(",", $f['file']));
-            $ls = $f['id_file'];
+        foreach ($as as $l) {        
+        $kk = $l['file'];
+        $la[] = $kk;
+        $this->smarty->assign("ef", $la);
         }
-        $list = $this->m_initiation->get_list_file($ls);
-
-        foreach ($list as $l) {
-           $this->smarty->assign("ef",  explode(",", $l['file']));
-        }
-
 
         $this->smarty->assign("let", $this->m_initiation->list_department_where($where));
        
@@ -211,18 +206,11 @@ public function index() {
             $fl = $l['file'];
         }
 
-        $replaceJudul = $this->judulTojudul($judul, $fl);
-
 
         if($this->tnotification->run() == FALSE){
-            $params = array(
-                'id_file' => $id_fl,
-            );
-            $pr = array(
-                'file'     => $replaceJudul,
-            );
+            $where = $fl;
             
-            if ($this->m_initiation->delete_file($fl, $pr)){
+            if ($this->m_initiation->delete_file($where, $id_ini)){
                 unlink('resource/doc/pdf/'.$judul);
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil dihapus");
@@ -294,16 +282,12 @@ public function index() {
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
 
-        $vfls = $this->m_initiation->get_file($where);
+        $as = $this->m_initiation->get_file($where);
 
-        foreach ($vfls as $f) {
-           // $this->smarty->assign("ef",  explode(",", $f['file']));
-            $ls = $f['id_file'];
-        }
-        $list = $this->m_initiation->get_list_file($ls);
-
-        foreach ($list as $l) {
-           $this->smarty->assign("ef",  explode(",", $l['file']));
+        foreach ($as as $l) {        
+        $kk = $l['file'];
+        $la[] = $kk;
+        $this->smarty->assign("ef", $la);
         }
         
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
@@ -449,7 +433,14 @@ public function index() {
             );
 
             if ($this->m_initiation->insert_initiation($params)) {
-                $this->m_initiation->tambah($fl);
+                
+                $id = $this->db->insert_id();
+                $tgl = date('d-m-Y h:i:sa');
+                for($x=0;$x<$hitung_file;$x++){
+                    $sql = "INSERT INTO file values('','$id','$fls[$x]', '', '$tgl')";
+                    $this->db->query($sql, $params);
+                }
+
                 //$this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
@@ -548,18 +539,13 @@ public function index() {
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());             
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
 
-        $vfls = $this->m_initiation->get_file($params);
+        $as = $this->m_initiation->get_file($params);
 
-        foreach ($vfls as $f) {
-           // $this->smarty->assign("ef",  explode(",", $f['file']));
-            $ls = $f['id_file'];
-        }
-        $list = $this->m_initiation->get_list_file($ls);
-
-        foreach ($list as $l) {
-        $this->smarty->assign("ef",  explode(",", $l['file']));
-        }
-        
+        foreach ($as as $l) {        
+        $kk = $l['file'];
+        $la[] = $kk;
+        $this->smarty->assign("ef", $la);
+        }        
 
         // notification
         $this->tnotification->display_notification();
@@ -575,12 +561,15 @@ public function index() {
 
         $dep = implode(",", $this->input->post("department"));
         $kar = implode(",", $this->input->post("karyawan"));
-        $fl = implode(",", $this->input->post("files"));
         // cek input
         $this->tnotification->set_rules('id_initiation', 'Nomor Identitas Initiation', 'trim|required');
         $this->tnotification->set_rules('judul_project', 'Nama Project', 'trim|required');
 
-                if($this->tnotification->run() !== FALSE){
+        $fls = $this->input->post("files");
+
+        $hitung_file = count($fls);
+
+        if($this->tnotification->run() !== FALSE){
             $params = array(
                 'project_title'     => $this->input->post("judul_project"),
                 'id_karyawan'       => $kar,
@@ -599,6 +588,14 @@ public function index() {
             );
 
             if ($this->m_initiation->update_initiation($params,$where)) {
+
+                $id = $this->input->post('id_initiation');
+                $tgl = date('d-m-Y h:i:sa');
+                for($x=0;$x<$hitung_file;$x++){
+                    $sql = "INSERT INTO file values('','$id','$fls[$x]', '', '$tgl')";
+                    $this->db->query($sql, $params);
+                }
+
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
