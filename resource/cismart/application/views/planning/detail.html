@@ -504,7 +504,7 @@
                                             <td align="middle">
                                                 <div class="col-md-12">
                                                     <label>Keterangan</label><br>
-                                                    <textarea name="keterangan" class="form-control" title="-- Keterangan --"></textarea>
+                                                    <textarea name="Ket" class="form-control" title="-- Keterangan --"></textarea>
                                                 </div>
                                             </td>
                                         </tr>
@@ -513,7 +513,9 @@
                                 <br>
                                 <center>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success" name="submit">Accept</button>
+                                        <button type="submit" class="btn btn-success" name="submit">Simpan</button>
+
+                    </form>
                                     <form class="" action="{$config->site_url('closing/closing/closing_process')}" method="post">
                                         <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">    
                                             <button type="submit" class="btn btn-primary" name="submit">Accept</button>
@@ -522,7 +524,6 @@
                                 </center>
                             </div>
                         </div>
-                    </form>
                 </div>
 {/foreach}
                             <div class="box box-primary">
