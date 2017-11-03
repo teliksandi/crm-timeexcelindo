@@ -80,16 +80,19 @@
     </select>
 </div>
                    <div class="form-group">
-            <label>Client</label>
-            <br>
-            <select name="client" class="form-control select2" min="0" max="40" multiple>
-                                        {foreach $dataclient as $cth}
-                                        <option value={$cth.id_client}>{$cth.client_name}</option>
-                                        {foreachelse}
-                                        Data tidak ditemukan !
-                                        {/foreach}
-                            </select>                           
-        </div>
+                                            <label>Client</label>
+                                                <br>
+                                                <select name="client" class="form-control select2" min="0" max="40" multiple>
+                                                                  
+                                                                            {foreach $clientedit as $cath}
+
+                                                                            <option value="{$rs.id_client|default:''}" {if $rs.id_client == $cath.id_client} selected {/if}>{$cath.client_name}</option>
+
+                                                                            {foreachelse}
+                                                                            Data tidak ditemukan !
+                                                                            {/foreach}
+                                                                </select>
+                                        </div>
         <div class="form-group">
         <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
             <label>Project Description</label>
