@@ -140,7 +140,7 @@
                                     <table>
                                         <div style="overflow-y: scroll; height: 200px">
                                             Komentar :
-                                            {foreach $komen_plan as $km}
+                                            {foreach $komen as $km}
                                             <br>
                                             <b><textarea disabled class="form-control">
                                             {$km.komentar}</textarea></b>
@@ -514,6 +514,10 @@
                                 <center>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success" name="submit">Accept</button>
+                                    <form class="" action="{$config->site_url('closing/closing/closing_process')}" method="post">
+                                        <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">    
+                                            <button type="submit" class="btn btn-primary" name="submit">Accept</button>
+                                    </form>
                                     </div>
                                 </center>
                             </div>
