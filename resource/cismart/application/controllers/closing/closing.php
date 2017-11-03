@@ -37,8 +37,7 @@ class closing extends ApplicationBase {
 
         // get list data
         $this->smarty->assign("komen", $this->m_closing->get_koment());
-        
-        
+        $this->smarty->assign("closing", $this->m_closing->get_list_closing());
         // output
     
         parent::display(); 
@@ -47,11 +46,13 @@ class closing extends ApplicationBase {
     function closing_process(){
         // set page rules
         $this->_set_page_rule("C");
- 
        
             $params = array(
-                'id_initiation'     => $this->input->post('init_closing')
-                
+                'id_initiation'     => $this->input->post('init_closing'),
+                'id_client'         => $this->input->post('id_client')
+                // 'id_karyawan'       => $this->input->post('init_closing'),
+                // 'id_department'     => $this->input->post('init_closing'),
+
             );
             $this->m_closing->insert_closing($params);
             redirect("initiation/initiation/index");

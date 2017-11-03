@@ -4,8 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class m_closing extends CI_Model{
 
    function get_list_closing(){
-        $sql = "SELECT * FROM closing";
-        $query = $this->db->query($sql);
+        $this->db->select('*');
+        $this->db->from('closing');
+        $this->db->join('initiation', 'initiation.id_initiation = closing.id_initiation', 'left'); 
+        $this->db->join('client', 'client.id_client = closing.id_client', 'left'); 
+        $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
             $query->free_result();

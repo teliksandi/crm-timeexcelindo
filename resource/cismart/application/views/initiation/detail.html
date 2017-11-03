@@ -189,6 +189,9 @@
                                                                         <tr>
                                                                             <form class="" action="{$config->site_url('closing/closing/closing_process')}" method="post">
                                                                                 <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
+                                                                                <input type="hidden" name="department_planning[]" id="department_planning">
+                                                                                <input type="hidden" name="karyawan_planning[]" id="karyawan_planning">
+                                                                                <input type="hidden" name="id_client" value="{$jn.id_client|default:''}" id="id_client">
                                                                                     <button type="submit" class="btn btn-danger">Reject</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                             </form>
                                                                         </tr>
