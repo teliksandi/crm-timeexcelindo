@@ -516,9 +516,15 @@
                                         <button type="submit" class="btn btn-success" name="submit">Simpan</button>
 
                     </form>
-                                    <form class="" action="{$config->site_url('closing/closing/closing_process')}" method="post">
-                                        <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">    
+                                    <form class="" action="{$config->site_url('execution/execution/execution_process')}" method="post">
+                                        {foreach $executi as $exec}
+                                        <input type="hidden" name="plan_execution" value="{$exec.id_initiation|default:''}">
+                                        <input type="hidden" name="start_execution" id="mulai_execution">
+                                        <input type="hidden" name="due_execution" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
+                                        <input type="hidden" name="department_planning[]" value="{$exec.id_department|default:''}">
+                                        <input type="hidden" name="karyawan_planning[]" value="{$exec.id_karyawan|default:''}">
                                             <button type="submit" class="btn btn-primary" name="submit">Accept</button>
+                                        {/foreach}
                                     </form>
                                     </div>
                                 </center>

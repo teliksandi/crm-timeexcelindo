@@ -267,6 +267,8 @@ class planning extends ApplicationBase {
 
         $this->smarty->assign("join", $this->m_planning->initiation_detail($where));
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($where));
+
+        $this->smarty->assign("executi", $this->m_planning->get_list_execution($where));
         $kk = $this->m_planning->get_department_by_id($where);
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
@@ -334,7 +336,7 @@ class planning extends ApplicationBase {
                 'p_b_lain_lain'                 => $this->idrToInt($this->input->post("persen_biaya_lain")),
                 'p_b_entertaint'                => $this->idrToInt($this->input->post("persen_biaya_entertaint")),
                 'p_perkiraan_rugi_laba'         => $this->idrToInt($this->input->post("persen_rugi_laba")),
-                'Catatan'                       => $this->input->post("Ket")
+                'catatan'                       => $this->input->post("Ket")
                 
             );
 

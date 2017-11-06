@@ -19,6 +19,17 @@ class m_planning extends CI_Model{
         }
     }
 
+     function get_list_execution($where){
+        $sql = "SELECT * FROM planning where id_planning = ?";
+        $query = $this->db->query($sql,$where);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
     function get_total_planning($params){
         $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";
