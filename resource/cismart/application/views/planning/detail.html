@@ -518,7 +518,7 @@
                     </form>
                                     <form class="" action="{$config->site_url('execution/execution/execution_process')}" method="post">
                                         {foreach $executi as $exec}
-                                        <input type="hidden" name="plan_execution" value="{$exec.id_initiation|default:''}">
+                                        <input type="hidden" name="plan_execution" value="{$exec.id_planning|default:''}">
                                         <input type="hidden" name="start_execution" id="mulai_execution">
                                         <input type="hidden" name="due_execution" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
                                         <input type="hidden" name="department_planning[]" value="{$exec.id_department|default:''}">
