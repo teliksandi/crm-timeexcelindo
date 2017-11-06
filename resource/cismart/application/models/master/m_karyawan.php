@@ -35,6 +35,31 @@ class m_karyawan extends CI_Model{
         }
     }
 
+    function last_id_user(){
+        $sql = "SELECT * FROM com_user ORDER BY user_id DESC LIMIT 1";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+
+    function last_id(){
+        $sql = "SELECT id_karyawan FROM karyawan ORDER BY id_karyawan DESC LIMIT 1";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
     function get_dept_karyawan($dept){
 
         //$query = $this->db->get_where('karyawan', array('id_department'=>$dept));
@@ -77,6 +102,18 @@ class m_karyawan extends CI_Model{
         } else {
             return NULL;
         }
+    }
+
+    function insert_user($params){
+        return $this->db->insert('users', $params);
+    }
+
+    function insert_com_user($params){
+        return $this->db->insert('com_user', $params);
+    }
+
+    function insert_com_role_user($params){
+        return $this->db->insert('com_role_user', $params);
     }
 
     function insert_karyawan($params){

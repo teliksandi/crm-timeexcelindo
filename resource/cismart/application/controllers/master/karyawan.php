@@ -15,6 +15,10 @@ class karyawan extends ApplicationBase{
         $this->load->library('tnotification');
         $this->load->library('pagination');
         $this->load->library('datetimemanipulation');
+        $this->load->model('m_settings');
+        // load library
+        $this->load->library('encrypt');
+        $this->smarty->assign("encrypt", $this->encrypt);
     }
 
     function index(){
@@ -129,14 +133,18 @@ class karyawan extends ApplicationBase{
 
         // cek input
         $this->tnotification->set_rules('nama_karyawan', 'Nama Karyawan', 'trim|required');
+
+        $password_key = crc32($this->input->post('password'));
+        $password = $this->encrypt->encode($this->input->post('password'), $password_key);
+        $id = $this->db->insert_id();
  
         if($this->tnotification->run() !== FALSE){
             $params = array(
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
                 //'mdb' => $this->com_user['user_id'],
                // 'mdd' => date('Y-m-d')
-                'username'          => $this->input->post('username'),
-                'password'          => md5 ($this->input->post('password')),
+                // 'username'          => $this->input->post('username'),
+                // 'password'          => ,
                 'nik'               => $this->input->post('nik'),
                 'jenis_kelamin'     => $this->input->post('jenis_kelamin'),
                 'tempat_lahir'      => $this->input->post('tempat_lahir'),
@@ -148,8 +156,67 @@ class karyawan extends ApplicationBase{
                 'status'            => $this->input->post('status')
             );
 
+            
+            $params_user = array(
+                'id_karyawan'       => $id,
+                'nama_lengkap'      => $this->input->post('nama_karyawan'),
+                'alamat'            => $this->input->post('tempat_lahir'),
+                'no_telp'           => $this->input->post('telp'),
+                'mdb'               => $this->com_user['user_id'],
+                'mdd'               => date('Y-m-d')
+            );
+
+            if ($this->input->post('status') == 'Aktif') {
+                $st = '0';
+            }else{
+                $st = '1';
+            }
+
+            $params_com_user = array(
+                'user_id'           => $id,
+                'user_name'         => $this->input->post('username'),
+                'user_pass'         => $password,
+                'user_key'          => $password_key,
+                'user_mail'         => $this->input->post('email'),
+                'lock_st'           => $st,
+                'mdb'               => $this->com_user['user_id'],
+                'mdd'               => date('Y-m-d')
+            );
+
             if ($this->m_karyawan->insert_karyawan($params)) {
+                $this->m_karyawan->insert_com_user($params_com_user);
+
+                $lst_id = $this->m_karyawan->last_id();                
+                foreach ($lst_id as $key ) {
+                    $last_id = $key['id_karyawan'];
+                }
                 
+                $lst_id_user = $this->m_karyawan->last_id_user();                
+                foreach ($lst_id_user as $key ) {
+                    $last_id_user = $key['user_id'];
+                }
+                
+
+                $params_user = array(
+                'user_id'           => $last_id_user,   
+                'id_karyawan'       => $last_id,
+                'nama_lengkap'      => $this->input->post('nama_karyawan'),
+                'alamat'            => $this->input->post('tempat_lahir'),
+                'no_telp'           => $this->input->post('telp'),
+                'mdb'               => $this->com_user['user_id'],
+                'mdd'               => date('Y-m-d')
+                );            
+
+                $this->m_karyawan->insert_user($params_user);
+
+
+                $params_role = array(
+                'role_id'           => '2',   
+                'user_id'           => $last_id_user
+                );            
+
+                $this->m_karyawan->insert_com_role_user($params_role);
+            
                 $args = [
                     'to'      => $this->input->post('email'),
                     'from'    => 'info@coba.com',
