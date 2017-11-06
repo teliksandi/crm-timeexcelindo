@@ -1,10 +1,10 @@
 <section class="content-header">
     <h1>
-        Pengolahan Data Eksekusi
+        Pengolahan Data Planning
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-archive"></i> Execution</a></li>
-        <li class="active">Data Execution</li>
+        <li><a href="#"><i class="fa fa-briefcase"></i> Planning</a></li>
+        <li class="active">Data Planning</li>
     </ol>
 </section>
 <!-- notification template -->
@@ -15,26 +15,32 @@
 	<div class="row">
 	        <div class="col-md-12">
 	            <div class="box box-success">
-	                <div class="box-header with-border">
-	                    <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
-	                </div>
-	                <div class="box-body">
-	                    <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
-	                        <div class="box-body">
-	                            <div class="form-group">
-	                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
-	                                <div class="col-sm-4">
-	                                    <input type="text" title="Masukkan Nama Project" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
-	                                </div>
-	                                <div class="col-sm-4">
-	                                    <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
-	                                    <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </form>
-	                </div>
-	            </div>
+	        		<div class="box-header with-border">
+	        			<h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
+	        		</div>
+			        <div class="box-body">
+		                <form class="form-horizontal" action="{$config->site_url('planning/planning/search_process')}" method="post">
+		                    <div class="box-body">
+		                        <div class="form-group">
+		                            <label for="project_title" class="col-sm-2 control-label">Keyword</label>
+		                            <div class="col-sm-4">
+		                                <input type="text" title="Masukkan Nama Project" name="keyword" value="{$search.keyword|default:''}" class="form-control" id="Keyword" placeholder="">
+		                            </div>
+		                            <div class="col-sm-2">
+		                            <select name="filter" min="0" max="40" class="form-control" widht='100px'>
+		                                <option value="" >- Select Filter -</option>
+		                                <option value='project_title'>Project Title</option>
+		                                <option value='client_name'>Client Name</option>
+		                                <option value='due_date'>Date/Year</option>
+		                            </select>
+		                            </div>
+		                                <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
+		                                <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
+		                        </div>
+		                    </div>
+		               	</form>
+		          	</div>
+		        </div>
 	            <div class="box">
 	               	<div class="box-body">
 		                <table class="table table-striped">
@@ -48,13 +54,14 @@
 	                                <td width="10%" align="middle"><b>Last History</b></td>
 	                                <td width="18%" align="middle"><b>Action</b></td>
 		                        </tr>
-		                        	{foreach $planning_project as $result}
+		                        {foreach $get as $result}
+		                        
 		                        <tr>
-		                        	<td align="middle">{$no++}</td>
-                                	<td align="middle">{$result.project_title}</td>
-                                	<td align="middle">{$result.client_name}</td>
-                                	<td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
-                                	<td align="middle">                                    
+		                            <td align="middle">{$no++}</td>
+		                            <td align="middle">{$result.project_title}</td>
+		                            <td align="middle">{$result.client_name}</td>
+		                            <td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
+		                            <td align="middle">                                    
                                     	<input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                             
                                         	<a id="dd"></a>
 		                                        {$dueDate = date('Y-m-d', strtotime($result.due_date|default:''))}
@@ -67,7 +74,7 @@
 		                                            <font color="#33cc33">Aktif</font> 
 		                                        {/if}
                                     </td>
-                                    <td align="middle">Belum dicari</td>
+                                    <td align="middle"></td>
 		                            <td align="middle">
 		                                <a href="{$config->site_url('execution/execution/edit')}/{$result.id_execution}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
 		                                <a href="{$config->site_url('execution/execution/detail')}/{$result.id_execution}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
