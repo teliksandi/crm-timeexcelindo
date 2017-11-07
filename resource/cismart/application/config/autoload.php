@@ -55,7 +55,7 @@ $autoload['packages'] = array(APPPATH . 'third_party');
   |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
  */
 
-$autoload['libraries'] = array('database', 'tsession', 'smarty', 'email', 'datetimemanipulation');
+$autoload['libraries'] = array('database', 'tsession', 'smarty', 'email', 'datetimemanipulation','pagination');
 
 
 /*
