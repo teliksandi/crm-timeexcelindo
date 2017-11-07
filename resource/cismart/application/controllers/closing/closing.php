@@ -58,4 +58,17 @@ class closing extends ApplicationBase {
             redirect("initiation/initiation/index");
    
     }
+
+    function detail($where){
+        $this->_set_page_rule("U");
+        // set template content
+        $this->smarty->assign("template_content", "closing/detail.html");
+
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
+
+        // output
+        parent::display();
+
+    }
 }
