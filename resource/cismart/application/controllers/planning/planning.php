@@ -273,9 +273,9 @@ class planning extends ApplicationBase {
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $this->smarty->assign("dprt", explode(",", $kk['id_department']));
+        $this->smarty->assign("dprt", explode(",", $kk['department']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
-        $this->smarty->assign("kry", explode(",", $kk['id_karyawan']));
+        $this->smarty->assign("kry", explode(",", $kk['karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
         $get_in = $this->m_planning->initiation_detail($where);

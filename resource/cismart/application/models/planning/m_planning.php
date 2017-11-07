@@ -34,18 +34,6 @@ class m_planning extends CI_Model{
         }
     }
 
-    function get_list_execution($where){
-        $sql = "SELECT * FROM planning where id_planning = ?";
-        $query = $this->db->query($sql,$where);
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            $query->free_result();
-            return $result;
-        } else {
-            return array();
-        }
-    }
-
     function get_initiation_by_id($params){
         $sql = "SELECT * FROM planning left join initiation on initiation.id_initiation = planning.id_initiation WHERE id_planning = ?";
         $query = $this->db->query($sql, $params);
@@ -71,9 +59,14 @@ class m_planning extends CI_Model{
         }
     }
 
+     function getComment_Planning($id_initiation) {
+        $sql = "SELECT tgl_komentar from komentar KM1 INNER JOIN( SELECT max(id_komentar)as id_kom from komentar where id_planning =" . $id_planning . " ) KM2 on KM2.id_kom=KM1.id_komentar ";
+        return $query = $this->db->query($sql)->result_array();
+    }
+
 
     function initiation_detail($where){
-        $sql = "SELECT a.id_initiation, b.*, c.*, d.*, e.* FROM planning a 
+        $sql = "SELECT a.id_initiation, b.start_date as 'mulai', b.due_date as 'akhir', b.*, c.*, d.*, e.* FROM planning a 
                 left JOIN initiation b on a.id_initiation = b.id_initiation
                 left JOIN client c on b.id_client = c.id_client 
                 left JOIN karyawan d on b.id_karyawan = d.id_karyawan
@@ -118,8 +111,8 @@ class m_planning extends CI_Model{
          
     }
 
-    function get_department_by_id($where){
-        $sql = "SELECT * FROM initiation left join planning on initiation.id_initiation = planning.id_initiation WHERE planning.id_planning = ?";
+     function get_department_by_id($where){
+        $sql = "SELECT a.id_department as 'department', a.id_karyawan as 'karyawan', b.id_planning FROM initiation a left join planning b on a.id_initiation = b.id_initiation WHERE b.id_planning = ?";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -127,6 +120,18 @@ class m_planning extends CI_Model{
             return $result;
         } else {
             return NULL;
+        }
+    }
+
+     function get_list_execution($where){
+        $sql = "SELECT * FROM planning where id_planning = ?";
+        $query = $this->db->query($sql,$where);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
         }
     }
 

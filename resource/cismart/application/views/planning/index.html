@@ -73,7 +73,7 @@
 		                                            <font color="#33cc33">Aktif</font> 
 		                                        {/if}
                                     </td>
-                                    <td align="middle">Belum Ditemukan</td>
+                                    <td align="middle">{getComment_Planning($result.id_planning)}</td>
 		                            <td align="middle">
 		                                <a href="{$config->site_url('planning/planning/edit')}/{$result.id_planning}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
 		                                <a href="{$config->site_url('planning/planning/detail')}/{$result.id_planning}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
