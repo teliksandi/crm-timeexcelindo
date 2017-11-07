@@ -21,19 +21,6 @@ class m_planning extends CI_Model{
     }
 
 
-    function search_planning($filter, $params){
-
-        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where planning.id_initiation is NOT NULL and $filter like ?";
-        $query = $this->db->query($sql,$params);
-        if ($query->num_rows() > 0) {
-            $result = $query->row_array();
-            $query->free_result();
-            return $result['total'];
-        } else {
-            return NULl;
-        }
-    }
-
     function get_initiation_by_id($params){
         $sql = "SELECT * FROM planning left join initiation on initiation.id_initiation = planning.id_initiation WHERE id_planning = ?";
         $query = $this->db->query($sql, $params);
@@ -47,7 +34,6 @@ class m_planning extends CI_Model{
     }
 
     function search_planning($filter, $params){
-
         $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where planning.id_initiation is NOT NULL and $filter like ?";
         $query = $this->db->query($sql,$params);
         if ($query->num_rows() > 0) {
@@ -59,7 +45,8 @@ class m_planning extends CI_Model{
         }
     }
 
-     function getComment_Planning($id_initiation) {
+
+     function getComment_Planning($id_planning) {
         $sql = "SELECT tgl_komentar from komentar KM1 INNER JOIN( SELECT max(id_komentar)as id_kom from komentar where id_planning =" . $id_planning . " ) KM2 on KM2.id_kom=KM1.id_komentar ";
         return $query = $this->db->query($sql)->result_array();
     }
