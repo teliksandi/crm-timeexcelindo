@@ -137,7 +137,8 @@ class karyawan extends ApplicationBase{
         $password_key = crc32($this->input->post('password'));
         $password = $this->encrypt->encode($this->input->post('password'), $password_key);
         $id = $this->db->insert_id();
- 
+
+
         if($this->tnotification->run() !== FALSE){
             $params = array(
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
@@ -156,7 +157,6 @@ class karyawan extends ApplicationBase{
                 'status'            => $this->input->post('status')
             );
 
-            
             $params_user = array(
                 'id_karyawan'       => $id,
                 'nama_lengkap'      => $this->input->post('nama_karyawan'),
@@ -216,7 +216,7 @@ class karyawan extends ApplicationBase{
                 );            
 
                 $this->m_karyawan->insert_com_role_user($params_role);
-            
+      
                 $args = [
                     'to'      => $this->input->post('email'),
                     'from'    => 'info@coba.com',
@@ -268,12 +268,16 @@ class karyawan extends ApplicationBase{
         $this->tnotification->set_rules('nama_karyawan', 'Nama Karyawan', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
+            
+            $password_key = crc32($this->input->post('password'));
+            $password = $this->encrypt->encode($this->input->post('password'), $password_key);
+
             $params = array(
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
                 //'mdb' => $this->com_user['user_id'],
                 //'mdd' => date('Y-m-d')
-                'username'          => $this->input->post('username'),
-                'password'          => md5($this->input->post('password')),
+                // 'username'          => $this->input->post('username'),
+                // 'password'          => md5($this->input->post('password')),
                 'nik'               => $this->input->post('nik'),
                 'jenis_kelamin'     => $this->input->post('jenis_kelamin'),
                 'tempat_lahir'      => $this->input->post('tempat_lahir'),
@@ -290,6 +294,39 @@ class karyawan extends ApplicationBase{
             );
 
             if ($this->m_karyawan->update_karyawan($params, $where)) {
+                    
+                    $params_user = array(
+                        'nama_lengkap'      => $this->input->post('nama_karyawan'),
+                        'alamat'            => $this->input->post('tempat_lahir'),
+                        'no_telp'           => $this->input->post('telp')
+                    );
+                    $id = $this->m_karyawan->get_id_user($where);                
+                    foreach ($id as $key ) {
+                        $user_id  = $key['user_id'];
+                    }
+                    $where_user = array(
+                        'user_id' => $user_id
+                    );
+                    $this->m_karyawan->update_users($params_user, $where_user);
+
+
+                    if ($this->input->post('status') == 'Aktif') {
+                        $st = '0';
+                    }else{
+                        $st = '1';
+                    }
+                    $params_com_user = array(
+                        'user_name'         => $this->input->post('username'),
+                        'user_pass'         => $password,
+                        'user_key'          => $password_key,
+                        'user_mail'         => $this->input->post('email'),
+                        'lock_st'           => $st,
+                    );
+                    $where_com_user = array(
+                        'user_id' => $user_id
+                    );
+                    $this->m_karyawan->update_com_users($params_com_user, $where_com_user);
+
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{

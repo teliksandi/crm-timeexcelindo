@@ -35,6 +35,19 @@ class m_karyawan extends CI_Model{
         }
     }
 
+    function identitas_karyawan($params){
+
+        $sql = "SELECT * FROM users WHERE user_id =?";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
     function last_id_user(){
         $sql = "SELECT * FROM com_user ORDER BY user_id DESC LIMIT 1";
         $query = $this->db->query($sql);
@@ -104,6 +117,18 @@ class m_karyawan extends CI_Model{
         }
     }
 
+    function get_id_user($where){
+        $sql = "SELECT * FROM users where id_karyawan = ?";
+        $query = $this->db->query($sql, $where);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
     function insert_user($params){
         return $this->db->insert('users', $params);
     }
@@ -122,6 +147,14 @@ class m_karyawan extends CI_Model{
 
     function update_karyawan($params, $where){
         return $this->db->update('karyawan', $params, $where);
+    }
+
+    function update_users($params, $where){
+        return $this->db->update('users', $params, $where);
+    }
+
+    function update_com_users($params, $where){
+        return $this->db->update('com_user', $params, $where);
     }
 
     function delete_karyawan($params){
