@@ -83,20 +83,22 @@
                                     
                                 <td align="middle">{getComment($result.id_inisiasi)}</td>
                                  <td align="middle">
-                                    {if {$jabatan} == 3}
-                                        <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                    {elseif {$department} == 8}
+                                {if {$jabatan} == 3}
+                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+                                {elseif {$department} == 8}
                                         {if {$jabatan} == 3}
-                                            <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
                                         {else}
-                                            <a href="{$config->site_url('initiation/initiation/edit/'|cat:$result.id_inisiasi)}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
-                                            <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
+                                    <a href="{$config->site_url('initiation/initiation/edit/'|cat:$result.id_inisiasi)}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
+                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
                                         {/if}
-                                    {elseif {$department} == 10 Or {$jabatan} == 1}
-                                        <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                        <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
-                                    {/if}
+                                {elseif {$department} == 10 Or {$jabatan} == 1}
+                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
+                                {/if}
+                                 
+
                                      <!-- Modal -->
                                       <div class="modal fade" id="{$result.id_inisiasi|default:''}" role="dialog">
                                         <div class="modal-dialog modal-lg">
