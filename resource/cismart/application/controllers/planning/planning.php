@@ -99,7 +99,7 @@ class planning extends ApplicationBase {
         $this->smarty->assign("get", $this->m_planning->get_list_planning($filter, $params));
 
         // get list data
-        // $this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
+        //$this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
         
         // output
         parent::display();
@@ -381,34 +381,13 @@ class planning extends ApplicationBase {
         // set template content
         $this->smarty->assign("template_content", "planning/edit.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($params));
-
-        $kk = $this->m_planning->get_planning_by_id($params);
-        foreach ($kk as $k) {
-            $this->smarty->assign("ex", explode(",", $k['id_department']));
-        }
+        $kk = $this->m_planning->get_department_by_id($params);
+        $this->smarty->assign("ex", explode(",", $kk['department_plan']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("exs", explode(",", $kk['karyawan_plan']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
-        $kks = $this->m_planning->get_planning_by_id($params);
-        foreach ($kks as $ks) {
-            $this->smarty->assign("exs", explode(",", $ks['id_karyawan']));
-        }
-        $this->smarty->assign("kar",$this->m_karyawan->get_all());
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
-
-        
-        
-
-        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
-
-        // load Javascript
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
-        $this->smarty->load_javascript("resource/custom/js/custom.js");
 
 
         // notification
@@ -424,18 +403,21 @@ class planning extends ApplicationBase {
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('id_planning', 'Nomor Identitas Planning', 'trim|required');
-        $this->tnotification->set_rules('project_title', 'Nama Project', 'trim|required');
+        $this->tnotification->set_rules('id_planning', 'Nomor Planning', 'trim|required');
+
+        $dep = implode(",", $this->input->post("depart_edit"));
+        $kar = implode(",", $this->input->post("kary_edit"));
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
                 'id_department'     => $dep,
+                'id_karyawan'       => $kar,
                 );
             $where = array(
                 'id_planning' => $this->input->post('id_planning', TRUE),
             );
-
-            if ($this->m_initiation->update_planning($params)) {
+            
+            if ($this->m_planning->update_planning($params,$where)) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
