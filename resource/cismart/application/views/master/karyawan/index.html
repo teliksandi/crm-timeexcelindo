@@ -1,16 +1,15 @@
- <section class="content-header">
+<section class="content-header">
     <h1>
-        Pengolahan Data Inisiasi
+        Pengolahan Data Karyawan
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-book"></i> Initiation</a></li>
-        <li class="active">Data Initiation</li>
+        <li><a href="#"><i class="fa fa-database"></i> Master</a></li>
+        <li class="active">Karyawan</li>
     </ol>
 </section>
 <!-- notification template -->
 {include file="base/templates/notification.html"}
 <!-- end of notification template-->
-
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -19,23 +18,17 @@
                     <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
                 </div>
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/search_process')}" method="post">
+                    <form class="form-horizontal" action="{$config->site_url('master/karyawan/search_process')}" method="post">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="project_title" class="col-sm-2 control-label">Keyword</label>
+                                <label for="nama_karyawan" class="col-sm-2 control-label">Nama Karyawan</label>
                                 <div class="col-sm-4">
-                                    <input type="text" title="Masukkan Nama Project" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
+                                    <input type="text" name="nama_karyawan" value="{$search.nama_karyawan|default:''}" class="form-control" id="nama_karyawan" placeholder="">
                                 </div>
-                                <div class="col-sm-2">
-                                <select name="filter" min="0" max="40" class="form-control" widht='100px'>
-                                    <option value="" >- Select Filter -</option>
-                                    <option value='project_title'>Project Title</option>
-                                    <option value='client_id'>Client Name</option>
-                                    <option value='start_date'>Date/Year</option>
-                                </select>
-                                </div>
+                                <div class="col-sm-4">
                                     <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
                                     <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -43,94 +36,71 @@
             </div>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Tabel Data Inisiasi</h3>
+                    <h3 class="box-title">Tabel Data Karyawan</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-success" href="{$config->site_url('initiation/initiation/add_initiation')}" ><i class="fa fa-plus"></i> Tambah Data</a>
+                        <a class="btn btn-sm btn-success" href="{$config->site_url('master/karyawan/add')}" ><i class="fa fa-plus"></i> Tambah Data</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table class="table table-striped">
-                        <tbody>
+                        <tbody> 
                             <tr>
-                                <td width="3%" align="middle"><b>No</b></td>
-                                <td width="20%" align="middle"><b>Project Title</b></td>
-                                <td width="15%" align="middle"><b>Client Nama</b></td>
-                                <td width="10%" align="middle"><b>Due Date</b></td>
-                                <td width="7%" align="middle"><b>Status</b></td>
-                                <td width="10%" align="middle"><b>Last History</b></td>
-                                <td width="18%" align="middle"><b>Action</b></td>
+                                <td width="5%" align="middle"><b>No</b></td>
+                                <td width="10%" align="middle"><b>NIK</b></td>
+                                <td width="20%" align="middle"><b>Nama</b></td>
+                                <td width="20" align="middle"><b>Department</b></td>
+                                <td width="15%" align="middle"><b>Email</b></td>
+                                <td width="15%" align="middle"><b>HP</b></td>
+                                <td width="10%" align="middle"><b>Status</b></td>
+                                <td width="13%" align="middle"><b>Action</b></td>
                             </tr>
-                            {foreach $get as $result}
+                            {foreach $dpt_id as $result}
                             <tr>
                                 <td align="middle">{$no++}</td>
-                                <td align="middle">{$result.project_title}</td>
-                                <td align="middle">{$result.client_name}</td>
-                                <td align="middle">{date('d F Y', strtotime($result.due_date|default:''))}</td>
-                                <td align="middle">                                    
-                                    <input type="hidden" value="{date('Y-m-d', strtotime($result.due_date|default:''))}" id="x_End_Date">                             
-                                        <a id="dd"></a>
-                                        {$dueDate = date('Y-m-d', strtotime($result.due_date|default:''))}
-                                        {$dateNow = date('Y-m-d')}                                       
-                                        {if $dueDate|strtotime < $dateNow|strtotime}
-                                            <font color="red">Deadline</font> 
-                                        {elseif $dueDate|strtotime == $dateNow|strtotime}
-                                            <font color="red">Deadline</font> 
-                                        {else}
-                                            <font color="#33cc33">Aktif</font> 
-                                        {/if}
-                                    </td>
-                                    
-                                <td align="middle">{getComment($result.id_inisiasi)}</td>
-                                 <td align="middle">
-                                {if {$jabatan} == 3}
-                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                {elseif {$department} == 8}
-                                        {if {$jabatan} == 3}
-                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                        {else}
-                                    <a href="{$config->site_url('initiation/initiation/edit/'|cat:$result.id_inisiasi)}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
-                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
-                                        {/if}
-                                {elseif {$department} == 10 Or {$jabatan} == 1}
-                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
-                                {/if}
-                                 
+                                <td align="middle">{$result.nik}</td>
+                                <td align="middle">{$result.nama_karyawan}</td> 
+                                <td align="middle">{$result.nama_department}</td>
+                                <td align="middle">{$result.email}</td>
+                                <td align="middle">{$result.telp}</td>
+                                <td align="middle">{$result.status}</td>
+                                <td>
+                                    <a href="{$config->site_url('master/karyawan/edit')}/{$result.id_karyawan}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_karyawan|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
 
                                      <!-- Modal -->
-                                      <div class="modal fade" id="{$result.id_inisiasi|default:''}" role="dialog">
+                                      <div class="modal fade" id="{$result.id_karyawan|default:''}" role="dialog">
                                         <div class="modal-dialog modal-lg">
                                           <div class="modal-content">
                                             <div class="modal-header">
                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                              <h4 class="modal-title">Delete Initiation</h4>
+                                              <h4 class="modal-title">Delete Karyawan</h4>
                                             </div>
                                             <div class="modal-body"> 
 
-                                                 <div class="box-body">
-                                                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/delete_process')}" method="post">
-                                                            <input type="hidden" name="id_initiation" value="{$result.id_inisiasi|default:''}">
-                                                            <div class="box-body">
-                                                                <div class="form-group">
-                                                                    <label for="id_initiation" class="col-sm-2 control-label">Project Title</label>
-                                                                    <div class="col-sm-8">
-                                                                        <input type="text" name="id_initiation" disabled value="{$result.project_title|default:''}" class="form-control" id="id_initiation" placeholder="">
-                                                                    </div>
+                                                <div class="box-body">
+                                                    <form class="form-horizontal" action="{$config->site_url('master/karyawan/delete_process')}" method="post">
+                                                        <input type="hidden" name="id_karyawan" value="{$result.id_karyawan|default:''}">
+                                                        <div class="box-body">
+                                                            <div class="form-group">
+                                                                <label for="nama_karyawan" class="col-sm-2 control-label">Nama Karyawan</label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" name="nama_karyawan" disabled value="{$result.nama_karyawan|default:''}" class="form-control" placeholder="" title="Masukkan Nama Karyawan">
                                                                 </div>
                                                             </div>
-                                                            <!-- /.box-body -->
-                                                            <div class="box-footer">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 col-md-offset-8">
-                                                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
-                                                                    </div>
+                                                        </div>
+                                                        <!-- /.box-body -->
+                                                        <div class="box-footer">
+                                                            <div class="row">
+                                                                <div class="col-md-3 col-md-offset-8">
+                                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
                                                                 </div>
                                                             </div>
-                                                            <!-- /.box-footer -->
-                                                        </form>
-                                                    </div>
+                                                        </div>
+                                                        <!-- /.box-footer -->
+                                                    </form>
+                                                </div>
+
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -160,3 +130,5 @@
         <!-- /.col -->
     </div>
 </section>
+
+
