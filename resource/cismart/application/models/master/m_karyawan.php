@@ -162,6 +162,21 @@ class m_karyawan extends CI_Model{
         return $this->db->query($sql, $params);
     }
 
+    function delete_user($params){
+        $sql = "DELETE FROM users WHERE id_karyawan = ?";
+        return $this->db->query($sql, $params);
+    }
+
+    function delete_com_user($params){
+        $sql = "DELETE FROM com_user WHERE user_id = ?";
+        return $this->db->query($sql, $params);
+    }
+
+    function delete_com_role_user($params){
+        $sql = "DELETE FROM com_role_user WHERE user_id = ?";
+        return $this->db->query($sql, $params);
+    }
+
     function get_all() {
         return $this->db->get('karyawan')->result_array();
     }

@@ -353,8 +353,24 @@ class karyawan extends ApplicationBase{
                 'id_karyawan' => $this->input->post('id_karyawan', TRUE),
                 
             );
+            
+            $params_user = array(
+                'id_karyawan' => $this->input->post('id_karyawan'),  
+            );            
+
+            $id = $this->m_karyawan->get_id_user($this->input->post('id_karyawan'));                
+            foreach ($id as $key ) {
+                $user_id  = $key['user_id'];
+            }
+            $params_com_user = array(
+                'user_id' => $user_id,  
+            );
 
             if ($this->m_karyawan->delete_karyawan($params)) {
+                $this->m_karyawan->delete_user($params_user);
+                $this->m_karyawan->delete_com_user($params_com_user);
+                $this->m_karyawan->delete_com_role_user($params_com_user);
+
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil dihapus");
             }else{
