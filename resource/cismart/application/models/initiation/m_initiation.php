@@ -206,8 +206,10 @@ class m_initiation extends CI_Model{
     }
 
     function initiation_komen($where) {  
-        $sql = "SELECT * FROM komentar WHERE id_initiation = ?";
-        $query = $this->db->query($sql, $where);
+        $this->db->select('*');
+        $this->db->from('komentar');
+        $this->db->join('users', 'komentar.user_id = users.user_id', 'left'); 
+        $query = $this->db->get();
         return $query->result_array();
     }
 
