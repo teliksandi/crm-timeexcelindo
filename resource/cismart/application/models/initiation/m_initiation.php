@@ -62,6 +62,9 @@ class m_initiation extends CI_Model{
         }
     }
 
+
+
+
     function nm_file($id){
         $this->db->select('*');
         $this->db->from('file');

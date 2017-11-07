@@ -40,6 +40,16 @@ public function index() {
         // set template content
         $this->smarty->assign("template_content", "initiation/index.html");
         //$this->smarty->assign('user', $this->com_user['user_id']);
+
+        $pengguna = $this->com_user['user_id'];
+        $s = $this->m_karyawan->identitas_karyawan($pengguna);
+        foreach ($s as $key) {
+            $id_k = $key['id_karyawan'];
+        }
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
     
 // session
         $search = $this->tsession->userdata('search_initiation');
@@ -97,10 +107,14 @@ public function index() {
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen_get());
         $this->smarty->assign("get", $this->m_initiation->get_list_initiation($filter, $params));
 
-        
-        // output
+        //bagian session
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
 
-    
+        // $this->smarty->assign("cek", $nama_karyawan);
+
+        // output
         parent::display();       
     }
 
@@ -127,6 +141,19 @@ public function index() {
         $this->_set_page_rule("U");
         // set template content
         $this->smarty->assign("template_content", "initiation/detail.html");
+        $pengguna = $this->com_user['user_id'];
+        $s = $this->m_karyawan->identitas_karyawan($pengguna);
+
+        foreach ($s as $key) {
+            $id_k = $key['id_karyawan'];
+        }
+
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $this->smarty->assign("jabatan", $list_kar['id_position']);
+        $this->smarty->assign("department", $department_karyawan);
+
         $this->smarty->assign("result", $this->m_initiation->get_initiation_by_id($where));
         //var_dump($this->m_initiation->initiation_detail());
         $this->smarty->assign("join", $this->m_initiation->initiation_detail($where));
@@ -145,6 +172,17 @@ public function index() {
         $la[] = $kk;
         $this->smarty->assign("ef", $la);
         }
+
+        // foreach ($vfls as $f) {
+        //    // $this->smarty->assign("ef",  explode(",", $f['file']));
+        //     $this->smarty->assign("ef", $f['file']);
+        // }
+
+        // $list = $this->m_initiation->get_list_file($ls);
+
+        // foreach ($list as $l) {
+        //    $this->smarty->assign("ef",  explode(",", $l['file']));
+        // }
 
         $this->smarty->assign("let", $this->m_initiation->list_department_where($where));
        
@@ -556,7 +594,7 @@ public function index() {
         $kk = $l['file'];
         $la[] = $kk;
         $this->smarty->assign("ef", $la);
-        }        
+        }
 
         // notification
         $this->tnotification->display_notification();
@@ -604,7 +642,7 @@ public function index() {
                 $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
                     $sql = "INSERT INTO file values('','$id','$fls[$x]', '', '$tgl')";
-                    $this->db->query($sql, $params);
+                    $this->db->query($sql);
                 }
 
                 $this->tnotification->delete_last_field();
