@@ -22,211 +22,376 @@
                         <a class="btn btn-sm btn-primary" href="{$config->site_url('closing/closing')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
-
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('closing/closing/closing_process')}" method="post">
-                      {foreach $join as $jn}
-                        <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}" id="id_initiation">
-                            <div class="box-header with-border">
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="client_name">Client Name</label>
-                                            <input type="text" name="client" value="{$jn.client_name|default:''}" class="form-control"  title="Nama Client" readonly>
+                        <center>
+                            <div class="form-group">
+                                <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
+                            </div>
+                        </center>
+                          <!-- Modal -->
+                        <div class="modal fade" id="r_inisiasi" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Initiation History</h4>
                                     </div>
+                                    <div class="modal-body">
+                                    <div class="box-body">
+                                        {foreach $join as $init_rwyt}
+                                            <div class="form-group">
+                                                <label for="project_title">Project title</label>
+                                                    <input type="text" name="project_title" class="form-control" value="{$init_rwyt.project_title|default:''}" id="project_title" placeholder="" title="Judul Project" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="client_name">Client Name</label>
+                                                    <input type="text" name="client" class="form-control" value="{$init_rwyt.client_name|default:''}" title="Nama Client" readonly>
+                                            </div>                                        
+                                            <div class="form-group">
+                                                <label>Project Manager Department</label>
+                                                <br>
+                                                    <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" disabled style="width: 100%;">
+                                                        {foreach $datadepartment as $cth}
+                                                            <option value="{$cth.id_department}" 
+                                                        {if $cth.id_department|in_array:$dprt} selected="selected"{/if}>{$cth.nama_department}
+                                                            </option>
+                                                        {foreachelse}
+                                                        Data tidak ditemukan !
+                                                        {/foreach}
+                                                    </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Team Member Name</label>
+                                                <br>
+                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" disabled style="width: 100%;">
+                                                        {foreach $marketing_kar as $value}
+                                                            <option value="{$value.id_karyawan}"
+                                                        {if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}
+                                                            </option>
+                                                        {foreachelse}
+                                                        Data tidak ditemukan !
+                                                        {/foreach}
+                                                    </select>
+                                            </div>
+                                            <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
+                                                <div class="form-group">
+                                                    <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
+                                                        <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$init_rwyt.project_desc|default:''}
+                                                        </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
+                                                        <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$init_rwyt.project_just|default:''}
+                                                        </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
+                                                        <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$init_rwyt.not_in_project|default:''}
+                                                        </textarea>
+                                                </div>
+                                            </div>
+                                            <!-- ./scroll -->
+                                            <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label for="budget">Budget</label>
+                                                        <input type="text" name="budget" class="form-control" id="budget" placeholder="" title="Estimasi harga" value="Rp. {number_format($init_rwyt.budget|default:'',0,",",".")}" readonly style="width: 70%;">
+                                            </div>
+                                            <div class="form-group">
+                                                    <label for="start_date">Start date</label>    
+                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($init_rwyt.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly style="width: 70%;">
+                                            </div>
+                                            <div class="form-group">
+                                                    <label for="due_date">Due date</label>
+                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($init_rwyt.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly style="width: 70%;">
+                                            </div>
+                                            </div>
+                                        {/foreach}
 
-                                    <div class="form-group">
-                                        <label for="project_title">Project title</label>
-                                            <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
+                                        <div class="col-md-6">
+                                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                                <div class="box-header with-border">
+                                                    <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
+                                                    <label for="files[]">Files</label>
+                                                    <div style="overflow-y: scroll; height: 200px;">
+                                                        <div class="form-group">
+                                                            <center>
+                                                                {foreach $ef as $f}
+                                                                        <table>
+                                                                            <input type="hidden" name="nm" value="{$f}">
+                                                                                <div class="form-group">
+                                                                                    <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>
+                                                                                </div>
+                                                                                {if $f !== ""}
+                                                                                <hr></hr>
+                                                                                {/if}
+                                                                        </table>
+                                                                {/foreach}
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                        </div>
+
                                     </div>
-                                                     
-                                    <div class="form-group">
-                                            <label>Project Manager Department</label>
-
+                                    <table>
+                                        <div style="overflow-y: scroll; height: 200px">
+                                            Komentar :
+                                            {foreach $komen as $km}
                                             <br>
-                                            <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
+                                            <b><textarea disabled class="form-control">
+                                            {$km.komentar}</textarea></b>
+                                            <div align="right">
+                                            Dikomentari pada : 
+                                                <br>
+                                                    {$km.tgl_komentar}
+                                                <br>
+                                            {/foreach}
+                                            </div>
+                                        </div>
+                                    </table>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Model Riwayat Inisiasi -->
 
-                                                {foreach $datadepartment as $cth}
 
-                                                <option value="{$cth.id_department}" 
+        <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
+        <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
+        <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
 
-                                                {if $cth.id_department|in_array:$ex}
-                                                 selected="selected"{/if}>{$cth.nama_department}
-                                                    
-                                                </option>
+
+                        <div class="box-header with-border">
+                                <center>
+                                    <div class="form-group">
+                                        <button type="submit" name="Riwayat_i" class="btn btn-info" data-toggle="modal" data-target="#r_planning"><i>Riwayat Planning</i></button>
+                                    </div>
+                                </center>
+                        </div>
+                          <!-- Modal -->
+                        <div class="modal fade" id="r_planning" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Planning History</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="box-body">
+                                        {foreach $join_planning as $planning_rwyt}
+                                        <div class="form-group">
+                                                <label for="project_title">Project title</label>
+                                                    <input type="text" name="project_title" class="form-control" value="{$planning_rwyt.project_title|default:''}" id="project_title" placeholder="" title="Judul Project" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="client_name">Client Name</label>
+                                                    <input type="text" name="client" class="form-control" value="{$planning_rwyt.client_name|default:''}" title="Nama Client" readonly>
+                                            </div>                                        
+                                            <div class="form-group">
+                                                <label>Project Manager Department</label>
+                                                <br>
+                                                    <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" readonly disabled style="width: 100%;">
+                                                        {foreach $datadepartment as $cth}
+                                                            <option value="{$cth.id_department}" 
+                                                        {if $cth.id_department|in_array:$dprt} selected="selected"{/if}>{$cth.nama_department}
+                                                            </option>
+                                                        {foreachelse}
+                                                        Data tidak ditemukan !
+                                                        {/foreach}
+                                                    </select>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Team Member Name</label>
+                                            <br>
+                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled>
+                                                    {foreach $marketing_kar as $value}
+                                                        <option value="{$value.id_karyawan}"
+                                                    {if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}
+                                                        </option>
                                                     {foreachelse}
                                                     Data tidak ditemukan !
                                                     {/foreach}
-                                            </select>
-                                        </div>
-
-                                        
-                                        <div class="form-group">
-                                            <label>Team Member Name</label>
-                                            <br>
-                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
-                                                  {foreach $marketing_kar as $value}
-                                                    <option value="{$value.id_karyawan}"
-                                                    {if $value.id_karyawan|in_array:$exs}
-                                                 selected="selected"{/if}>{$value.nama_karyawan}</option>
-                                                  {foreachelse}
-                                                  Data tidak ditemukan !
-                                                  {/foreach}
                                                 </select>
                                         </div>
-
-                                    <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
-                                                <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$jn.project_desc|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
-                                                <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$jn.project_just|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$jn.not_in_project|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    </div>
-                                    <!-- ./scroll -->
-
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="budget">Budget</label>
-                                                <input type="text" name="budget" value="Rp. {number_format($jn.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="start_date">Start date</label>    
-                                                <input type="text" name="start_date" value="{date('d F Y', strtotime($jn.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <label for="due_date">Due date</label>
-                                                <input type="text" name="due_date" value="{date('d F Y', strtotime($jn.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
-                                        </div>
-                                    </div>
-
-                                </div>
-                </form>
-
-                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
-                            <div class="col-md-6">
-                                <div class="box-header with-border">
-                                    <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
-                                    <label for="files[]">Files</label>
-                                    <div style="overflow-y: scroll; height: 200px;">
-                                    <div class="form-group">
-                                        <center>
-                                                {foreach $ef as $f}
-                                                        <table>
-
-                                                            <input type="hidden" name="id_i" value="{$f}">
-                                                                <div class="form-group">
-                                                                    <a href="{$f}">{$f}</a>
-                                                                    <input type="image" name="submit" src="{$BASEURL}resource/doc/images/icon/aa.png" width="50px" height="50px">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                {$f}
-                                                                </div>
-                                                        </table>
-                                                {/foreach}
-                                        </center>
-                                    </div>
-                                    </div>
-                        </form>
-                        
-                        <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
-                                    <center>
-                                        <br>
-                                    <div class="form-group">
-                                        <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
-                                            <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
-                                    </center>
-
-                        </form>
-                        <form class="form-horizontal" action="{$config->site_url('closing/closing/closing_process')}" method="post">
-                                    <center>
-                                    <div class="form-group">
-                                        <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
-                                            <button type="submit" class="btn btn-danger">Reject</button></div>
+                                            <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
+                                                <div class="form-group">
+                                                    <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
+                                                        <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$init_rwyt.project_desc|default:''}
+                                                        </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
+                                                        <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$init_rwyt.project_just|default:''}
+                                                        </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
+                                                        <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$init_rwyt.not_in_project|default:''}
+                                                        </textarea>
+                                                </div>
+                                            </div>
+                                            <!-- ./scroll -->
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <label for="budget">Budget</label>
+                                                        <input type="text" name="budget" class="form-control" id="budget" placeholder="" title="Estimasi harga" value="Rp. {number_format($planning_rwyt.budget|default:'',0,",",".")}" readonly >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="start_date">Start date</label>    
+                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($planning_rwyt.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="due_date">Due date</label>
+                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($planning_rwyt.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
+                                                </div>
+                                            </div>
                                             <br>
                                             <br>
-                                    </center>
-                        </form>
 
-                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
-                                    <div class="form-group">
-                                            <table>
-                                                <div style="overflow-y: scroll; height: 200px">
-                                                    Komentar :
-                                                    {foreach $komen as $km}
-                                                        <br>
-                                                        <b><textarea disabled class="form-control">
-                                                            {$km.komentar}</textarea></b>
-                                                <div align="right">
-                                                    Dikomentari pada : 
-                                                        <br>
-                                                            {$km.tgl_komentar}
-                                                        <br>
-                                                    {/foreach}
-                                                </div>
-                                                </div>
-                                            </table>
-                                                <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
-                                                <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
-                                                    <br>
-
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
-                                                                    <br>
-                                                                <div align="right">
-                                                                    <button type="submit" name="submit" class="btn btn-info">Comment</button></div>
-                                                        </div>
-                                                    </div>
-                                   </div>
+                                        <table class="table table-striped" border="3" align="center" onload="biaya()">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="15%" align="middle"><b> Uraian </b></td>
+                                                    <td width="5%" align="middle"><b> % </b></td>
+                                                    <td width="15%" align="middle"><b> Total </b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Total Anggaran </td>
+                                                    <td align="middle"></td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$rs.budget|default:''}" title="Total Anggaran" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> DPP </td>
+                                                    <td align="middle"></td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="DPP" value ="0" title="DPP" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="dpp_hasil" readonly></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> PPN </td>
+                                                    <td align="middle"> 10 % </td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="PPN" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="ppn_hasil"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> PPH </td>
+                                                    <td align="middle"> 2 % </td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="PPH" value ="0" title="PPH" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="pph_hasil"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle" style="background-color: yellow"> Pendapatan Setelah Pajak </td>
+                                                    <td align="middle" style="background-color: yellow"></td>
+                                                    <td align="middle" style="background-color: yellow">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Pendapatan" value ="0" title="Pendapatan setelah pajak" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="netto" readonly></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle">  </td>
+                                                    <td align="middle">  </td>
+                                                    <td align="middle">  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Rincian Biaya </td>
+                                                    <td align="middle"></td>
+                                                    <td align="middle"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Biaya Administrasi </td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_administrasi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$rs.p_b_administrasi|default:''}"> %</td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="{$rs.b_administrasi|default:''}" title="Masukkan biaya Administrasi" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" ></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Biaya Produksi dan Operasional </td>
+                                                    <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$rs.p_b_produksi_dan_operasional|default:''}"> %</td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="{$rs.b_produksi_dan_operasional|default:''}" title="Masukkan biaya Produksi" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" ></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Biaya Hardware & Infrastruktur </td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_hardware" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$rs.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="{$rs.b_hardware_dan_infrastruktur|default:''}" title="Masukkan biaya Hardware" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Biaya Perawatan / Garansi </td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_perawatan" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$rs.p_b_perawatan|default:''}"> %</td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="{$rs.b_perawatan|default:''}" title="Masukkan Biaya Perawatan" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Biaya Lain-Lain </td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_lain" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$rs.p_b_lain_lain|default:''}"> %</td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Lain" value="{$rs.b_lain_lain|default:''}" title="Masukkan biaya Lain_lain" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle"> Biaya Entertaint </td>
+                                                    <td align="middle"><input type="number" name="persen_biaya_entertaint" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$rs.p_b_entertaint|default:''}"> %</td>
+                                                    <td align="middle">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value="{$rs.b_entertaint|default:''}" title="Masukkan biaya Entertaint" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle" style="background-color: yellow"> Total Biaya </td>
+                                                    <td align="middle" style="background-color: yellow"></td>
+                                                    <td align="middle" style="background-color: yellow">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" value="{$rs.total_biaya|default:''}" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="total_biaya" readonly readonly></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle">  </td>
+                                                    <td align="middle">  </td>
+                                                    <td align="middle">  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle" style="background-color: yellow"> Perkiraan Laba Rugi </td>
+                                                    <td align="middle" style="background-color: yellow"><input type="number" name="persen_rugi_laba" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$rs.p_perkiraan_rugi_laba|default:''}"> %</td>
+                                                    <td align="middle" style="background-color: yellow">
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="laba" value="{$rs.perkiraan_rugi_laba|default:''}" title="" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="hasil_laba"></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                         {/foreach}
-                    </form>
-
-
-                               </div>
-                               <!-- /.box-header --> 
+                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /,col -->
-
                         </div>
-                        <!-- /,box-header -->
+                        <!-- Model Riwayat Planning -->
 
-                </div> 
-                <!-- /.box-body -->
 
-                <div class="box-footer clearfix">
-                    {$pagination.data|default:''}
-                </div>
+        <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
+        <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
+        <!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
+
 
             </div>
-            <!-- /.box -->
-
+            <!-- box -->
         </div>
-        <!-- /.col -->
+        <!-- col -->
     </div>
+    <!-- row -->
 </section>
