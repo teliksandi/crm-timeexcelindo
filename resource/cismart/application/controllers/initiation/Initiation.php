@@ -451,19 +451,13 @@ public function index() {
         $dep = implode(",", $this->input->post("department"));
         $kar = implode(",", $this->input->post("karyawan"));
         $fl = implode(",", $this->input->post("files"));
-        // $ex = explode("[","]", $ll);
-        // var_dump($ll);
-        // var_dump($this->input->post("files"));
-        // exit();
-
-        // $list_file = $this->input->post("files");
-        // foreach ($list_file as $k) {
-        //     $hsl_f = $k;
-        // }
+        
         $fls = $this->input->post("files");
 
         $hitung_file = count($fls);
 
+        $hasil = $this->SpasiKeAnd($fls);
+    
         if($this->tnotification->run() !== FALSE){
             $params = array(
                 'project_title'     => $this->input->post("judul_project"),
@@ -481,15 +475,13 @@ public function index() {
 
             if ($this->m_initiation->insert_initiation($params)) {
 
-// *****************************************ini yang baru ***************************
                 $id = $this->db->insert_id();
                 $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','$id','$fls[$x]', '', '$tgl')";
+                    $sql = "INSERT INTO file values('','$id','','$hasil[$x]', '', '$tgl')";
                     $this->db->query($sql);
                 }
 
-// ********************************************************************************                
                 //$this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
@@ -504,6 +496,19 @@ public function index() {
         // default redirect
         redirect("initiation/initiation/add_initiation/");
 
+    }
+
+    function SpasiKeAnd($idr) {
+        $search = [
+                
+                ' ',
+            ];
+
+            $replace = [
+                '_'
+            ];
+
+        return $currToIn = str_ireplace($search, $replace, $idr);
     }
 
 

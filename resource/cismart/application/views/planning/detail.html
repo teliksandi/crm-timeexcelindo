@@ -110,16 +110,17 @@
                                             </div>
                                         {/foreach}
 
-                                        <div class="col-md-6">
                                         <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                            <div class="col-md-6">
                                                 <div class="box-header with-border">
                                                     <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
                                                     <label for="files[]">Files</label>
                                                     <div style="overflow-y: scroll; height: 200px;">
-                                                        <div class="form-group">
-                                                            <center>
+                                                    <div class="form-group">
+                                                        <center>
                                                                 {foreach $ef as $f}
                                                                         <table>
+
                                                                             <input type="hidden" name="nm" value="{$f}">
                                                                                 <div class="form-group">
                                                                                     <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>
@@ -129,12 +130,12 @@
                                                                                 {/if}
                                                                         </table>
                                                                 {/foreach}
-                                                            </center>
-                                                        </div>
+                                                        </center>
+                                                    </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </form>
-                                        </div>
 
                                     </div>
                                     <table>

@@ -91,15 +91,9 @@ class planning extends ApplicationBase {
         // get list data
         $params = array($keyword, ($start - 1), $config['per_page']);
 
-///////////////////////////////////////////////////////////////////////////////////////
-//  Belum dicari                                                                     //
-//////////////////////////////////////////////////////////////////////////////////////
-//        $this->smarty->assign("komen", $this->m_planning->planning_komen_get());  //
-//////////////////////////////////////////////////////////////////////////////////////
         $this->smarty->assign("get", $this->m_planning->get_list_planning($filter, $params));
 
         // get list data
-        //$this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
         
         // output
         parent::display();
@@ -122,7 +116,6 @@ class planning extends ApplicationBase {
 
          $get_in = $this->m_planning->initiation_detail($where);
         foreach ($get_in as $f) {
-           // $this->smarty->assign("ef",  explode(",", $f['file']));
             $id_ini = $f['id_initiation'];
         }
 
@@ -238,8 +231,47 @@ class planning extends ApplicationBase {
                 'p_perkiraan_rugi_laba'         => "0",
                               
             );
+
             $this->m_planning->insert_planning($params);
+            $id_p = $this->db->insert_id();
+            
+            $ls_id_in = $this->m_planning->get_initiation_by_id($id_p);
+
+            $id_ini = $ls_id_in['id_initiation'];
+
+            $as = $this->m_initiation->get_file($id_ini);
+
+
+            foreach ($as as $l) {        
+            $kk = $l['file'];
+            $la[] = $kk;
+            }
+
+            $hitung_file = count($la);
+
+            $hasil = $this->SpasiKeAnd($la);            
+
+            $tgl = date('d-m-Y h:i:sa');
+                for($x=0;$x<$hitung_file;$x++){
+                    $sql = "INSERT INTO file values('','','$id_p','$hasil[$x]', '', '$tgl')";
+                    $this->db->query($sql);
+                }
+
+
             redirect("initiation/initiation/index");
+    }
+
+    function SpasiKeAnd($idr) {
+        $search = [
+                
+                ' ',
+            ];
+
+            $replace = [
+                '_'
+            ];
+
+        return $currToIn = str_ireplace($search, $replace, $idr);
     }
 
 
@@ -283,19 +315,12 @@ class planning extends ApplicationBase {
             $id_ini = $f['id_initiation'];
         }
 
-        $vfls = $this->m_initiation->get_file($id_ini);
+        $as = $this->m_initiation->get_file($id_ini);
 
-        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
-
-        foreach ($vfls as $f) {
-           // $this->smarty->assign("ef",  explode(",", $f['file']));
-            $ls = $f['id_file'];
-        }
-
-        $list = $this->m_initiation->get_list_file($ls);
-
-        foreach ($list as $l) {
-           $this->smarty->assign("ef",  explode(",", $l['file']));
+        foreach ($as as $l) {        
+        $kk = $l['file'];
+        $la[] = $kk;
+        $this->smarty->assign("ef", $la);
         }
 
         $this->tnotification->display_notification();
@@ -381,13 +406,34 @@ class planning extends ApplicationBase {
         // set template content
         $this->smarty->assign("template_content", "planning/edit.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($params));
-        $kk = $this->m_planning->get_department_by_id($params);
-        $this->smarty->assign("ex", explode(",", $kk['department_plan']));
-        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
-        $this->smarty->assign("exs", explode(",", $kk['karyawan_plan']));
-        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
+        $kk = $this->m_planning->get_planning_by_id($params);
+        foreach ($kk as $k) {
+            $this->smarty->assign("ex", explode(",", $k['id_department']));
+        }
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+
+        $kks = $this->m_planning->get_planning_by_id($params);
+        foreach ($kks as $ks) {
+            $this->smarty->assign("exs", explode(",", $ks['id_karyawan']));
+        }
+        $this->smarty->assign("kar",$this->m_karyawan->get_all());
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
+
+        
+        
+
+        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
+
+        // load Javascript
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
+        $this->smarty->load_javascript("resource/custom/js/custom.js");
 
 
         // notification
@@ -403,21 +449,18 @@ class planning extends ApplicationBase {
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('id_planning', 'Nomor Planning', 'trim|required');
-
-        $dep = implode(",", $this->input->post("depart_edit"));
-        $kar = implode(",", $this->input->post("kary_edit"));
+        $this->tnotification->set_rules('id_planning', 'Nomor Identitas Planning', 'trim|required');
+        $this->tnotification->set_rules('project_title', 'Nama Project', 'trim|required');
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
                 'id_department'     => $dep,
-                'id_karyawan'       => $kar,
                 );
             $where = array(
                 'id_planning' => $this->input->post('id_planning', TRUE),
             );
-            
-            if ($this->m_planning->update_planning($params,$where)) {
+
+            if ($this->m_initiation->update_planning($params)) {
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
