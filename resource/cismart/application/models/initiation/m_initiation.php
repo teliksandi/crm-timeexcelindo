@@ -328,6 +328,13 @@ class m_initiation extends CI_Model{
         return $this->db->query($sql);
     }
 
+    function delete_file_cuy($params){
+
+        $sql = "DELETE FROM file where id_initiation = ? ";
+        return $this->db->query($sql,$params);
+
+    }
+
     function delete_komentar($params){
         $sql = "DELETE FROM komentar WHERE id_initiation= ?";
         return $this->db->query($sql, $params);
