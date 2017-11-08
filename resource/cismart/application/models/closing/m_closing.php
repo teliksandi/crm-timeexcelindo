@@ -55,6 +55,35 @@ class m_closing extends CI_Model{
         }
     }
     
+    function initiation_detail($where){
+        $sql = "SELECT a.id_initiation, b.start_date as 'mulai', b.due_date as 'akhir', b.*, c.*, d.*, e.* FROM closing a 
+                left JOIN initiation b on a.id_initiation = b.id_initiation
+                left JOIN client c on b.id_client = c.id_client 
+                left JOIN karyawan d on b.id_karyawan = d.id_karyawan
+                left JOIN department e on b.id_department = e.id_department
+                WHERE  b.id_initiation = ?";
+        $query = $this->db->query($sql, $where);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+    function get_department_by_id($where){
+        $sql = "SELECT a.id_department as 'department', a.id_karyawan as 'karyawan', b.id_closing FROM initiation a left join closing b on a.id_initiation = b.id_initiation WHERE a.id_initiation = ?";
+        $query = $this->db->query($sql, $where);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return NULL;
+        }
+    }
+    
     function insert_closing($params){
         return $this->db->insert('closing', $params);
     }

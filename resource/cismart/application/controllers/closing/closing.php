@@ -18,6 +18,19 @@ class closing extends ApplicationBase {
         // load library
         $this->load->library('tnotification');
         $this->load->library('datetimemanipulation');
+
+        //load plugin
+        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
+
+        // load Javascript
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
+        $this->smarty->load_javascript("resource/custom/js/custom.js");
     }
 
     
@@ -63,6 +76,37 @@ class closing extends ApplicationBase {
         $this->_set_page_rule("U");
         // set template content
         $this->smarty->assign("template_content", "closing/detail.html");
+
+        $this->smarty->assign("join", $this->m_closing->initiation_detail($where));
+
+        $kk = $this->m_closing->get_department_by_id($where);
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($where));
+        $this->smarty->assign("dprt", explode(",", $kk['department']));
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("kry", explode(",", $kk['karyawan']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+
+        $get_in = $this->m_closing->initiation_detail($where);
+
+        foreach ($get_in as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $id_ini = $f['id_initiation'];
+        }
+
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
+
+        $vfls = $this->m_initiation->get_file($id_ini);
+
+        foreach ($vfls as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
+            $ls = $f['id_file'];
+        }
+
+        $list = $this->m_initiation->get_list_file($ls);
+
+        foreach ($list as $l) {
+           $this->smarty->assign("ef",  explode(",", $l['file']));
+        }
 
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
