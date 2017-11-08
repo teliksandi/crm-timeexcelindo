@@ -8,6 +8,21 @@ class m_execution extends CI_Model{
     //     $this->load->library('datetimemanipulation');
     //     $this->smarty->assign("dtm", $this->datetimemanipulation);
     // }
+    function execution_get($params){
+        $sql = "SELECT a.start_date as 'mulai', a.due_date as 'akhir', a.*, b.*, c.*, d.* from execution a left JOIN planning b on a.id_planning = b.id_planning
+                left JOIN initiation c on c.id_initiation = b.id_initiation
+                left JOIN client d on d.id_client = c.id_client
+                WHERE a.id_execution = ? ";
+        $query = $this->db->query($sql,$params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+
+    }
 
     function search_execution($filter, $params){
 
@@ -23,7 +38,7 @@ class m_execution extends CI_Model{
     }
 
     function get_planning_by_id($where){
-        $sql = "SELECT b.id_department as 'department', b.id_karyawan as 'karyawan', b.* FROM execution a left JOIN planning b on a.id_planning = b.id_planning
+        $sql = "SELECT a.id_department as 'department_exe', a.id_karyawan as 'karyawan_exe', b.id_department as 'department', b.id_karyawan as 'karyawan', b.*, c.* FROM execution a left JOIN planning b on a.id_planning = b.id_planning
                 left JOIN initiation c on c.id_initiation = b.id_initiation
                  WHERE a.id_execution = ?";
         $query = $this->db->query($sql, $where);
@@ -76,9 +91,23 @@ class m_execution extends CI_Model{
     }
 
     function get_department_by_id($where){
-        $sql = "SELECT c.id_department as 'department', c.id_karyawan as 'karyawan' FROM execution a left JOIN planning b on a.id_planning = b.id_planning
+        $sql = "SELECT c.id_department as 'department', c.id_karyawan as 'karyawan', a.id_department as 'department_exe', a.id_karyawan as 'karyawan_exe' FROM execution a left JOIN planning b on a.id_planning = b.id_planning
                 left JOIN initiation c on c.id_initiation = b.id_initiation
                  WHERE a.id_execution = ?";
+        $query = $this->db->query($sql, $where);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return NULL;
+        }
+
+    }
+
+    function get_execution_by_id($where){
+        $sql = "SELECT * from execution a WHERE a.id_execution = ?  
+        ";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -107,9 +136,17 @@ class m_execution extends CI_Model{
         }
     }
 
+    function getComment_Execution($id_execution){
+         $sql = "SELECT tgl_komentar from komentar KM1 INNER JOIN( SELECT max(id_komentar)as id_kom from komentar where id_execution =" . $id_execution . " ) KM2 on KM2.id_kom=KM1.id_komentar ";
+        return $query = $this->db->query($sql)->result_array();
+    }
 
     function insert_execution($params){
         return $this->db->insert('execution', $params);
+    }
+
+     function update_execution($params, $where){
+        return $this->db->update('execution', $params, $where);
     }
 
 }

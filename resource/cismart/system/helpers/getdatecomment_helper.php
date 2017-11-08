@@ -20,7 +20,7 @@
 		$CI =& get_instance();
 		$CI->load->model('m_execution');
 
-	$rest = $CI->m_execution->getComment_Planning($id_execution);
+	$rest = $CI->m_execution->getComment_Execution($id_execution);
 	return !empty($rest[0]['tgl_komentar']) ? $rest[0]['tgl_komentar'] : '' ;
 
 	}

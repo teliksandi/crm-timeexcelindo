@@ -1,4 +1,4 @@
-<?php
+    <?php
 
     if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -116,25 +116,45 @@
                 redirect("planning/planning/index");
         }
 
-        
+        function edit($params){
+        // set page rules
+        $this->_set_page_rule("U");
+        // set template content
+        $this->smarty->assign("template_content", "execution/edit.html");
+        $this->smarty->assign("result",$this->m_execution->execution_get($params));
+        $kk = $this->m_execution->get_department_by_id($params);
+        $this->smarty->assign("ex", explode(",", $kk['department_exe']));
+        $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("exs", explode(",", $kk['karyawan_exe']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+        $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
+        // notification
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
+
+        // output
+        parent::display();
+    }
 
         function edit_process(){
             // set page rules
             $this->_set_page_rule("U");
 
             // cek input
-            $this->tnotification->set_rules('id_planning', 'Nomor Identitas Planning', 'trim|required');
-            $this->tnotification->set_rules('project_title', 'Nama Project', 'trim|required');
+            $this->tnotification->set_rules('id_execution', 'Nomor Identitas Execution', 'trim|required');
+            $dep = implode(",", $this->input->post("depart_edit"));
+            $kar = implode(",", $this->input->post("kary_edit"));
 
             if($this->tnotification->run() !== FALSE){
                 $params = array(
                     'id_department'     => $dep,
+                    'id_karyawan'       => $kar,
                     );
                 $where = array(
-                    'id_planning' => $this->input->post('id_planning', TRUE),
+                    'id_execution' => $this->input->post('id_execution', TRUE),
                 );
 
-                if ($this->m_initiation->update_planning($params)) {
+                if ($this->m_execution->update_execution($params, $where)) {
                     $this->tnotification->delete_last_field();
                     $this->tnotification->sent_notification("success", "Data berhasil disimpan");
                 }else{
@@ -146,7 +166,7 @@
                 $this->tnotification->sent_notification("error", "Data gagal disimpan");
             }
             // default redirect
-            redirect("planning/planning/edit/".$this->input->post('id_planning', TRUE));
+            redirect("execution/execution/edit/".$this->input->post('id_execution', TRUE));
         }
 
 
@@ -154,7 +174,8 @@
         function detail($where){
             $this->_set_page_rule("U");
             // set template content
-            $this->smarty->assign("template_content", "execution/detail.html");        
+            $this->smarty->assign("template_content", "execution/detail.html");  
+            $this->smarty->assign("execution_detail",$this->m_execution->execution_get($where));      
             $this->smarty->assign("join", $this->m_execution->initiation_detail($where));
            $this->smarty->assign("join_planning", $this->m_execution->planning_detail($where));
             $kk = $this->m_execution->get_department_by_id($where);
@@ -172,6 +193,11 @@
             $this->smarty->assign("kry_plan", explode(",", $rr['karyawan']));
             $this->smarty->assign("marketing_kar_plan",$this->m_karyawan->get_market_karyawan());
 
+            $ss = $this->m_execution->get_execution_by_id($where);
+            $this->smarty->assign("dprt_exet", explode(",", $ss['id_department']));
+            $this->smarty->assign("datadepartment_exet",$this->m_initiation->get_list_department());
+            $this->smarty->assign("kry_exet", explode(",", $ss['id_karyawan']));
+            $this->smarty->assign("marketing_kar_exet",$this->m_karyawan->get_market_karyawan());
             $this->smarty->assign("");
             $this->tnotification->display_notification();
             $this->tnotification->display_last_field();

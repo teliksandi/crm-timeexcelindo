@@ -112,7 +112,7 @@
                                         <div class="col-md-6">
                                         <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
                                                 <div class="box-header with-border">
-                                                    <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
+                                                    <!-- <input type="hidden" name="init_planning" value="{$exex.id_initiation|default:''}"> -->
                                                     <label for="files[]">Files</label>
                                                     <div style="overflow-y: scroll; height: 200px;">
                                                         <div class="form-group">
@@ -384,20 +384,20 @@
 
                 <div class="box-body">
                     <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
-                      {foreach $join as $jn}
-                        <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}" id="id_initiation">
+                      {foreach $execution_detail as $exex}
+                        <input type="hidden" name="id_initiation" value="{$exex.id_initiation|default:''}" id="id_initiation">
                             <div class="box-header with-border">
 
                                 <div class="col-md-6">
 
                                     <div class="form-group">
                                         <label for="client_name">Client Name</label>
-                                            <input type="text" name="client" value="{$jn.client_name|default:''}" class="form-control"  title="Nama Client" readonly>
+                                            <input type="text" name="client" value="{$exex.client_name|default:''}" class="form-control"  title="Nama Client" readonly>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="project_title">Project title</label>
-                                            <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
+                                            <input type="text" name="project_title" value="{$exex.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
                                     </div>
                                                      
                                     <div class="form-group">
@@ -406,11 +406,11 @@
                                             <br>
                                             <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project">
 
-                                                {foreach $datadepartment as $cth}
+                                                {foreach $datadepartment_exet as $cth}
 
                                                 <option value="{$cth.id_department}" 
 
-                                                {if $cth.id_department|in_array:$ex}
+                                                {if $cth.id_department|in_array:$dprt_exet}
                                                  selected="selected"{/if}>{$cth.nama_department}
                                                     
                                                 </option>
@@ -425,9 +425,9 @@
                                             <label>Team Member Name</label>
                                             <br>
                                                 <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple">
-                                                  {foreach $marketing_kar as $value}
+                                                  {foreach $marketing_kar_exet as $value}
                                                     <option value="{$value.id_karyawan}"
-                                                    {if $value.id_karyawan|in_array:$exs}
+                                                    {if $value.id_karyawan|in_array:$kry_exet}
                                                  selected="selected"{/if}>{$value.nama_karyawan}</option>
                                                   {foreachelse}
                                                   Data tidak ditemukan !
@@ -440,21 +440,21 @@
                                     <div class="form-group">
                                         <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
                                             <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
-                                                <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$jn.project_desc|default:''}
+                                                <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$exex.project_desc|default:''}
                                                 </textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
                                             <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
-                                                <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$jn.project_just|default:''}
+                                                <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$exex.project_just|default:''}
                                                 </textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
                                             <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$jn.not_in_project|default:''}
+                                                <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$exex.not_in_project|default:''}
                                                 </textarea>
                                     </div>
 
@@ -464,21 +464,21 @@
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label for="budget">Budget</label>
-                                                <input type="text" name="budget" value="Rp. {number_format($jn.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
+                                                <input type="text" name="budget" value="Rp. {number_format($exex.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label for="start_date">Start date</label>    
-                                                <input type="text" name="start_date" value="{date('d F Y', strtotime($jn.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
+                                                <input type="text" name="start_date" value="{date('d F Y', strtotime($exex.mulai|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label for="due_date">Due date</label>
-                                                <input type="text" name="due_date" value="{date('d F Y', strtotime($jn.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
+                                                <input type="text" name="due_date" value="{date('d F Y', strtotime($exex.akhir|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
                                         </div>
                                     </div>
 
@@ -488,7 +488,7 @@
                         <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
                             <div class="col-md-6">
                                 <div class="box-header with-border">
-                                    <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
+                                    <input type="hidden" name="init_planning" value="{$exex.id_initiation|default:''}">
                                     <label for="files[]">Files</label>
                                     <div style="overflow-y: scroll; height: 200px;">
                                     <div class="form-group">
@@ -515,7 +515,7 @@
                                     <center>
                                         <br>
                                     <div class="form-group">
-                                        <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
+                                        <input type="hidden" name="init_planning" value="{$exex.id_initiation|default:''}">
                                             <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
                                     </center>
 
@@ -523,7 +523,7 @@
                         <form class="form-horizontal" action="{$config->site_url('closing/closing/closing_process')}" method="post">
                                     <center>
                                     <div class="form-group">
-                                        <input type="hidden" name="init_closing" value="{$jn.id_initiation|default:''}">
+                                        <input type="hidden" name="init_closing" value="{$exex.id_initiation|default:''}">
                                             <button type="submit" class="btn btn-danger">Reject</button></div>
                                             <br>
                                             <br>
@@ -548,7 +548,7 @@
                                                 </div>
                                                 </div>
                                             </table>
-                                                <input type="hidden" name="id_initiation_komentar" value="{$jn.id_initiation|default:''}">
+                                                <input type="hidden" name="id_initiation_komentar" value="{$exex.id_initiation|default:''}">
                                                 <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
                                                     <br>
 
