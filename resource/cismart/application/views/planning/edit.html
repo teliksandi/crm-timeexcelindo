@@ -145,6 +145,22 @@
                                 <br>
                                 </div>
                     </form>
+                                <br>
+                                <center><label>Delete File</label></center>
+                                <br>
+                                <div style="overflow-y: scroll; height: 120px; width: 100%;">
+                                    {foreach $ef as $f}
+                                        <table>
+                                            <input type="hidden" name="nm" value="{$f}">
+                                                <div class="form-group" align="center">
+                                                    <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank" style="width: 300px;">{$f}</a>    {if $f !== ""}  <a href="{$config->site_url('planning/planning/delete_file')}/{$f}" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash-o" title="Delete"></i></a>{/if}
+                                                </div>
+                                    {if $f !== ""}
+                                                <hr></hr>
+                                    {/if}
+                                        </table>
+                                    {/foreach}
+                                </div>
 
  <script>
 $('#files').change(function(){

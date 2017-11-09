@@ -109,6 +109,12 @@ class planning extends ApplicationBase {
         $this->smarty->assign("join", $this->m_planning->initiation_detail($where));
         $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
         $kk = $this->m_planning->get_department_by_id($where);
+
+        $this->smarty->assign("executi", $this->m_planning->get_list_execution($where));
+        $kk = $this->m_planning->get_department_by_id($where);
+
+        $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
+        
         $this->smarty->assign("dprt", explode(",", $kk['id_department']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
         $this->smarty->assign("kry", explode(",", $kk['id_karyawan']));
@@ -249,15 +255,15 @@ class planning extends ApplicationBase {
 
             $hitung_file = count($la);
 
-            $hasil = $this->SpasiKeAnd($la);            
+            $hasil = $this->SpasiKeAnd($la);
+
+            $user = $this->com_user['user_id'];
 
             $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','','$id_p','$hasil[$x]', '', '$tgl')";
+                    $sql = "INSERT INTO file values('','','$id_p','','$hasil[$x]', '$user', '$tgl')";
                     $this->db->query($sql);
                 }
-
-
             redirect("initiation/initiation/index");
     }
 
@@ -401,40 +407,27 @@ class planning extends ApplicationBase {
 
 
     function edit($params){
+
         // set page rules
         $this->_set_page_rule("U");
         // set template content
         $this->smarty->assign("template_content", "planning/edit.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($params));
-
-        $kk = $this->m_planning->get_planning_by_id($params);
-        foreach ($kk as $k) {
-            $this->smarty->assign("ex", explode(",", $k['id_department']));
-        }
+        $kk = $this->m_planning->get_department_by_id($params);
+        $this->smarty->assign("ex", explode(",", $kk['department_plan']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
+        $this->smarty->assign("exs", explode(",", $kk['karyawan_plan']));
+        $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
-        $kks = $this->m_planning->get_planning_by_id($params);
-        foreach ($kks as $ks) {
-            $this->smarty->assign("exs", explode(",", $ks['id_karyawan']));
-        }
-        $this->smarty->assign("kar",$this->m_karyawan->get_all());
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
 
-        
-        
+        $gf = $this->m_planning->get_file($params);
 
-        $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
-
-        // load Javascript
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/select2/dist/js/select2.full.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/jquery.inputmask.bundle.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.date.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.numeric.extensions.min.js");
-        $this->smarty->load_javascript("resource/themes/adminlte/plugins/inputmask/inputmask.phone.extensions.min.js");
-        $this->smarty->load_javascript("resource/custom/js/custom.js");
-
+        foreach ($gf as $fl) {        
+        $fle = $fl['file'];
+        $la[] = $fle;
+        $this->smarty->assign("ef", $la);
+        }
 
         // notification
         $this->tnotification->display_notification();
@@ -444,23 +437,75 @@ class planning extends ApplicationBase {
         parent::display();
     }
 
+    function delete_file($judul){
+        // set page rules
+        $this->_set_page_rule("U");
+
+        // cek input
+        $this->tnotification->set_rules($judul, 'Judul', 'trim|required');
+        $get_fl = $this->m_planning->get_id_file($judul);
+
+        foreach ($get_fl as $i) {
+            $id_fl = $i['id_file'];
+            $id_plan = $i['id_planning'];
+        }
+
+        
+        $nm_fl = $this->m_planning->nm_file($id_fl);
+
+
+        if($this->tnotification->run() == FALSE){
+            
+            if ($this->m_planning->delete_file($judul, $id_plan)){
+                unlink('resource/doc/pdf/'.$judul);
+                $this->tnotification->delete_last_field();
+                $this->tnotification->sent_notification("success", "Data berhasil dihapus");
+            }else{
+                // default error
+                $this->tnotification->sent_notification("error", "Data gagal dihapus");
+            }
+        }else{
+            // default error
+            $this->tnotification->sent_notification("error", "Data gagal dihapus");
+        }
+        // default redirect
+        redirect("planning/planning/edit/".$id_plan);
+    }
+
     function edit_process(){
         // set page rules
         $this->_set_page_rule("U");
 
         // cek input
-        $this->tnotification->set_rules('id_planning', 'Nomor Identitas Planning', 'trim|required');
-        $this->tnotification->set_rules('project_title', 'Nama Project', 'trim|required');
+        $this->tnotification->set_rules('id_planning', 'Nomor Planning', 'trim|required');
+
+        $dep = implode(",", $this->input->post("depart_edit"));
+        $kar = implode(",", $this->input->post("kary_edit"));
+
+        $fls = $this->input->post("files");
+
+        $hitung_file = count($fls);
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
                 'id_department'     => $dep,
+                'id_karyawan'       => $kar,
                 );
             $where = array(
                 'id_planning' => $this->input->post('id_planning', TRUE),
             );
+            
 
-            if ($this->m_initiation->update_planning($params)) {
+            $user = $this->com_user['user_id'];
+            $id_plan = $this->input->post('id_planning');
+            $hasil = $this->SpasiKeAnd($fls);      
+
+            if ($this->m_planning->update_planning($params,$where)) {
+                $tgl = date('d-m-Y h:i:sa');
+                for($x=0;$x<$hitung_file;$x++){
+                    $sql = "INSERT INTO file values('','','$id_plan','','$hasil[$x]', '$user', '$tgl')";
+                    $this->db->query($sql);
+                }
                 $this->tnotification->delete_last_field();
                 $this->tnotification->sent_notification("success", "Data berhasil disimpan");
             }else{
@@ -488,6 +533,37 @@ class planning extends ApplicationBase {
         parent::display();
     }
 
+    public function upload_f(){
+        sleep(3);
+      if($_FILES["files"]["name"] != '')
+      {
+       $output = '';
+
+       $config["upload_path"] = 'resource/doc/pdf';
+       $config["allowed_types"] = 'png|jpg|jpeg|docx|pdf|xlsx|ppt|rar|zip';
+       $this->load->library('upload', $config);
+       $this->upload->initialize($config);
+       for($count = 0; $count<count($_FILES["files"]["name"]); $count++)
+       {
+        $_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
+        $_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
+        $_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
+        $_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
+        $_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+        if($this->upload->do_upload('file'))
+        {
+         $data = $this->upload->data();
+         $output .= '
+         <div class="col-md-3">
+          <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-responsive img-thumbnail" />
+         </div>
+         ';
+        }
+       }
+       echo $output;   
+      }
+    }
+    
      function delete_process(){
         // set page rules
         $this->_set_page_rule("U");

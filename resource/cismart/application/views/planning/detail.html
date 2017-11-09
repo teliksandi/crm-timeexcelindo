@@ -25,12 +25,11 @@
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <!-- RIWAYAT INITIATION -->
-                    <div class="container">                          
-                    <!-- Trigger the modal with a button -->
-                            <div class="form-group">
-                                                                                                                                                                                        <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
-                            </div>
+                    <center>        
+                        <div class="form-group">
+                            <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
+                       </div>
+                   </center>
                           <!-- Modal -->
                         <div class="modal fade" id="r_inisiasi" role="dialog">
                             <div class="modal-dialog modal-lg">
@@ -148,7 +147,7 @@
                                             <div align="right">
                                             Dikomentari pada : 
                                                 <br>
-                                                    {$km.tgl_komentar}
+                                                    {$km.tgl_komentar}, {$km.nama_lengkap}
                                                 <br>
                                             {/foreach}
                                             </div>
@@ -290,7 +289,7 @@
                                             <td align="middle">
                                                 <div class="col-md-12">
                                                     <label>Keterangan</label><br>
-                                                    <textarea name="Ket" class="form-control" title="-- Keterangan --" value="{$rs.catatan|default:''}"></textarea>
+                                                    <textarea name="Ket" class="form-control" title="-- Keterangan --">{$rs.catatan|default:''}</textarea>
                                                 </div>
                                             </td>
                                         </tr>
@@ -351,7 +350,7 @@
                                                 <div align="right">
                                                     Dikomentari pada : 
                                                         <br>
-                                                            {$km.tgl_komentar}
+                                                            {$km.tgl_komentar}, {$km.nama_lengkap}
                                                         <br>
                                                     {/foreach}
                                                 </div>

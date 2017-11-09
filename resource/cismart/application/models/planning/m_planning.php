@@ -20,10 +20,54 @@ class m_planning extends CI_Model{
         }
     }
      
+    function get_file($where){                              
+        $this->db->select('*');
+        $this->db->from('file');
+        $this->db->where('id_planning', $where);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
+    function get_id_file($judul){
+        $sql = "SELECT a.*, b.id_planning as 'planning' FROM file a 
+                left JOIN planning b on b.id_planning = a.id_planning
+                WHERE  a.file = ? and a.id_initiation = 0";
+        $query = $this->db->query($sql, $judul);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+    function nm_file($id){
+        $this->db->select('*');
+        $this->db->from('file');
+        $this->db->like('id_file', $id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+    function delete_file($judul, $id){
+        $sql = "DELETE FROM file WHERE id_planning = ? and file = '$judul'";
+        return $this->db->query($sql, $id);
+    }
 
     function search_planning($filter, $params){
-
         $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where planning.id_initiation is NOT NULL and $filter like ?";
         $query = $this->db->query($sql,$params);
         if ($query->num_rows() > 0) {
@@ -34,7 +78,6 @@ class m_planning extends CI_Model{
             return NULl;
         }
     }
-
 
     function get_total_planning($params){
         $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";
@@ -47,6 +90,7 @@ class m_planning extends CI_Model{
             return NULl;
         }
     }
+
     function get_initiation_by_id($params){
         $sql = "SELECT * FROM planning left join initiation on initiation.id_initiation = planning.id_initiation WHERE id_planning = ?";
         $query = $this->db->query($sql, $params);
@@ -70,8 +114,11 @@ class m_planning extends CI_Model{
     }
 
     function planning_komen($where) {  
-        $sql = "SELECT * FROM komentar WHERE id_planning = ?";
-        $query = $this->db->query($sql, $where);
+        $this->db->select('*');
+        $this->db->from('komentar');
+        $this->db->join('users', 'komentar.user_id = users.user_id', 'left');
+        $this->db->where('id_planning', $where);
+        $query = $this->db->get();
         return $query->result_array();
     }
 
@@ -134,8 +181,11 @@ class m_planning extends CI_Model{
         }
     }
 
-   
     function update_planning($params, $where){
+        return $this->db->update('planning', $params, $where);
+    }
+
+    function update_planning_b($params, $where){
         return $this->db->update('planning', $params, $where);
     }
 
@@ -143,10 +193,13 @@ class m_planning extends CI_Model{
         return $this->db->insert('planning', $params);
     }
 
+    function insert_komentar($params){
+        return $this->db->insert('komentar', $params);
+    }
+
     function delete_planning($params){
         $sql = "DELETE FROM planning WHERE id_planning= ?";
         return $this->db->query($sql, $params);
     }
-
 
 }

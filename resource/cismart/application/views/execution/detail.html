@@ -308,49 +308,49 @@
                                                     <td align="middle"> Biaya Administrasi </td>
                                                     <td align="middle"><input type="number" name="persen_biaya_administrasi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$planning_rwyt.p_b_administrasi|default:''}"> %</td>
                                                     <td align="middle">
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="{$planning_rwyt.b_administrasi|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" ></div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="{$planning_rwyt.b_administrasi|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" readonly></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Produksi dan Operasional </td>
                                                     <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$planning_rwyt.p_b_produksi_dan_operasional|default:''}"> %</td>
                                                     <td align="middle">
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="{$planning_rwyt.b_produksi_dan_operasional|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" ></div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="{$planning_rwyt.b_produksi_dan_operasional|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" readonly></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Hardware & Infrastruktur </td>
                                                     <td align="middle"><input type="number" name="persen_biaya_hardware" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$planning_rwyt.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
                                                     <td align="middle">
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="{$planning_rwyt.b_hardware_dan_infrastruktur|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware"></div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="{$planning_rwyt.b_hardware_dan_infrastruktur|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware" readonly></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Perawatan / Garansi </td>
                                                     <td align="middle"><input type="number" name="persen_biaya_perawatan" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$planning_rwyt.p_b_perawatan|default:''}"> %</td>
                                                     <td align="middle">
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="{$planning_rwyt.b_perawatan|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan"></div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="{$planning_rwyt.b_perawatan|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan" readonly></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Lain-Lain </td>
                                                     <td align="middle"><input type="number" name="persen_biaya_lain" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$planning_rwyt.p_b_lain_lain|default:''}"> %</td>
                                                     <td align="middle">
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="Lain" value="{$planning_rwyt.b_lain_lain|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain"></div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Lain" value="{$planning_rwyt.b_lain_lain|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain" readonly></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle"> Biaya Entertaint </td>
                                                     <td align="middle"><input type="number" name="persen_biaya_entertaint" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$planning_rwyt.p_b_entertaint|default:''}"> %</td>
                                                     <td align="middle">
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value="{$planning_rwyt.b_entertaint|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint"></div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value="{$planning_rwyt.b_entertaint|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint" readonly></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle" style="background-color: yellow"> Total Biaya </td>
                                                     <td align="middle" style="background-color: yellow"></td>
                                                     <td align="middle" style="background-color: yellow">
-                                                        <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" value="{$planning_rwyt.total_biaya|default:''}" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="total_biaya" readonly readonly></div>
+                                                        <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" value="{$planning_rwyt.total_biaya|default:''}" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="total_biaya" readonly></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -376,10 +376,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
                 <!-- /.box-header -->
 
                 <div class="box-body">

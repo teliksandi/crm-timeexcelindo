@@ -478,7 +478,7 @@ public function index() {
                 $id = $this->db->insert_id();
                 $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','$id','','$hasil[$x]', '', '$tgl')";
+                    $sql = "INSERT INTO file values('','$id','','','$hasil[$x]', '', '$tgl')";
                     $this->db->query($sql);
                 }
 
@@ -646,7 +646,7 @@ public function index() {
                 $id = $this->input->post('id_initiation');
                 $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','$id','$fls[$x]', '', '$tgl')";
+                    $sql = "INSERT INTO file values('','$id','','','$fls[$x]', '', '$tgl')";
                     $this->db->query($sql);
                 }
 
