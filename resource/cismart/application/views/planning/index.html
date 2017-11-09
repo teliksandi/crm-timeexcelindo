@@ -55,6 +55,7 @@
 	                                <td width="18%" align="middle"><b>Action</b></td>
 		                        </tr>
 		                        {foreach $get as $result}
+		                        {$result|@print_r}
 		                        <tr>
 		                            <td align="middle">{$no++}</td>
 		                            <td align="middle">{$result.project_title}</td>
