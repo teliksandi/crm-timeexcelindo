@@ -3,11 +3,61 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class m_execution extends CI_Model{
 
-    // function __construct(){
-    //     parent::__construct();
-    //     $this->load->library('datetimemanipulation');
-    //     $this->smarty->assign("dtm", $this->datetimemanipulation);
-    // }
+    function execution_komen($where) {  
+        $this->db->select('*');
+        $this->db->from('komentar');
+        $this->db->join('users', 'komentar.user_id = users.user_id', 'left');
+        $this->db->where('id_execution', $where);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function get_id_file($judul){
+        $sql = "SELECT a.*, c.*, b.id_execution as 'execution' FROM file a 
+                left JOIN execution b on b.id_execution = a.id_execution
+                left JOIN planning c on b.id_planning = a.id_planning
+                WHERE  a.file = ? and a.id_initiation = 0 and c.id_planning = 0";
+        $query = $this->db->query($sql, $judul);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+    function get_file($where){                              
+        $this->db->select('*');
+        $this->db->from('file');
+        $this->db->where('id_execution', $where);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+    function delete_file($judul, $id){
+        $sql = "DELETE FROM file WHERE id_execution = ? and file = '$judul'";
+        return $this->db->query($sql, $id);
+    }
+
+    function get_initiation_by_id($params){
+        $sql = "SELECT * FROM execution left join planning on execution.id_planning = planning.id_planning WHERE id_execution = ?";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return NULL;
+        }
+    }
+
     function execution_get($params){
         $sql = "SELECT a.start_date as 'mulai', a.due_date as 'akhir', a.*, b.*, c.*, d.* from execution a left JOIN planning b on a.id_planning = b.id_planning
                 left JOIN initiation c on c.id_initiation = b.id_initiation
@@ -145,7 +195,11 @@ class m_execution extends CI_Model{
         return $this->db->insert('execution', $params);
     }
 
-     function update_execution($params, $where){
+    function insert_komentar($params){
+        return $this->db->insert('komentar', $params);
+    }
+
+    function update_execution($params, $where){
         return $this->db->update('execution', $params, $where);
     }
 
