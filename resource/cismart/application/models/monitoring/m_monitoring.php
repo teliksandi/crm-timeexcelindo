@@ -1,7 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class m_execution extends CI_Model{
+class m_monitoring extends CI_Model{
+
+    function get_all_monitoring(){
+        $sql = "SELECT monitoring.id_monitoring AS 'id_monitoring', initiation.project_title, monitoring.due_date, execution.id_execution, planning.id_planning, initiation.id_initiation, monitoring.start_date, client.client_name
+                        From monitoring left join execution on monitoring.id_execution = execution.id_execution
+                        left join planning on planning.id_planning = execution.id_planning 
+                        left join initiation on initiation.id_initiation = planning.id_initiation
+                        left join client on initiation.id_client = client.id_client                    
+                        where monitoring.id_execution is NOT NULL";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
     function execution_komen($where) {  
         $this->db->select('*');
@@ -74,21 +91,8 @@ class m_execution extends CI_Model{
 
     }
 
-    function get_list_monitoring($where){
-        $sql = "SELECT * FROM execution where id_execution = ?";
-        $query = $this->db->query($sql,$where);
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            $query->free_result();
-            return $result;
-        } else {
-            return array();
-        }
-    }
-
-    function search_execution($filter, $params){
-
-        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title, execution.due_date From execution left join planning on execution.id_planning = planning.id_planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where execution.id_planning is NOT NULL and $filter like ?";
+    function search_monitoring($filter, $params){
+        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From monitoring left join execution on execution.id_execution = monitoring.id_execution left join planning on execution.id_planning = planning.id_planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where monitoring.id_execution is NOT NULL and $filter like ?";
         $query = $this->db->query($sql,$params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -181,13 +185,15 @@ class m_execution extends CI_Model{
 
     }
 
-    function get_list_execution($filter, $params){
-        $sql = "SELECT execution.id_execution AS 'id_execution', initiation.project_title, execution.due_date, initiation.id_initiation, execution.start_date, client.client_name, monitoring.id_monitoring
-                        From execution left join planning on execution.id_planning = planning.id_planning
+    
+
+    function get_list_monitoring($filter, $params){
+        $sql = "SELECT monitoring.id_monitoring AS 'id_monitoring', initiation.project_title, monitoring.due_date, initiation.id_initiation, monitoring.start_date, client.client_name
+                        From monitoring left join execution on monitoring.id_execution = execution.id_execution
+                        left join planning on execution.id_planning = planning.id_planning
                         left join initiation on initiation.id_initiation = planning.id_initiation
-                        left join monitoring on execution.id_execution = monitoring.id_execution
                         left join client on initiation.id_client = client.id_client                    
-                        where execution.id_execution is NOT NULL and monitoring.id_execution is NULL
+                        where monitoring.id_execution is NOT NULL
                         and $filter LIKE ? LIMIT ?,?";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
@@ -204,8 +210,8 @@ class m_execution extends CI_Model{
         return $query = $this->db->query($sql)->result_array();
     }
 
-    function insert_execution($params){
-        return $this->db->insert('execution', $params);
+    function insert_monitoring($params){
+        return $this->db->insert('monitoring', $params);
     }
 
     function insert_komentar($params){

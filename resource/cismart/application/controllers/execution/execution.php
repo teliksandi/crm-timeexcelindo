@@ -419,12 +419,13 @@
             $this->smarty->assign("join", $this->m_execution->initiation_detail($where));
             $this->smarty->assign("join_planning", $this->m_execution->planning_detail($where));
             $kk = $this->m_execution->get_department_by_id($where);
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             $this->smarty->assign("dprt", explode(",", $kk['department']));
             $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
             $this->smarty->assign("kry", explode(",", $kk['karyawan']));
             $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+            $this->smarty->assign("monitoring", $this->m_execution->get_list_monitoring($where));
+            
             //planning history
             $rr = $this->m_execution->get_planning_by_id($where);
             $this->smarty->assign("dprt_plan", explode(",", $rr['department']));

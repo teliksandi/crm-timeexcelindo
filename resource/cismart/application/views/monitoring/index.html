@@ -19,17 +19,23 @@
 	                    <h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
 	                </div>
 	                <div class="box-body">
-	                    <form class="form-horizontal" action="{$config->site_url('planning/planning/search_process')}" method="post">
+	                    <form class="form-horizontal" action="{$config->site_url('monitoring/monitoring/search_process')}" method="post">
 	                        <div class="box-body">
 	                            <div class="form-group">
-	                                <label for="project_title" class="col-sm-2 control-label">Nama Project</label>
+	                                <label for="project_title" class="col-sm-2 control-label">Keyword</label>
 	                                <div class="col-sm-4">
-	                                    <input type="text" title="Masukkan Nama Project" name="project_title" value="{$search.project_title|default:''}" class="form-control" id="project_title" placeholder="">
+	                                    <input type="text" title="Masukkan Nama Project" name="keyword" value="{$search.keyword|default:''}" class="form-control" id="Keyword" placeholder="">
 	                                </div>
-	                                <div class="col-sm-4">
+	                                <div class="col-sm-2">
+		                            <select name="filter" min="0" max="40" class="form-control" widht='100px'>
+		                                <option value="" >- Select Filter -</option>
+		                                <option value='project_title'>Project Title</option>
+		                                <option value='client_name'>Client Name</option>
+		                                <option value='due_date'>Date/Year</option>
+		                            </select>
+		                            </div>
 	                                    <button type="submit" value="Reset" name="save" class="btn btn-danger">Reset</button>&nbsp;&nbsp;
 	                                    <button type="submit" value="Cari" name="save" class="btn btn-success">Cari</button>
-	                                </div>
 	                            </div>
 	                        </div>
 	                    </form>
@@ -48,7 +54,7 @@
 	                                <td width="10%" align="middle"><b>Last History</b></td>
 	                                <td width="18%" align="middle"><b>Action</b></td>
 		                        </tr>
-		                        	{foreach $planning_project as $result}
+		                        	{foreach $monitoring as $result}
 		                        <tr>
 		                        	<td align="middle">{$no++}</td>
                                 	<td align="middle">{$result.project_title}</td>
@@ -67,10 +73,9 @@
 		                                            <font color="#33cc33">Aktif</font> 
 		                                        {/if}
                                     </td>
-                                    <td align="middle">{getComment($result.id_inisiasi)}</td>
+                                    <td align="middle">belum dicari</td>
 		                            <td align="middle">
-		                                <a href="{$config->site_url('planning/planning/edit')}/{$result.id_planning}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
-		                                <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+		                                <a href="{$config->site_url('monitoring/monitoring/detail')}/{$result.id_monitoring}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
 		                            </td>
 		                        </tr>
 		                        {foreachelse}
