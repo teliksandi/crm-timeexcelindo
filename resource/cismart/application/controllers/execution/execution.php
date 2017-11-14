@@ -41,12 +41,49 @@
             // set template content
             $this->smarty->assign("template_content", "execution/index.html");
 
-            $search = $this->tsession->userdata('search_execution');
-            $this->smarty->assign('search', $search);
-            $keyword  = !empty($search['keyword']) ? $search['keyword'] : "%";
-            $filter         = !empty($search['filter']) ? $search['filter'] : "%";
-            $params         =  array($keyword);
+            $list_dp = $this->m_execution->list_department();
+            foreach ($list_dp as $ls) {
+                $list = $ls['id_department'];
+                $arr_list[] = $list;
+            }
 
+            $val_dep = implode(",", $arr_list);
+
+            $pengguna = $this->com_user['user_id'];
+            $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+        $this->smarty->assign("auth_dep", explode(",", $val_dep));
+
+        $auth_dep = explode(",", $val_dep);
+
+        // foreach ($auth_dep as $key) {
+        //     if ($jabatan_karyawan == $key) {
+        //         $this->smarty->assign("status", "1");
+        //         break;
+        //     }elseif($jabatan_karyawan == 1){
+        //         $this->smarty->assign("status", "1");
+        //     }
+        //     else{
+        //         $this->smarty->assign("status", "0");
+        //     }
+        // }
+
+            $search         = $this->tsession->userdata('search_execution');
+            $this->smarty->assign('search', $search);
+            $keyword        = !empty($search['keyword']) ? '%'. $search['keyword'] .'%' : "%";
+            $filter         = !empty($search['filter']) ? '%'. $search['filter'] .'%' : "%";
+            $params         =  array($keyword);
+            $dpt            = '%'. $department_karyawan .'%';
             $ttl_rows = "";
             if ($filter == "client_name") {
                 $nm_client = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
@@ -66,7 +103,7 @@
             }
 
             $config['base_url'] = site_url("execution/execution/index/");
-            $config['total_rows'] = $this->m_execution->search_execution($filter, $ttl_rows);
+            $config['total_rows'] = $this->m_execution->search_execution($filter, $ttl_rows, $dpt);
             $config['uri_segment'] = 4;
             $config['per_page'] = 10;
             $this->pagination->initialize($config);
@@ -89,7 +126,7 @@
             // get list data
             $params = array($keyword, ($start - 1), $config['per_page']);
 
-            $this->smarty->assign("get", $this->m_execution->get_list_execution($filter, $params));
+            $this->smarty->assign("get", $this->m_execution->get_list_execution($filter, $params, $dpt));
 
             // get list data
             //$this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
@@ -97,6 +134,25 @@
             // output
             parent::display();
         }
+
+        function search_process(){
+        // set page rules
+        $this->_set_page_rule("R");
+        //--
+        if ($this->input->post('save') == 'Cari') {
+            $params = array(
+                "keyword"       => $this->input->post('keyword'),
+                "filter"        => $this->input->post('filter')
+            );
+            // set
+            $this->tsession->set_userdata('search_execution', $params);
+        } else {
+            // unset
+            $this->tsession->unset_userdata('search_execution');
+        }
+        //--
+        redirect('execution/execution');
+    }
 
         function execution_process(){
            
@@ -137,7 +193,7 @@
 
             $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','','', '$id_e','$hasil[$x]', '$user', '$tgl')";
+                    $sql = "INSERT INTO file values('','','', '$id_e','','$hasil[$x]', '$user', '$tgl')";
                     $this->db->query($sql);
                 }
 
@@ -214,7 +270,7 @@
 
                     $tgl = date('d-m-Y h:i:sa');
                     for($x=0;$x<$hitung_file;$x++){
-                        $sql = "INSERT INTO file values('','','','$id_exe','$hasil[$x]','$user','$tgl')";
+                        $sql = "INSERT INTO file values('','','','$id_exe','','$hasil[$x]','$user','$tgl')";
                         $this->db->query($sql);
                     }
                     $this->tnotification->delete_last_field();
@@ -418,6 +474,7 @@
             $this->smarty->assign("execution_detail",$this->m_execution->execution_get($where));      
             $this->smarty->assign("join", $this->m_execution->initiation_detail($where));
             $this->smarty->assign("join_planning", $this->m_execution->planning_detail($where));
+            $this->smarty->assign("monitoring", $this->m_execution->get_list_monitoring($where));
             $kk = $this->m_execution->get_department_by_id($where);
 
             $this->smarty->assign("dprt", explode(",", $kk['department']));

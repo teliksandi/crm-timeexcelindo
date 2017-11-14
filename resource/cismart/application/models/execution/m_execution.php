@@ -58,6 +58,11 @@ class m_execution extends CI_Model{
         }
     }
 
+    function list_department(){
+        $sql = "SELECT *  from execution";
+        return $query = $this->db->query($sql)->result_array();
+    }
+
     function execution_get($params){
         $sql = "SELECT a.start_date as 'mulai', a.due_date as 'akhir', a.*, b.*, c.*, d.* from execution a left JOIN planning b on a.id_planning = b.id_planning
                 left JOIN initiation c on c.id_initiation = b.id_initiation
@@ -86,9 +91,8 @@ class m_execution extends CI_Model{
         }
     }
 
-    function search_execution($filter, $params){
-
-        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title, execution.due_date From execution left join planning on execution.id_planning = planning.id_planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where execution.id_planning is NOT NULL and $filter like ?";
+    function search_execution($filter, $params, $id_department){
+        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title, execution.due_date From execution left join planning on execution.id_planning = planning.id_planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where execution.id_planning is NOT NULL and $filter like ? and execution.id_department like '$id_department'";
         $query = $this->db->query($sql,$params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -181,14 +185,14 @@ class m_execution extends CI_Model{
 
     }
 
-    function get_list_execution($filter, $params){
+    function get_list_execution($filter, $params, $id_department){
         $sql = "SELECT execution.id_execution AS 'id_execution', initiation.project_title, execution.due_date, initiation.id_initiation, execution.start_date, client.client_name, monitoring.id_monitoring
                         From execution left join planning on execution.id_planning = planning.id_planning
                         left join initiation on initiation.id_initiation = planning.id_initiation
                         left join monitoring on execution.id_execution = monitoring.id_execution
                         left join client on initiation.id_client = client.id_client                    
                         where execution.id_execution is NOT NULL and monitoring.id_execution is NULL
-                        and $filter LIKE ? LIMIT ?,?";
+                        and $filter LIKE ? and execution.id_department like '$id_department' LIMIT ?,?";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

@@ -40,7 +40,7 @@
 		                    </div>
 		               	</form>
 		          	</div>
-		        </div>
+		        </div><!-- {$auth_dep|@print_r} -->
 	            <div class="box">
 	               	<div class="box-body">
 		                <table class="table table-striped">
@@ -54,7 +54,10 @@
 	                                <td width="10%" align="middle"><b>Last History</b></td>
 	                                <td width="18%" align="middle"><b>Action</b></td>
 		                        </tr>
+		                        <!--<br>department anda : {$department}<br>-->
+
 		                        {foreach $get as $result}
+		                        <!-- {$result|@print_r} -->
 		                        
 		                        <tr>
 		                            <td align="middle">{$no++}</td>
@@ -76,8 +79,18 @@
                                     </td>
                                     <td align="middle">{getComment_Execution($result.id_execution)}</td>
 		                            <td align="middle">
+		    {foreach $auth_dep as $a_dep}
+			{if {$department} == {$a_dep} OR {$department} == 1}
 		                                <a href="{$config->site_url('execution/execution/edit')}/{$result.id_execution}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
 		                                <a href="{$config->site_url('execution/execution/detail')}/{$result.id_execution}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+		    {break}
+			{else}
+										<a href="{$config->site_url('execution/execution/detail')}/{$result.id_execution}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+			{break}
+
+			{/if}
+		                        	<br>
+			{/foreach}
 		                            </td>
 		                        </tr>
 		                        {foreachelse}
