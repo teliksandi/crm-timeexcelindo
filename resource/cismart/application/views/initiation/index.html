@@ -85,26 +85,17 @@
                                     
                                 <td align="middle">{getComment($result.id_inisiasi)}</td>
                                  <td align="middle">
-                                {if {$jabatan} == 3}
-                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                {elseif {$department} == 8}
+                                {if {$department} == 8}
                                         {if {$jabatan} == 3}
                                     <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
                                         {else}
                                     <a href="{$config->site_url('initiation/initiation/edit/'|cat:$result.id_inisiasi)}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>
                                     <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
-                                        {/if}
-                                {elseif {$department} == 10 Or {$jabatan} == 1}
-                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
-                                {/if}
-                                 
-
-                                     <!-- Modal -->
+                                    <!-- Modal -->
                                       <div class="modal fade" id="{$result.id_inisiasi|default:''}" role="dialog">
                                         <div class="modal-dialog modal-lg">
-                                          <div class="modal-content">
+  -                                        <div class="modal-content">
                                             <div class="modal-header">
                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                                               <h4 class="modal-title">Delete Initiation</h4>
@@ -130,6 +121,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                             <!-- /.box-footer -->
                                                         </form>
                                                     </div>
@@ -140,6 +132,52 @@
                                           </div>
                                         </div>
                                      </div>
+                                        {/if}
+                                {elseif {$department} == 10 Or {$jabatan} == 1}
+                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{$result.id_inisiasi|default:''}"><i class="fa fa-trash-o"></i> Delete</a>
+                                    <!-- Modal -->
+                                      <div class="modal fade" id="{$result.id_inisiasi|default:''}" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+  -                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Delete Initiation</h4>
+                                            </div>
+                                            <div class="modal-body"> 
+
+                                                 <div class="box-body">
+                                                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/delete_process')}" method="post">
+                                                            <input type="hidden" name="id_initiation" value="{$result.id_inisiasi|default:''}">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label for="id_initiation" class="col-sm-2 control-label">Project Title</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" name="id_initiation" disabled value="{$result.project_title|default:''}" class="form-control" id="id_initiation" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.box-body -->
+                                                            <div class="box-footer">
+                                                                <div class="row">
+                                                                    <div class="col-md-3 col-md-offset-8">
+                                                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- /.box-footer -->
+                                                        </form>
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                     </div>                                {else}
+                                    <a href="{$config->site_url('initiation/initiation/detail')}/{$result.id_inisiasi}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+                                {/if}
                                 </td>
                             </tr>
                             {foreachelse}

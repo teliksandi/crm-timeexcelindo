@@ -107,7 +107,6 @@ class planning extends ApplicationBase {
         $this->smarty->assign("template_content", "planning/detail.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($where));
         $this->smarty->assign("join", $this->m_planning->initiation_detail($where));
-        $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
         $kk = $this->m_planning->get_department_by_id($where);
 
         $this->smarty->assign("executi", $this->m_planning->get_list_execution($where));
@@ -128,8 +127,6 @@ class planning extends ApplicationBase {
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
 
         $vfls = $this->m_initiation->get_file($id_ini);
-        $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
-
         foreach ($vfls as $f) {
            // $this->smarty->assign("ef",  explode(",", $f['file']));
             $ls = $f['id_file'];
@@ -261,7 +258,7 @@ class planning extends ApplicationBase {
 
             $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','','$id_p','','$hasil[$x]', '$user', '$tgl')";
+                    $sql = "INSERT INTO file values('','','$id_p','','','$hasil[$x]', '$user', '$tgl')";
                     $this->db->query($sql);
                 }
             redirect("initiation/initiation/index");
@@ -301,15 +298,11 @@ class planning extends ApplicationBase {
         // set template content
         $this->smarty->assign("template_content", "planning/detail.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($where));
-
         $this->smarty->assign("join", $this->m_planning->initiation_detail($where));
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($where));
-
         $this->smarty->assign("executi", $this->m_planning->get_list_execution($where));
         $kk = $this->m_planning->get_department_by_id($where);
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $this->smarty->assign("dprt", explode(",", $kk['department']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
         $this->smarty->assign("kry", explode(",", $kk['karyawan']));
@@ -320,6 +313,8 @@ class planning extends ApplicationBase {
            // $this->smarty->assign("ef",  explode(",", $f['file']));
             $id_ini = $f['id_initiation'];
         }
+
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
 
         $as = $this->m_initiation->get_file($id_ini);
 
@@ -503,7 +498,7 @@ class planning extends ApplicationBase {
             if ($this->m_planning->update_planning($params,$where)) {
                 $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','','$id_plan','','$hasil[$x]', '$user', '$tgl')";
+                    $sql = "INSERT INTO file values('','','$id_plan','','','$hasil[$x]', '$user', '$tgl')";
                     $this->db->query($sql);
                 }
                 $this->tnotification->delete_last_field();

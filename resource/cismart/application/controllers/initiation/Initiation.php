@@ -303,12 +303,25 @@ public function index() {
         parent::display();
     }
 
-
  function add_komentar($where){
         // set page rules
         $this->_set_page_rule("C");
 
         $this->smarty->assign("template_content", "initiation/detail.html");
+
+        $pengguna = $this->com_user['user_id'];
+        $s = $this->m_karyawan->identitas_karyawan($pengguna);
+
+        foreach ($s as $key) {
+            $id_k = $key['id_karyawan'];
+        }
+
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $this->smarty->assign("jabatan", $list_kar['id_position']);
+        $this->smarty->assign("department", $department_karyawan);
+
         $this->smarty->assign("result", $this->m_initiation->get_initiation_by_id($where));
         //var_dump($this->m_initiation->initiation_detail());
         $this->smarty->assign("join", $this->m_initiation->initiation_detail($where));
@@ -360,7 +373,8 @@ public function index() {
             $params = array(
                 'komentar'          => $this->input->post("komentarin"),
                 'tgl_komentar'      => $this->input->post("tgl_komentar"),   
-                'id_initiation'     => $this->input->post("id_initiation_komentar")   
+                'id_initiation'     => $this->input->post("id_initiation_komentar"),
+                'user_id'           => $this->com_user['user_id']   
             );
 
             if ($this->m_initiation->insert_komentar($params)) {
@@ -478,7 +492,7 @@ public function index() {
                 $id = $this->db->insert_id();
                 $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','$id','','','$hasil[$x]', '', '$tgl')";
+                    $sql = "INSERT INTO file values('','$id','','','','$hasil[$x]', '', '$tgl')";
                     $this->db->query($sql);
                 }
 
@@ -646,7 +660,7 @@ public function index() {
                 $id = $this->input->post('id_initiation');
                 $tgl = date('d-m-Y h:i:sa');
                 for($x=0;$x<$hitung_file;$x++){
-                    $sql = "INSERT INTO file values('','$id','','','$fls[$x]', '', '$tgl')";
+                    $sql = "INSERT INTO file values('','$id','','','','$fls[$x]', '', '$tgl')";
                     $this->db->query($sql);
                 }
 

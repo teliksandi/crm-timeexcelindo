@@ -198,7 +198,7 @@
                                             <div class="form-group">
                                             <label>Team Member Name</label>
                                             <br>
-                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled>
+                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled style="width: 100%;">
                                                     {foreach $marketing_kar_plan as $value}
                                                         <option value="{$value.id_karyawan}"
                                                     {if $value.id_karyawan|in_array:$kry_plan} selected="selected"{/if}>{$value.nama_karyawan}
@@ -515,11 +515,17 @@
                                     </div>
                             </form>
                             <br>
-                            <form class="form-horizontal" action="{$config->site_url('planning/planning/planning_process')}" method="post">
+                            <form class="form-horizontal" action="{$config->site_url('monitoring/monitoring/monitoring_process')}" method="post">
                                 <center>
                                 <br>
                                     <div class="form-group">
-                                        <input type="hidden" name="init_planning" value="{$exex.id_initiation|default:''}">
+                                        {foreach $monitoring as $moni}
+                                        <input type="hidden" name="init_execution" value="{$exex.id_execution|default:''}">
+                                        <input type="hidden" name="start_monitoring" id="mulai_monitoring">
+                                        <input type="hidden" name="due_monitoring" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
+                                        <input type="hidden" name="department_monitoring[]" value="{$moni.id_department|default:''}">
+                                        <input type="hidden" name="karyawan_monitoring[]" value="{$moni.id_karyawan|default:''}">
+                                        {/foreach}
                                             <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
                                     </center>
                             </form>
@@ -564,16 +570,29 @@
                                <!-- /.box-header --> 
                             </div>
                             <!-- /,col -->
-
                         </div>
                         <!-- /,box-header -->
-
                 </div> 
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-
         </div>
         <!-- /.col -->
     </div>
+
+    <script type="text/javascript">
+        var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            var today = dd+'-'+mm+'-'+yyyy;
+            document.getElementById("mulai_monitoring").value = today;
+    </script>
 </section>
