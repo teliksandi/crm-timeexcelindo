@@ -11,7 +11,7 @@ class m_karyawan extends CI_Model{
 
     function get_list_karyawan($params){
 
-        $sql = "SELECT * FROM karyawan WHERE nama_karyawan LIKE ? LIMIT ?,?";
+        $sql = "SELECT * FROM karyawan left join department on karyawan.id_department = department.id_department WHERE nama_karyawan LIKE ? LIMIT ?,?";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
