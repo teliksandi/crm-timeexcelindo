@@ -198,6 +198,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <form class="" action="{$config->site_url('planning/planning/planning_process')}" method="post">
+                                                                                <input type="hidden" name="client" value="{$jn.id_client|default:''}" class="form-control"  title="Nama Client" readonly>
                                                                                 <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}">
                                                                                 <input type="hidden" name="start_planning" id="mulai_planning">
                                                                                 <input type="hidden" name="due_planning" value="{date('d F Y', strtotime($jn.due_date|default:''))}">

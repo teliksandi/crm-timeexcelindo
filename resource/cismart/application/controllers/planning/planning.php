@@ -213,6 +213,7 @@ class planning extends ApplicationBase {
                 'due_date'          => $this->input->post('due_planning'),
                 'id_karyawan'       => $kar,
                 'id_department'     => $dep,
+                'id_client'         => $this->input->post('client'),
                 'DPP'                           => "0",
                 'PPN'                           => "0",
                 'PPH'                           => "0",
