@@ -55,6 +55,7 @@
                                 <td width="10%" align="middle"><b>Status</b></td>
                                 <td width="13%" align="middle"><b>Action</b></td>
                             </tr>
+{if {$department} == 8}
                             {foreach $rs_id as $result}
                             <tr>
                                 <td align="middle">{$no++}</td>
@@ -117,6 +118,15 @@
                                 </td>
                             </tr>
                             {/foreach}
+{else}
+                            <tr>
+                                <td colspan="4">
+                                    <br>
+                                        <b>Anda tidak memiliki hak akses untuk mengakses data karyawan</b>
+                                    <br>
+                                </td>
+                            </tr>
+{/if}
                         </tbody>
                     </table>
                 </div>

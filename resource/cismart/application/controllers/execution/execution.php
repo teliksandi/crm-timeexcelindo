@@ -41,13 +41,36 @@
             // set template content
             $this->smarty->assign("template_content", "execution/index.html");
 
-            $list_dp = $this->m_execution->list_department();
-            foreach ($list_dp as $ls) {
-                $list = $ls['id_department'];
-                $arr_list[] = $list;
-            }
+            // foreach ($auth_dep as $key) {
+            //     if ($jabatan_karyawan == $key) {
+            //         $this->smarty->assign("status", "1");
+            //         break;
+            //     }elseif($jabatan_karyawan == 1){
+            //         $this->smarty->assign("status", "1");
+            //     }
+            //     else{
+            //         $this->smarty->assign("status", "0");
+            //     }
+            // }
 
-            $val_dep = implode(",", $arr_list);
+            $search         = $this->tsession->userdata('search_execution');
+            $this->smarty->assign('search', $search);
+            $keyword        = !empty($search['keyword']) ? '%'. $search['keyword'] .'%' : "%";
+            $filter         = !empty($search['filter']) ? '%'. $search['filter'] .'%' : "%";
+            $params         =  array($keyword);
+
+            $list_dp = $this->m_planning->list_department();
+            if ($list_dp !== NULL) {
+                foreach ($list_dp as $ls) {
+                    $list = $ls['id_department'];
+                    $arr_list[] = $list;
+                }
+
+                $val_dep = implode(",", $arr_list);
+                $this->smarty->assign("auth_dep", explode(",", $val_dep));    
+            }else{
+                $this->smarty->assign("auth_dep", "0");    
+            }
 
             $pengguna = $this->com_user['user_id'];
             $s = $this->m_karyawan->identitas_karyawan($pengguna);
@@ -55,34 +78,14 @@
                 $id_k = $key['id_karyawan'];
             }
             
-        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
-        $nama_karyawan = $list_kar['nama_karyawan'];
-        $department_karyawan = $list_kar['id_department'];
-        $jabatan_karyawan = $list_kar['id_position'];
-        $this->smarty->assign("nama_karyawan", $nama_karyawan);
-        $this->smarty->assign("department", $department_karyawan);
-        $this->smarty->assign("jabatan", $jabatan_karyawan);
-        $this->smarty->assign("auth_dep", explode(",", $val_dep));
-
-        $auth_dep = explode(",", $val_dep);
-
-        // foreach ($auth_dep as $key) {
-        //     if ($jabatan_karyawan == $key) {
-        //         $this->smarty->assign("status", "1");
-        //         break;
-        //     }elseif($jabatan_karyawan == 1){
-        //         $this->smarty->assign("status", "1");
-        //     }
-        //     else{
-        //         $this->smarty->assign("status", "0");
-        //     }
-        // }
-
-            $search         = $this->tsession->userdata('search_execution');
-            $this->smarty->assign('search', $search);
-            $keyword        = !empty($search['keyword']) ? '%'. $search['keyword'] .'%' : "%";
-            $filter         = !empty($search['filter']) ? '%'. $search['filter'] .'%' : "%";
-            $params         =  array($keyword);
+            $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+            $nama_karyawan = $list_kar['nama_karyawan'];
+            $department_karyawan = $list_kar['id_department'];
+            $jabatan_karyawan = $list_kar['id_position'];
+            $this->smarty->assign("nama_karyawan", $nama_karyawan);
+            $this->smarty->assign("department", $department_karyawan);
+            $this->smarty->assign("jabatan", $jabatan_karyawan);
+            
             $dpt            = '%'. $department_karyawan .'%';
             $ttl_rows = "";
             if ($filter == "client_name") {
@@ -362,13 +365,12 @@
             $this->smarty->assign("join", $this->m_execution->initiation_detail($where));
             $this->smarty->assign("join_planning", $this->m_execution->planning_detail($where));
             $kk = $this->m_execution->get_department_by_id($where);
-               ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
-              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             $this->smarty->assign("dprt", explode(",", $kk['department']));
             $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
             $this->smarty->assign("kry", explode(",", $kk['karyawan']));
             $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+            $this->smarty->assign("monitoring", $this->m_execution->get_list_monitoring($where));
                 //planning history
             $rr = $this->m_execution->get_planning_by_id($where);
             $this->smarty->assign("dprt_plan", explode(",", $rr['department']));

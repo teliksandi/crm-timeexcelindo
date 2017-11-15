@@ -59,8 +59,15 @@ class m_execution extends CI_Model{
     }
 
     function list_department(){
-        $sql = "SELECT *  from execution";
-        return $query = $this->db->query($sql)->result_array();
+        $sql = "SELECT *  from planning";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return NULL;
+        }
     }
 
     function execution_get($params){

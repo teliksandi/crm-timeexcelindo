@@ -10,6 +10,8 @@ class client extends ApplicationBase {
         parent::__construct();
         // load model
         $this->load->model("master/m_client");
+        $this->load->model("master/m_karyawan");
+        $this->load->model('master/m_position');
         // load library
         $this->load->library('tnotification');
         $this->load->library('datetimemanipulation');
@@ -28,6 +30,20 @@ class client extends ApplicationBase {
 // session
         $search = $this->tsession->userdata('search_client');
         $this->smarty->assign('search', $search);
+
+        $pengguna = $this->com_user['user_id'];
+        $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
 
         // params
         $client_name = !empty($search['client_name']) ? '%'. $search['client_name'] . '%' : "%";
@@ -166,6 +182,7 @@ class client extends ApplicationBase {
         // output
         parent::display();
     }
+    
     function edit_process(){
         // set page rules
         $this->_set_page_rule("U");

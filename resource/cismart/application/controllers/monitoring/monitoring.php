@@ -27,13 +27,26 @@ class monitoring extends ApplicationBase {
         $this->_set_page_rule("R");
         // set template content
         $this->smarty->assign("template_content", "monitoring/index.html");
+
+        $pengguna = $this->com_user['user_id'];
+        $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
         
         $search = $this->tsession->userdata('search_monitoring');
         $this->smarty->assign('search', $search);
         $keyword  = !empty($search['keyword']) ? $search['keyword'] : "%";
         $filter         = !empty($search['filter']) ? $search['filter'] : "%";
         $params         =  array($keyword);
-
         $ttl_rows = "";
         if ($filter == "client_name") {
             $nm_client = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
@@ -158,7 +171,7 @@ class monitoring extends ApplicationBase {
     function detail($where){
         $this->_set_page_rule("U");
         // set template content
-        $this->smarty->assign("template_content", "planning/detail.html");
+        $this->smarty->assign("template_content", "monitoring/detail.html");
         
        
         $this->tnotification->display_notification();

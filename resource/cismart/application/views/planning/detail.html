@@ -29,8 +29,8 @@
                         <div class="form-group">
                             <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
                        </div>
-                   </center>
-                          <!-- Modal -->
+                    </center>
+                    <!-- Modal -->
                         <div class="modal fade" id="r_inisiasi" role="dialog">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -297,10 +297,15 @@
                                 </table>
                                 <br>
                                 <center>
+                                <table>
+                                    <td>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success" name="submit">Simpan</button>
 
                     </form>
+                                    </td>
+                                    <td>
+                {if {$department} != 10 AND {$jabatan} != 3}
                                     <form class="" action="{$config->site_url('execution/execution/execution_process')}" method="post">
                                         {foreach $executi as $exec}
                                         <input type="hidden" name="plan_execution" value="{$exec.id_planning|default:''}">
@@ -311,37 +316,25 @@
                                             <button type="submit" class="btn btn-primary" name="submit">Accept</button>
                                         {/foreach}
                                     </form>
+                {else}
+                                        <input type="hidden" name="plan_execution" value="{$exec.id_planning|default:''}">
+                {/if}
+                                    </td>
+                                </table>
+                                            <label>Keterangan :</label><br>
+                                            <i>Simpan -> Menyimpan data Planning</i><br>
+                                            <i>Accept -> Menuju tahap Execution</i>
                                     </div>
                                 </center>
                             </div>
                         </div>
-                </div>
 {/foreach}
-                            <div class="box box-primary">
                                 <div class="box-header with-border">
                                     <form class="form-horizontal" action="{$config->site_url('planning/planning/komentar_process')}" method="post">
                                         <div class="col-md-8">
                                         <div class="form-group">
                                             <table>
-                                                <br>
-                                                <div id="scroll-hide">
-                                                    <div class="inner">
-
-                                                <style type="text/css">
-                                                    #scroll-hide{
-                                                        width:100%;
-                                                        overflow:hidden;
-                                                        background:#fff;
-                                                        }
-                                                    #scroll-hide .inner{
-                                                        width:100%;
-                                                        height:100px;
-                                                        overflow:auto;
-                                                        margin:20px;
-                                                        padding-right:20px;
-                                                        }
-                                                </style>
-
+                                                <div style="overflow-y: scroll; height: 200px">
                                                     <b>Komentar :</b>
                                                     {foreach $komen_plan as $km}
                                                         <br>
@@ -354,7 +347,6 @@
                                                         <br>
                                                     {/foreach}
                                                 </div>
-                                                    </div>
                                                 </div>
                                             </table>
                                                 <input type="hidden" name="id_planning_komentar" value="{$rs.id_planning|default:''}">
@@ -373,7 +365,6 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
                 </div>
                 <!-- /.box-body -->
             </div>

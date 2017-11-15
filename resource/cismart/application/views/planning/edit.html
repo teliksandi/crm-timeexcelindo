@@ -91,14 +91,14 @@
                                                 <textarea name="deskripsi" title="Masukkan Deskripsi tentang Project" rows="3" cols="35" class="ckeditor" id="ckedtor" placeholder="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" disabled>{$rs.project_desc|default:''}</textarea>
                                     </div>
                                     <div class="form-group">
-                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                        <label>Project Justification</label> 
-                                        <textarea name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" disabled>{$rs.project_just|default:''}</textarea>
+                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                            <label>Project Justification</label> 
+                                                <textarea name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" disabled>{$rs.project_just|default:''}</textarea>
                                     </div>
                                     <div class="form-group">
-                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                        <label>Not in this Project</label> 
-                                        <textarea name="not_in" rows="3" cols="35" class="ckeditor" id="ckedtor3" title="Masukkan Data yang tidak ada pada Project" placeholder="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" disabled>{$rs.not_in_project|default:''}</textarea>
+                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                            <label>Not in this Project</label> 
+                                                <textarea name="not_in" rows="3" cols="35" class="ckeditor" id="ckedtor3" title="Masukkan Data yang tidak ada pada Project" placeholder="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" disabled>{$rs.not_in_project|default:''}</textarea>
                                     </div>
                                 </div>
                                 </div>
@@ -113,21 +113,37 @@
                                             <td>
                                                 <table>
                                                     <tr>
-                                                        <td width="500px" align="center"><b>Start date</b></td>
-                                                        <td width="500px" align="center"><b>Due date</b></td>
+                                                        <td width="250px" align="center"><b>Start date</b></td>
+                                                        <td width="250px" align="center"><b>Due date</b></td>
                                                         <td width="500px"  align="center"><b>Pilih File</b></td>
+                                                        <td width="500px"  align="center"><b>Detail File</b></td>
                                                     </tr>
                                                     <tr>
                                                         <td align="center">
-                                                            <input type="text" name="tanggal_start" value ="{$rs.mulai|default:''}" class="tanggal" maxlength="10" size="10" disabled>
+                                                            <input type="text" name="tanggal_start" value ="{$rs.mulai|default:''}" class="tanggal" maxlength="10" size="10" disabled style="width: 150px; text-align: center;">
                                                         </td>
                                                         <td align="center">
-                                                            <input type="text" name="tanggal_due" value ="{$rs.akhir|default:''}" class="tanggal" maxlength="10" size="10" disabled>
+                                                            <input type="text" name="tanggal_due" value ="{$rs.akhir|default:''}" class="tanggal" maxlength="10" size="10" disabled style="width: 150px; text-align: center;">
                                                         </td>
                                                         <td align="center">
                                                         (File Berbentuk png, jpg, jpeg, docx, pdf, xlsx, pptx , rar, zip.)<br>
                                                         Ket : Gunakan Ctrl + Click Untuk Memilih > 1 File Pada Folder File
                                                             <input type="file" name="files[]" id="files" multiple>
+                                                        </td>
+                                                        <td>
+                                                            <div style="overflow-y: scroll; height: 120px; width: 100%;">
+                                                                {foreach $ef as $f}
+                                                                    <table>
+                                                                        <input type="hidden" name="nm" value="{$f}">
+                                                                            <div class="form-group" align="center">
+                                                                                <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank" style="width: 300px;">{$f}</a>    {if $f !== ""}  <a href="{$config->site_url('planning/planning/delete_file')}/{$f}" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash-o" title="Delete"></i></a>{/if}
+                                                                            </div>
+                                                                {if $f !== ""}
+                                                                    <hr></hr>
+                                                                {/if}
+                                                                    </table>
+                                                                {/foreach}
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -136,31 +152,16 @@
                                     </div>
                                 </div>
                         {/foreach}
+
                                 <div class="form-group">
                                 <center>
-                                    <button type="submit" class="btn btn-success">Simpan</button>&nbsp;&nbsp;
+                                    <button type="submit" class="btn btn-success">Simpan</button>            
                                    
                                     <input type="button" value="Reset" class="btn btn-danger" onClick="history.go(0)">
                                 </center>
                                 <br>
                                 </div>
                     </form>
-                                <br>
-                                <center><label>Delete File</label></center>
-                                <br>
-                                <div style="overflow-y: scroll; height: 120px; width: 100%;">
-                                    {foreach $ef as $f}
-                                        <table>
-                                            <input type="hidden" name="nm" value="{$f}">
-                                                <div class="form-group" align="center">
-                                                    <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank" style="width: 300px;">{$f}</a>    {if $f !== ""}  <a href="{$config->site_url('planning/planning/delete_file')}/{$f}" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash-o" title="Delete"></i></a>{/if}
-                                                </div>
-                                    {if $f !== ""}
-                                                <hr></hr>
-                                    {/if}
-                                        </table>
-                                    {/foreach}
-                                </div>
 
  <script>
 $('#files').change(function(){

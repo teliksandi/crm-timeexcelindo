@@ -10,7 +10,6 @@
 </section>
 
 <section class="content">
-    
     <!-- notification template -->
     {include file="base/templates/notification.html"}
     <!-- end of notification template-->
@@ -29,101 +28,76 @@
                       {foreach $join as $jn}
                         <input type="hidden" name="id_initiation" value="{$jn.id_initiation|default:''}" id="id_initiation">
                             <div class="box-header with-border">
-
                                 <div class="col-md-6">
-
                                     <div class="form-group">
                                         <label for="client_name">Client Name</label>
                                             <input type="text" name="client" value="{$jn.client_name|default:''}" class="form-control"  title="Nama Client" readonly>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="project_title">Project title</label>
                                             <input type="text" name="project_title" value="{$jn.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly>
-                                    </div>
-                                                     
+                                    </div>             
                                     <div class="form-group">
                                             <label>Project Manager Department</label>
-
                                             <br>
                                             <select name="department[]" id="department" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" id="department">
-
                                                 {foreach $datadepartment as $cth}
-
-                                                <option value="{$cth.id_department}" 
-
-                                                {if $cth.id_department|in_array:$ex}
-                                                 selected="selected"{/if}>{$cth.nama_department}
-                                                    
-                                                </option>
-                                                    {foreachelse}
-                                                    Data tidak ditemukan !
-                                                    {/foreach}
+                                                    <option value="{$cth.id_department}" {if $cth.id_department|in_array:$ex} selected="selected"{/if}>{$cth.nama_department}</option>
+                                                {foreachelse}
+                                                Data tidak ditemukan !
+                                                {/foreach}
                                             </select>
                                         </div>
-
-                                        
                                         <div class="form-group">
                                             <label>Team Member Name</label>
                                             <br>
-                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" id="karyawan">
-                                                  {foreach $marketing_kar as $value}
-                                                    <option value="{$value.id_karyawan}"
-                                                    {if $value.id_karyawan|in_array:$exs}
-                                                 selected="selected"{/if}>{$value.nama_karyawan}</option>
-                                                  {foreachelse}
-                                                  Data tidak ditemukan !
-                                                  {/foreach}
-                                                </select>
+                                            <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" id="karyawan">
+                                                {foreach $marketing_kar as $value}
+                                                    <option value="{$value.id_karyawan}" {if $value.id_karyawan|in_array:$exs} selected="selected"{/if}>{$value.nama_karyawan}</option>
+                                                {foreachelse}
+                                                Data tidak ditemukan !
+                                                {/foreach}
+                                            </select>
                                         </div>
-
                                     <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
-                                                <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$jn.project_desc|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
-                                                <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$jn.project_just|default:''}
-                                                </textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                            <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$jn.not_in_project|default:''}
-                                                </textarea>
-                                    </div>
-
+                                        <div class="form-group">
+                                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
+                                                    <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$jn.project_desc|default:''}
+                                                    </textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
+                                                    <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$jn.project_just|default:''}
+                                                    </textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
+                                                    <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$jn.not_in_project|default:''}
+                                                    </textarea>
+                                        </div>
                                     </div>
                                     <!-- ./scroll -->
-
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label for="budget">Budget</label>
                                                 <input type="text" name="budget" value="Rp. {number_format($jn.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label for="start_date">Start date</label>    
                                                 <input type="text" name="start_date" value="{date('d F Y', strtotime($jn.start_date|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-md-4">
                                             <label for="due_date">Due date</label>
                                                 <input type="text" name="due_date" value="{date('d F Y', strtotime($jn.due_date|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
                                         </div>
                                     </div>
-
                                 </div>
                 </form>
 

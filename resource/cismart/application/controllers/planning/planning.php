@@ -48,6 +48,36 @@ class planning extends ApplicationBase {
         $filter         = !empty($search['filter']) ? $search['filter'] : "%";
         $params         =  array($keyword);
 
+        $list_dp = $this->m_planning->list_department();
+        if ($list_dp !== NULL) {
+            foreach ($list_dp as $ls) {
+                $list = $ls['id_department'];
+                $arr_list[] = $list;
+            }
+
+                $val_dep = implode(",", $arr_list);
+                $this->smarty->assign("auth_dep", explode(",", $val_dep));    
+            }else{
+                $this->smarty->assign("auth_dep", "0");    
+            }
+            
+
+            $pengguna = $this->com_user['user_id'];
+            $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
+        $dpt            = '%'. $department_karyawan .'%';
+
         $ttl_rows = "";
         if ($filter == "client_name") {
             $nm_client = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
@@ -68,7 +98,7 @@ class planning extends ApplicationBase {
 
 
         $config['base_url'] = site_url("planning/planning/index/");
-        $config['total_rows'] = $this->m_planning->search_planning($filter, $ttl_rows);
+        $config['total_rows'] = $this->m_planning->search_planning($filter, $ttl_rows, $dpt);
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
@@ -90,9 +120,7 @@ class planning extends ApplicationBase {
         // get list data
         // get list data
         $params = array($keyword, ($start - 1), $config['per_page']);
-
-        $this->smarty->assign("get", $this->m_planning->get_list_planning($filter, $params));
-
+        $this->smarty->assign("get", $this->m_planning->get_list_planning($filter, $params, $dpt));
         // get list data
         
         // output
@@ -107,38 +135,43 @@ class planning extends ApplicationBase {
         $this->smarty->assign("template_content", "planning/detail.html");
         $this->smarty->assign("result", $this->m_planning->get_planning_by_id($where));
         $this->smarty->assign("join", $this->m_planning->initiation_detail($where));
-        $kk = $this->m_planning->get_department_by_id($where);
-
+        $this->smarty->assign("komen", $this->m_initiation->initiation_komen($where));
         $this->smarty->assign("executi", $this->m_planning->get_list_execution($where));
         $kk = $this->m_planning->get_department_by_id($where);
-
         $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($where));
-        
-        $this->smarty->assign("dprt", explode(",", $kk['id_department']));
+        $this->smarty->assign("dprt", explode(",", $kk['department']));
         $this->smarty->assign("datadepartment",$this->m_initiation->get_list_department());
-        $this->smarty->assign("kry", explode(",", $kk['id_karyawan']));
+        $this->smarty->assign("kry", explode(",", $kk['karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
+
+        $pengguna = $this->com_user['user_id'];
+            $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
 
          $get_in = $this->m_planning->initiation_detail($where);
         foreach ($get_in as $f) {
             $id_ini = $f['id_initiation'];
         }
-
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
-
         $vfls = $this->m_initiation->get_file($id_ini);
         foreach ($vfls as $f) {
            // $this->smarty->assign("ef",  explode(",", $f['file']));
             $ls = $f['id_file'];
         }
-
         $list = $this->m_initiation->get_list_file($ls);
-
         foreach ($list as $l) {
            $this->smarty->assign("ef",  explode(",", $l['file']));
         }
-
-
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -161,7 +194,8 @@ class planning extends ApplicationBase {
             $params = array(
                 'komentar'          => $this->input->post("isi_komentar"),
                 'tgl_komentar'      => $this->input->post("tgl_komentar"),   
-                'id_planning'       => $this->input->post("id_planning_komentar")   
+                'id_planning'       => $this->input->post("id_planning_komentar")
+                'user_id'           => $this->com_user['user_id']
             );
 
             if ($this->m_planning->insert_komentar($params)) {
@@ -309,22 +343,32 @@ class planning extends ApplicationBase {
         $this->smarty->assign("kry", explode(",", $kk['karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
+        $pengguna = $this->com_user['user_id'];
+            $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
         $get_in = $this->m_planning->initiation_detail($where);
         foreach ($get_in as $f) {
            // $this->smarty->assign("ef",  explode(",", $f['file']));
             $id_ini = $f['id_initiation'];
         }
-
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
-
         $as = $this->m_initiation->get_file($id_ini);
-
         foreach ($as as $l) {        
         $kk = $l['file'];
         $la[] = $kk;
         $this->smarty->assign("ef", $la);
         }
-
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -400,7 +444,6 @@ class planning extends ApplicationBase {
 
         return $currToIn = str_ireplace($search, $replace, $idr);
     }
-
 
     function edit($params){
 

@@ -75,7 +75,11 @@
                                     </td>
                                     <td align="middle">belum dicari</td>
 		                            <td align="middle">
+		{if {$department} == 1 or {$department} == 7}
 		                                <a href="{$config->site_url('monitoring/monitoring/detail')}/{$result.id_monitoring}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Detail"></i> Detail</a>
+		{else}
+										
+		{/if}
 		                            </td>
 		                        </tr>
 		                        {foreachelse}

@@ -32,6 +32,20 @@ class karyawan extends ApplicationBase{
         $search = $this->tsession->userdata('search_karyawan');
         $this->smarty->assign('search', $search);
 
+        $pengguna = $this->com_user['user_id'];
+         $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
         // params
         $nama_karyawan = !empty($search['nama_karyawan']) ? '%'. $search['nama_karyawan'] . '%' : "%";
         $params = array($nama_karyawan);
@@ -126,7 +140,6 @@ class karyawan extends ApplicationBase{
 
     }
 
-
     function add_process(){
         // set page rules
         $this->_set_page_rule("C");
@@ -208,7 +221,6 @@ class karyawan extends ApplicationBase{
                 );            
 
                 $this->m_karyawan->insert_user($params_user);
-
 
                 $params_role = array(
                 'role_id'           => '2',   
