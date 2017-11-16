@@ -35,7 +35,6 @@ class planning extends ApplicationBase {
         $this->smarty->load_javascript("resource/custom/js/custom.js");
     }
 
-    
     public function index() {
         // set page rules
         $this->_set_page_rule("R");
@@ -163,15 +162,25 @@ class planning extends ApplicationBase {
             $id_ini = $f['id_initiation'];
         }
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
+
         $vfls = $this->m_initiation->get_file($id_ini);
-        foreach ($vfls as $f) {
+        if ($vfls === NULL) {
+            $this->smarty->assign("ef", "");
+        }else{
+                foreach ($vfls as $f) {
            // $this->smarty->assign("ef",  explode(",", $f['file']));
-            $ls = $f['id_file'];
+                $ls = $f['id_file'];
+                }
+                $list = $this->m_initiation->get_list_file($ls);
+                if ($list === NULL) {
+                    $this->smarty->assign("ef", "");
+                }else{
+                    foreach ($list as $l) {
+                       $this->smarty->assign("ef",  explode(",", $l['file']));
+                    }
+                }    
         }
-        $list = $this->m_initiation->get_list_file($ls);
-        foreach ($list as $l) {
-           $this->smarty->assign("ef",  explode(",", $l['file']));
-        }
+
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -181,7 +190,6 @@ class planning extends ApplicationBase {
         // cek input
         parent::display();
     }
-
 
     function komentar_process(){
 
@@ -194,7 +202,7 @@ class planning extends ApplicationBase {
             $params = array(
                 'komentar'          => $this->input->post("isi_komentar"),
                 'tgl_komentar'      => $this->input->post("tgl_komentar"),   
-                'id_planning'       => $this->input->post("id_planning_komentar")
+                'id_planning'       => $this->input->post("id_planning_komentar"),
                 'user_id'           => $this->com_user['user_id']
             );
 
@@ -233,7 +241,6 @@ class planning extends ApplicationBase {
         //--
         redirect('planning/planning');
     }
-
 
     function planning_process(){
 
@@ -363,12 +370,22 @@ class planning extends ApplicationBase {
             $id_ini = $f['id_initiation'];
         }
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
-        $as = $this->m_initiation->get_file($id_ini);
-        foreach ($as as $l) {        
-        $kk = $l['file'];
-        $la[] = $kk;
-        $this->smarty->assign("ef", $la);
+
+        $vfls = $this->m_initiation->get_file($id_ini);
+        if ($vfls === NULL) {
+            $this->smarty->assign("ef", "");
+        }else{
+                if ($vfls === NULL) {
+                    $this->smarty->assign("ef", "");
+                }else{
+                    foreach ($vfls as $l) {        
+                        $kk = $l['file'];
+                        $la[] = $kk;
+                    $this->smarty->assign("ef", $la);
+                    }
+                } 
         }
+
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -376,7 +393,6 @@ class planning extends ApplicationBase {
         parent::display();
 
     }
-
 
     function add_process(){
 
@@ -462,10 +478,14 @@ class planning extends ApplicationBase {
 
         $gf = $this->m_planning->get_file($params);
 
-        foreach ($gf as $fl) {        
-        $fle = $fl['file'];
-        $la[] = $fle;
-        $this->smarty->assign("ef", $la);
+        if ($gf === NULL) {
+            $this->smarty->assign("ef", "");
+        }else{
+            foreach ($gf as $l) {        
+                $kk = $l['file'];
+                $la[] = $kk;
+            $this->smarty->assign("ef", $la);
+            }
         }
 
         // notification

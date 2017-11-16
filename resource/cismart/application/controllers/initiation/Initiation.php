@@ -32,7 +32,6 @@ class Initiation extends ApplicationBase {
         $this->smarty->load_javascript("resource/custom/js/custom.js");
     }
 
-
 public function index() {
         // set page rules
         
@@ -164,13 +163,16 @@ public function index() {
         $this->smarty->assign("exs", explode(",", $kk['id_karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
-        
         $as = $this->m_initiation->get_file($where);
-
-        foreach ($as as $l) {        
-        $kk = $l['file'];
-        $la[] = $kk;
-        $this->smarty->assign("ef", $la);
+        
+        if ($as === NULL) {
+            $this->smarty->assign("ef", "");
+        }else{
+            foreach ($as as $l) {        
+                $kk = $l['file'];
+                $la[] = $kk;
+            $this->smarty->assign("ef", $la);
+            }
         }
 
         // foreach ($vfls as $f) {
@@ -332,13 +334,16 @@ public function index() {
         $this->smarty->assign("exs", explode(",", $kk['id_karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
-
         $as = $this->m_initiation->get_file($where);
 
-        foreach ($as as $l) {        
-        $kk = $l['file'];
-        $la[] = $kk;
-        $this->smarty->assign("ef", $la);
+        if ($as === NULL) {
+            $this->smarty->assign("ef", "");
+        }else{
+            foreach ($as as $l) {        
+                $kk = $l['file'];
+                $la[] = $kk;
+            $this->smarty->assign("ef", $la);
+            }
         }
         
         $this->smarty->load_style("adminlte/plugins/select2/dist/css/select2.min.css");
@@ -395,8 +400,6 @@ public function index() {
 
     }
 
-
-
     function idrToInt($idr) {
         $search = [
                 
@@ -424,7 +427,6 @@ public function index() {
         echo implode(", ", $karyawans);
         
     }
-
 
      public function upload_f(){
         sleep(3);
@@ -525,7 +527,6 @@ public function index() {
         return $currToIn = str_ireplace($search, $replace, $idr);
     }
 
-
         function edit_komen($where){
         // set page rules
         $this->_set_page_rule("U");
@@ -592,8 +593,6 @@ public function index() {
         parent::display();
     }
 
-
-
     function edit($params){
         // set page rules
         $this->_set_page_rule("U");
@@ -609,10 +608,16 @@ public function index() {
 
         $as = $this->m_initiation->get_file($params);
 
-        foreach ($as as $l) {        
-        $kk = $l['file'];
-        $la[] = $kk;
-        $this->smarty->assign("ef", $la);
+        $as = $this->m_initiation->get_file($params);
+        
+        if ($as === NULL) {
+            $this->smarty->assign("ef", "");
+        }else{
+            foreach ($as as $l) {        
+                $kk = $l['file'];
+                $la[] = $kk;
+            $this->smarty->assign("ef", $la);
+            }
         }
 
         // notification

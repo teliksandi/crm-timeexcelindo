@@ -300,8 +300,11 @@
                                 <table>
                                     <td>
                                     <div class="form-group">
+                                        {if {$department} == 10}
                                         <button type="submit" class="btn btn-success" name="submit">Simpan</button>
+                                        {else}
 
+                                        {/if}
                     </form>
                                     </td>
                                     <td>
@@ -329,6 +332,7 @@
                             </div>
                         </div>
 {/foreach}
+                            <div class="box box-primary">
                                 <div class="box-header with-border">
                                     <form class="form-horizontal" action="{$config->site_url('planning/planning/komentar_process')}" method="post">
                                         <div class="col-md-8">
@@ -349,6 +353,7 @@
                                                 </div>
                                                 </div>
                                             </table>
+                            {if {$jabatan} !=3 OR {$department} == 10}
                                                 <input type="hidden" name="id_planning_komentar" value="{$rs.id_planning|default:''}">
                                                 <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
                                                     <br>
@@ -361,10 +366,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                            {else}
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                            
+                                                        </div>
+                                                    </div>
+                            {/if}
                                         </div>
                                         </div>
                                     </form>
                                 </div>
+                            </div>
                 </div>
                 <!-- /.box-body -->
             </div>

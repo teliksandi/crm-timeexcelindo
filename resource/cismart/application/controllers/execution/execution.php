@@ -34,7 +34,6 @@
             $this->smarty->load_javascript("resource/custom/js/custom.js");
         }
 
-        
         public function index() {
             // set page rules
             $this->_set_page_rule("R");
@@ -233,13 +232,15 @@
         $this->tnotification->display_last_field();
 
         $gf = $this->m_execution->get_file($params);
-
-        foreach ($gf as $fl) {        
-        $fle = $fl['file'];
-        $la[] = $fle;
-        $this->smarty->assign("ef", $la);
+        if ($gf === NULL) {
+            $this->smarty->assign("ef_e", "");
+        }else{
+            foreach ($gf as $l) {        
+                $kk = $l['file'];
+                $la[] = $kk;
+            $this->smarty->assign("ef_e", $la);
+            }
         }
-
         // output
         parent::display();
     }
@@ -360,10 +361,11 @@
             // set page rules
             $this->_set_page_rule("C");
 
-            $this->smarty->assign("template_content", "execution/detail.html");
+            $this->smarty->assign("template_content", "execution/detail.html");  
             $this->smarty->assign("execution_detail",$this->m_execution->execution_get($where));      
             $this->smarty->assign("join", $this->m_execution->initiation_detail($where));
             $this->smarty->assign("join_planning", $this->m_execution->planning_detail($where));
+            $this->smarty->assign("monitoring", $this->m_execution->get_list_monitoring($where));
             $kk = $this->m_execution->get_department_by_id($where);
 
             $this->smarty->assign("dprt", explode(",", $kk['department']));
@@ -371,7 +373,8 @@
             $this->smarty->assign("kry", explode(",", $kk['karyawan']));
             $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
             $this->smarty->assign("monitoring", $this->m_execution->get_list_monitoring($where));
-                //planning history
+            
+            //planning history
             $rr = $this->m_execution->get_planning_by_id($where);
             $this->smarty->assign("dprt_plan", explode(",", $rr['department']));
             $this->smarty->assign("datadepartment_plan",$this->m_initiation->get_list_department());
@@ -385,48 +388,76 @@
             $this->smarty->assign("marketing_kar_exet",$this->m_karyawan->get_market_karyawan());
             $this->smarty->assign("");
 
-
             $ls_id_in = $this->m_execution->get_initiation_by_id($where);
-            $id_ini = $ls_id_in['id_initiation'];
+            $id_ini     = $ls_id_in['id_initiation'];
             $id_plan    = $ls_id_in['id_planning'];
 
             $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini)); 
             $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($id_plan));   
             $this->smarty->assign("komen_exe", $this->m_execution->execution_komen($where));
 
-////////////////////////////////file punya execution//////////////////////////////////////////////
-            $gf = $this->m_execution->get_file($where);
-
-            foreach ($gf as $fl) {        
-                $fle = $fl['file'];
-                $la[] = $fle;
-                $this->smarty->assign("ef", $la);
+            $pengguna = $this->com_user['user_id'];
+            $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
             }
+            
+            $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+            $nama_karyawan = $list_kar['nama_karyawan'];
+            $department_karyawan = $list_kar['id_department'];
+            $jabatan_karyawan = $list_kar['id_position'];
+            $this->smarty->assign("nama_karyawan", $nama_karyawan);
+            $this->smarty->assign("department", $department_karyawan);
+            $this->smarty->assign("jabatan", $jabatan_karyawan);
+
+            ////////////////////////////////file punya execution//////////////////////////////////////////////
+            $gf = $this->m_execution->get_file($where);
+            if ($gf === NULL) {
+                $this->smarty->assign("ef_e", "");
+            }else{
+                foreach ($gf as $l) {        
+                    $kk = $l['file'];
+                    $la[] = $kk;
+                $this->smarty->assign("ef_e", $la);
+                }
+            }
+            
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////file punya riwayat initiation//////////////////////////////////////
             $gf_i = $this->m_initiation->get_file($id_ini);
 
-            foreach ($gf_i as $fl_i) {        
-                $fle_i = $fl_i['file'];
-                $la_i[] = $fle_i;
-                $this->smarty->assign("ef_i", $la_i);
+            if ($gf_i === NULL) {
+                $this->smarty->assign("ef_i", "");
+            }else{
+                foreach ($gf_i as $l) {        
+                    $kk = $l['file'];
+                    $la[] = $kk;
+                $this->smarty->assign("ef_i", $la);
+                }
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////file punya riwayat initiation//////////////////////////////////////
+////////////////////////////////file punya riwayat planning//////////////////////////////////////
             $gf_p = $this->m_planning->get_file($id_plan);
 
-            foreach ($gf_p as $fl_p) {        
-                $fle_p = $fl_p['file'];
-                $la_p[] = $fle_p;
-                $this->smarty->assign("ef_p", $la_p);
+            if ($gf_p === NULL) {
+                    $this->smarty->assign("ef_p", "");
+            }else{
+                  foreach ($gf_p as $fl_p) {        
+                    $fle_p = $fl_p['file'];
+                    $la_p[] = $fle_p;
+                    $this->smarty->assign("ef_p", $la_p);
+                  }   
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+            // $get_in = $this->m_execution->initiation_detail($where);
+            // $this->smarty->assign("komen", $this->m_initiation->initiation_komen($get_in['id_initiation']));
 
-        $this->tnotification->display_notification();
-        $this->tnotification->display_last_field();
+            $this->tnotification->display_notification();
+            $this->tnotification->display_last_field();
+
 
        
         // cek input
@@ -507,32 +538,58 @@
             $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($id_plan));   
             $this->smarty->assign("komen_exe", $this->m_execution->execution_komen($where));
 
+            $pengguna = $this->com_user['user_id'];
+            $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+            $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+            $nama_karyawan = $list_kar['nama_karyawan'];
+            $department_karyawan = $list_kar['id_department'];
+            $jabatan_karyawan = $list_kar['id_position'];
+            $this->smarty->assign("nama_karyawan", $nama_karyawan);
+            $this->smarty->assign("department", $department_karyawan);
+            $this->smarty->assign("jabatan", $jabatan_karyawan);
+
             ////////////////////////////////file punya execution//////////////////////////////////////////////
             $gf = $this->m_execution->get_file($where);
-
-            foreach ($gf as $fl) {        
-                $fle = $fl['file'];
-                $la[] = $fle;
-                $this->smarty->assign("ef", $la);
+            if ($gf === NULL) {
+                $this->smarty->assign("ef_e", "");
+            }else{
+                foreach ($gf as $l) {        
+                    $kk = $l['file'];
+                    $la[] = $kk;
+                $this->smarty->assign("ef_e", $la);
+                }
             }
+            
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////file punya riwayat initiation//////////////////////////////////////
             $gf_i = $this->m_initiation->get_file($id_ini);
 
-            foreach ($gf_i as $fl_i) {        
-                $fle_i = $fl_i['file'];
-                $la_i[] = $fle_i;
-                $this->smarty->assign("ef_i", $la_i);
+            if ($gf_i === NULL) {
+                $this->smarty->assign("ef_i", "");
+            }else{
+                foreach ($gf_i as $l) {        
+                    $kk = $l['file'];
+                    $la[] = $kk;
+                $this->smarty->assign("ef_i", $la);
+                }
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////file punya riwayat initiation//////////////////////////////////////
+////////////////////////////////file punya riwayat planning//////////////////////////////////////
             $gf_p = $this->m_planning->get_file($id_plan);
 
-            foreach ($gf_p as $fl_p) {        
-                $fle_p = $fl_p['file'];
-                $la_p[] = $fle_p;
-                $this->smarty->assign("ef_p", $la_p);
+            if ($gf_p === NULL) {
+                    $this->smarty->assign("ef_p", "");
+            }else{
+                  foreach ($gf_p as $fl_p) {        
+                    $fle_p = $fl_p['file'];
+                    $la_p[] = $fle_p;
+                    $this->smarty->assign("ef_p", $la_p);
+                  }   
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

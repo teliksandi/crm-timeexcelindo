@@ -477,18 +477,22 @@
                                                     <input type="text" name="budget" value="Rp. {number_format($exex.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label for="start_date">Start date</label>    
+                                        <table>
+                                            <tr>
+                                                <td width="200px"><b><h5>Start Date</h5></b></td>
+                                                <td>            </td>
+                                                <td width="200px"><b><h5>Due Date</h5></b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
                                                     <input type="text" name="start_date" value="{date('d F Y', strtotime($exex.mulai|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label for="due_date">Due date</label>
+                                                </td>
+                                                <td>            </td>
+                                                <td>
                                                     <input type="text" name="due_date" value="{date('d F Y', strtotime($exex.akhir|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
-                                            </div>
-                                        </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                 </div>
                 </form>
 
@@ -499,7 +503,7 @@
                                     <div style="overflow-y: scroll; height: 200px; width: 100%;">
                                         <div class="form-group">
                                             <center>
-                                            {foreach $ef as $f}
+                                            {foreach $ef_e as $f}
                                                 <table>
                                                     <input type="hidden" name="nm" value="{$f}">
                                                         <div class="form-group">
@@ -526,11 +530,15 @@
                                         <input type="hidden" name="department_monitoring[]" value="{$moni.id_department|default:''}">
                                         <input type="hidden" name="karyawan_monitoring[]" value="{$moni.id_karyawan|default:''}">
                                         {/foreach}
+                                            {if {$department} == 1}
                                             <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
-                                    </center>
+                                            {/if}
+                                    </div>
+                                </center>
                             </form>
 
-                    <form class="form-horizontal" action="{$config->site_url('execution/execution/komentar_process')}" method="post">
+                            <div class="col-md-6">
+                            <form class="form-horizontal" action="{$config->site_url('execution/execution/komentar_process')}" method="post">
                                     <div class="form-group">
                                             <table>
                                                 <div style="overflow-y: scroll; height: 200px">
@@ -562,8 +570,9 @@
                                                     </div>
                                    </div>
                                         {/foreach}
-                    </form>
-                    </div>
+                            </form>
+                            </div>
+                        </div>
 
 
                                </div>
