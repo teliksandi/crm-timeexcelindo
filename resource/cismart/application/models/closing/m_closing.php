@@ -7,7 +7,7 @@ class m_closing extends CI_Model{
         $this->db->select('*');
         $this->db->from('closing');
         $this->db->join('initiation', 'initiation.id_initiation = closing.id_initiation', 'left'); 
-        $this->db->join('client', 'client.id_client = closing.id_client', 'left'); 
+        $this->db->join('client', 'client.id_client = initiation.id_client', 'left'); 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

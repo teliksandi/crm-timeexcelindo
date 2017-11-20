@@ -1,11 +1,11 @@
-<section class="content-header">
+<section class="content-header">Monitoring
     <h1>
-        Pengolahan Data Execution
+        Pengolahan Data Monitoring
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-archive"></i> Execution</a></li>
-        <li><a href="#">Data Execution</a></li>
-        <li class="active">Detail Data Execution</li>
+        <li><a href="#"><i class="fa fa-archive"></i>Monitoring</a></li>
+        <li><a href="#">Data Monitoring</a></li>
+        <li class="active">Detail Data Monitoring</li>
     </ol>
 </section>
 
@@ -17,9 +17,9 @@
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Form detail initiation</h3>
+                    <h3 class="box-title">Form detail monitoring</h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-primary" href="{$config->site_url('execution/execution')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                        <a class="btn btn-sm btn-primary" href="{$config->site_url('monitoring/monitoring')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
 
@@ -156,13 +156,12 @@
                         </div>
                         <!-- RIWAYAT PLANNING -->
 
-                        <div class="box-header with-border">
+                       
                                 <center>
                                     <div class="form-group">
                                         <button type="submit" name="Riwayat_i" class="btn btn-info" data-toggle="modal" data-target="#r_planning"><i>Riwayat Planning</i></button>
                                     </div>
                                 </center>
-                        </div>
                           <!-- Modal -->
                         <div class="modal fade" id="r_planning" role="dialog">
                             <div class="modal-dialog modal-lg">
@@ -198,7 +197,7 @@
                                             <div class="form-group">
                                             <label>Team Member Name</label>
                                             <br>
-                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled>
+                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" readonly disabled style="width: 100%;">
                                                     {foreach $marketing_kar_plan as $value}
                                                         <option value="{$value.id_karyawan}"
                                                     {if $value.id_karyawan|in_array:$kry_plan} selected="selected"{/if}>{$value.nama_karyawan}
@@ -412,94 +411,241 @@
                         </div>
                 <!-- /.box-header -->
 
-                <div class="box-body">
-                    <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
-                      {foreach $execution_detail as $exex}
-                        <input type="hidden" name="id_initiation" value="{$exex.id_initiation|default:''}" id="id_initiation">
-                            <div class="box-header with-border">
-                                <div class="col-md-6">
+{foreach $execution_detail as $exex}
+                            <center>
                                     <div class="form-group">
-                                        <label for="client_name">Client Name</label>
-                                            <input type="text" name="client" value="{$exex.client_name|default:''}" class="form-control"  title="Nama Client" readonly style="width: 95%;">
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#r_exe">Riwayat Execution</button>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="project_title">Project title</label>
-                                            <input type="text" name="project_title" value="{$exex.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly style="width: 95%;">
-                                    </div>        
-                                    <div class="form-group">
-                                        <label>Project Manager Department</label>
-                                        <br>
-                                            <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project" style="width: 95%;">
-                                                {foreach $datadepartment_exet as $cth}
-                                                    <option value="{$cth.id_department}" {if $cth.id_department|in_array:$dprt_exet} selected="selected"{/if}>{$cth.nama_department}</option>
-                                                {foreachelse}
-                                                Data tidak ditemukan !
-                                                {/foreach}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Team Member Name</label>
-                                            <br>
-                                                <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple" style="width: 95%;">
-                                                {foreach $marketing_kar_exet as $value}
-                                                    <option value="{$value.id_karyawan}" {if $value.id_karyawan|in_array:$kry_exet} selected="selected"{/if}>{$value.nama_karyawan}</option>
-                                                {foreachelse}
-                                                Data tidak ditemukan !
-                                                {/foreach}
-                                                </select>
-                                        </div>
-
-                                    <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
-                                        <div class="form-group">
-                                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                                <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
-                                                    <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$exex.project_desc|default:''}
-                                                    </textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                                <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
-                                                    <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$exex.project_just|default:''}
-                                                    </textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                                <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                    <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$exex.not_in_project|default:''}
-                                                    </textarea>
-                                        </div>
+                                </center>
+                               
+                        <!-- Modal -->
+                        <div class="modal fade" id="r_exe" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">History Execution</h4>
                                     </div>
-                                    <!-- ./scroll -->
-
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label for="budget">Budget</label>
-                                                    <input type="text" name="budget" value="Rp. {number_format($exex.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
+                                    <div class="modal-body">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="client_name">Client Name</label>
+                                                    <input type="text" name="client" value="{$exex.client_name|default:''}" class="form-control"  title="Nama Client" readonly style="width: 95%;">
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label for="start_date">Start date</label>    
-                                                    <input type="text" name="start_date" value="{date('d F Y', strtotime($exex.mulai|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
+                                            <div class="form-group">
+                                                <label for="project_title">Project title</label>
+                                                    <input type="text" name="project_title" value="{$exex.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly style="width: 95%;">
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                <label for="due_date">Due date</label>
-                                                    <input type="text" name="due_date" value="{date('d F Y', strtotime($exex.akhir|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
+                                            <div class="form-group">
+                                                <label>Project Manager Department</label>
+                                                <br>
+                                                    <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project" style="width: 95%;">
+                                                        {foreach $datadepartment_exet as $cth}
+                                                            <option value="{$cth.id_department}" {if $cth.id_department|in_array:$dprt_exet} selected="selected"{/if}>{$cth.nama_department}</option>
+                                                        {foreachelse}
+                                                        Data tidak ditemukan !
+                                                        {/foreach}
+                                                    </select>
                                             </div>
+                                            <div class="form-group">
+                                                <label>Team Member Name</label>
+                                                <br>
+                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple" style="width: 95%;">
+                                                    {foreach $marketing_kar_exet as $value}
+                                                        <option value="{$value.id_karyawan}" {if $value.id_karyawan|in_array:$kry_exet} selected="selected"{/if}>{$value.nama_karyawan}</option>
+                                                    {foreachelse}
+                                                    Data tidak ditemukan !
+                                                    {/foreach}
+                                                    </select>
+                                            </div>
+                                            <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
+                                                <div class="form-group">
+                                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                        <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
+                                                            <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$exex.project_desc|default:''}
+                                                            </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                        <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
+                                                            <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$exex.project_just|default:''}
+                                                            </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                        <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
+                                                            <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$exex.not_in_project|default:''}
+                                                            </textarea>
+                                                </div>
+                                            </div>
+                                            <!-- Scroll -->
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label for="budget">Budget</label>
+                                                        <input type="text" name="budget" value="Rp. {number_format($exex.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label for="start_date">Start date</label>    
+                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($exex.mulai|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label for="due_date">Due date</label>
+                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($exex.akhir|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                                    <label for="files[]">Files</label>
+                                                        <div style="overflow-y: scroll; height: 200px; width: 100%;">
+                                                            <div class="form-group">
+                                                                <center>
+                                                                {foreach $ef_e as $f}
+                                                                    <table>
+                                                                        <input type="hidden" name="nm" value="{$f}">
+                                                                            <div class="form-group">
+                                                                                <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>
+                                                                            </div>
+                                                                {if $f !== ""}
+                                                                        <hr></hr>
+                                                                {/if}
+                                                                    </table>
+                                                                {/foreach}
+                                                                </center>
+                                                            </div>
+                                                        </div>
+                                                </form>
+                                            </div>
+                                                <br>
+                                            <div class="col-md-6">
+                                                <form class="form-horizontal" action="{$config->site_url('execution/execution/komentar_process')}" method="post">
+                                                            <div class="form-group">
+                                                                <table>
+                                                                    <div style="overflow-y: scroll; height: 200px">
+                                                                        Komentar :
+                                                                        {foreach $komen_exe as $km}
+                                                                            <br>
+                                                                            <b><textarea disabled class="form-control">
+                                                                                {$km.komentar}</textarea></b>
+                                                                        <div align="right">
+                                                                        Dikomentari pada : 
+                                                                            <br>
+                                                                                {$km.tgl_komentar}, {$km.nama_lengkap}
+                                                                            <br>
+                                                                            {/foreach}
+                                                                        </div>
+                                                                    </div>
+                                                                </table>
+                                                                    <input type="hidden" name="id_execution_komentar" value="{$exex.id_execution|default:''}">
+                                                                    <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
+                                                                        <br>
+                                                               </div>
+                                                </form>
+                                            </div>
+                                            <!-- col -->
                                         </div>
+                                        <!-- box-body -->
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
-                </form>
+                            </div>
+                        </div>
+{/foreach}
+                            <!--Riwayat Execution -->
 
-                        <div class="col-md-6">
+                        <!--Riwayat Monitoring -->                        
+                        <!-- <div class="box-body">
+                            <form class="form-horizontal" action="{$config->site_url('execution/execution/execution_process')}" method="post">
+                            {foreach $execution_detail as $exex}
+                                <input type="hidden" name="id_initiation" value="{$exex.id_initiation|default:''}" id="id_initiation">
+                                    <div class="box-header with-border">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="client_name">Client Name</label>
+                                                    <input type="text" name="client" value="{$exex.client_name|default:''}" class="form-control"  title="Nama Client" readonly style="width: 95%;">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="project_title">Project title</label>
+                                                    <input type="text" name="project_title" value="{$exex.project_title|default:''}" class="form-control" id="project_title" placeholder="" title="Judul Project" readonly style="width: 95%;">
+                                            </div>     
+                                            <div class="form-group">
+                                                <label>Project Manager Department</label>
+                                                <br>
+                                                    <select name="department[]" id="department" class="form-control select2 department" multiple="multiple" title="Pilih Manager Department Project" style="width: 95%;">
+                                                        {foreach $datadepartment_exet as $cth}
+                                                            <option value="{$cth.id_department}" {if $cth.id_department|in_array:$dprt_exet} selected="selected"{/if}>{$cth.nama_department}</option>
+                                                        {foreachelse}
+                                                        Data tidak ditemukan !
+                                                        {/foreach}
+                                                    </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Team Member Name</label>
+                                                <br>
+                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 karyawan" data-value="" multiple="multiple" style="width: 95%;">
+                                                    {foreach $marketing_kar_exet as $value}
+                                                        <option value="{$value.id_karyawan}" {if $value.id_karyawan|in_array:$kry_exet} selected="selected"{/if}>{$value.nama_karyawan}</option>
+                                                    {foreachelse}
+                                                    Data tidak ditemukan !
+                                                    {/foreach}
+                                                    </select>
+                                            </div>
+                                            <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
+                                                <div class="form-group">
+                                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                        <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
+                                                            <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$exex.project_desc|default:''}
+                                                            </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                        <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
+                                                            <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$exex.project_just|default:''}
+                                                            </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
+                                                        <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
+                                                            <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$exex.not_in_project|default:''}
+                                                            </textarea>
+                                                </div>
+                                            </div>
+                                            
+
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label for="budget">Budget</label>
+                                                        <input type="text" name="budget" value="Rp. {number_format($exex.budget|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" readonly >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label for="start_date">Start date</label>    
+                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($exex.mulai|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label for="due_date">Due date</label>
+                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($exex.akhir|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </form>
+
+                            <div class="col-md-6">
                             <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
-                            <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
                                 <label for="files[]">Files</label>
                                     <div style="overflow-y: scroll; height: 200px; width: 100%;">
                                         <div class="form-group">
                                             <center>
-                                            {foreach $ef as $f}
+                                            {foreach $ef_e as $f}
                                                 <table>
                                                     <input type="hidden" name="nm" value="{$f}">
                                                         <div class="form-group">
@@ -515,70 +661,46 @@
                                     </div>
                             </form>
                             <br>
-                            <form class="form-horizontal" action="{$config->site_url('monitoring/monitoring/monitoring_process')}" method="post">
-                                <center>
-                                <br>
-                                    <div class="form-group">
-                                        {foreach $monitoring as $moni}
-                                        <input type="hidden" name="init_execution" value="{$exex.id_execution|default:''}">
-                                        <input type="hidden" name="start_monitoring" id="mulai_monitoring">
-                                        <input type="hidden" name="due_monitoring" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
-                                        <input type="hidden" name="department_monitoring[]" value="{$moni.id_department|default:''}">
-                                        <input type="hidden" name="karyawan_monitoring[]" value="{$moni.id_karyawan|default:''}">
-                                        {/foreach}
-                                            <button type="submit" name="accept" class="btn btn-success">Accept</button></div>
-                                    </center>
-                            </form>
-
-                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/komentar_process')}" method="post">
-                                    <div class="form-group">
-                                            <table>
-                                                <div style="overflow-y: scroll; height: 200px">
-                                                    Komentar :
-                                                    {foreach $komen_exe as $km}
-                                                        <br>
-                                                        <b><textarea disabled class="form-control">
-                                                            {$km.komentar}</textarea></b>
-                                                <div align="right">
-                                                    Dikomentari pada : 
-                                                        <br>
-                                                            {$km.tgl_komentar}, {$km.nama_lengkap}
-                                                        <br>
-                                                    {/foreach}
-                                                </div>
-                                                </div>
-                                            </table>
-                                                <input type="hidden" name="id_execution_komentar" value="{$exex.id_execution|default:''}">
-                                                <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
-                                                    <br>
-
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
-                                                                    <br>
-                                                                <div align="right">
-                                                                    <button type="submit" name="submit" class="btn btn-info">Comment</button></div>
+                            <form class="form-horizontal" action="{$config->site_url('execution/execution/komentar_process')}" method="post">
+                                            <div class="form-group">
+                                                    <table>
+                                                        <div style="overflow-y: scroll; height: 200px">
+                                                            Komentar :
+                                                            {foreach $komen_exe as $km}
+                                                                <br>
+                                                                <b><textarea disabled class="form-control">
+                                                                    {$km.komentar}</textarea></b>
+                                                        <div align="right">
+                                                            Dikomentari pada : 
+                                                                <br>
+                                                                    {$km.tgl_komentar}, {$km.nama_lengkap}
+                                                                <br>
+                                                            {/foreach}
                                                         </div>
-                                                    </div>
-                                   </div>
-                                        {/foreach}
-                    </form>
-                    </div>
+                                                        </div>
+                                                    </table>
+                                                        <input type="hidden" name="id_execution_komentar" value="{$exex.id_execution|default:''}">
+                                                        <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
+                                                            <br>
 
-
-                               </div>
-                               <!-- /.box-header --> 
+                                                            <div class="form-group">
+                                                                <div class="col-md-12">
+                                                                    <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
+                                                                            <br>
+                                                                        <div align="right">
+                                                                            <button type="submit" name="submit" class="btn btn-info">Comment</button></div>
+                                                                </div>
+                                                            </div>
+                                           </div>
+                                                {/foreach}
+                            </form>
                             </div>
-                            <!-- /,col -->
 
-                        </div>
-                        <!-- /,box-header -->
+                                    </div>
+                        </div> -->
 
-                </div> 
-                <!-- /.box-body -->
             </div>
             <!-- /.box -->
-
         </div>
         <!-- /.col -->
     </div>

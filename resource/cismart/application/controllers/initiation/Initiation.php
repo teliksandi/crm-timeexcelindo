@@ -608,8 +608,7 @@ public function index() {
 
         $as = $this->m_initiation->get_file($params);
 
-        $as = $this->m_initiation->get_file($params);
-        
+    
         if ($as === NULL) {
             $this->smarty->assign("ef", "");
         }else{

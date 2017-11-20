@@ -164,6 +164,7 @@
                                                     <td align="center">
                                                         <div style="overflow-y: scroll; height: 120px; width: 100%;">
                                                         <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                                        <!-- **************************************************** ini baru ***************************************-->
                                                                 {foreach $ef as $f}
                                                                     <table>
                                                                         <input type="hidden" name="nm" value="{$f}">
@@ -175,6 +176,7 @@
                                                                 {/if}
                                                                     </table>
                                                                 {/foreach}
+                                                        <!-- ************************************************************************************************ -->
                                                         </form>
                                                         </div>
                                                     </td>

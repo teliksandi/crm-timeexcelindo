@@ -183,13 +183,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="middle"> DPP </td>
-                                            <td align="middle"></td>
-                                            <td align="middle">
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="DPP" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="dpp_hasil" readonly></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td align="middle"> PPN </td>
                                             <td align="middle"> 10 % </td>
                                             <td align="middle">
@@ -263,7 +256,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="middle" style="background-color: yellow"> Total Biaya </td>
+                                            <td align="middle" style="background-color: yellow"> Total Biaya Produksi</td>
                                             <td align="middle" style="background-color: yellow"></td>
                                             <td align="middle" style="background-color: yellow">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" value="{$rs.total_biaya|default:''}" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="total_biaya" readonly readonly></div>
@@ -390,12 +383,10 @@
     <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 
     <script type="text/javascript">
-
-        var x = {$rs.budget} / 11 * 10 ;
-        var y = {$rs.budget} / 11 ;
-        var z = x * 0.02 ;  
-        var tot_s_pajak = x - z ;
-        document.getElementById("dpp_hasil").value = x;
+ 
+        var y = Math.round({$rs.budget} * 0.1) ;
+        var z = Math.round({$rs.budget} * 0.02) ;  
+        var tot_s_pajak = Math.round({$rs.budget} - ( y + z )) ;
         document.getElementById("ppn_hasil").value = y; 
         document.getElementById("pph_hasil").value = z;
         document.getElementById("netto").value = tot_s_pajak;
@@ -420,8 +411,8 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
-          
+            var persen_prod = (rot / tot_s_pajak * 100).toFixed(2);
+
             document.getElementById("persen_b_administrasi").value = persen_prod;
 
             var prod  = document.getElementById("b_produksi").value;
@@ -458,7 +449,7 @@
 
             var laba = tot_s_pajak - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }   
 
@@ -467,7 +458,7 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
           
             document.getElementById("persen_b_produksi").value = persen_prod;
 
@@ -503,7 +494,7 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = tot_s_pajak - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }
 
@@ -512,7 +503,7 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
           
             document.getElementById("persen_b_hardware").value = persen_prod;
 
@@ -549,7 +540,7 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = tot_s_pajak - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }   
 
@@ -558,7 +549,7 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
           
             document.getElementById("persen_b_perawatan").value = persen_prod;
 
@@ -595,7 +586,7 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = tot_s_pajak - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }  
 
@@ -604,7 +595,7 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
           
             document.getElementById("persen_b_lain").value = persen_prod;
              var admin = document.getElementById("b_administrasi").value;            
@@ -641,7 +632,7 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = tot_s_pajak - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }
 
@@ -650,7 +641,7 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
           
             document.getElementById("persen_b_entertaint").value = persen_prod;
 
@@ -689,13 +680,8 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = tot_s_pajak - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
-        }   
-
-        function biaya(){
-            alert("berhasil");
-        }
-
+        }  
     </script>
 </section>

@@ -20,11 +20,11 @@ class m_monitoring extends CI_Model{
         }
     }
 
-    function execution_komen($where) {  
+    function monitoring_komen($where) {  
         $this->db->select('*');
         $this->db->from('komentar');
         $this->db->join('users', 'komentar.user_id = users.user_id', 'left');
-        $this->db->where('id_execution', $where);
+        $this->db->where('id_monitoring', $where);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -54,7 +54,7 @@ class m_monitoring extends CI_Model{
             $query->free_result();
             return $result;
         } else {
-            return array();
+            return NULL;
         }
     }
 
@@ -64,7 +64,7 @@ class m_monitoring extends CI_Model{
     }
 
     function get_initiation_by_id($params){
-        $sql = "SELECT * FROM execution left join planning on execution.id_planning = planning.id_planning WHERE id_execution = ?";
+        $sql = "SELECT * FROM monitoring left join execution on execution.id_execution = monitoring.id_execution left join planning on execution.id_planning = planning.id_planning WHERE id_monitoring = ?";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -75,11 +75,12 @@ class m_monitoring extends CI_Model{
         }
     }
 
-    function execution_get($params){
-        $sql = "SELECT a.start_date as 'mulai', a.due_date as 'akhir', a.*, b.*, c.*, d.* from execution a left JOIN planning b on a.id_planning = b.id_planning
-                left JOIN initiation c on c.id_initiation = b.id_initiation
-                left JOIN client d on d.id_client = c.id_client
-                WHERE a.id_execution = ? ";
+    function monitoring_get($params){
+        $sql = "SELECT a.start_date as 'mulai', a.due_date as 'akhir', a.*, b.*, c.*, e.*, d.* from monitoring a left JOIN execution b on a.id_execution = b.id_execution
+                left JOIN planning c on b.id_planning = c.id_planning
+                left JOIN initiation d on d.id_initiation = c.id_initiation
+                left JOIN client e on e.id_client = d.id_client
+                WHERE a.id_monitoring = ? ";
         $query = $this->db->query($sql,$params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -104,9 +105,9 @@ class m_monitoring extends CI_Model{
     }
 
     function get_planning_by_id($where){
-        $sql = "SELECT a.id_department as 'department_exe', a.id_karyawan as 'karyawan_exe', b.id_department as 'department', b.id_karyawan as 'karyawan', b.*, c.* FROM execution a left JOIN planning b on a.id_planning = b.id_planning
-                left JOIN initiation c on c.id_initiation = b.id_initiation
-                 WHERE a.id_execution = ?";
+        $sql = "SELECT a.id_department as 'department_exe', a.id_karyawan as 'karyawan_exe', b.id_department as 'department', b.id_karyawan as 'karyawan', b.*,d.*, c.* FROM monitoring a left JOIN execution d on d.id_execution = a.id_execution left JOIN planning b on d.id_planning = b.id_planning
+                left JOIN initiation c on c.id_initiation = b.id_initiation 
+                 WHERE a.id_monitoring = ?";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -125,7 +126,8 @@ class m_monitoring extends CI_Model{
                 left JOIN karyawan d on b.id_karyawan = d.id_karyawan
                 left JOIN department e on b.id_department = e.id_department
                 left JOIN execution f on f.id_planning = a.id_planning
-                WHERE f.id_execution = ?";
+                left JOIN monitoring g on g.id_execution = f.id_execution
+                WHERE g.id_monitoring = ?";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -144,7 +146,8 @@ class m_monitoring extends CI_Model{
                 left JOIN karyawan d on b.id_karyawan = d.id_karyawan
                 left JOIN department e on b.id_department = e.id_department
                 left JOIN execution f on f.id_planning = a.id_planning
-                WHERE f.id_execution = ?";
+                left JOIN monitoring g on g.id_execution = f.id_execution
+                WHERE g.id_monitoring = ?";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -157,9 +160,10 @@ class m_monitoring extends CI_Model{
     }
 
     function get_department_by_id($where){
-        $sql = "SELECT c.id_department as 'department', c.id_karyawan as 'karyawan', a.id_department as 'department_exe', a.id_karyawan as 'karyawan_exe' FROM execution a left JOIN planning b on a.id_planning = b.id_planning
-                left JOIN initiation c on c.id_initiation = b.id_initiation
-                 WHERE a.id_execution = ?";
+        $sql = "SELECT d.id_department, d.id_karyawan FROM monitoring a left JOIN execution b on a.id_execution = b.id_execution
+            left JOIN planning c on c.id_planning = b.id_planning
+            left JOIN initiation d on d.id_initiation = c.id_initiation
+            WHERE a.id_monitoring = ?";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -172,7 +176,7 @@ class m_monitoring extends CI_Model{
     }
 
     function get_execution_by_id($where){
-        $sql = "SELECT * from execution a WHERE a.id_execution = ?  
+        $sql = "SELECT a.id_department as 'dep_exe', a.id_karyawan as 'kar_exe' from execution a left join monitoring b on a.id_execution = b.id_execution WHERE b.id_monitoring = ?  
         ";
         $query = $this->db->query($sql, $where);
         if ($query->num_rows() > 0) {
@@ -181,6 +185,23 @@ class m_monitoring extends CI_Model{
             return $result;
         } else {
             return NULL;
+        }
+
+    }
+
+     function execution_get($where){
+        $sql = "SELECT a.start_date as 'mulai', a.due_date as 'akhir', a.*, b.*, c.*, d.*, e.* from execution a left JOIN planning b on a.id_planning = b.id_planning
+                left JOIN initiation c on c.id_initiation = b.id_initiation
+                left JOIN client d on d.id_client = c.id_client
+                left join monitoring e on e.id_execution = a.id_execution
+                WHERE e.id_monitoring = ? ";
+        $query = $this->db->query($sql,$where);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
         }
 
     }
