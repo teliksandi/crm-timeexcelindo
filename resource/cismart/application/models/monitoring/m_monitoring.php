@@ -92,8 +92,16 @@ class m_monitoring extends CI_Model{
 
     }
 
-    function search_monitoring($filter, $params){
-        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From monitoring left join execution on execution.id_execution = monitoring.id_execution left join planning on execution.id_planning = planning.id_planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where monitoring.id_execution is NOT NULL and $filter like ?";
+    function search_monitoring($filter, $params, $id_department, $id_k){
+        if ($id_department == '%10%') {
+            $dp = '%';
+            $id = '%';
+        }
+        else{
+            $dp = $id_department;
+            $id = $id_k;
+        }
+        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From monitoring left join execution on execution.id_execution = monitoring.id_execution left join planning on execution.id_planning = planning.id_planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where monitoring.id_execution is NOT NULL and $filter like ? and monitoring.id_department like '$dp' and monitoring.id_karyawan like '$id'";
         $query = $this->db->query($sql,$params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -208,14 +216,22 @@ class m_monitoring extends CI_Model{
 
     
 
-    function get_list_monitoring($filter, $params){
+    function get_list_monitoring($filter, $params, $id_department, $id_k){
+        if ($id_department == '%10%') {
+            $dp = '%';
+            $id = '%';
+        }
+        else{
+            $dp = $id_department;
+            $id = $id_k;
+        }
         $sql = "SELECT monitoring.id_monitoring AS 'id_monitoring', initiation.project_title, monitoring.due_date, initiation.id_initiation, monitoring.start_date, client.client_name
                         From monitoring left join execution on monitoring.id_execution = execution.id_execution
                         left join planning on execution.id_planning = planning.id_planning
                         left join initiation on initiation.id_initiation = planning.id_initiation
                         left join client on initiation.id_client = client.id_client                    
                         where monitoring.id_execution is NOT NULL
-                        and $filter LIKE ? LIMIT ?,?";
+                        and $filter LIKE ? and monitoring.id_department like '$dp' and monitoring.id_karyawan like '$id' LIMIT ?,?";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

@@ -3,19 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class m_planning extends CI_Model{
 
-    function get_list_planning($filter, $params, $id_department){
+    function get_list_planning($filter, $params, $id_department, $id_k){
         if ($id_department == '%10%') {
             $dp = '%';
+            $id = '%';
         }
         else{
             $dp = $id_department;
+            $id = $id_k;
         }
         $sql = "SELECT planning.id_planning AS 'id_planning', initiation.project_title, planning.due_date, initiation.id_initiation,  planning.start_date, client.client_name
                         From planning left join initiation on initiation.id_initiation = planning.id_initiation
                         left join client on initiation.id_client = client.id_client 
                         left join execution on execution.id_planning = planning.id_planning                       
                         where execution.id_planning is NULL and planning.id_planning is not NULL
-                        and $filter LIKE ? and planning.id_department like '$dp' LIMIT ?,?";
+                        and $filter LIKE ? and planning.id_department like '$dp' and planning.id_karyawan like '$id' LIMIT ?,?";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -85,14 +87,16 @@ class m_planning extends CI_Model{
         return $this->db->query($sql, $id);
     }
 
-    function search_planning($filter, $params, $id_department){
+    function search_planning($filter, $params, $id_department, $id_k){
         if ($id_department == '%10%') {
             $dp = '%';
+            $id = '%';
         }
         else{
             $dp = $id_department;
+            $id = $id_k;
         }
-        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where planning.id_initiation is NOT NULL and $filter like ? and planning.id_department like '$dp'";
+        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title From planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where planning.id_initiation is NOT NULL and $filter like ? and planning.id_department like '$dp' and planning.id_karyawan like '$id'";
         $query = $this->db->query($sql,$params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -102,6 +106,7 @@ class m_planning extends CI_Model{
             return NULl;
         }
     }
+
 
     function get_total_planning($params){
         $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";

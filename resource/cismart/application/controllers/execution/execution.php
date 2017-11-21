@@ -87,7 +87,7 @@
         $this->smarty->assign("jabatan", $jabatan_karyawan);
 
 
-
+            $nm            = '%'. $id_k .'%';
             $dpt            = '%'. $department_karyawan .'%';
             $ttl_rows = "";
             if ($filter == "client_name") {
@@ -108,7 +108,7 @@
             }
 
             $config['base_url'] = site_url("execution/execution/index/");
-            $config['total_rows'] = $this->m_execution->search_execution($filter, $ttl_rows, $dpt);
+            $config['total_rows'] = $this->m_execution->search_execution($filter, $ttl_rows, $dpt, $nm);
             $config['uri_segment'] = 4;
             $config['per_page'] = 10;
             $this->pagination->initialize($config);
@@ -131,7 +131,7 @@
             // get list data
             $params = array($keyword, ($start - 1), $config['per_page']);
 
-            $this->smarty->assign("get", $this->m_execution->get_list_execution($filter, $params, $dpt));
+            $this->smarty->assign("get", $this->m_execution->get_list_execution($filter, $params, $dpt, $nm));
 
             // get list data
             //$this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
@@ -230,6 +230,34 @@
         $this->smarty->assign("exs", explode(",", $kk['karyawan_exe']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
+
+        $dp = $kk['department_exe'];
+        if ($dp == "") {
+            $dp = 0;
+        }
+
+        $pengguna = $this->com_user['user_id'];
+         $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
+        
+        if ($department_karyawan != 10 and $department_karyawan != $dp and $jabatan_karyawan != 3) {
+            echo '<script language="javascript">';
+            echo 'alert("anda tidak berhak mengakses halaman ini")';
+            echo '</script>';
+            echo '<script language="javascript">window.location ="'.site_url("execution/execution/index/").'"</script>';
+        }
+
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();

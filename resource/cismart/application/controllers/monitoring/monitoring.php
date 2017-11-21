@@ -56,12 +56,14 @@ class monitoring extends ApplicationBase {
         $this->smarty->assign("department", $department_karyawan);
         $this->smarty->assign("jabatan", $jabatan_karyawan);
 
-
         $search = $this->tsession->userdata('search_monitoring');
         $this->smarty->assign('search', $search);
         $keyword  = !empty($search['keyword']) ? $search['keyword'] : "%";
         $filter         = !empty($search['filter']) ? $search['filter'] : "%";
         $params         =  array($keyword);
+
+        $nm            = '%'. $id_k .'%';
+        $dpt            = '%'. $department_karyawan .'%';
         $ttl_rows = "";
         if ($filter == "client_name") {
             $nm_client = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
@@ -82,7 +84,7 @@ class monitoring extends ApplicationBase {
 
 
         $config['base_url'] = site_url("monitoring/monitoring/index/");
-        $config['total_rows'] = $this->m_monitoring->search_monitoring($filter, $ttl_rows);
+        $config['total_rows'] = $this->m_monitoring->search_monitoring($filter, $ttl_rows, $dpt, $nm);
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
@@ -102,7 +104,7 @@ class monitoring extends ApplicationBase {
 
         $params = array($keyword, ($start - 1), $config['per_page']);
 
-        $this->smarty->assign("monitoring", $this->m_monitoring->get_list_monitoring($filter, $params));
+        $this->smarty->assign("monitoring", $this->m_monitoring->get_list_monitoring($filter, $params, $dpt, $nm));
 
 
         // $start = $this->uri->segment(4, 0) + 1;

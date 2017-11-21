@@ -131,6 +131,28 @@ class client extends ApplicationBase {
 
          $this->smarty->assign("template_content", "master/client/add_client.html");
 
+         $pengguna = $this->com_user['user_id'];
+         $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
+        
+        if ($department_karyawan != 10 and $department_karyawan != 1) {
+            echo '<script language="javascript">';
+            echo 'alert("anda tidak berhak mengakses halaman ini")';
+            echo '</script>';
+            echo '<script language="javascript">window.location = "index"</script>';
+        }
+
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -176,6 +198,29 @@ class client extends ApplicationBase {
         // set template content
         $this->smarty->assign("template_content", "master/client/edit.html");
         $this->smarty->assign("result", $this->m_client->get_client_by_id($params));
+
+        $pengguna = $this->com_user['user_id'];
+         $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
+        
+        if ($department_karyawan != 10 and $department_karyawan != 1) {
+            echo '<script language="javascript">';
+            echo 'alert("anda tidak berhak mengakses halaman ini")';
+            echo '</script>';
+            echo '<script language="javascript">window.location = "index"</script>';
+        }
+
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
