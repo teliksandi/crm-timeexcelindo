@@ -56,14 +56,17 @@ class monitoring extends ApplicationBase {
         $this->smarty->assign("department", $department_karyawan);
         $this->smarty->assign("jabatan", $jabatan_karyawan);
 
+
         $search = $this->tsession->userdata('search_monitoring');
         $this->smarty->assign('search', $search);
         $keyword  = !empty($search['keyword']) ? $search['keyword'] : "%";
         $filter         = !empty($search['filter']) ? $search['filter'] : "%";
         $params         =  array($keyword);
 
-        $nm            = '%'. $id_k .'%';
-        $dpt            = '%'. $department_karyawan .'%';
+//^^^^^^^^^^^^^^^^^^^^^^^^^^tanggal 20 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            $nm            = '%'. $id_k .'%';
+            $dpt            = '%'. $department_karyawan .'%';
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $ttl_rows = "";
         if ($filter == "client_name") {
             $nm_client = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
@@ -135,6 +138,33 @@ class monitoring extends ApplicationBase {
                 "keyword"       => $this->input->post('keyword'),
                 "filter"        => $this->input->post('filter')
             );
+
+            $config['protocol']     = 'smtp';
+            $config['charset']      = 'utf-8';
+            $config['smtp_host']    = 'ssl://smtp.gmail.com';
+            $config['smtp_user']    = 'ajisanthoshol@gmail.com';
+            $config['smtp_pass']    = 'lougie123';
+            $config['port']         = '465';
+            $config['smtp_timeout'] = '7';
+            $config['mailtype']     = "html";
+            $config['newline']      = "\r\n";
+            $this->load->library('email',$config);
+            $this->email->set_newline("\r\n");
+            
+            $this->email->from('ajisanthoshol@gmail.com', 'Lathiif Aji Santhosho');
+            $this->email->to('tioprisbowo25@gmail.com');
+            $this->email->subject('dicoba');
+            $this->email->message('percobaan dalam mengirim email');
+
+            if (!$this->email->send()) {
+                echo "ini error";
+                exit();
+            }else{
+                echo "email berhasil dikirim";
+                echo $this->email->print_debugger();
+                exit();
+            }
+
             // set
             $this->tsession->set_userdata('search_monitoring', $params);
         } else {

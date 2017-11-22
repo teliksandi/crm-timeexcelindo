@@ -300,6 +300,7 @@ public function index() {
 
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
         // cek input
+
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^21 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $pengguna = $this->com_user['user_id'];
          $s = $this->m_karyawan->identitas_karyawan($pengguna);
@@ -324,7 +325,7 @@ public function index() {
         }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        
+
         // cek input
         parent::display();
     }
@@ -629,6 +630,7 @@ public function index() {
         $this->smarty->assign("exs", explode(",", $kk['id_karyawan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());             
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
+
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^21 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $pengguna = $this->com_user['user_id'];
          $s = $this->m_karyawan->identitas_karyawan($pengguna);
@@ -652,6 +654,7 @@ public function index() {
             echo '<script language="javascript">window.location ="'.site_url("initiation/initiation/index/").'"</script>';
         }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
         $as = $this->m_initiation->get_file($params);
 

@@ -105,6 +105,7 @@ class karyawan extends ApplicationBase{
         $this->smarty->assign("data_department",$this->m_department->get_list_department());
         $this->smarty->assign("data_position", $this->m_position->get_list_position());
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^21 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $pengguna = $this->com_user['user_id'];
          $s = $this->m_karyawan->identitas_karyawan($pengguna);
             foreach ($s as $key) {
@@ -126,7 +127,8 @@ class karyawan extends ApplicationBase{
             echo '</script>';
             echo '<script language="javascript">window.location = "index"</script>';
         }
-        
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
@@ -285,7 +287,7 @@ class karyawan extends ApplicationBase{
         $this->smarty->assign("data_position", $this->m_position->get_list_position());
 
         //tanggal setting coba
-        
+
         $pengguna = $this->com_user['user_id'];
          $s = $this->m_karyawan->identitas_karyawan($pengguna);
             foreach ($s as $key) {
@@ -308,6 +310,7 @@ class karyawan extends ApplicationBase{
             echo '<script language="javascript">window.location = "index"</script>';
         }
 
+        
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();

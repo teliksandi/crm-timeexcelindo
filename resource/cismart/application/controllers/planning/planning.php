@@ -75,8 +75,10 @@ class planning extends ApplicationBase {
         $this->smarty->assign("department", $department_karyawan);
         $this->smarty->assign("jabatan", $jabatan_karyawan);
 
-        $dpt            = '%'. $department_karyawan .'%';
-        $nm             = '%'. $id_k .'%';
+        $dpt          = '%'. $department_karyawan .'%';
+//^^^^^^^^^^^^^^^^^^^^^^^^^^tanggal 20 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        $nm           = '%'. $id_k .'%';
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $ttl_rows = "";
         if ($filter == "client_name") {
             $nm_client = !empty($search['keyword']) ? '%'. $search['keyword'] . '%' : "%";
@@ -97,7 +99,7 @@ class planning extends ApplicationBase {
 
 
         $config['base_url'] = site_url("planning/planning/index/");
-        $config['total_rows'] = $this->m_planning->search_planning($filter, $ttl_rows, $dpt, $dpt, $nm);
+        $config['total_rows'] = $this->m_planning->search_planning($filter, $ttl_rows, $dpt, $nm);
         $config['uri_segment'] = 4;
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
@@ -119,7 +121,7 @@ class planning extends ApplicationBase {
         // get list data
         // get list data
         $params = array($keyword, ($start - 1), $config['per_page']);
-        $this->smarty->assign("get", $this->m_planning->get_list_planning($filter, $params, $dpt, $dpt, $nm));
+        $this->smarty->assign("get", $this->m_planning->get_list_planning($filter, $params, $dpt, $nm));
         // get list data
         
         // output
@@ -148,7 +150,7 @@ class planning extends ApplicationBase {
             foreach ($s as $key) {
                 $id_k = $key['id_karyawan'];
             }
-
+            
         $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
         $nama_karyawan = $list_kar['nama_karyawan'];
         $department_karyawan = $list_kar['id_department'];
@@ -157,8 +159,9 @@ class planning extends ApplicationBase {
         $this->smarty->assign("department", $department_karyawan);
         $this->smarty->assign("jabatan", $jabatan_karyawan);
 
-         $get_in = $this->m_planning->initiation_detail($where);
+        $get_in = $this->m_planning->initiation_detail($where);
         foreach ($get_in as $f) {
+           // $this->smarty->assign("ef",  explode(",", $f['file']));
             $id_ini = $f['id_initiation'];
         }
         $this->smarty->assign("komen", $this->m_initiation->initiation_komen($id_ini));
@@ -194,9 +197,9 @@ class planning extends ApplicationBase {
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
-       
-        // cek input
+        // output
         parent::display();
+
     }
 
     function komentar_process(){
@@ -394,6 +397,19 @@ class planning extends ApplicationBase {
                 } 
         }
 
+        $fls_p = $this->m_planning->get_file($where);
+        if ($fls_p === NULL) {
+            $this->smarty->assign("ef_p", "");
+        }else{
+                if ($fls_p === NULL) {
+                    $this->smarty->assign("ef_p", "");
+                }else{
+                    foreach ($fls_p as $l) {
+                       $this->smarty->assign("ef_p",  explode(",", $l['file']));
+                    }
+                }    
+        }
+
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
 
@@ -482,6 +498,7 @@ class planning extends ApplicationBase {
         $this->smarty->assign("exs", explode(",", $kk['karyawan_plan']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^21 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $pengguna = $this->com_user['user_id'];
          $s = $this->m_karyawan->identitas_karyawan($pengguna);
             foreach ($s as $key) {
@@ -503,7 +520,9 @@ class planning extends ApplicationBase {
             echo '</script>';
             echo '<script language="javascript">window.location ="'.site_url("planning/planning/index/").'"</script>';
         }
-        
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
 

@@ -97,7 +97,7 @@ class m_execution extends CI_Model{
             return array();
         }
     }
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^tanggal 20 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     function search_execution($filter, $params, $id_department, $id_k){
         if ($id_department == '%10%') {
             $dp = '%';
@@ -117,6 +117,7 @@ class m_execution extends CI_Model{
             return NULl;
         }
     }
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     function get_planning_by_id($where){
         $sql = "SELECT a.id_department as 'department_exe', a.id_karyawan as 'karyawan_exe', b.id_department as 'department', b.id_karyawan as 'karyawan', b.*, c.* FROM execution a left JOIN planning b on a.id_planning = b.id_planning
@@ -199,7 +200,7 @@ class m_execution extends CI_Model{
         }
 
     }
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^tanggal 20 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     function get_list_execution($filter, $params, $id_department, $id_k){
         if ($id_department == '%10%') {
             $dp = '%';
@@ -225,6 +226,7 @@ class m_execution extends CI_Model{
             return NULL;
         }
     }
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     function getComment_Execution($id_execution){
          $sql = "SELECT tgl_komentar from komentar KM1 INNER JOIN( SELECT max(id_komentar)as id_kom from komentar where id_execution =" . $id_execution . " ) KM2 on KM2.id_kom=KM1.id_komentar ";

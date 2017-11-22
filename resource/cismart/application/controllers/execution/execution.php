@@ -86,8 +86,9 @@
         $this->smarty->assign("department", $department_karyawan);
         $this->smarty->assign("jabatan", $jabatan_karyawan);
 
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^tanggal 20 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             $nm            = '%'. $id_k .'%';
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             $dpt            = '%'. $department_karyawan .'%';
             $ttl_rows = "";
             if ($filter == "client_name") {
@@ -108,7 +109,9 @@
             }
 
             $config['base_url'] = site_url("execution/execution/index/");
+//^^^^^^^^^^^^^^^^^^^^^^^^^^tanggal 20 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             $config['total_rows'] = $this->m_execution->search_execution($filter, $ttl_rows, $dpt, $nm);
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             $config['uri_segment'] = 4;
             $config['per_page'] = 10;
             $this->pagination->initialize($config);
@@ -130,9 +133,9 @@
             // get list data
             // get list data
             $params = array($keyword, ($start - 1), $config['per_page']);
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^tanggal 20 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             $this->smarty->assign("get", $this->m_execution->get_list_execution($filter, $params, $dpt, $nm));
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             // get list data
             //$this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
             
@@ -236,6 +239,7 @@
             $dp = 0;
         }
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^21 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $pengguna = $this->com_user['user_id'];
          $s = $this->m_karyawan->identitas_karyawan($pengguna);
             foreach ($s as $key) {
@@ -257,6 +261,8 @@
             echo '</script>';
             echo '<script language="javascript">window.location ="'.site_url("execution/execution/index/").'"</script>';
         }
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
         // notification
         $this->tnotification->display_notification();

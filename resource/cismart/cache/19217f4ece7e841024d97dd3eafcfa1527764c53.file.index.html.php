@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2017-11-16 06:39:57
+<?php /* Smarty version Smarty-3.0.7, created on 2017-11-22 10:11:08
          compiled from "application/views\execution/index.html" */ ?>
-<?php /*%%SmartyHeaderCode:5670687455a0d24ad031cd3-57491775%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:285325a153f2c79e0c3-15073040%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '19217f4ece7e841024d97dd3eafcfa1527764c53' => 
     array (
       0 => 'application/views\\execution/index.html',
-      1 => 1510803529,
+      1 => 1511245006,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '5670687455a0d24ad031cd3-57491775',
+  'nocache_hash' => '285325a153f2c79e0c3-15073040',
   'function' => 
   array (
   ),
@@ -39,8 +39,10 @@ $_smarty_tpl->decodeProperties(array (
 	        			<h3 class="box-title"><i class="fa fa-search"></i> Pencarian</h3>
 	        		</div>
 			        <div class="box-body">
-		                <form class="form-horizontal" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('planning/planning/search_process');?>
+			        	<!-- baru tanggal 21 november 2017 -->
+		                <form class="form-horizontal" action="<?php echo $_smarty_tpl->getVariable('config')->value->site_url('execution/execution/search_process');?>
 " method="post">
+		                <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
 		                    <div class="box-body">
 		                        <div class="form-group">
 		                            <label for="project_title" class="col-sm-2 control-label">Keyword</label>

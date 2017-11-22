@@ -107,7 +107,6 @@ class m_planning extends CI_Model{
         }
     }
 
-
     function get_total_planning($params){
         $sql = "SELECT COUNT(*) as 'total' FROM initiation WHERE project_title LIKE ? ";
         $query = $this->db->query($sql, $params);

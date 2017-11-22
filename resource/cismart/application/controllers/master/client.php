@@ -129,9 +129,10 @@ class client extends ApplicationBase {
         // set page rules
         $this->_set_page_rule("C");
 
-         $this->smarty->assign("template_content", "master/client/add_client.html");
+        $this->smarty->assign("template_content", "master/client/add_client.html");
 
-         $pengguna = $this->com_user['user_id'];
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^21 november 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        $pengguna = $this->com_user['user_id'];
          $s = $this->m_karyawan->identitas_karyawan($pengguna);
             foreach ($s as $key) {
                 $id_k = $key['id_karyawan'];
@@ -152,6 +153,8 @@ class client extends ApplicationBase {
             echo '</script>';
             echo '<script language="javascript">window.location = "index"</script>';
         }
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
@@ -220,7 +223,7 @@ class client extends ApplicationBase {
             echo '</script>';
             echo '<script language="javascript">window.location = "index"</script>';
         }
-
+        
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();

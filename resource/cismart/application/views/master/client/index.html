@@ -38,7 +38,9 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Tabel Data Client</h3>
                     <div class="box-tools">
+                        {if {$department} == 1 OR {$department} == 10}
                         <a class="btn btn-sm btn-success" href="{$config->site_url('master/client/add_client')}" ><i class="fa fa-plus"></i> Tambah Data</a>
+                        {/if}
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -55,7 +57,7 @@
                                 <td width="15%" align="middle"><b>Email</b></td>
                                 <td width="15%" align="middle"><b>Actions</b></td>
                             </tr>
-{if {$department} == 8}
+{if {$department} == 1 OR {$department} == 10}
                             {foreach $rs_id as $result}
                             <tr>
                                 <td align="middle">{$no++}</td>
