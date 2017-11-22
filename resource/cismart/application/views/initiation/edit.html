@@ -123,6 +123,7 @@
                             <div class="box-body">
                                 <table>
                                     <tr>
+<<<<<<< HEAD
                                         <td width="230px" align="center"><b>Start Date</b></td>
                                         <td>     </td>
                                         <td width="230px" align="center"><b>Due Date</b></td>
@@ -170,6 +171,55 @@
                                     </center>
                                         {/foreach}
                                     
+=======
+                                        <label><h4><b>
+                                            Date And Upload  - Target Penyelesaian Inisiasi
+                                        </b></h4></label>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td width="250px" align="center"><b>Start date</b></td>
+                                                    <td width="250px" align="center"><b>Due date</b></td>
+                                                    <td width="500px"  align="center"><b>Tambahkan File Baru</b></td>
+                                                    <td width="500px"  align="center"><b>Detail File</b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center">
+                                                        <input type="text" name="tanggal_start" value ="{$result.start_date|default:''}" class="tanggal" maxlength="10" size="10" style="width: 150px; text-align: center;">
+                                                    </td>
+                                                    <td align="center">
+                                                        <input type="text" name="tanggal_due" value ="{$result.due_date|default:''}" class="tanggal" maxlength="10" size="10" style="width: 150px; text-align: center;">
+                                                    </td>
+                                                    <td align="center">
+                                                        <div class="form-group"><br>
+                                                                (File Berbentuk png, jpg, jpeg, docx, pdf, xlsx, ppt , rar, zip.)<br>
+                                                                Ket : Gunakan Ctrl + Click Untuk Memilih > 1 File Pada Folder File
+                                                                <input type="file" name="files[]" id="files" multiple>
+                                                        </div>
+                                                    </td>
+                    </form>
+                                                    <td align="center">
+                                                        <div style="overflow-y: scroll; height: 120px; width: 100%;">
+                                                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                                        <!-- **************************************************** ini baru ***************************************-->
+                                                                {foreach $ef as $f}
+                                                                    <table>
+                                                                        <input type="hidden" name="nm" value="{$f}">
+                                                                            <div class="form-group">
+                                                                                <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>    {if $f !== ""}  <a href="{$config->site_url('initiation/initiation/delete_file')}/{$f}" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash-o" title="Delete"></i></a>{/if}
+                                                                            </div>
+                                                                {if $f !== ""}
+                                                                            <hr></hr>
+                                                                {/if}
+                                                                    </table>
+                                                                {/foreach}
+                                                        <!-- ************************************************************************************************ -->
+                                                        </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
                                 </div>
                             </div>
                         </div>

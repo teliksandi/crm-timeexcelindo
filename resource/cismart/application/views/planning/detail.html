@@ -213,10 +213,17 @@
                                             <td width="15%" align="middle"><b> Total </b></td>
                                         </tr>
                                         <tr>
+<<<<<<< HEAD
                                             <td align="middle"> Total Anggaran </td>
                                             <td align="middle"></td>
                                             <td align="middle">
                                                     <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$rs.budget|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required onchange="total_anggaran()" id="anggaran"></div>
+=======
+                                            <td align="middle"> Total Anggaran </td>
+                                            <td align="middle"></td>
+                                            <td align="middle">
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$rs.budget|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
                                             </td>
                                         </tr>
                                         <tr>
@@ -293,7 +300,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="middle" style="background-color: yellow"> Total Biaya </td>
+                                            <td align="middle" style="background-color: yellow"> Total Biaya Produksi</td>
                                             <td align="middle" style="background-color: yellow"></td>
                                             <td align="middle" style="background-color: yellow">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Total" title="Masukkan Jumlah Uang" value="{$rs.total_biaya|default:''}" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="total_biaya" readonly readonly></div>
@@ -405,9 +412,20 @@
                     </form>
 
 
+<<<<<<< HEAD
     </div>
     <!-- row -->
 
+=======
+    <script type="text/javascript">
+ 
+        var y = Math.round({$rs.budget} * 0.1) ;
+        var z = Math.round({$rs.budget} * 0.02) ;  
+        var tot_s_pajak = Math.round({$rs.budget} - ( y + z )) ;
+        document.getElementById("ppn_hasil").value = y; 
+        document.getElementById("pph_hasil").value = z;
+        document.getElementById("netto").value = tot_s_pajak;
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
 
     <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 
@@ -447,12 +465,16 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
+<<<<<<< HEAD
 
             var xx1 = document.getElementById("netto").value;
             var ret1 = xx1.replace(',','');
             var rat1 = ret1.replace(',','');
             var rot1 = parseInt(rat1.replace(',',''));
             var persen_prod = (rot / rot1 * 100).toFixed(2);
+=======
+            var persen_prod = (rot / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
 
             document.getElementById("persen_b_administrasi").value = persen_prod;
 
@@ -490,7 +512,11 @@
 
             var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
+<<<<<<< HEAD
             var p_laba = (laba / rot1 * 100).toFixed(2);
+=======
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
             document.getElementById("persen_laba").value = p_laba;
         }   
 
@@ -499,12 +525,17 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
+<<<<<<< HEAD
 
             var xx1 = document.getElementById("netto").value;
             var ret1 = xx1.replace(',','');
             var rat1 = ret1.replace(',','');
             var rot1 = parseInt(rat1.replace(',',''));
             var persen_prod = (rot / rot1 * 100).toFixed(2);
+=======
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
+          
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
             document.getElementById("persen_b_produksi").value = persen_prod;
 
             var admin = document.getElementById("b_administrasi").value;            
@@ -539,7 +570,11 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
+<<<<<<< HEAD
             var p_laba = (laba / rot1 * 100).toFixed(2);
+=======
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
             document.getElementById("persen_laba").value = p_laba;
         }
 
@@ -548,12 +583,16 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
+<<<<<<< HEAD
 
             var xx1 = document.getElementById("netto").value;
             var ret1 = xx1.replace(',','');
             var rat1 = ret1.replace(',','');
             var rot1 = parseInt(rat1.replace(',',''));
             var persen_prod = (rot / rot1 * 100).toFixed(2);
+=======
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
           
             document.getElementById("persen_b_hardware").value = persen_prod;
 
@@ -590,7 +629,11 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
+<<<<<<< HEAD
             var p_laba = (laba / rot1 * 100).toFixed(2);
+=======
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
             document.getElementById("persen_laba").value = p_laba;
         }   
 
@@ -599,12 +642,16 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
+<<<<<<< HEAD
 
             var xx1 = document.getElementById("netto").value;
             var ret1 = xx1.replace(',','');
             var rat1 = ret1.replace(',','');
             var rot1 = parseInt(rat1.replace(',',''));
             var persen_prod = (rot / rot1 * 100).toFixed(2);
+=======
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
           
             document.getElementById("persen_b_perawatan").value = persen_prod;
 
@@ -641,7 +688,11 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
+<<<<<<< HEAD
             var p_laba = (laba / rot1 * 100).toFixed(2);
+=======
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
             document.getElementById("persen_laba").value = p_laba;
         }  
 
@@ -650,12 +701,16 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
+<<<<<<< HEAD
 
             var xx1 = document.getElementById("netto").value;
             var ret1 = xx1.replace(',','');
             var rat1 = ret1.replace(',','');
             var rot1 = parseInt(rat1.replace(',',''));
             var persen_prod = (rot / rot1 * 100).toFixed(2);
+=======
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
           
             document.getElementById("persen_b_lain").value = persen_prod;
              var admin = document.getElementById("b_administrasi").value;            
@@ -692,7 +747,11 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
+<<<<<<< HEAD
             var p_laba = (laba / rot1 * 100).toFixed(2);
+=======
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
             document.getElementById("persen_laba").value = p_laba;
         }
 
@@ -701,12 +760,16 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
+<<<<<<< HEAD
             
             var xx1 = document.getElementById("netto").value;
             var ret1 = xx1.replace(',','');
             var rat1 = ret1.replace(',','');
             var rot1 = parseInt(rat1.replace(',',''));
             var persen_prod = (rot / rot1 * 100).toFixed(2);
+=======
+            var persen_prod = ( rot / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
           
             document.getElementById("persen_b_entertaint").value = persen_prod;
 
@@ -745,7 +808,11 @@
             document.getElementById("total_biaya").value = total_semua;
             var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
+<<<<<<< HEAD
             var p_laba = (laba / rot1 * 100).toFixed(2);
+=======
+            var p_laba = (laba / tot_s_pajak * 100).toFixed(2);
+>>>>>>> 48719cd63679c487692bd7dd62168d14e71b21b3
             document.getElementById("persen_laba").value = p_laba;
         }  
     </script>

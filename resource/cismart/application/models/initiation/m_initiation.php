@@ -58,7 +58,7 @@ class m_initiation extends CI_Model{
             $query->free_result();
             return $result;
         } else {
-            return array();
+            return NULL;
         }
     }
 

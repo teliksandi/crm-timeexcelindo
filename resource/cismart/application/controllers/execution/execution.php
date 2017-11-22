@@ -39,24 +39,25 @@
             $this->_set_page_rule("R");
             // set template content
             $this->smarty->assign("template_content", "execution/index.html");
-
-            // foreach ($auth_dep as $key) {
-            //     if ($jabatan_karyawan == $key) {
-            //         $this->smarty->assign("status", "1");
-            //         break;
-            //     }elseif($jabatan_karyawan == 1){
-            //         $this->smarty->assign("status", "1");
-            //     }
-            //     else{
-            //         $this->smarty->assign("status", "0");
-            //     }
-            // }
+            
+        // foreach ($auth_dep as $key) {
+        //     if ($jabatan_karyawan == $key) {
+        //         $this->smarty->assign("status", "1");
+        //         break;
+        //     }elseif($jabatan_karyawan == 1){
+        //         $this->smarty->assign("status", "1");
+        //     }
+        //     else{
+        //         $this->smarty->assign("status", "0");
+        //     }
+        // }
 
             $search         = $this->tsession->userdata('search_execution');
             $this->smarty->assign('search', $search);
             $keyword        = !empty($search['keyword']) ? '%'. $search['keyword'] .'%' : "%";
             $filter         = !empty($search['filter']) ? '%'. $search['filter'] .'%' : "%";
             $params         =  array($keyword);
+
 
             $list_dp = $this->m_planning->list_department();
             if ($list_dp !== NULL) {
@@ -77,14 +78,16 @@
                 $id_k = $key['id_karyawan'];
             }
             
-            $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
-            $nama_karyawan = $list_kar['nama_karyawan'];
-            $department_karyawan = $list_kar['id_department'];
-            $jabatan_karyawan = $list_kar['id_position'];
-            $this->smarty->assign("nama_karyawan", $nama_karyawan);
-            $this->smarty->assign("department", $department_karyawan);
-            $this->smarty->assign("jabatan", $jabatan_karyawan);
-            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
+
+            $nm            = '%'. $id_k .'%';
             $dpt            = '%'. $department_karyawan .'%';
             $ttl_rows = "";
             if ($filter == "client_name") {
@@ -105,7 +108,7 @@
             }
 
             $config['base_url'] = site_url("execution/execution/index/");
-            $config['total_rows'] = $this->m_execution->search_execution($filter, $ttl_rows, $dpt);
+            $config['total_rows'] = $this->m_execution->search_execution($filter, $ttl_rows, $dpt, $nm);
             $config['uri_segment'] = 4;
             $config['per_page'] = 10;
             $this->pagination->initialize($config);
@@ -128,7 +131,7 @@
             // get list data
             $params = array($keyword, ($start - 1), $config['per_page']);
 
-            $this->smarty->assign("get", $this->m_execution->get_list_execution($filter, $params, $dpt));
+            $this->smarty->assign("get", $this->m_execution->get_list_execution($filter, $params, $dpt, $nm));
 
             // get list data
             //$this->smarty->assign("planning_project", $this->m_planning->get_data_planning());
@@ -227,6 +230,34 @@
         $this->smarty->assign("exs", explode(",", $kk['karyawan_exe']));
         $this->smarty->assign("marketing_kar",$this->m_karyawan->get_market_karyawan());
         $this->smarty->assign("clientedit",$this->m_initiation->get_list_client());
+
+        $dp = $kk['department_exe'];
+        if ($dp == "") {
+            $dp = 0;
+        }
+
+        $pengguna = $this->com_user['user_id'];
+         $s = $this->m_karyawan->identitas_karyawan($pengguna);
+            foreach ($s as $key) {
+                $id_k = $key['id_karyawan'];
+            }
+            
+        $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
+        $nama_karyawan = $list_kar['nama_karyawan'];
+        $department_karyawan = $list_kar['id_department'];
+        $jabatan_karyawan = $list_kar['id_position'];
+        $this->smarty->assign("nama_karyawan", $nama_karyawan);
+        $this->smarty->assign("department", $department_karyawan);
+        $this->smarty->assign("jabatan", $jabatan_karyawan);
+
+        
+        if ($department_karyawan != 10 and $department_karyawan != $dp and $jabatan_karyawan != 3) {
+            echo '<script language="javascript">';
+            echo 'alert("anda tidak berhak mengakses halaman ini")';
+            echo '</script>';
+            echo '<script language="javascript">window.location ="'.site_url("execution/execution/index/").'"</script>';
+        }
+
         // notification
         $this->tnotification->display_notification();
         $this->tnotification->display_last_field();
@@ -361,7 +392,7 @@
             // set page rules
             $this->_set_page_rule("C");
 
-            $this->smarty->assign("template_content", "execution/detail.html");  
+            $this->smarty->assign("template_content", "execution/detail.html");            
             $this->smarty->assign("execution_detail",$this->m_execution->execution_get($where));      
             $this->smarty->assign("join", $this->m_execution->initiation_detail($where));
             $this->smarty->assign("join_planning", $this->m_execution->planning_detail($where));
@@ -396,11 +427,12 @@
             $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($id_plan));   
             $this->smarty->assign("komen_exe", $this->m_execution->execution_komen($where));
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 16 November 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             $pengguna = $this->com_user['user_id'];
             $s = $this->m_karyawan->identitas_karyawan($pengguna);
-            foreach ($s as $key) {
-                $id_k = $key['id_karyawan'];
-            }
+                foreach ($s as $key) {
+                    $id_k = $key['id_karyawan'];
+                }
             
             $list_kar = $this->m_karyawan->get_karyawan_by_id($id_k);        
             $nama_karyawan = $list_kar['nama_karyawan'];
@@ -409,55 +441,42 @@
             $this->smarty->assign("nama_karyawan", $nama_karyawan);
             $this->smarty->assign("department", $department_karyawan);
             $this->smarty->assign("jabatan", $jabatan_karyawan);
-
-            ////////////////////////////////file punya execution//////////////////////////////////////////////
+//^^^^^^^^^^^^^^^baru tanggal 20 november 2017 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+////////////////////////////////file punya execution//////////////////////////////////////////////
             $gf = $this->m_execution->get_file($where);
-            if ($gf === NULL) {
-                $this->smarty->assign("ef_e", "");
-            }else{
-                foreach ($gf as $l) {        
-                    $kk = $l['file'];
-                    $la[] = $kk;
+
+            foreach ($gf as $fl) {        
+                $fle = $fl['file'];
+                $la[] = $fle;
+                //^^^^^^^^^^^^^^^baru tanggal 20 november 2017 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                 $this->smarty->assign("ef_e", $la);
-                }
+                //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             }
-            
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////file punya riwayat initiation//////////////////////////////////////
             $gf_i = $this->m_initiation->get_file($id_ini);
 
-            if ($gf_i === NULL) {
-                $this->smarty->assign("ef_i", "");
-            }else{
-                foreach ($gf_i as $l) {        
-                    $kk = $l['file'];
-                    $la[] = $kk;
-                $this->smarty->assign("ef_i", $la);
-                }
+            foreach ($gf_i as $fl_i) {        
+                $fle_i = $fl_i['file'];
+                $la_i[] = $fle_i;
+                $this->smarty->assign("ef_i", $la_i);
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////file punya riwayat planning//////////////////////////////////////
             $gf_p = $this->m_planning->get_file($id_plan);
 
-            if ($gf_p === NULL) {
-                    $this->smarty->assign("ef_p", "");
-            }else{
-                  foreach ($gf_p as $fl_p) {        
-                    $fle_p = $fl_p['file'];
-                    $la_p[] = $fle_p;
-                    $this->smarty->assign("ef_p", $la_p);
-                  }   
+            foreach ($gf_p as $fl_p) {        
+                $fle_p = $fl_p['file'];
+                $la_p[] = $fle_p;
+                $this->smarty->assign("ef_p", $la_p);
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-            // $get_in = $this->m_execution->initiation_detail($where);
-            // $this->smarty->assign("komen", $this->m_initiation->initiation_komen($get_in['id_initiation']));
 
-            $this->tnotification->display_notification();
-            $this->tnotification->display_last_field();
-
+        $this->tnotification->display_notification();
+        $this->tnotification->display_last_field();
 
        
         // cek input
@@ -538,6 +557,7 @@
             $this->smarty->assign("komen_plan", $this->m_planning->planning_komen($id_plan));   
             $this->smarty->assign("komen_exe", $this->m_execution->execution_komen($where));
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 16 November 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             $pengguna = $this->com_user['user_id'];
             $s = $this->m_karyawan->identitas_karyawan($pengguna);
             foreach ($s as $key) {
@@ -552,6 +572,8 @@
             $this->smarty->assign("department", $department_karyawan);
             $this->smarty->assign("jabatan", $jabatan_karyawan);
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
             ////////////////////////////////file punya execution//////////////////////////////////////////////
             $gf = $this->m_execution->get_file($where);
             if ($gf === NULL) {
@@ -563,7 +585,7 @@
                 $this->smarty->assign("ef_e", $la);
                 }
             }
-            
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////file punya riwayat initiation//////////////////////////////////////
             $gf_i = $this->m_initiation->get_file($id_ini);

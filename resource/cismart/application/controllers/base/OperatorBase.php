@@ -43,6 +43,10 @@ class ApplicationBase extends CI_Controller {
         $this->smarty->load_javascript("resource/themes/adminlte/plugins/metismenu/js/metisMenu.min.js");
         $this->smarty->load_javascript("resource/themes/adminlte/plugins/datepicker/bootstrap-datepicker.js");
         $this->smarty->load_javascript("resource/themes/adminlte/app.js");
+	
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/jquery/jquery.min.js");
+        $this->smarty->load_javascript("resource/themes/adminlte/plugins/jquery/highcharts.js");
+        
     }
 
     /*
