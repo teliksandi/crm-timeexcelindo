@@ -57,7 +57,7 @@
 		                            <td align="middle">{$no++}</td>
 		                            <td align="middle">{$result.project_title}</td>
 		                            <td align="middle">{$result.client_name}</td>		                       
-		                        	<td align="middle"><input type="text" name="budget" value="Rp. {number_format({$result.budget}|default:'',2,",",".")}" class="form-control" id="budget" placeholder="" title="Estimasi harga" disabled></td>
+		                        	<td align="middle">Rp. {number_format($result.budget|default:'',0,",",".")}</td>
 		                        	<td align="middle">Belum Dicari</td>
 		                            <td align="middle">
 		                                <a href="{$config->site_url('closing/finishing/detail')}/{$result.id_initiation}" class="btn btn-xs btn-warning" title="Detail"><i class="fa fa-book" title="Edit"></i> Detail</a> 

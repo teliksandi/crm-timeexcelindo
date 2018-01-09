@@ -158,8 +158,9 @@ class m_planning extends CI_Model{
     function get_planning_by_id($where){
         $this->db->select("planning.start_date AS 'mulai'");
         $this->db->select("planning.due_date AS 'akhir'");
+        $this->db->select("initiation.budget AS 'budget_initiation'");
+        $this->db->select("initiation.project_title");
         $this->db->select('planning.*');
-        $this->db->select('initiation.*');
         $this->db->from('planning');
         $this->db->join('initiation', 'initiation.id_initiation = planning.id_initiation', 'left'); 
         $this->db->where('planning.id_planning', $where);

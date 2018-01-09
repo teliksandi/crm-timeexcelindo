@@ -260,13 +260,13 @@ class planning extends ApplicationBase {
         $kar = implode(",", $this->input->post("karyawan_planning"));
        
             $params = array(
+                'budget'                        => $this->idrToInt($this->input->post("Anggaran")),
                 'id_initiation'     => $this->input->post('init_planning'),
                 'start_date'        => $this->input->post('start_planning'),
                 'due_date'          => $this->input->post('due_planning'),
                 'id_karyawan'       => $kar,
                 'id_department'     => $dep,
                 'id_client'         => $this->input->post('client'),
-                'DPP'                           => "0",
                 'PPN'                           => "0",
                 'PPH'                           => "0",
                 'pendapatan_stlh_pajak'         => "0",
@@ -427,8 +427,8 @@ class planning extends ApplicationBase {
 
         if($this->tnotification->run() !== FALSE){
             $params = array(
-                'DPP'                           => $this->idrToInt($this->input->post("DPP")),
                 'PPN'                           => $this->idrToInt($this->input->post("PPN")),
+                'budget'                        => $this->idrToInt($this->input->post("Anggaran")),
                 'PPH'                           => $this->idrToInt($this->input->post("PPH")),
                 'pendapatan_stlh_pajak'         => $this->idrToInt($this->input->post("Pendapatan")),
                 'b_administrasi'                => $this->idrToInt($this->input->post("Adm")),
@@ -439,13 +439,13 @@ class planning extends ApplicationBase {
                 'b_entertaint'                  => $this->idrToInt($this->input->post("Entertaint")),
                 'total_biaya'                   => $this->idrToInt($this->input->post("Total")),
                 'perkiraan_rugi_laba'           => $this->idrToInt($this->input->post("laba")),
-                'p_b_administrasi'              => $this->idrToInt($this->input->post("persen_biaya_administrasi")),
-                'p_b_produksi_dan_operasional'  => $this->idrToInt($this->input->post("persen_biaya_produksi")),
-                'p_b_hardware_dan_infrastruktur'=> $this->idrToInt($this->input->post("persen_biaya_hardware")),
-                'p_b_perawatan'                 => $this->idrToInt($this->input->post("persen_biaya_perawatan")),
-                'p_b_lain_lain'                 => $this->idrToInt($this->input->post("persen_biaya_lain")),
-                'p_b_entertaint'                => $this->idrToInt($this->input->post("persen_biaya_entertaint")),
-                'p_perkiraan_rugi_laba'         => $this->idrToInt($this->input->post("persen_rugi_laba")),
+                'p_b_administrasi'              => $this->input->post("persen_biaya_administrasi"),
+                'p_b_produksi_dan_operasional'  => $this->input->post("persen_biaya_produksi"),
+                'p_b_hardware_dan_infrastruktur'=> $this->input->post("persen_biaya_hardware"),
+                'p_b_perawatan'                 => $this->input->post("persen_biaya_perawatan"),
+                'p_b_lain_lain'                 => $this->input->post("persen_biaya_lain"),
+                'p_b_entertaint'                => $this->input->post("persen_biaya_entertaint"),
+                'p_perkiraan_rugi_laba'         => $this->input->post("persen_rugi_laba"),
                 'catatan'                       => $this->input->post("Ket")
                 
             );

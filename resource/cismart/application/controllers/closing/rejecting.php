@@ -120,7 +120,7 @@ class rejecting extends ApplicationBase {
         $this->_set_page_rule("C");
        
             $params = array(
-                'id_initiation'     => $this->input->post('init_closing')
+                'id_initiation'     => $this->input->post('id_initiation')
                 // 'id_karyawan'       => $this->input->post('init_closing'),
                 // 'id_department'     => $this->input->post('init_closing'),
 

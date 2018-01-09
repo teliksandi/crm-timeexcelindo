@@ -45,7 +45,7 @@
                                                 <div class="modal-body">
 
                                                     <div class="col-md-6">
-                                                        <div class="box box-success">
+                                                        <div class="box box-warning">
                                                             <div class="box-body">
                                                                 {foreach $join as $init_rwyt}
                                                                     <div class="form-group">
@@ -88,7 +88,7 @@
                                                     <!-- col -->
 
                                                     <div class="col-md-6">
-                                                        <div class="box box-success">
+                                                        <div class="box box-warning">
                                                             <div class="box-body">
                                                                 <div class="form-group" style="overflow: scroll; height: 360px; width: 100%;">
                                                                     <div class="form-group">
@@ -101,11 +101,6 @@
                                                                             <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$init_rwyt.project_just|default:''}
                                                                             </textarea>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                                            <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$init_rwyt.not_in_project|default:''}
-                                                                            </textarea>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -113,7 +108,7 @@
                                                     <!-- col -->
 
                                                     <div class="col-md-6">
-                                                        <div class="box box-success">
+                                                        <div class="box box-warning">
                                                             <div class="box-body">
                                                                 <div class="form-group">
                                                                     <label for="start_date">Start date</label>    
@@ -132,13 +127,13 @@
 
                                                     <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
                                                         <div class="col-md-6">
-                                                            <div class="box box-success">
+                                                            <div class="box box-warning">
                                                                 <div class="box-body">
                                                                     <label for="files[]">Files</label>
                                                                     <div style="overflow-y: scroll; height: 126px;">
                                                                     <div class="form-group">
                                                                         <center>
-                                                                                {foreach $ef as $f}
+                                                                                {foreach $ef_i as $f}
                                                                                         <table>
                                                                                             <input type="hidden" name="nm" value="{$f}">
                                                                                                 <div class="form-group">
@@ -158,7 +153,7 @@
                                                     </form>
                                     
                                                     <div class="col-md-12">
-                                                        <div class="box box-success">
+                                                        <div class="box box-warning">
                                                             <div class="box-body">
                                                                 <b>Komentar :</b><br><br>
                                                                 <table>
@@ -207,7 +202,7 @@
                                                 <div class="modal-body">
 
                                                     <div class="col-md-6">    
-                                                        <div class="box box-success">
+                                                        <div class="box box-info">
                                                             <div class="box-body">
                                                                 {foreach $join_planning as $planning_rwyt}
                                                                     <div class="form-group">
@@ -252,7 +247,7 @@
                                                     <!-- col -->
 
                                                     <div class="col-md-6">
-                                                        <div class="box box-success">
+                                                        <div class="box box-info">
                                                             <div class="box-body">
                                                                 <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
                                                                     <div class="form-group">
@@ -265,11 +260,6 @@
                                                                             <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$init_rwyt.project_just|default:''}
                                                                             </textarea>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                                            <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$init_rwyt.not_in_project|default:''}
-                                                                            </textarea>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -277,7 +267,7 @@
                                                     <!-- col -->
 
                                                     <div class="col-md-6">
-                                                        <div class="box box-success">
+                                                        <div class="box box-info">
                                                             <div class="box-body">
                                                                 <div class="form-group">
                                                                     <label for="start_date">Start date</label>    
@@ -294,7 +284,7 @@
 
                                                     <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
                                                         <div class="col-md-6">
-                                                            <div class="box box-success">
+                                                            <div class="box box-info">
                                                                 <div class="box-body">
                                                                     <label for="files[]">Files</label>
                                                                         <div style="overflow-y: scroll; height: 126px;">
@@ -320,7 +310,7 @@
                                                     </form>
 
                                                     <div class="col-md-12">
-                                                        <div class="box box-success">
+                                                        <div class="box box-info">
                                                             <div class="box-body">
                                                             <table class="table table-striped" border="3" align="center" onload="biaya()">
                                                             <tbody>
@@ -330,10 +320,10 @@
                                                                     <td width="15%" align="middle"><b> Total </b></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td align="middle"> Total Anggaran </td>
+                                                                    <td align="middle"> Total Anggaran </td>
                                                                     <td align="middle"></td>
                                                                     <td align="middle">
-                                                                        <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$planning_rwyt.budget|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
+                                                                        <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$planning_rwyt.budget|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required onchange="total_anggaran()" id="anggaran"></div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -369,42 +359,42 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="middle"> Biaya Administrasi </td>
-                                                                    <td align="middle"><input type="number" name="persen_biaya_administrasi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$planning_rwyt.p_b_administrasi|default:''}"> %</td>
+                                                                    <td align="middle"><input type="number" name="persen_biaya_administrasi" style="width: 70%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$planning_rwyt.p_b_administrasi|default:''}"> %</td>
                                                                     <td align="middle">
                                                                         <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="{$planning_rwyt.b_administrasi|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" readonly></div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="middle"> Biaya Produksi dan Operasional </td>
-                                                                    <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$planning_rwyt.p_b_produksi_dan_operasional|default:''}"> %</td>
+                                                                    <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 70%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$planning_rwyt.p_b_produksi_dan_operasional|default:''}"> %</td>
                                                                     <td align="middle">
                                                                         <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="{$planning_rwyt.b_produksi_dan_operasional|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" readonly></div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="middle"> Biaya Hardware & Infrastruktur </td>
-                                                                    <td align="middle"><input type="number" name="persen_biaya_hardware" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$planning_rwyt.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
+                                                                    <td align="middle"><input type="number" name="persen_biaya_hardware" style="width: 70%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$planning_rwyt.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
                                                                     <td align="middle">
                                                                         <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="{$planning_rwyt.b_hardware_dan_infrastruktur|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware" readonly></div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="middle"> Biaya Perawatan / Garansi </td>
-                                                                    <td align="middle"><input type="number" name="persen_biaya_perawatan" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$planning_rwyt.p_b_perawatan|default:''}"> %</td>
+                                                                    <td align="middle"><input type="number" name="persen_biaya_perawatan" style="width: 70%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$planning_rwyt.p_b_perawatan|default:''}"> %</td>
                                                                     <td align="middle">
                                                                         <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="{$planning_rwyt.b_perawatan|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan" readonly></div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="middle"> Biaya Lain-Lain </td>
-                                                                    <td align="middle"><input type="number" name="persen_biaya_lain" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$planning_rwyt.p_b_lain_lain|default:''}"> %</td>
+                                                                    <td align="middle"><input type="number" name="persen_biaya_lain" style="width: 70%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$planning_rwyt.p_b_lain_lain|default:''}"> %</td>
                                                                     <td align="middle">
                                                                         <div align="center">Rp.&nbsp;<input type="text" name="Lain" value="{$planning_rwyt.b_lain_lain|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain" readonly></div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="middle"> Biaya Entertaint </td>
-                                                                    <td align="middle"><input type="number" name="persen_biaya_entertaint" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$planning_rwyt.p_b_entertaint|default:''}"> %</td>
+                                                                    <td align="middle"><input type="number" name="persen_biaya_entertaint" style="width: 70%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$planning_rwyt.p_b_entertaint|default:''}"> %</td>
                                                                     <td align="middle">
                                                                         <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value="{$planning_rwyt.b_entertaint|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint" readonly></div>
                                                                     </td>
@@ -423,7 +413,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="middle" style="background-color: yellow"> Perkiraan Laba Rugi </td>
-                                                                    <td align="middle" style="background-color: yellow"><input type="number" name="persen_rugi_laba" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$planning_rwyt.p_perkiraan_rugi_laba|default:''}"> %</td>
+                                                                    <td align="middle" style="background-color: yellow"><input type="number" name="persen_rugi_laba" style="width: 70%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$planning_rwyt.p_perkiraan_rugi_laba|default:''}"> %</td>
                                                                     <td align="middle" style="background-color: yellow">
                                                                         <div align="center">Rp.&nbsp;<input type="text" name="laba" value="{$planning_rwyt.perkiraan_rugi_laba|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="hasil_laba"></div>
                                                                     </td>
@@ -437,7 +427,7 @@
                                                     <!-- col -->
 
                                                     <div class="col-md-12">
-                                                        <div class="box box-success">
+                                                        <div class="box box-info">
                                                             <div class="box-body">
                                                             <b>Komentar :</b><br><br>
                                                             <table>
@@ -523,10 +513,7 @@
                                                     </textarea><br>
                                             <label for="project_just">Project Justification</label>
                                                 <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$exex.project_just|default:''}
-                                                    </textarea><br>
-                                            <label for="not_in_project">Not in project</label>
-                                                <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$exex.not_in_project|default:''}
-                                                </textarea>
+                                                    </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -590,103 +577,70 @@
                     {/foreach}
                 </form>
 
+                <form class="form-horizontal" action="{$config->site_url('monitoring/monitoring/monitoring_process')}" method="post">
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-body">
-                                <b>Durasi Termin</b><br><br>
-                                <table align="center">
-                                    <tr>
-                                        <td width="200px" style="text-align: center;"><b>Termin ke 1</b></td>
-                                        <td width="100px">     </td>
-                                        <td width="200px" style="text-align: center;"><b>Termin ke 2</b></td>
-                                        <td width="100px">     </td>
-                                        <td width="200px" style="text-align: center;"><b>Termin ke 3</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
-                                            <input type="text" name="tgl_termin_1" class="tanggal" id="DATE" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="" style="width: 80%; text-align: center;" title="Tanggal Termin ke 1">
-                                            <br><br>
-                                            <b><input type="text" name="Rp." value="Rp." disabled style="width: 12%;"></b><input type="text" name="termin_1" title="Masukkan Jumlah Termin ke 1" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required style="text-align: center; width: 70%;">
-                                        </td>
-                                        <td>     </td>
-                                        <td align="center">
-                                            <input type="text" name="tgl_termin_2" class="tanggal" id="DATE" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="" style="width: 80%; text-align: center;" title="Tanggal Termin ke 1">
-                                            <br><br>
-                                            <b><input type="text" name="Rp." value="Rp." disabled style="width: 12%;"></b><input type="text" name="termin_2" title="Masukkan Jumlah Termin ke 2" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required style="text-align: center; width: 70%;">
-                                        </td>
-                                        <td>     </td>
-                                        <td align="center">
-                                            <input type="text" name="tgl_termin_3" class="tanggal" id="DATE" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="" style="width: 80%; text-align: center;" title="Tanggal Termin ke 1">
-                                            <br><br>
-                                            <b><input type="text" name="Rp." value="Rp." disabled style="width: 12%;"></b><input type="text" name="termin_3" title="Masukkan Jumlah Termin ke 3" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required style="text-align: center; width: 70%;">
-                                        </td>
-                                    </tr>
-                                </table>
+                                <center>
+                                    <div class="form-group">
+                                        {foreach $monitoring as $moni}
+                                            <input type="hidden" name="init_execution" value="{$exex.id_execution|default:''}">
+                                            <input type="hidden" name="start_monitoring" id="mulai_monitoring">
+                                            <input type="hidden" name="due_monitoring" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
+                                            <input type="hidden" name="department_monitoring[]" value="{$moni.id_department|default:''}">
+                                            <input type="hidden" name="karyawan_monitoring[]" value="{$moni.id_karyawan|default:''}">
+                                        {/foreach}
+                                        {if {$department} == 1 OR {$department} == 10}
+                                                <button type="submit" name="accept" class="btn btn-success">Accept</button>                  
+
+                                            <form class="" action="{$config->site_url('closing/rejecting/closing_process')}" method="post">
+                                                <input type="hidden" name="id_planning" value="{$jn.id_initiation|default:''}">
+                                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                            </form>
+                                    </div>
+                                        
+                                        {/if}
+                                </center>
                             </div>
                         </div>
-                        <!-- box -->
                     </div>
                     <!-- col -->
+                </form>
 
-                    <form class="form-horizontal" action="{$config->site_url('monitoring/monitoring/monitoring_process')}" method="post">
-                        <div class="col-md-12">
-                                <div class="box">
-                                    <div class="box-body">
-                                        <center>
-                                                <div class="form-group">
-                                                    {foreach $monitoring as $moni}
-                                                        <input type="hidden" name="init_execution" value="{$exex.id_execution|default:''}">
-                                                        <input type="hidden" name="start_monitoring" id="mulai_monitoring">
-                                                        <input type="hidden" name="due_monitoring" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
-                                                        <input type="hidden" name="department_monitoring[]" value="{$moni.id_department|default:''}">
-                                                        <input type="hidden" name="karyawan_monitoring[]" value="{$moni.id_karyawan|default:''}">
-                                                    {/foreach}
-                                                    {if {$department} == 1 OR {$department} == 10}
-                                                            <button type="submit" name="accept" class="btn btn-success">Accept</button>
-                                                </div>
-                                                    {/if}
-                                        </center>
-                                    </div>
-                                </div>
-                        </div>
-                        <!-- col -->
-                    </form>
-
-                    <form class="form-horizontal" action="{$config->site_url('execution/execution/komentar_process')}" method="post">
-                        <div class="col-md-12">
-                            <div class="box box-primary">
-                                <div class="box-body">
-                                    <b>Komentar :</b><br><br>
-                                    <table>
-                                        <div style="overflow-y: scroll; height: 200px">
-                                            {foreach $komen_exe as $km}
+                <form class="form-horizontal" action="{$config->site_url('execution/execution/komentar_process')}" method="post">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <b>Komentar :</b><br><br>
+                                <table>
+                                    <div style="overflow-y: scroll; height: 200px">
+                                        {foreach $komen_exe as $km}
                                             <div align="left">
-                                            <i><label>{$km.nama_lengkap}</label></i>
+                                                <i><label>{$km.nama_lengkap}</label></i>
                                             </div>
                                                 <b><textarea disabled class="form-control" style="height:65px;text-align: left;">{$km.komentar}</textarea></b>
-                                                <div align="right">
-                                                    Dikomentari pada : {$km.tgl_komentar}
-                                                    <hr></hr>
-                                                    {/foreach}
-                                                </div>
-                                        </div>
-                                    </table>
-                                        <input type="hidden" name="id_execution_komentar" value="{$exex.id_execution|default:''}">
-                                        <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
-                                            <br>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
+                                            <div align="right">
+                                                Dikomentari pada : {$km.tgl_komentar}
+                                                <hr></hr>
+                                        {/foreach}
+                                            </div>
+                                    </div>
+                                </table>
+                                    <input type="hidden" name="id_execution_komentar" value="{$exex.id_execution|default:''}">
+                                    <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <textarea name="komentarin" class="form-control" title="Komentar"></textarea>
                                                     <br>
                                                         <div align="right">
                                                             <button type="submit" name="submit" class="btn btn-info">Comment</button>
                                                         </div>
-                                                </div>
                                             </div>
-                                </div>
+                                        </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                </form>
 
     </div>
     <!-- row -->

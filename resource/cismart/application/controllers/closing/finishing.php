@@ -114,19 +114,19 @@ class finishing extends ApplicationBase {
         redirect('closing/finishing');
     }
 
-    function closing_process(){
+    function closing_process($where){
         // set page rules
         $this->_set_page_rule("C");
        
             $params = array(
-                'id_initiation'     => $this->input->post('init_closing'),
-                'id_client'         => $this->input->post('id_client')
+                'id_monitoring'     => $where,
                 // 'id_karyawan'       => $this->input->post('init_closing'),
                 // 'id_department'     => $this->input->post('init_closing'),
+                'year'              => $this->input->post('taun')
 
             );
             $this->m_closing->insert_closing($params);
-            redirect("initiation/initiation/index");
+            redirect("monitoring/monitoring/index");
    
     }
 

@@ -1,7 +1,5 @@
 <section class="content-header">
-    <h1>
-        Add Data Initiation
-    </h1>
+    <br>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-book"></i> Initiation</a></li>
         <li><a href="#">Data Initiation</a></li>
@@ -17,154 +15,148 @@
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> </h3>
+                    <h3><b>Detail Project</b></h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-primary" href="{$config->site_url('initiation/initiation')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                        <br><a class="btn btn-sm btn-primary" href="{$config->site_url('initiation/initiation')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
-
-	<form  action="{$config->site_url('initiation/initiation/add_process')}" method="post">
-		<div class="box box-default" data-url="{$BASEURL}">
-			<div class="box-header with-border">
-					<label><h4><b>Detail Project</b></h4></label>
-					<br>
-
-				<div class="col-md-6">
-
-						<div class="form-group">
-							<label>Project Title</label>
-								<input type="text" name="judul_project" placeholder="-- Judul Project --" title="Masukkan Judul Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
-						</div>
-						
-				<div class="form-group">
-			<label>Project Manager Department</label>
-			<br>
-			<select name="department[]" class="form-control select2" multiple title="Pilih Manager Department Project" placeholder="-- Manager Department Project --">
-	    			{foreach $datadepartment as $cth}
-	    		<option value={$cth.id_department} placeholder="-- Manager Department Project --">{$cth.nama_department}</option>
-	   				{foreachelse}
-	   				Data tidak ditemukan !
-	   				{/foreach}
-	   		</select>
+            </div>
+			<!-- box-success -->
 		</div>
-
-		<div class="form-group">
-			<label>Team Member Name</label>
-			<br>
-			<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" placeholder="-- Nama Anggota Tim --">
-			{foreach $marketing_kar as $value}
-				<option value="{$value.id_karyawan}" placeholder="-- Nama Anggota Tim --">{$value.nama_karyawan}</option>
-			{foreachelse}
-			Data tidak ditemukan !
-			{/foreach}
-			</select>
-		</div>
-
-		<div class="form-group">
-			<label>Client</label>
-			<br>
-			<select name="client" class="form-control select2" min="0" max="40" multiple>
-                                        {foreach $dataclient as $cth}
+        <!-- col -->
+            
+            	<form  action="{$config->site_url('initiation/initiation/add_process')}" method="post">
+            		<div class="col-md-6">
+						<div class="box">
+							<div class="box-body">
+								<div class="form-group">
+									<h5><b>Project Title</b></h5>
+										<input type="text" name="judul_project" placeholder="-- Judul Project --" title="Masukkan Judul Project" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
+								</div>
+								<div class="form-group">
+									<h5><b>Project Manager Department</b></h5>
+									<select name="department[]" class="form-control select2" multiple title="Pilih Manager Department Project" placeholder="-- Manager Department Project --">
+							    			{foreach $datadepartment as $cth}
+							    		<option value={$cth.id_department} placeholder="-- Manager Department Project --">{$cth.nama_department}</option>
+							   				{foreachelse}
+							   				Data tidak ditemukan !
+							   				{/foreach}
+							   		</select>
+								</div>
+								<div class="form-group">
+									<h5><b>Team Member Name</b></h5>
+										<select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" placeholder="-- Nama Anggota Tim --">
+									{foreach $marketing_kar as $value}
+											<option value="{$value.id_karyawan}" placeholder="-- Nama Anggota Tim --">{$value.nama_karyawan}</option>
+									{foreachelse}
+									Data tidak ditemukan !
+									{/foreach}
+										</select>
+								</div>
+								<div class="form-group">
+									<h5><b>Client</b></h5>
+									<select name="client" class="form-control select2" min="0" max="40" multiple>
+						                {foreach $dataclient as $cth}
 										<option value={$cth.id_client}>{$cth.client_name}</option>
 				           				{foreachelse}
 				           				Data tidak ditemukan !
 				           				{/foreach}
-                            </select>							
-		</div>
-
-						<div class="form-group">
-							<label>Budget</label><br><b>Rp.</b>
-								<input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
-						</div>
-
-				</div>
-
-				<div class="col-md-6">
-
-					<div class="form-group" style="overflow: scroll; width: 500px; height: 400px;">
-
-						<div class="form-group">
-							
-								<label>Project Description</label>
-									<textarea name="deskripsi" title="Masukkan Deskripsi tentang Project" rows="3" cols="35" class="ckeditor" id="ckedtor" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" placeholder="-- Deskripsi Project --">
-									</textarea>
-						</div>
-
-						<div class="form-group">
-								<label>Project Justification</label> 
-									<textarea height="300" name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" placeholder="-- Justifikasi Project --">
-									</textarea>
-						</div>
-				
-						<div class="form-group">
-								<label>Not in this Project</label> 
-									<textarea name="not_in" rows="3" cols="35" class="ckeditor" id="ckedtor3" title="Masukkan Data yang tidak ada pada Project" placeholder="-- Data yang tidak ada dalam Project" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')">
-									</textarea>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-							<!-- <div class="box box-danger">
-							<div class="box-header with-border">
+						            </select>							
+								</div>
 								<div class="form-group">
-								<script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-								<textarea class="ckeditor" id="ckedtor"></textarea>
-								<br>
-								<button type="submit" class="btn btn-success">Simpan</button>
+									<h5><b>Budget</b></h5><b><input type="text" name="Rp." value="Rp." disabled style="width: 6%;"></b><input type="text" name="money" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required>
 								</div>
 							</div>
-							</div> -->
-
-
-
-			<div class="box box-success">
-				<div class="box-header with-border">
-					<tr>
-						<label><h4><b>
-							Date And Upload  - Target Penyelesaian Inisiasi
-						</b></h4></label>
-
-						<td>
-							<table>
-								<tr>
-									<td width="500px" align="center"><b>Start date</b></td>
-									<td width="500px" align="center"><b>Due date</b></td>
-									<td width="500px"  align="center"><b>Pilih File</b></td>
-								</tr>
-								<tr>
-									<td align="center">
-										<input type="text" name="tanggal_start" class="tanggal" id="DATE" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="" style="width: 150px; text-align: center;">
-									</td>
-									<td align="center">
-										<input type="text" name="tanggal_due" class="tanggal" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" style="width: 150px; text-align: center;">
-									</td>
-									<td align="center">
-									(File Berbentuk png, jpg, jpeg, docx, pdf, xlsx, ppt , rar, zip.)<br>
-									Ket : Gunakan Ctrl + Click Untuk Memilih > 1 File Pada Folder File
-										<input type="file" name="files[]" id="files" multiple>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</div>
-			</div>
-
-						<div class="form-group">
-							<center>
-								<button type="submit" class="btn btn-success" id="kirim">Simpan</button>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
-							</center>
-								<br>
 						</div>
+					</div>
+			
+					<div class="col-md-6">
+						<div class="box">
+							<div class="box-body">
+								<div class="form-group" style="overflow: scroll; width: 100%; height: 350px;">
+									<div class="form-group">
+										<h5><b>Project Description</b></h5>
+											<textarea name="deskripsi" title="Masukkan Deskripsi tentang Project" rows="3" cols="35" class="ckeditor" id="ckedtor" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" placeholder="-- Deskripsi Project --">
+											</textarea>
+									</div>
+									<div class="form-group">
+										<h5><b>Project Justification</b></h5>
+											<textarea height="300" name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" placeholder="-- Justifikasi Project --">
+											</textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-	</form>
-		
+				<div class="row">
+					<div class="col-md-6">
+						<div class="box box-success">
+							<div class="box-body">
+								<center><h5><b>Target Penyelesaian Initiation</b></h5></center>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="box box-success">
+							<div class="box-body">
+								<center><h5><b>Upload File/Berkas</b></h5></center>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="box">
+							<div class="box-body">
+								<table>
+									<tr>
+										<td width="230px" align="center"><h5><b>Start Date</b></h5></td>
+										<td>     </td>
+										<td width="230px" align="center"><h5><b>Due Date</b></h5></td>
+									</tr>
+									<tr>
+										<td align="center">
+											<input type="text" name="tanggal_start" class="tanggal" id="DATE" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" value="" style="width: 150px; text-align: center;">
+										</td>
+										<td>     </td>
+										<td align="center">
+											<input type="text" name="tanggal_due" class="tanggal" maxlength="10" size="10" placeholder="- dd/mm/yyyy -" style="width: 150px; text-align: center;">
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="box">
+							<div class="box-body">
+								<h5><b>Pilih File</b></h5>
+								<input type="file" name="files[]" id="files" multiple title="(File Berbentuk png, jpg, jpeg, docx, pdf, xlsx, ppt , rar, zip.) Ket : Gunakan Ctrl + Click Untuk Memilih > 1 File Pada Folder File">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-12">
+						<div class="box">
+							<div class="box-body">
+								<div class="form-group">
+								<br>
+										<center>
+											<button type="submit" class="btn btn-success" id="kirim">Simpan</button>                         
+											<button type="reset" value="reset" name="reset" class="btn btn-danger">Reset</button>
+										</center>
+									</div>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>	
+
+
 
 		<script>
 

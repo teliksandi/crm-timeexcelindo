@@ -181,11 +181,15 @@ class monitoring extends ApplicationBase {
  
             $dep = implode(",", $this->input->post("department_monitoring"));
             $kar = implode(",", $this->input->post("karyawan_monitoring"));
+
        
             $params = array(
                 'id_execution'      => $this->input->post('init_execution'),
                 'start_date'        => $this->input->post('start_monitoring'),
                 'due_date'          => $this->input->post('due_monitoring'),
+                'b_tm_1'                        => '0',
+                'b_tm_2'                        => '0',
+                'b_tm_3'                        => '0',
                 'id_karyawan'       => $kar,
                 'id_department'     => $dep
                 
@@ -255,6 +259,116 @@ class monitoring extends ApplicationBase {
         redirect("planning/planning/edit/".$this->input->post('id_planning', TRUE));
     }
 
+    function termin_process(){
+
+        $this->_set_page_rule("U"); 
+
+        $this->tnotification->set_rules('tgl_termin_1', 'tanggal termin', 'trim|required');
+        $this->tnotification->set_rules('termin_1', 'tanggal termin', 'trim|required');
+
+
+            $tr1 = $this->idrToInt($this->input->post("termin_1"));
+            $tr2 = $this->idrToInt($this->input->post("termin_2"));
+            $tr3 = $this->idrToInt($this->input->post("termin_3"));
+            $budget = $this->input->post("bgt");
+            $where = $this->input->post('id_monitoring');
+
+
+
+                        $taun = $this->m_monitoring->tahun($where);
+        $dapat = date('Y', strtotime($taun));
+
+        $this->smarty->assign("taun", $dapat);
+
+
+        if($this->tnotification->run() !== FALSE){
+            
+                    if (($tr1 + $tr2 + $tr3) >= $budget) {
+
+                        //jika lunas
+
+                        $params = array(
+                            'tgl_tm_1'                      => $this->input->post("tgl_termin_1"),
+                            'b_tm_1'                        => $tr1,
+                            'tgl_tm_2'                      => $this->input->post("tgl_termin_2"),
+                            'b_tm_2'                        => $tr2,
+                            'tgl_tm_3'                      => $this->input->post("tgl_termin_3"),
+                            'b_tm_3'                        => $tr3,
+                            'due_date'                      =>  $this->input->post("tgl_selesai")
+                        );
+
+                        $where_m = array(
+                                'id_monitoring' => $where
+                                );
+
+                            if ($this->m_monitoring->update_monitoring($params, $where_m)) {
+                                $this->tnotification->delete_last_field();
+                                $this->tnotification->sent_notification("success", "Data berhasil disimpan");
+                                redirect("closing/finishing/closing_process/".$where);
+                            }else{
+                                // default error
+
+                                $this->tnotification->sent_notification("error", "Data gagal disimpan");
+                            }
+
+                    }else{
+                        $params = array(
+                            'tgl_tm_1'                      => $this->input->post("tgl_termin_1"),
+                            'b_tm_1'                        => $tr1,
+                            'tgl_tm_2'                      => $this->input->post("tgl_termin_2"),
+                            'b_tm_2'                        => $tr2,
+                            'tgl_tm_3'                      => $this->input->post("tgl_termin_3"),
+                            'b_tm_3'                        => $tr3,
+
+                            'due_date'                      =>  $this->input->post("tgl_selesai")
+                            
+                        );
+
+                        $where_m = array(
+                                'id_monitoring' => $where
+                                );
+
+                            if ($this->m_monitoring->update_monitoring($params, $where_m)) {
+                                $this->tnotification->delete_last_field();
+                                $this->tnotification->sent_notification("success", "Data berhasil disimpan");
+                                redirect("monitoring/monitoring/detail/".$where);
+                            }else{
+                                // default error
+
+                                $this->tnotification->sent_notification("error", "Data gagal disimpan");
+                            }
+                    }
+
+                    
+        }else{
+            // default error
+            $this->tnotification->sent_notification("error", "Data gagal disimpan");
+        }
+
+
+            
+
+        
+
+        // default redirect
+        redirect("monitoring/monitoring/detail/".$where);
+
+    }
+
+    function idrToInt($idr) {
+        $search = [
+                
+                '.',
+                ','
+            ];
+
+            $replace = [
+                ''
+            ];
+
+        return $currToIn = str_ireplace($search, $replace, $idr);
+    }
+
 
 
     function detail($where){
@@ -266,6 +380,9 @@ class monitoring extends ApplicationBase {
             $this->smarty->assign("execution_detail",$this->m_monitoring->execution_get($where));  
             // var_dump($this->m_monitoring->monitoring_get($where));
             // exit();      
+
+        $tahun = date('Y');
+            $this->smarty->assign("taun", $tahun);
 
 
             $this->smarty->assign("join", $this->m_monitoring->initiation_detail($where));
@@ -295,6 +412,11 @@ class monitoring extends ApplicationBase {
             $this->smarty->assign("kry_exet", explode(",", $ss['kar_exe']));
             $this->smarty->assign("marketing_kar_exet",$this->m_karyawan->get_market_karyawan());
             $this->smarty->assign("");
+        
+        //^^^^^^^^^^^^^^^^^^^^^^^BARU MALAM 22 NOVEMBER 2017^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            $this->smarty->assign("bg", $this->m_monitoring->planning_budget($where));
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   
+
 
             $ls_id_in     = $this->m_monitoring->get_initiation_by_id($where);
             $id_ini       = $ls_id_in['id_initiation'];

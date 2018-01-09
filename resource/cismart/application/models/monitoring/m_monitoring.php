@@ -7,9 +7,10 @@ class m_monitoring extends CI_Model{
         $sql = "SELECT monitoring.id_monitoring AS 'id_monitoring', initiation.project_title, monitoring.due_date, execution.id_execution, planning.id_planning, initiation.id_initiation, monitoring.start_date, client.client_name
                         From monitoring left join execution on monitoring.id_execution = execution.id_execution
                         left join planning on planning.id_planning = execution.id_planning 
+                        left join closing on closing.id_monitoring =monitoring.id_monitoring 
                         left join initiation on initiation.id_initiation = planning.id_initiation
                         left join client on initiation.id_client = client.id_client                    
-                        where monitoring.id_execution is NOT NULL";
+                        where monitoring.id_execution is NOT NULL and closing.id_monitoring is NULL";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -92,6 +93,20 @@ class m_monitoring extends CI_Model{
 
     }
 
+    function tahun($params){
+        $sql = "SELECT due_date from monitoring where id_monitoring = ? ";
+        $query = $this->db->query($sql,$params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+
+    }
+
+
     function search_monitoring($filter, $params, $id_department, $id_k){
         if ($id_department == '%10%') {
             $dp = '%';
@@ -148,7 +163,7 @@ class m_monitoring extends CI_Model{
     }
 
     function planning_detail($where){
-        $sql = "SELECT a.id_initiation, a.start_date as 'mulai', a.due_date as 'akhir', a.*, b.*, c.*, d.*, e.* FROM planning a 
+        $sql = "SELECT a.id_initiation, a.start_date as 'mulai' , a.budget as 'budgets', a.due_date as 'akhir', a.*, b.*, c.*, d.*, e.* FROM planning a 
                 left JOIN initiation b on a.id_initiation = b.id_initiation
                 left JOIN client c on b.id_client = c.id_client 
                 left JOIN karyawan d on b.id_karyawan = d.id_karyawan
@@ -166,6 +181,27 @@ class m_monitoring extends CI_Model{
         }
 
     }
+
+    function planning_budget($where){
+        $sql = "SELECT a.id_initiation, a.start_date as 'mulai' , a.due_date as 'akhir', a.*, b.id_initiation, c.*, d.*, e.* FROM planning a 
+                left JOIN initiation b on a.id_initiation = b.id_initiation
+                left JOIN client c on b.id_client = c.id_client 
+                left JOIN karyawan d on b.id_karyawan = d.id_karyawan
+                left JOIN department e on b.id_department = e.id_department
+                left JOIN execution f on f.id_planning = a.id_planning
+                left JOIN monitoring g on g.id_execution = f.id_execution
+                WHERE g.id_monitoring = ?";
+        $query = $this->db->query($sql, $where);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+
+    }
+
 
     function get_department_by_id($where){
         $sql = "SELECT d.id_department, d.id_karyawan FROM monitoring a left JOIN execution b on a.id_execution = b.id_execution
@@ -230,9 +266,10 @@ class m_monitoring extends CI_Model{
                         From monitoring left join execution on monitoring.id_execution = execution.id_execution
                         left join planning on execution.id_planning = planning.id_planning
                         left join initiation on initiation.id_initiation = planning.id_initiation
+                        left join closing on closing.id_monitoring =monitoring.id_monitoring
                         left join client on initiation.id_client = client.id_client                    
                         where monitoring.id_execution is NOT NULL
-                        and $filter LIKE ? and monitoring.id_department like '$dp' and monitoring.id_karyawan like '$id' LIMIT ?,?";
+                        and $filter LIKE ? and monitoring.id_department like '$dp' and monitoring.id_karyawan like '$id' and closing.id_monitoring is NULL LIMIT ?,?";
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
@@ -258,8 +295,8 @@ class m_monitoring extends CI_Model{
         return $this->db->insert('komentar', $params);
     }
 
-    function update_execution($params, $where){
-        return $this->db->update('execution', $params, $where);
+    function update_monitoring($params, $where){
+        return $this->db->update('monitoring', $params, $where);
     }
 
 }

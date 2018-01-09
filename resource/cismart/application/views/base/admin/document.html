@@ -31,7 +31,7 @@
                     {foreach from=$list_top_nav item=menu}
                     <li>
                         <a href="{$config->site_url($menu.nav_url)}" {if $menu.nav_id == $top_menu_selected}class="active"{/if}>
-                           <img src="{$BASEURL}resource/doc/images/nav/{$menu.nav_icon|default:'default.png'}" alt="" />{$menu.nav_title}<br /><small>{$menu.nav_desc}</small>
+                           <img src="{$BASEURL}resource/doc/images/nav/{$menu.nav_icon|default:'default.png'}" alt="" />{$menu.nav_title}<br><small>{$menu.nav_desc}</small>
                         </a>
                     </li>
                     {/foreach}

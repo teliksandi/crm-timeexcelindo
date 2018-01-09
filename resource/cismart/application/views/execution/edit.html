@@ -87,11 +87,6 @@
                                         <h5><b>Project Justification</b></h5>
                                             <textarea name="justifikasi" title="Masukkan Justifikasi Project" placeholder="" class="ckeditor" id="ckedtor2" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" disabled>{$rs.project_just|default:''}</textarea>
                                 </div>
-                                <div class="form-group">
-                                    <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
-                                        <h5><b>Not in this Project</b></h5>
-                                            <textarea name="not_in" rows="3" cols="35" class="ckeditor" id="ckedtor3" title="Masukkan Data yang tidak ada pada Project" placeholder="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong')" oninput="setCustomValidity('')" disabled>{$rs.not_in_project|default:''}</textarea>
-                                </div>
                             </div>
                         </div>
                     </div>

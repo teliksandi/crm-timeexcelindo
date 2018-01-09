@@ -78,7 +78,7 @@
 		                                            <font color="#33cc33">Aktif</font> 
 		                                        {/if}
                                     </td>
-                                    <td align="middle">Belum ditemukan</td>
+                                    <td align="middle">{getComment_Execution($result.id_execution)}</td>
 		                            <td align="middle">
 		    {if {$jabatan} != 3}
 		                                <a href="{$config->site_url('execution/execution/edit')}/{$result.id_execution}" class="btn btn-xs btn-primary" title="Edit"><i class="fa fa-pencil" title="Edit"></i> Edit</a>

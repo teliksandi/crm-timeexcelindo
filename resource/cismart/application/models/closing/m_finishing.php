@@ -4,12 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class m_finishing extends CI_Model{
 
    function get_list_closing($filter, $params){
-        $sql = "SELECT closing.id_initiation AS 'id_initiation', closing.id_closing, initiation.project_title, initiation.budget, client.client_name
-                        From closing left join initiation on initiation.id_initiation = closing.id_initiation
-                        left join client on initiation.id_client = client.id_client                    
-                        where closing.id_monitoring is NOT NULL
-                        and $filter LIKE ? ORDER BY closing.id_closing DESC LIMIT ?,?";
-        $query = $this->db->query($sql, $params);
+        $sql = "SELECT closing.id_closing AS 'id_closing', initiation.id_initiation, initiation.project_title, planning.budget, client.client_name
+                        From closing left join monitoring on monitoring.id_monitoring = closing.id_monitoring
+                        left join execution on monitoring.id_execution = execution.id_execution
+                        left join planning on execution.id_planning = planning.id_planning
+                        left join initiation on initiation.id_initiation = planning.id_initiation
+                        left join client on initiation.id_client = client.id_client where closing.id_monitoring is NOT NULL";
+        $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
             $query->free_result();
@@ -32,8 +33,8 @@ class m_finishing extends CI_Model{
     }
 
     function search_closing($filter, $params){
-        $sql = "SELECT COUNT(*) as 'total', client.client_name, initiation.project_title, closing.id_closing, initiation.budget From closing left join initiation on initiation.id_initiation = closing.id_initiation  left join client on initiation.id_client = client.id_client where closing.id_monitoring is NOT NULL and $filter like ? ORDER BY closing.id_closing DESC";
-        $query = $this->db->query($sql,$params);
+        $sql = "SELECT COUNT(*) as 'total', planning.budget,client.client_name, initiation.id_initiation, initiation.project_title From closing  left join monitoring on closing.id_monitoring = monitoring.id_monitoring left join execution on execution.id_execution = monitoring.id_execution left join planning on execution.id_planning = planning.id_planning left join initiation on initiation.id_initiation = planning.id_initiation left join client on initiation.id_client = client.id_client where closing.id_monitoring is NOT NULL";
+        $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
             $query->free_result();

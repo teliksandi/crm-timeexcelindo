@@ -1,7 +1,5 @@
 <section class="content-header">
-    <h1>
-        Pengolahan Data Planning
-    </h1>
+    <br>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-briefcase"></i> Planning</a></li>
         <li><a href="#">Data Planning</a></li>
@@ -17,157 +15,191 @@
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Form detail Planning</h3>
+                    <h3><b>Form detail Planning</b></h3>
                     <div class="box-tools">
-                        <a class="btn btn-sm btn-primary" href="{$config->site_url('planning/planning')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
+                        <br><a class="btn btn-sm btn-primary" href="{$config->site_url('planning/planning')}" ><i class="fa fa-long-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
+            </div>
+        </div>
+        <!-- col -->
 
+        <div class="col-md-12">
+            <div class="box">
                 <div class="box-body">
-                    <center>        
-                        <div class="form-group">
-                            <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
-                       </div>
-                    </center>
-                    <!-- Modal -->
-                        <div class="modal fade" id="r_inisiasi" role="dialog">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Initiation History</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                    <div class="box-body">
-                                        {foreach $join as $init_rwyt}
-                                            <div class="form-group">
-                                                <label for="project_title">Project title</label>
-                                                    <input type="text" name="project_title" class="form-control" value="{$init_rwyt.project_title|default:''}" id="project_title" placeholder="" title="Judul Project" readonly>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="client_name">Client Name</label>
-                                                    <input type="text" name="client" class="form-control" value="{$init_rwyt.client_name|default:''}" title="Nama Client" readonly>
-                                            </div>                                        
-                                            <div class="form-group">
-                                                <label>Project Manager Department</label>
-                                                <br>
-                                                    <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" disabled style="width: 100%;">
-                                                        {foreach $datadepartment as $cth}
-                                                            <option value="{$cth.id_department}" 
-                                                        {if $cth.id_department|in_array:$dprt} selected="selected"{/if}>{$cth.nama_department}
-                                                            </option>
-                                                        {foreachelse}
-                                                        Data tidak ditemukan !
-                                                        {/foreach}
-                                                    </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Team Member Name</label>
-                                                <br>
-                                                    <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" disabled style="width: 100%;">
-                                                        {foreach $marketing_kar as $value}
-                                                            <option value="{$value.id_karyawan}"
-                                                        {if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}
-                                                            </option>
-                                                        {foreachelse}
-                                                        Data tidak ditemukan !
-                                                        {/foreach}
-                                                    </select>
-                                            </div>
-                                            <div class="form-group" style="overflow: scroll; height: 400px; width: 100%;">
-                                                <div class="form-group">
-                                                    <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
-                                                        <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$init_rwyt.project_desc|default:''}
-                                                        </textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
-                                                        <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$init_rwyt.project_just|default:''}
-                                                        </textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="not_in_project">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not in project</label>
-                                                        <textarea name="not_in_project"  class="ckeditor" id="not_in_project" placeholder="" title="Yang tidak diperlukan" readonly>{$init_rwyt.not_in_project|default:''}
-                                                        </textarea>
-                                                </div>
-                                            </div>
-                                            <!-- ./scroll -->
-                                            <div class="col-md-6">
-                                            <div class="form-group">
-                                                    <label for="budget">Budget</label>
-                                                        <input type="text" name="budget" class="form-control" id="budget" placeholder="" title="Estimasi harga" value="Rp. {number_format($init_rwyt.budget|default:'',0,",",".")}" readonly style="width: 70%;">
-                                            </div>
-                                            <div class="form-group">
-                                                    <label for="start_date">Start date</label>    
-                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($init_rwyt.mulai|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly style="width: 70%;">
-                                            </div>
-                                            <div class="form-group">
-                                                    <label for="due_date">Due date</label>
-                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($init_rwyt.akhir|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly style="width: 70%;">
-                                            </div>
-                                            </div>
-                                        {/foreach}
-
-                                        <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
-                                            <div class="col-md-6">
-                                                <div class="box-header with-border">
-                                                    <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
-                                                    <label for="files[]">Files</label>
-                                                    <div style="overflow-y: scroll; height: 200px;">
-                                                    <div class="form-group">
-                                                        <center>
-                                                                {foreach $ef as $f}
-                                                                        <table>
-
-                                                                            <input type="hidden" name="nm" value="{$f}">
-                                                                                <div class="form-group">
-                                                                                    <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>
-                                                                                </div>
-                                                                                {if $f !== ""}
-                                                                                <hr></hr>
-                                                                                {/if}
-                                                                        </table>
-                                                                {/foreach}
-                                                        </center>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                    <table>
-                                        <div style="overflow-y: scroll; height: 200px">
-                                            Komentar :
-                                            {foreach $komen as $km}
-                                            <br>
-                                            <b><textarea disabled class="form-control">
-                                            {$km.komentar}</textarea></b>
-                                            <div align="right">
-                                            Dikomentari pada : 
-                                                <br>
-                                                    {$km.tgl_komentar}, {$km.nama_lengkap}
-                                                <br>
-                                            {/foreach}
-                                            </div>
-                                        </div>
-                                    </table>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
+                    <b>List Riwayat</b>
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" name="Riwayat_i" class="btn btn-warning" data-toggle="modal" data-target="#r_inisiasi"><i>Riwayat Initiation</i></button>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Model Riwayat Inisiasi -->
+                                <!-- Model -->
+                                <div class="modal fade" id="r_inisiasi" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Initiation History</h4>
+                                            </div>
+                                                <div class="modal-body">
 
-                        
-                    <form class="form-horizontal" action="{$config->site_url('planning/planning/add_process')}" method="post"> 
-                    {foreach $result as $rs}
-                    <input type="hidden" name="id_planning" value="{$rs.id_planning|default:''}">
-                        <div class="box box-default">
-                            <div class="box-header with-border">
+                                                    <div class="col-md-6">
+                                                        <div class="box box-warning">
+                                                            <div class="box-body">
+                                                                {foreach $join as $init_rwyt}
+                                                                    <div class="form-group">
+                                                                        <label for="project_title">Project title</label>
+                                                                            <input type="text" name="project_title" class="form-control" value="{$init_rwyt.project_title|default:''}" id="project_title" placeholder="" title="Judul Project" readonly>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="client_name">Client Name</label>
+                                                                            <input type="text" name="client" class="form-control" value="{$init_rwyt.client_name|default:''}" title="Nama Client" readonly>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Project Manager Department</label>
+                                                                        <br>
+                                                                            <select name="department[]" class="form-control select2 " multiple="multiple" title="Pilih Manager Department Project" disabled style="width: 100%;">
+                                                                                {foreach $datadepartment as $cth}
+                                                                                    <option value="{$cth.id_department}"{if $cth.id_department|in_array:$dprt} selected="selected"{/if}>{$cth.nama_department}</option>
+                                                                                {foreachelse}
+                                                                                    Data tidak ditemukan !
+                                                                                {/foreach}
+                                                                            </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Team Member Name</label>
+                                                                        <br>
+                                                                            <select name="karyawan[]" title="Pilih Anggota Tim" class="form-control select2 " data-value="" multiple="multiple" disabled style="width: 100%;">
+                                                                                {foreach $marketing_kar as $value}
+                                                                                    <option value="{$value.id_karyawan}"{if $value.id_karyawan|in_array:$kry} selected="selected"{/if}>{$value.nama_karyawan}</option>
+                                                                                {foreachelse}
+                                                                                    Data tidak ditemukan !
+                                                                                {/foreach}
+                                                                            </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="budget">Budget</label>
+                                                                            <input type="text" name="budget" class="form-control" id="budget" placeholder="" title="Estimasi harga" value="Rp. {number_format($init_rwyt.budget|default:'',0,",",".")}" readonly style="width: 100%;">
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- col -->
+
+                                                    <div class="col-md-6">
+                                                        <div class="box box-warning">
+                                                            <div class="box-body">
+                                                                <div class="form-group" style="overflow: scroll; height: 360px; width: 100%;">
+                                                                    <div class="form-group">
+                                                                        <label for="project_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Description</label>
+                                                                            <textarea name="project_desc"  class="ckeditor" id="project_desc" placeholder="" title="Deskripsi Project" readonly>{$init_rwyt.project_desc|default:''}
+                                                                            </textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="project_just">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Justification</label>
+                                                                            <textarea name="project_just" class="ckeditor" id="project_just" placeholder="" title="Justifikasi Project" readonly>{$init_rwyt.project_just|default:''}
+                                                                            </textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- col -->
+
+                                                    <div class="col-md-6">
+                                                        <div class="box box-warning">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <label for="start_date">Start date</label>    
+                                                                        <input type="text" name="start_date" value="{date('d F Y', strtotime($init_rwyt.mulai|default:''))}" class="form-control" id="start_date" placeholder="" title="Tanggal memulai" readonly style="width: 100%;">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="due_date">Due date</label>
+                                                                        <input type="text" name="due_date" value="{date('d F Y', strtotime($init_rwyt.akhir|default:''))}" class="form-control" id="due_date" placeholder="" title="Tanggal target selesai" readonly style="width: 100%;">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {/foreach}
+                                                    </div>
+                                                    <!-- col -->
+                                            
+
+                                                    <form class="form-horizontal" action="{$config->site_url('initiation/initiation/pdf_view')}" method="post" target="blank">
+                                                        <div class="col-md-6">
+                                                            <div class="box box-warning">
+                                                                <div class="box-body">
+                                                                    <label for="files[]">Files</label>
+                                                                    <div style="overflow-y: scroll; height: 126px;">
+                                                                    <div class="form-group">
+                                                                        <center>
+                                                                                {foreach $ef as $f}
+                                                                                        <table>
+                                                                                            <input type="hidden" name="nm" value="{$f}">
+                                                                                                <div class="form-group">
+                                                                                                    <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>
+                                                                                                </div>
+                                                                                                {if $f !== ""}
+                                                                                                <hr></hr>
+                                                                                                {/if}
+                                                                                        </table>
+                                                                                {/foreach}
+                                                                        </center>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                    
+                                                    <div class="col-md-12">
+                                                        <div class="box box-warning">
+                                                            <div class="box-body">
+                                                                <b>Komentar :</b><br><br>
+                                                                <table>
+                                                                    <div style="overflow-y: scroll; height: 200px">
+                                                                            {foreach $komen as $km}
+                                                                            <div align="left">
+                                                                            <i><label>{$km.nama_lengkap}</label></i>
+                                                                            </div>
+                                                                        <b><textarea disabled class="form-control" style="height:65px;text-align: left;">{$km.komentar}</textarea></b>
+                                                                        <div align="right">
+                                                                            Dikomentari pada : {$km.tgl_komentar}
+                                                                            <hr></hr>
+                                                                            {/foreach}
+                                                                        </div>
+                                                                    </div>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                    
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                </div>
+                                                </div>
+                                                <!-- modal-body -->
+                                            </div>
+                                            <!-- modal-content -->
+                                        </div>
+                                        <!-- modal-dialog -->
+                                    </div>
+                                    <!-- Model Riwayat Inisiasi -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- col -->
+
+        <form class="form-horizontal" action="{$config->site_url('planning/planning/add_process')}" method="post"> 
+            {foreach $result as $rs}
+                <input type="hidden" name="id_planning" value="{$rs.id_planning|default:''}">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-body">
                                 <table class="table table-striped" border="3" align="center" onload="biaya()">
                                     <tbody>
                                         <tr>
@@ -176,38 +208,31 @@
                                             <td width="15%" align="middle"><b> Total </b></td>
                                         </tr>
                                         <tr>
-                                            <td align="middle"> Total Anggaran </td>
+                                            <td align="middle"> Total Anggaran </td>
                                             <td align="middle"></td>
                                             <td align="middle">
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$rs.budget|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="middle"> DPP </td>
-                                            <td align="middle"></td>
-                                            <td align="middle">
-                                                    <div align="center">Rp.&nbsp;<input type="text" name="DPP" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="dpp_hasil" readonly></div>
+                                                    <div align="center">Rp.&nbsp;<input type="text" name="Anggaran" value ="{$rs.budget|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required onchange="total_anggaran()" id="anggaran"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> PPN </td>
                                             <td align="middle"> 10 % </td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="ppn_hasil"></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="PPN"  title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="ppn_hasil" value="{$rs.PPN|default:''}"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> PPH </td>
                                             <td align="middle"> 2 % </td>
                                             <td align="middle">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="PPH" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="pph_hasil"></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="PPH" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="pph_hasil" value="{$rs.PPH|default:''}"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle" style="background-color: yellow"> Pendapatan Setelah Pajak </td>
                                             <td align="middle" style="background-color: yellow"></td>
                                             <td align="middle" style="background-color: yellow">
-                                                <div align="center">Rp.&nbsp;<input type="text" name="Pendapatan" value ="0" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="netto" readonly></div>
+                                                <div align="center">Rp.&nbsp;<input type="text" name="Pendapatan" value="{$rs.pendapatan_stlh_pajak|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required id="netto" readonly></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -222,42 +247,42 @@
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Administrasi </td>
-                                            <td align="middle"><input type="number" name="persen_biaya_administrasi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$rs.p_b_administrasi|default:''}"> %</td>
+                                            <td align="middle"><input type="text" name="persen_biaya_administrasi" style="width: 55%; height: 4%; text-align: center;" readonly id="persen_b_administrasi" value="{$rs.p_b_administrasi|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Adm" value ="{$rs.b_administrasi|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': true, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaAdministrasi()" id="b_administrasi" ></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Produksi dan Operasional </td>
-                                            <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$rs.p_b_produksi_dan_operasional|default:''}"> %</td>
+                                            <td align="middle"><input type="text" name="persen_biaya_produksi" style="width: 55%; height: 4%; text-align: center;" readonly id="persen_b_produksi" value="{$rs.p_b_produksi_dan_operasional|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Produksi" value ="{$rs.b_produksi_dan_operasional|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaProduksi()" id="b_produksi" ></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Hardware dan Infrastruktur </td>
-                                            <td align="middle"><input type="number" name="persen_biaya_hardware" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$rs.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
+                                            <td align="middle"><input type="text" name="persen_biaya_hardware" style="width: 55%; height: 4%; text-align: center;" readonly id="persen_b_hardware" value="{$rs.p_b_hardware_dan_infrastruktur|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Hardware" value ="{$rs.b_hardware_dan_infrastruktur|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaHardware()" id="b_hardware"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Perawatan / Garansi </td>
-                                            <td align="middle"><input type="number" name="persen_biaya_perawatan" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$rs.p_b_perawatan|default:''}"> %</td>
+                                            <td align="middle"><input type="text" name="persen_biaya_perawatan" style="width: 55%; height: 4%; text-align: center;" readonly id="persen_b_perawatan" value="{$rs.p_b_perawatan|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Perawatan" value ="{$rs.b_perawatan|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaPerawatan()" id="b_perawatan"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Lain-Lain </td>
-                                            <td align="middle"><input type="number" name="persen_biaya_lain" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$rs.p_b_lain_lain|default:''}"> %</td>
+                                            <td align="middle"><input type="text" name="persen_biaya_lain" style="width: 55%; height: 4%; text-align: center;" readonly id="persen_b_lain" value="{$rs.p_b_lain_lain|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Lain" value="{$rs.b_lain_lain|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaLain()" id="b_lain"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="middle"> Biaya Entertaint </td>
-                                            <td align="middle"><input type="number" name="persen_biaya_entertaint" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$rs.p_b_entertaint|default:''}"> %</td>
+                                            <td align="middle"><input type="text" name="persen_biaya_entertaint" style="width: 55%; height: 4%; text-align: center;" readonly id="persen_b_entertaint" value="{$rs.p_b_entertaint|default:''}"> %</td>
                                             <td align="middle">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="Entertaint" value="{$rs.b_entertaint|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask  onchange="biayaEntertaint()" id="b_entertaint"></div>
                                             </td>
@@ -276,7 +301,7 @@
                                         </tr>
                                         <tr>
                                             <td align="middle" style="background-color: yellow"> Perkiraan Laba Rugi </td>
-                                            <td align="middle" style="background-color: yellow"><input type="number" name="persen_rugi_laba" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$rs.p_perkiraan_rugi_laba|default:''}"> %</td>
+                                            <td align="middle" style="background-color: yellow"><input type="text" name="persen_rugi_laba" style="width: 40%; height: 4%; text-align: center;" readonly id="persen_laba" value="{$rs.p_perkiraan_rugi_laba|default:''}"> %</td>
                                             <td align="middle" style="background-color: yellow">
                                                 <div align="center">Rp.&nbsp;<input type="text" name="laba" value="{$rs.perkiraan_rugi_laba|default:''}" title="Masukkan Jumlah Uang" data-inputmask="'alias': 'numeric', 'groupSeparator':'.', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': ' ', 'placeholder': '0'" data-mask required readonly id="hasil_laba"></div>
                                             </td>
@@ -299,9 +324,8 @@
                                 <center>
                                 <table>
                                     <td>
-                                    <div class="form-group">
                                         {if {$department} == 10}
-                                        <button type="submit" class="btn btn-success" name="submit">Simpan</button>
+                                        <button type="submit" class="btn btn-success" name="submit">Simpan</button>                  
                                         {else}
 
                                         {/if}
@@ -309,123 +333,91 @@
                                     </td>
                                     <td>
                 {if {$jabatan} != 3}
-                                    <form class="" action="{$config->site_url('execution/execution/execution_process')}" method="post">
-                                        {foreach $executi as $exec}
-                                        <input type="hidden" name="plan_execution" value="{$exec.id_planning|default:''}">
-                                        <input type="hidden" name="start_execution" id="mulai_execution">
-                                        <input type="hidden" name="due_execution" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
-                                        <input type="hidden" name="department_planning[]" value="{$exec.id_department|default:''}">
-                                        <input type="hidden" name="karyawan_planning[]" value="{$exec.id_karyawan|default:''}">
-                                            <button type="submit" class="btn btn-primary" name="submit">Accept</button>
-                                        {/foreach}
-                                    </form>
+                                <table>
+                                    <td>
+                                        <form class="" action="{$config->site_url('execution/execution/execution_process')}" method="post">
+                                            {foreach $executi as $exec}
+                                                <input type="hidden" name="plan_execution" value="{$exec.id_planning|default:''}">
+                                                <input type="hidden" name="start_execution" id="mulai_execution">
+                                                <input type="hidden" name="due_execution" value="{date('d F Y', strtotime($exec.due_date|default:''))}">
+                                                <input type="hidden" name="department_planning[]" value="{$exec.id_department|default:''}">
+                                                <input type="hidden" name="karyawan_planning[]" value="{$exec.id_karyawan|default:''}">
+                                                    <button type="submit" class="btn btn-primary" name="submit">Accept</button>
+                                            {/foreach}
+                                        </form>
+                                    </td>
+                                    <td>          </td>
+                                    <td>
+                                        <form class="" action="{$config->site_url('closing/rejecting/closing_process')}" method="post">
+                                            <input type="hidden" name="id_planning" value="{$jn.id_initiation|default:''}">
+                                                <button type="submit" class="btn btn-danger" style="width: 100%;">Reject</button>
+                                        </form>
+                                    </td>
+                                </table>
                 {else}
                                         <input type="hidden" name="plan_execution" value="{$exec.id_planning|default:''}">
                 {/if}
                                     </td>
-                                </table>
+                                </table><br>
                                             <label>Keterangan :</label><br>
                                             <i>Simpan -> Menyimpan data Planning</i><br>
                                             <i>Accept -> Menuju tahap Execution</i>
-                                    </div>
                                 </center>
                             </div>
                         </div>
-{/foreach}
+                    </div>
+                    <!-- col -->
+            {/foreach}
+
+                    <form class="form-horizontal" action="{$config->site_url('planning/planning/komentar_process')}" method="post">
+                        <div class="col-md-12">
                             <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <form class="form-horizontal" action="{$config->site_url('planning/planning/komentar_process')}" method="post">
-                                        <div class="col-md-6">
-                                            <div class="box-header with-border">
-                                                <!-- <input type="hidden" name="init_planning" value="{$jn.id_initiation|default:''}"> -->
-                                                <label for="files[]">Files</label>
-                                                <div style="overflow-y: scroll; height: 200px;">
-                                                <div class="form-group">
-                                                    <center>
-                                                            {foreach $ef_p as $f}
-                                                                    <table>
-
-                                                                        <input type="hidden" name="nm" value="{$f}">
-                                                                            <div class="form-group">
-                                                                                <a href="{$config->site_url('initiation/initiation/pdf_view')}/{$f}" target="_blank">{$f}</a>
-                                                                            </div>
-                                                                            {if $f !== ""}
-                                                                            <hr></hr>
-                                                                            {/if}
-                                                                    </table>
-                                                            {/foreach}
-                                                    </center>
-                                                </div>
-                                                </div>
+                                <div class="box-body">
+                                    <b>Komentar :</b><br><br>
+                                        <table>
+                                            <div style="overflow-y: scroll; height: 200px">                
+                                                {foreach $komen_plan as $km}
+                                                    <div align="left">
+                                                        <i><label>{$km.nama_lengkap}</label></i>
+                                                    </div>
+                                                        <b><textarea readonly class="form-control" style="height:65px;text-align: left;">{$km.komentar}</textarea></b>
+                                                    <div align="right">
+                                                        Dikomentari pada : {$km.tgl_komentar}
+                                                            <hr></hr>
+                                                {/foreach}
+                                                    </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                        <div class="form-group">
-                                            <table>
-                                                <div style="overflow-y: scroll; height: 200px">
-                                                    <b>Komentar :</b>
-                                                    {foreach $komen_plan as $km}
-                                                        <br>
-                                                        <b><textarea readonly class="form-control">
-                                                            {$km.komentar}</textarea></b>
-                                                <div align="right">
-                                                    Dikomentari pada : 
-                                                        <br>
-                                                            {$km.tgl_komentar}, {$km.nama_lengkap}
-                                                        <br>
-                                                    {/foreach}
-                                                </div>
-                                                </div>
-                                            </table>
+                                        </table>
                             {if {$jabatan} !=3 OR {$department} == 10}
-                                                <input type="hidden" name="id_planning_komentar" value="{$rs.id_planning|default:''}">
-                                                <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
-                                                    <br>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <textarea name="isi_komentar" class="form-control" title="Komentar"></textarea>
-                                                            <br>
-                                                            <div align="right">
-                                                                <button type="submit" name="submit" class="btn btn-info">Comment</button>
-                                                            </div>
+                                            <input type="hidden" name="id_planning_komentar" value="{$rs.id_planning|default:''}">
+                                            <input type="hidden" name="tgl_komentar" max = "50" value="{date('d-m-Y h:i:sa')}">
+                                                <br>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <textarea name="isi_komentar" class="form-control" title="Komentar"></textarea>
+                                                        <br>
+                                                        <div align="right">
+                                                            <button type="submit" name="submit" class="btn btn-info">Comment</button>
                                                         </div>
                                                     </div>
+                                                </div>
                             {else}
-                                                    <br>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                            
-                                                        </div>
-                                                    </div>
                             {/if}
-                                        </div>
-                                        </div>
-                                        
-                                    </form>
                                 </div>
                             </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box-box -->
-        </div> 
-        <!-- /.col -->
+                        </div>
+                        <!-- col -->
+                    </form>
+
+
     </div>
+    <!-- row -->
+
 
     <script type="text/javascript" src="{$BASEURL}resource/themes/ckeditor/ckeditor.js"></script>
 
-    <script type="text/javascript">
-
-        var x = {$rs.budget} / 11 * 10 ;
-        var y = {$rs.budget} / 11 ;
-        var z = x * 0.02 ;  
-        var tot_s_pajak = x - z ;
-        document.getElementById("dpp_hasil").value = x;
-        document.getElementById("ppn_hasil").value = y; 
-        document.getElementById("pph_hasil").value = z;
-        document.getElementById("netto").value = tot_s_pajak;
-
+     <script type="text/javascript">
+ 
         var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth()+1; //January is 0!
@@ -440,14 +432,33 @@
             var today = dd+'-'+mm+'-'+yyyy;
             document.getElementById("mulai_execution").value = today;
 
-       
+        function total_anggaran(){            
+            var xx = document.getElementById("anggaran").value;
+            var ret = xx.replace(',','');
+            var rat = ret.replace(',','');
+            var rot = parseInt(rat.replace(',',''));
+            var ppn = rot * 0.1 ;
+            var pph = rot * 0.02 ;
+            document.getElementById("ppn_hasil").value = ppn; 
+            document.getElementById("pph_hasil").value = pph;                
+            var tot_pajak = Math.round( rot - (ppn + pph)); 
+            document.getElementById("netto").value = tot_pajak;
+        }
+
+        
+
         function biayaAdministrasi(){
             var xx = document.getElementById("b_administrasi").value;
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
-          
+
+            var xx1 = document.getElementById("netto").value;
+            var ret1 = xx1.replace(',','');
+            var rat1 = ret1.replace(',','');
+            var rot1 = parseInt(rat1.replace(',',''));
+            var persen_prod = (rot / rot1 * 100).toFixed(2);
+
             document.getElementById("persen_b_administrasi").value = persen_prod;
 
             var prod  = document.getElementById("b_produksi").value;
@@ -482,9 +493,9 @@
             var total_semua = rot + c_prod + c_hard + c_para + c_lain + c_entert ;
             document.getElementById("total_biaya").value = total_semua;
 
-            var laba = tot_s_pajak - total_semua;
+            var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / rot1 * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }   
 
@@ -493,8 +504,12 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
-          
+
+            var xx1 = document.getElementById("netto").value;
+            var ret1 = xx1.replace(',','');
+            var rat1 = ret1.replace(',','');
+            var rot1 = parseInt(rat1.replace(',',''));
+            var persen_prod = (rot / rot1 * 100).toFixed(2);
             document.getElementById("persen_b_produksi").value = persen_prod;
 
             var admin = document.getElementById("b_administrasi").value;            
@@ -527,9 +542,9 @@
             
             var total_semua = c_admin + rot + c_hard + c_para + c_lain + c_entert ;
             document.getElementById("total_biaya").value = total_semua;
-            var laba = tot_s_pajak - total_semua;
+            var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / rot1 * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }
 
@@ -538,7 +553,12 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+
+            var xx1 = document.getElementById("netto").value;
+            var ret1 = xx1.replace(',','');
+            var rat1 = ret1.replace(',','');
+            var rot1 = parseInt(rat1.replace(',',''));
+            var persen_prod = (rot / rot1 * 100).toFixed(2);
           
             document.getElementById("persen_b_hardware").value = persen_prod;
 
@@ -573,9 +593,9 @@
             
             var total_semua = c_admin + c_prod + rot + c_para + c_lain + c_entert ;
             document.getElementById("total_biaya").value = total_semua;
-            var laba = tot_s_pajak - total_semua;
+            var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / rot1 * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }   
 
@@ -584,7 +604,12 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+
+            var xx1 = document.getElementById("netto").value;
+            var ret1 = xx1.replace(',','');
+            var rat1 = ret1.replace(',','');
+            var rot1 = parseInt(rat1.replace(',',''));
+            var persen_prod = (rot / rot1 * 100).toFixed(2);
           
             document.getElementById("persen_b_perawatan").value = persen_prod;
 
@@ -619,9 +644,9 @@
             
             var total_semua = c_admin + c_prod + c_hard + rot + c_lain + c_entert ;
             document.getElementById("total_biaya").value = total_semua;
-            var laba = tot_s_pajak - total_semua;
+            var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / rot1 * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }  
 
@@ -630,7 +655,12 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+
+            var xx1 = document.getElementById("netto").value;
+            var ret1 = xx1.replace(',','');
+            var rat1 = ret1.replace(',','');
+            var rot1 = parseInt(rat1.replace(',',''));
+            var persen_prod = (rot / rot1 * 100).toFixed(2);
           
             document.getElementById("persen_b_lain").value = persen_prod;
              var admin = document.getElementById("b_administrasi").value;            
@@ -665,9 +695,9 @@
             
             var total_semua = c_admin + c_prod + c_hard + c_para + rot + c_entert ;
             document.getElementById("total_biaya").value = total_semua;
-            var laba = tot_s_pajak - total_semua;
+            var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / rot1 * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
         }
 
@@ -676,7 +706,12 @@
             var ret = xx.replace(',','');
             var rat = ret.replace(',','');
             var rot = parseInt(rat.replace(',',''));
-            var persen_prod = Math.round( rot / tot_s_pajak * 100);
+            
+            var xx1 = document.getElementById("netto").value;
+            var ret1 = xx1.replace(',','');
+            var rat1 = ret1.replace(',','');
+            var rot1 = parseInt(rat1.replace(',',''));
+            var persen_prod = (rot / rot1 * 100).toFixed(2);
           
             document.getElementById("persen_b_entertaint").value = persen_prod;
 
@@ -713,15 +748,10 @@
 
             var total_semua = c_admin + c_prod + c_hard + c_para + c_lain + rot ;
             document.getElementById("total_biaya").value = total_semua;
-            var laba = tot_s_pajak - total_semua;
+            var laba = rot1 - total_semua;
             document.getElementById("hasil_laba").value = laba;
-            var p_laba = Math.round(laba / tot_s_pajak * 100);
+            var p_laba = (laba / rot1 * 100).toFixed(2);
             document.getElementById("persen_laba").value = p_laba;
-        }   
-
-        function biaya(){
-            alert("berhasil");
-        }
-
+        }  
     </script>
 </section>
