@@ -599,6 +599,7 @@ class planning extends ApplicationBase {
             $params = array(
                 'id_department'     => $dep,
                 'id_karyawan'       => $kar,
+                'due_date'          => $this->input->post('tanggal_due')
                 );
             $where = array(
                 'id_planning' => $this->input->post('id_planning', TRUE),
